@@ -167,7 +167,7 @@ public class Menu extends javax.swing.JPanel {
                 .addGap(16, 16, 16)
                 .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelPopUpMenuLayout.setVerticalGroup(
@@ -184,8 +184,8 @@ public class Menu extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelItem, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
-            .addComponent(panelSetting, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+            .addComponent(panelItem, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
+            .addComponent(panelSetting, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
             .addComponent(panelPopUpMenu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -200,7 +200,7 @@ public class Menu extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
-        // TODO add your handling code here:
+        btnMenu.addActionListener(evt);
     }//GEN-LAST:event_btnMenuActionPerformed
 
     @Override

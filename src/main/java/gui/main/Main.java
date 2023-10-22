@@ -15,6 +15,10 @@ import gui.form.Form_QuanLyPhongHat;
 import gui.form.Form_Setting;
 import gui.form.Form_ThongKeDoanhThu;
 import gui.form.Form_ThongKeMatHang;
+import java.lang.annotation.Target;
+import org.jdesktop.animation.timing.Animator;
+import org.jdesktop.animation.timing.TimingTarget;
+import org.jdesktop.animation.timing.TimingTargetAdapter;
 
 /**
  *
@@ -26,6 +30,7 @@ public class Main extends javax.swing.JFrame {
     private Menu menu;
     private Header header;
     private MainForm main;
+    private Animator animator;
 
     public Main() {
         initComponents();
@@ -64,19 +69,19 @@ public class Main extends javax.swing.JFrame {
                     } else if (subMenuIndex == 1) {
                         main.showForm(new Form_DichVu());
                     }
-                }else if(menuIndex ==5){
-                    if(subMenuIndex==-1){
+                } else if (menuIndex == 5) {
+                    if (subMenuIndex == -1) {
                         main.showForm(new Form_QuanLyNhanVien());
                     }
-                }else if(menuIndex ==6){
-                    if(subMenuIndex==-1 || subMenuIndex == 0){
+                } else if (menuIndex == 6) {
+                    if (subMenuIndex == -1 || subMenuIndex == 0) {
                         main.showForm(new Form_ThongKeMatHang());
-                    }else if (subMenuIndex == 1) {
+                    } else if (subMenuIndex == 1) {
                         main.showForm(new Form_ThongKeDoanhThu());
                     }
-                    
-                }else if(menuIndex ==7){
-                    if(subMenuIndex==-1 ){
+
+                } else if (menuIndex == 7) {
+                    if (subMenuIndex == -1) {
                         main.showForm(new Form_Setting());
                     }
                 }
@@ -92,6 +97,22 @@ public class Main extends javax.swing.JFrame {
                 "h 40!, wrap");
         bg.add(main,
                 "w 100% , h 100%");
+        TimingTarget target = new TimingTargetAdapter() {
+            @Override
+            public void timingEvent(float fraction) {
+
+            }
+
+            @Override
+            public void end() {
+                
+            }
+            
+            
+            
+        };
+        animator = new Animator(500,target);
+        
     }
 
     @SuppressWarnings("unchecked")
