@@ -23,7 +23,9 @@ gui\component\Menu.class
 gui\swing\Button.class
 gui\swing\PanelPopUp.class
 gui\form\Form_MatHang.class
+gui\swing\CustomJPasswordField.class
 gui\swing\scrollbar\ModernScrollBarUI$ScrollBarButton.class
+gui\swing\RadiusButton.class
 gui\swing\MenuItem.class
 gui\swing\PopupMenu.class
 gui\form\Form_ThongKeDoanhThu.class
@@ -37,8 +39,10 @@ gui\swing\PopupMenu$3.class
 gui\component\Header.class
 gui\model\ModelMenu.class
 gui\main\Main$1.class
+gui\swing\RadiusButton$2.class
 gui\form\Form_DichVu.class
 gui\component\Menu$1.class
+gui\swing\CustomJTextField.class
 gui\form\Form_QuanLyKhachHang.class
 gui\swing\MenuAnimation$1.class
 gui\swing\MenuItem$2.class
@@ -48,4 +52,5 @@ gui\main\Main.class
 gui\swing\Button$1.class
 gui\form\Form_Login$2.class
 gui\swing\MenuButton$1.class
+gui\swing\RadiusButton$1.class
 gui\main\Main$2.class

@@ -9,7 +9,5 @@ package gui;
  * @author 84934
  */
 public class Login {
-    public static void main(String[] args) {
-       
-    }
+
 }

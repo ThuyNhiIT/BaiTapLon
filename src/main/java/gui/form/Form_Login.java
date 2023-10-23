@@ -27,21 +27,20 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
         setLocationRelativeTo(null);
         btnThoat.addActionListener(this);   
     }
-
     
-    protected void paintComponent(Graphics g) {
-        Graphics2D g2 = (Graphics2D)g;
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
-       GradientPaint gradient = new GradientPaint(
-            0, 0, Color.decode("#00AFB9"),  // Màu bắt đầu (#c471ed)
-            getWidth(), 0, Color.WHITE   // Màu kết thúc (trắng)
-        );
-
-        // Vẽ gradient
-        g2.setPaint(gradient);
-        g2.fillRect(0, 0,getWidth(), getHeight());
-        super.paintComponents(g);
-    }
+//    protected void paintComponent(Graphics g) {
+//        Graphics2D g2 = (Graphics2D)g;
+//        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+//       GradientPaint gradient = new GradientPaint(
+//            0, 0, Color.decode("#00AFB9"),  // Màu bắt đầu (#c471ed)
+//            getWidth(), 0, Color.WHITE   // Màu kết thúc (trắng)
+//        );
+//
+//        // Vẽ gradient
+//        g2.setPaint(gradient);
+//        g2.fillRect(0, 0,getWidth(), getHeight());
+//        super.paintComponents(g);
+//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
