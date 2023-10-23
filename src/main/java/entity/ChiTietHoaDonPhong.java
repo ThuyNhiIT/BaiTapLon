@@ -1,0 +1,126 @@
+package entity;
+
+import java.time.LocalDateTime;
+import java.util.Objects;
+
+public class ChiTietHoaDonPhong {
+	private HoaDon hoaDon;
+	private PhongHat phongHat;
+	private Double gia;
+	private LocalDateTime gioVao;
+	private LocalDateTime gioRa;
+	private String maGiamGia;
+	
+	public ChiTietHoaDonPhong() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public ChiTietHoaDonPhong(HoaDon hoaDon, PhongHat phongHat, Double gia, LocalDateTime gioVao, LocalDateTime gioRa,
+			String maGiamGia) {
+		super();
+		this.hoaDon = hoaDon;
+		this.phongHat = phongHat;
+		this.gia = gia;
+		this.gioVao = gioVao;
+		this.gioRa = gioRa;
+		this.maGiamGia = maGiamGia;
+	}
+
+	public HoaDon getHoaDon() {
+		return hoaDon;
+	}
+
+	public void setHoaDon(HoaDon hoaDon) {
+		this.hoaDon = hoaDon;
+	}
+
+	public PhongHat getPhongHat() {
+		return phongHat;
+	}
+
+	public void setPhongHat(PhongHat phongHat) {
+		this.phongHat = phongHat;
+	}
+
+	public Double getGia() {
+		return gia;
+	}
+
+	public void setGia(Double gia) throws Exception {
+		if(gia <= 0) {
+			throw new Exception("Giá không được <= 0!");
+		}
+		this.gia = gia;
+	}
+
+	public LocalDateTime getGioVao() {
+		return gioVao;
+	}
+
+	public void setGioVao(LocalDateTime gioVao) throws Exception {
+		if(gioVao.isAfter(gioRa)) {
+			throw new Exception("Giờ vào trước giờ ra!");
+		}
+			
+		this.gioVao = gioVao;
+	}
+
+	public LocalDateTime getGioRa() {
+		return gioRa;
+	}
+
+	public void setGioRa(LocalDateTime gioRa) throws Exception {
+		if(gioRa.isBefore(gioVao)) {
+			throw new Exception("Giờ ra sau giờ vào!");
+		}
+			
+		this.gioRa = gioRa;
+	}
+
+	public String getMaGiamGia() {
+		return maGiamGia;
+	}
+
+	public void setMaGiamGia(String maGiamGia) {
+		this.maGiamGia = maGiamGia;
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(gia, gioRa, gioVao, hoaDon, maGiamGia, phongHat);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ChiTietHoaDonPhong other = (ChiTietHoaDonPhong) obj;
+		return Objects.equals(gia, other.gia) && Objects.equals(gioRa, other.gioRa)
+				&& Objects.equals(gioVao, other.gioVao) && Objects.equals(hoaDon, other.hoaDon)
+				&& Objects.equals(maGiamGia, other.maGiamGia) && Objects.equals(phongHat, other.phongHat);
+	}
+	public Double tinhTienPhong() {
+		return gia* (gioRa.getHour() - gioVao.getHour());
+	}
+	public Double tinhTienGiam() {
+		if(maGiamGia.equals("VIP")){
+			return tinhTienPhong() * 0.02;
+		}
+		else if(maGiamGia.equals("TH")){
+			return tinhTienPhong() * 0.01;
+		}
+		else
+			return 0.0;
+	}
+	@Override
+	public String toString() {
+		return "ChiTietHoaDonPhong [hoaDon=" + hoaDon + ", phongHat=" + phongHat + ", gia=" + gia + ", maGiamGia="
+				+ maGiamGia + "]";
+	}
+	
+}
