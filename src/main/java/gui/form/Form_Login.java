@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package gui.form;
 
 import java.awt.BorderLayout;
@@ -25,10 +22,9 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
     public Form_Login() {
         initComponents();
         addImg();
-        jButton_Thoat.addActionListener(this);
-       
-
+        jButton_Thoat.addActionListener(this);   
     }
+ 
 
     /**
      * This method is called from within the constructor to initialize the form.

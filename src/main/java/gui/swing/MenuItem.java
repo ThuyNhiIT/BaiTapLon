@@ -13,7 +13,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
 /**
- *
+ *Lớp MenuItem đại diện cho một mục menu trong ứng dụng.
  * @author HO MINH HAU
  */
 public class MenuItem extends javax.swing.JPanel {
@@ -47,6 +47,18 @@ public class MenuItem extends javax.swing.JPanel {
     public void setMenu(ModelMenu menu) {
         this.menu = menu;
     }
+     public ModelMenu getMenu() {
+        return menu;
+    }
+
+    /**
+     * Khởi tạo một MenuItem mới.
+     *
+     * @param menu          ModelMenu chứa thông tin về mục menu này.
+     * @param event         Sự kiện menu.
+     * @param eventSelected Sự kiện khi mục menu được chọn.
+     * @param index         Chỉ số của mục menu.
+     */
     private ModelMenu menu;
     private boolean open;
     private EventMenuSelected eventSelected;

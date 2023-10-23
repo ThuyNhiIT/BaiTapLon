@@ -5,6 +5,9 @@ import gui.component.Menu;
 import gui.form.MainForm;
 import net.miginfocom.swing.MigLayout;
 import gui.event.EventMenuSelected;
+
+
+import gui.event.EventShowPopUpMenu;
 import gui.form.Form_DichVu;
 import gui.form.Form_Home;
 import gui.form.Form_MatHang;
@@ -15,12 +18,19 @@ import gui.form.Form_QuanLyPhongHat;
 import gui.form.Form_Setting;
 import gui.form.Form_ThongKeDoanhThu;
 import gui.form.Form_ThongKeMatHang;
+import gui.swing.MenuItem;
+import gui.swing.PopupMenu;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.lang.annotation.Target;
+import javax.swing.ImageIcon;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
 /**
+ * Lớp Main đại diện cho giao diện chính của ứng dụng.
  *
  * @author HO MINH HAU
  */
@@ -31,22 +41,29 @@ public class Main extends javax.swing.JFrame {
     private Header header;
     private MainForm main;
     private Animator animator;
+   
 
     public Main() {
         initComponents();
         init();
     }
 
+    /**
+     * Khởi tạo các thành phần giao diện và các sự kiện.
+     */
     private void init() {
         layout = new MigLayout("fill", "0[]0[100%, fill]0", "0[fill, top]0");
         bg.setLayout(layout);
         menu = new Menu();
         header = new Header();
         main = new MainForm();
+        // Thêm sự kiện cho menu khi một mục menu được chọn.
         menu.addEvent(new EventMenuSelected() {
             @Override
             public void menuSelect(int menuIndex, int subMenuIndex) {
                 System.out.println("Menu Index:" + menuIndex + "SubMenuIndex:" + subMenuIndex);
+                // Xử lý khi một mục menu được chọn
+                // Ví dụ: Hiển thị một form tương ứng với mục menu được chọn.
                 if (menuIndex == 0) {
                     if (subMenuIndex == -1) {
                         main.showForm(new Form_Home());
@@ -89,30 +106,76 @@ public class Main extends javax.swing.JFrame {
             }
         }
         );
+
+
+        // Thêm sự kiện cho menu khi cần hiển thị menu con (pop-up menu).
+        // Khi thu nhỏ menu thì gọi sự kiện này để hiển thị popupmenu
+        menu.addEventShowPopUpMenu(new EventShowPopUpMenu() {
+            @Override
+            public void showPopUp(Component com) {
+                MenuItem item = (MenuItem) com;
+                PopupMenu popup = new PopupMenu(Main.this, item.getIndex(), item.getEventSelected(), item.getMenu().getSubMenu());
+                int x = Main.this.getX() + 52;
+                int y = Main.this.getY() + com.getY() + 86;
+                popup.setLocation(x, y);
+                popup.setVisible(true);
+            }
+        }
+        );
         menu.initMenuItem();
 
+        // Thêm menu, header, và MainForm vào lớp chứa.Chỉnh sửa độ rộng hay độ cao của các componet ở đây
         bg.add(menu,
-                "w 200!, spany2");
+                "w 220!, spany2");
         bg.add(header,
                 "h 40!, wrap");
         bg.add(main,
                 "w 100% , h 100%");
+
+        // Tạo hiệu ứng mở và đóng menu bằng cách thay đổi kích thước và hiển thị của menu.
         TimingTarget target = new TimingTargetAdapter() {
             @Override
             public void timingEvent(float fraction) {
-
+                double width;
+                if (menu.isShowMenu()) {
+                    width = 60 + (170 * (1f - fraction));
+                } else {
+                    width = 60 + (170 * fraction);
+                }
+                layout.setComponentConstraints(menu, "w " + width + "!, spany2");
+                menu.revalidate();
             }
 
             @Override
             public void end() {
-                
+                menu.setShowMenu(!menu.isShowMenu());
             }
-            
-            
-            
         };
-        animator = new Animator(500,target);
-        
+
+        animator = new Animator(500, target);
+        animator.setResolution(0);
+        animator.setDeceleration(0.5f);
+        animator.setAcceleration(0.5f);
+
+
+// Thêm sự kiện cho nút menu (hiển thị hoặc ẩn menu).
+        header.addMenuEvent(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!animator.isRunning()) {
+                    if (menu.isShowMenu()) {
+                        header.btnMenu.setIcon(new ImageIcon(getClass().getResource("/icon/next.png")));
+                    } else {
+                        header.btnMenu.setIcon(new ImageIcon(getClass().getResource("/icon/left.png")));
+                    }
+                    animator.start();
+                }
+//                menu.setEnbleMenu(false);
+                if (menu.isShowMenu()) {
+                    menu.hideallMenu();
+                }
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -122,7 +185,6 @@ public class Main extends javax.swing.JFrame {
         bg = new javax.swing.JLayeredPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Karaoke APLUS");
 
         bg.setOpaque(true);
 

@@ -48,14 +48,24 @@ public class MenuButton extends JButton {
     private float alpha;
     private Color effectColor = new Color(255, 255, 255, 150);
 
+    /**
+     * Khởi tạo một MenuButton với biểu tượng (icon) và văn bản (text).
+     *
+     * @param icon Biểu tượng của nút.
+     * @param text Văn bản hiển thị trên nút.
+     */
     public MenuButton(Icon icon, String text) {
         super(text);
         setIcon(icon);
         init();
         setBorder(new EmptyBorder(1, 20, 1, 1));
-         setFont(new Font("SansSerif", Font.PLAIN, 13));
+         setFont(new Font("SansSerif", Font.PLAIN, 14));
     }
-
+    /**
+     * Khởi tạo một MenuButton với văn bản (text).
+     *
+     * @param text Văn bản hiển thị trên nút.
+     */
     public MenuButton(String text) {
         super(text);
         init();
