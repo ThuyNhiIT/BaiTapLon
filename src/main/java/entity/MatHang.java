@@ -37,7 +37,7 @@ public class MatHang {
 
     public void setTenMH(String tenMH) {
         this.tenMH = tenMH;
-        
+
     }
 
     public Double getGia() {

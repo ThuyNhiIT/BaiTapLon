@@ -44,7 +44,9 @@ public class TaiKhoan {
 
     @Override
     public int hashCode() {
-        return Objects.hash(passWord, username);
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.username);
+        return hash;
     }
 
     @Override
@@ -58,9 +60,10 @@ public class TaiKhoan {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        TaiKhoan other = (TaiKhoan) obj;
-        return Objects.equals(passWord, other.passWord) && Objects.equals(username, other.username);
+        final TaiKhoan other = (TaiKhoan) obj;
+        return Objects.equals(this.username, other.username);
     }
+
 
     @Override
     public String toString() {

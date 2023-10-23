@@ -4,99 +4,106 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class DonDatPhong {
-	private String maDonDatPhong;
-	private LocalDate ngayDat;
-	private LocalDate ngayNhan;
-	private PhongHat phongHat;
-	private KhachHang khachHang;
-	
-	public DonDatPhong() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
-	public DonDatPhong(String maDonDatPhong, LocalDate ngayDat, LocalDate ngayNhan, PhongHat phongHat,
-			KhachHang khachHang) {
-		super();
-		this.maDonDatPhong = maDonDatPhong;
-		this.ngayDat = ngayDat;
-		this.ngayNhan = ngayNhan;
-		this.phongHat = phongHat;
-		this.khachHang = khachHang;
-	}
+    private String maDonDatPhong;
+    private LocalDate ngayDat;
+    private LocalDate ngayNhan;
+    private PhongHat phongHat;
+    private KhachHang khachHang;
 
-	public String getMaDonDatPhong() {
-		return maDonDatPhong;
-	}
+    public DonDatPhong() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
-	public void setMaDonDatPhong(String maDonDatPhong) {
-		this.maDonDatPhong = maDonDatPhong;
-	}
+    public DonDatPhong(String maDonDatPhong, LocalDate ngayDat, LocalDate ngayNhan, PhongHat phongHat,
+            KhachHang khachHang) {
+        super();
+        this.maDonDatPhong = maDonDatPhong;
+        this.ngayDat = ngayDat;
+        this.ngayNhan = ngayNhan;
+        this.phongHat = phongHat;
+        this.khachHang = khachHang;
+    }
 
-	public LocalDate getNgayDat() {
-		return ngayDat;
-	}
+    public DonDatPhong(String maDonDatPhong) {
+        this.maDonDatPhong = maDonDatPhong;
+    }
 
-	public void setNgayDat(LocalDate ngayDat) throws Exception {
-		if(ngayDat.compareTo(LocalDate.now()) != 0 && ngayDat.isBefore(LocalDate.now())) {
-			throw new Exception("Ngày đặt phải bằng hoặc sau ngày hiện tại!");
-		}
-		else
-		this.ngayDat = ngayDat;
-	}
+    public String getMaDonDatPhong() {
+        return maDonDatPhong;
+    }
 
-	public LocalDate getNgayNhan() {
-		return ngayNhan;
-	}
+    public void setMaDonDatPhong(String maDonDatPhong) {
+        this.maDonDatPhong = maDonDatPhong;
+    }
 
-	public void setNgayNhan(LocalDate ngayNhan) throws Exception {
-		if(ngayNhan != ngayDat) {
-			throw new Exception("Ngày nhận bằng ngày đặt!");
-		}
-		else
-		this.ngayNhan = ngayNhan;
-	}
+    public LocalDate getNgayDat() {
+        return ngayDat;
+    }
 
-	public PhongHat getPhongHat() {
-		return phongHat;
-	}
+    public void setNgayDat(LocalDate ngayDat) throws Exception {
+        if (ngayDat.compareTo(LocalDate.now()) != 0 && ngayDat.isBefore(LocalDate.now())) {
+            throw new Exception("Ngày đặt phải bằng hoặc sau ngày hiện tại!");
+        } else {
+            this.ngayDat = ngayDat;
+        }
+    }
 
-	public void setPhongHat(PhongHat phongHat) {
-		this.phongHat = phongHat;
-	}
+    public LocalDate getNgayNhan() {
+        return ngayNhan;
+    }
 
-	public KhachHang getKhachHang() {
-		return khachHang;
-	}
+    public void setNgayNhan(LocalDate ngayNhan) throws Exception {
+        if (ngayNhan != ngayDat) {
+            throw new Exception("Ngày nhận bằng ngày đặt!");
+        } else {
+            this.ngayNhan = ngayNhan;
+        }
+    }
 
-	public void setKhachHang(KhachHang khachHang) {
-		this.khachHang = khachHang;
-	}
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(khachHang, maDonDatPhong, ngayDat, ngayNhan, phongHat);
-	}
+    public PhongHat getPhongHat() {
+        return phongHat;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		DonDatPhong other = (DonDatPhong) obj;
-		return Objects.equals(khachHang, other.khachHang) && Objects.equals(maDonDatPhong, other.maDonDatPhong)
-				&& Objects.equals(ngayDat, other.ngayDat) && Objects.equals(ngayNhan, other.ngayNhan)
-				&& Objects.equals(phongHat, other.phongHat);
-	}
+    public void setPhongHat(PhongHat phongHat) {
+        this.phongHat = phongHat;
+    }
 
-	@Override
-	public String toString() {
-		return "DonDatPhong [maDonDatPhong=" + maDonDatPhong + ", ngayDat=" + ngayDat + ", ngayNhan=" + ngayNhan
-				+ ", phongHat=" + phongHat + ", khachHang=" + khachHang + "]";
-	}
-	
-	
+    public KhachHang getKhachHang() {
+        return khachHang;
+    }
+
+    public void setKhachHang(KhachHang khachHang) {
+        this.khachHang = khachHang;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 61 * hash + Objects.hashCode(this.maDonDatPhong);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final DonDatPhong other = (DonDatPhong) obj;
+        return Objects.equals(this.maDonDatPhong, other.maDonDatPhong);
+    }
+
+    @Override
+    public String toString() {
+        return "DonDatPhong [maDonDatPhong=" + maDonDatPhong + ", ngayDat=" + ngayDat + ", ngayNhan=" + ngayNhan
+                + ", phongHat=" + phongHat + ", khachHang=" + khachHang + "]";
+    }
+
 }
