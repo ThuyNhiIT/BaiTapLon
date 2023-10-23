@@ -27,8 +27,6 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
         setLocationRelativeTo(null);
         btnThoat.addActionListener(this);   
     }
-    
-    
 
     
     protected void paintComponent(Graphics g) {
