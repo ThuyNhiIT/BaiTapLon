@@ -51,124 +51,28 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
     private void initComponents() {
 
         pnlTong = new javax.swing.JPanel();
-        pnlLeft = new javax.swing.JPanel();
-        lblDangNhap = new javax.swing.JLabel();
-        lblTenDangNhap = new javax.swing.JLabel();
-        lblMatKhau = new javax.swing.JLabel();
-        btnQuenMatKhau = new gui.swing.Button();
-        txtTenDangNhap = new gui.swing.CustomJTextField();
-        customJPasswordField1 = new gui.swing.CustomJPasswordField();
-        btnDangNhap = new gui.swing.RadiusButton();
-        btnThoat = new gui.swing.RadiusButton();
         pnlRight = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        pnlLeft = new gui.swing.CustomPanel();
+        btnThoat = new gui.swing.RadiusButton();
+        btnDangNhap = new gui.swing.RadiusButton();
+        customJPasswordField1 = new gui.swing.CustomJPasswordField();
+        txtTenDangNhap = new gui.swing.CustomJTextField();
+        lblMatKhau = new javax.swing.JLabel();
+        btnQuenMatKhau = new gui.swing.Button();
+        lblTenDangNhap = new javax.swing.JLabel();
+        lblDangNhap = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Karaoke APLUS");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setName("Đăng nhập"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(985, 520));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(973, 500));
         setResizable(false);
 
-        pnlTong.setBackground(new java.awt.Color(248, 248, 248));
+        pnlTong.setBackground(new java.awt.Color(115, 211, 221));
         pnlTong.setPreferredSize(new java.awt.Dimension(900, 520));
-
-        pnlLeft.setBackground(new java.awt.Color(244, 246, 247));
-        pnlLeft.setForeground(new java.awt.Color(248, 248, 248));
-        pnlLeft.setPreferredSize(new java.awt.Dimension(450, 260));
-
-        lblDangNhap.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
-        lblDangNhap.setText("ĐĂNG NHẬP");
-
-        lblTenDangNhap.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lblTenDangNhap.setText("Tên đăng nhập");
-
-        lblMatKhau.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lblMatKhau.setText("Mật khẩu");
-
-        btnQuenMatKhau.setBackground(new java.awt.Color(244, 246, 247));
-        btnQuenMatKhau.setText("Quên Mật Khẩu");
-        btnQuenMatKhau.setFont(new java.awt.Font("Dialog", 2, 14)); // NOI18N
-        btnQuenMatKhau.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnQuenMatKhauActionPerformed(evt);
-            }
-        });
-
-        txtTenDangNhap.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        txtTenDangNhap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTenDangNhapActionPerformed(evt);
-            }
-        });
-
-        customJPasswordField1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-
-        btnDangNhap.setBackground(new java.awt.Color(23, 194, 209));
-        btnDangNhap.setText("Đăng nhập");
-        btnDangNhap.setFocusable(false);
-        btnDangNhap.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-
-        btnThoat.setBackground(new java.awt.Color(255, 51, 51));
-        btnThoat.setText("Thoát");
-        btnThoat.setFocusable(false);
-        btnThoat.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        btnThoat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThoatActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pnlLeftLayout = new javax.swing.GroupLayout(pnlLeft);
-        pnlLeft.setLayout(pnlLeftLayout);
-        pnlLeftLayout.setHorizontalGroup(
-            pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlLeftLayout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(customJPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLeftLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLeftLayout.createSequentialGroup()
-                        .addComponent(lblDangNhap)
-                        .addGap(88, 88, 88))
-                    .addComponent(btnQuenMatKhau, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLeftLayout.createSequentialGroup()
-                        .addComponent(btnDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)
-                        .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(75, 75, 75))))
-        );
-        pnlLeftLayout.setVerticalGroup(
-            pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlLeftLayout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addComponent(lblDangNhap)
-                .addGap(44, 44, 44)
-                .addGroup(pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(pnlLeftLayout.createSequentialGroup()
-                        .addComponent(lblTenDangNhap)
-                        .addGap(40, 40, 40)
-                        .addComponent(lblMatKhau))
-                    .addGroup(pnlLeftLayout.createSequentialGroup()
-                        .addComponent(txtTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(customJPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnQuenMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addGroup(pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         pnlRight.setPreferredSize(new java.awt.Dimension(450, 260));
 
@@ -185,23 +89,121 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/img_LoginBlue.gif"))); // NOI18N
 
+        pnlLeft.setEnabled(false);
+        pnlLeft.setOpaque(false);
+
+        btnThoat.setBackground(new java.awt.Color(255, 51, 51));
+        btnThoat.setText("Thoát");
+        btnThoat.setFocusable(false);
+        btnThoat.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoatActionPerformed(evt);
+            }
+        });
+
+        btnDangNhap.setBackground(new java.awt.Color(0, 167, 182));
+        btnDangNhap.setText("Đăng nhập");
+        btnDangNhap.setFocusable(false);
+        btnDangNhap.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+
+        customJPasswordField1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+
+        txtTenDangNhap.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        txtTenDangNhap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTenDangNhapActionPerformed(evt);
+            }
+        });
+
+        lblMatKhau.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblMatKhau.setText("Mật khẩu");
+
+        btnQuenMatKhau.setBackground(new java.awt.Color(115, 211, 221));
+        btnQuenMatKhau.setText("Quên Mật Khẩu");
+        btnQuenMatKhau.setFont(new java.awt.Font("Dialog", 2, 14)); // NOI18N
+        btnQuenMatKhau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuenMatKhauActionPerformed(evt);
+            }
+        });
+
+        lblTenDangNhap.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblTenDangNhap.setText("Tên đăng nhập");
+
+        lblDangNhap.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        lblDangNhap.setText("ĐĂNG NHẬP");
+
+        javax.swing.GroupLayout pnlLeftLayout = new javax.swing.GroupLayout(pnlLeft);
+        pnlLeft.setLayout(pnlLeftLayout);
+        pnlLeftLayout.setHorizontalGroup(
+            pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLeftLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLeftLayout.createSequentialGroup()
+                        .addComponent(lblDangNhap)
+                        .addGap(88, 88, 88))
+                    .addComponent(btnQuenMatKhau, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(pnlLeftLayout.createSequentialGroup()
+                .addGroup(pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlLeftLayout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addGroup(pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32)
+                        .addGroup(pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(customJPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pnlLeftLayout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(btnDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)
+                        .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+        pnlLeftLayout.setVerticalGroup(
+            pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlLeftLayout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addComponent(lblDangNhap)
+                .addGap(48, 48, 48)
+                .addGroup(pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTenDangNhap)
+                    .addComponent(txtTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addGroup(pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblMatKhau)
+                    .addComponent(customJPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addComponent(btnQuenMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(93, 93, 93))
+        );
+
         javax.swing.GroupLayout pnlTongLayout = new javax.swing.GroupLayout(pnlTong);
         pnlTong.setLayout(pnlTongLayout);
         pnlTongLayout.setHorizontalGroup(
             pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTongLayout.createSequentialGroup()
-                .addComponent(pnlLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(701, 701, 701))
         );
         pnlTongLayout.setVerticalGroup(
             pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlLeft, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
             .addComponent(pnlRight, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
-            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTongLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel2))
+            .addComponent(pnlLeft, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -210,7 +212,7 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pnlTong, javax.swing.GroupLayout.PREFERRED_SIZE, 997, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 2, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -287,7 +289,7 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
     private javax.swing.JLabel lblDangNhap;
     private javax.swing.JLabel lblMatKhau;
     private javax.swing.JLabel lblTenDangNhap;
-    private javax.swing.JPanel pnlLeft;
+    private gui.swing.CustomPanel pnlLeft;
     private javax.swing.JPanel pnlRight;
     private javax.swing.JPanel pnlTong;
     private gui.swing.CustomJTextField txtTenDangNhap;
