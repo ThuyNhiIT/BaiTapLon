@@ -26,6 +26,7 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
         initComponents();
         setLocationRelativeTo(null);
         btnThoat.addActionListener(this);   
+        btnQuenMatKhau.addActionListener(this);
     }
     
 //    protected void paintComponent(Graphics g) {
@@ -242,6 +243,10 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
         if(o.equals(btnThoat)){
             System.exit(0);
             return;
+        }
+        else if(o.equals(btnQuenMatKhau)){
+            Form_QuenMatKhau quen_mk = new Form_QuenMatKhau();
+            quen_mk.setVisible(true);
         }
     }
     
