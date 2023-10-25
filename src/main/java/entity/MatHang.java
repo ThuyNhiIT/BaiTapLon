@@ -9,19 +9,27 @@ import java.util.Objects;
 /**
  *
  * @author 84343
- *
  */
 public class MatHang {
 
-    public MatHang(String maMH, String tenMH, Double gia) {
+    private String maMH;
+    private String tenMH;
+    private double gia;
+    private boolean trangThai;
+
+    public MatHang(String maMH, String tenMH, double gia, boolean trangThai) {
         this.maMH = maMH;
         this.tenMH = tenMH;
         this.gia = gia;
+        this.trangThai = trangThai;
     }
 
-    private String maMH;
-    private String tenMH;
-    private Double gia;
+    public MatHang(String maMH) {
+        this.maMH = maMH;
+    }
+
+    public MatHang() {
+    }
 
     public String getMaMH() {
         return maMH;
@@ -37,20 +45,28 @@ public class MatHang {
 
     public void setTenMH(String tenMH) {
         this.tenMH = tenMH;
-
     }
 
-    public Double getGia() {
+    public double getGia() {
         return gia;
     }
 
-    public void setGia(Double gia) {
+    public void setGia(double gia) {
         this.gia = gia;
+    }
+
+    public boolean isTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.maMH);
         return hash;
     }
 
@@ -71,14 +87,7 @@ public class MatHang {
 
     @Override
     public String toString() {
-        return "MatHang{" + "maMH=" + maMH + ", tenMH=" + tenMH + ", gia=" + gia + '}';
-    }
-
-    public MatHang() {
-    }
-
-    public MatHang(String maMH) {
-        this.maMH = maMH;
+        return "MatHang{" + "maMH=" + maMH + ", tenMH=" + tenMH + ", gia=" + gia + ", trangThai=" + trangThai + '}';
     }
 
 }
