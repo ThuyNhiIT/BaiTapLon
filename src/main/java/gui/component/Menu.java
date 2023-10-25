@@ -17,35 +17,62 @@ import gui.event.EventShowPopUpMenu;
 import java.awt.event.ActionListener;
 
 /**
+ * Lớp Menu là thành phần giao diện cho thanh menu bên trái của ứng dụng.
  *
  * @author HO MINH HAU
  */
 public class Menu extends javax.swing.JPanel {
 
+    /**
+     * Thêm sự kiện khi một mục menu được chọn.
+     *
+     * @param event Sự kiện EventMenuSelected.
+     */
     public void addEvent(EventMenuSelected event) {
         this.event = event;
     }
 
+    /**
+     * Đặt cờ cho phép hiển thị menu.
+     *
+     * @param enbleMenu Cờ cho phép hiển thị menu.
+     */
     public void setEnbleMenu(boolean enbleMenu) {
         this.enbleMenu = enbleMenu;
     }
 
+    /**
+     * Đặt cờ xác định menu đang hiển thị hay ẩn.
+     *
+     * @param showMenu Cờ xác định menu đang hiển thị hay ẩn.
+     */
     public void setShowMenu(boolean showMenu) {
         this.showMenu = showMenu;
     }
 
+    /**
+     * Kiểm tra xem menu đang hiển thị hay ẩn.
+     *
+     * @return true nếu menu đang hiển thị, false nếu đang ẩn.
+     */
     public boolean isShowMenu() {
         return showMenu;
     }
 
+    /**
+     * Thêm sự kiện khi cần hiển thị menu con (pop-up menu).
+     *
+     * @param eventShowPopUpMenu Sự kiện EventShowPopUpMenu.
+     */
     public void addEventShowPopUpMenu(EventShowPopUpMenu eventShowPopUpMenu) {
         this.eventShowPopUpMenu = eventShowPopUpMenu;
     }
-    private EventMenuSelected event;
-    private boolean enbleMenu = true;
-    private boolean showMenu = true;
-    private final MigLayout layout;
-    private EventShowPopUpMenu eventShowPopUpMenu;
+    // Các biến và sự kiện quan trọng
+    private EventMenuSelected event; // Sự kiện xảy ra khi một mục menu được chọn.
+    private boolean enbleMenu = true; // Cờ cho phép hiển thị menu.
+    private boolean showMenu = true; // Cờ xác định menu đang hiển thị hay ẩn.
+    private final MigLayout layout; // Layout quản lý cách các mục menu được sắp xếp.
+    private EventShowPopUpMenu eventShowPopUpMenu; // Sự kiện hiển thị menu con (pop-up menu).
 
     public Menu() {
         initComponents();
@@ -57,18 +84,28 @@ public class Menu extends javax.swing.JPanel {
 
     }
 
+    /**
+     * Khởi tạo các mục menu ban đầu.
+     */
     public void initMenuItem() {
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/TrangChu1.png")), "Trang Chủ"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/choices.png")), "Quản Lí Đặt Phòng"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/QuanLyPhongHat2.png")), "Quản Lí Phòng Hát"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/add-user.png")), "Quản Lí Khách Hàng"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/add-to-basket.png")), "Quản Lí Mặt Hàng", "     Mặt Hàng", "     Dịch Vụ"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/booking.png")), "Quản Lí Đặt Phòng"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/smartphone.png")), "Quản Lí Phòng Hát"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/service.png")), "Quản Lí Khách Hàng"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/dairy-products.png")), "Quản Lí Mặt Hàng", "     Mặt Hàng", "     Dịch Vụ"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/teamwork.png")), "Quản Lí Nhân Viên "));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/bar-chart.png")), "Thống Kê", "     Thống Kê Mặt Hàng", "     Thống Kê Doanh Thu"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/setting.png")), "Cài Đặt"));
 
     }
 
+    /**
+     * Thêm một mục menu vào thanh menu. Ở đây có 2 panel là pnlItem và
+     * pnlSetting .
+     *
+     * @param menu ModelMenu đại diện cho mục menu.
+     *
+     */
     private void addMenu(ModelMenu menu) {
         if (menu.getMenuName().equals("Cài Đặt")) {
             pnlSetting.add(new MenuItem(menu, getEventMenu(), event, pnlItem.getComponentCount()), "h 30!, pushy, growy");
@@ -78,6 +115,11 @@ public class Menu extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Lấy sự kiện cho mục menu.
+     *
+     * @return EventMenu đại diện cho sự kiện menu.
+     */
     private EventMenu getEventMenu() {
         return new EventMenu() {
             @Override
@@ -91,7 +133,7 @@ public class Menu extends javax.swing.JPanel {
                         }
                         return true;
                     } else {
-                       eventShowPopUpMenu.showPopUp(com);
+                        eventShowPopUpMenu.showPopUp(com);
                     }
                 }
                 return false;
@@ -99,6 +141,9 @@ public class Menu extends javax.swing.JPanel {
         };
     }
 
+    /**
+     * Ẩn tất cả các menu đang mở.
+     */
     public void hideallMenu() {
         for (Component com : pnlItem.getComponents()) {
             MenuItem item = (MenuItem) com;
@@ -166,6 +211,7 @@ public class Menu extends javax.swing.JPanel {
         );
 
         lblTitle.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("KARAOKE APLUS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -182,11 +228,11 @@ public class Menu extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(8, 8, 8)
-                .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlItem, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnlSetting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(pnlSetting, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
