@@ -232,7 +232,6 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
        if (userNameValue.equals("admin") && passwordValue.equals("admin")) {
         // Đóng Form_Login
         this.dispose(); // Đóng cửa sổ hiện tại (Form_Login)
-
         // Mở Form_Main
            new Main().setVisible(true);
     } else {

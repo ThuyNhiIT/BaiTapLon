@@ -1,9 +1,11 @@
 gui\main\Main$3.class
 gui\event\EventShowPopUpMenu.class
 gui\form\Form_QuanLyNhanVien.class
+dao\NhanVien_DAO.class
 gui\form\Form_Login.class
 gui\form\Form_Setting.class
 gui\form\Form_QuanLyPhongHat.class
+gui\component\Header$3.class
 gui\swing\scrollbar\ModernScrollBarUI.class
 entity\PhongHat.class
 gui\form\MainForm.class
@@ -12,12 +14,14 @@ entity\NhanVien.class
 gui\event\EventMenu.class
 gui\event\EventCheckConnectDB.class
 gui\swing\PanelPopUp.class
+gui\swing\ButtonGradient.class
 gui\swing\CustomJPasswordField.class
 gui\swing\scrollbar\ModernScrollBarUI$ScrollBarButton.class
 gui\swing\RadiusButton.class
 gui\swing\PopupMenu.class
 gui\form\Form_ThongKeDoanhThu.class
 gui_dialog\DL_ThanhToan$2.class
+gui\form\Form_QuenMatKhau$1.class
 gui\component\Header$1.class
 gui\form\Form_ThongKeMatHang.class
 gui\form\Form_Login$3.class
@@ -30,6 +34,7 @@ gui_dialog\DL_ThemMatHang$2.class
 gui\Application$1.class
 gui\form\ProcessesLoading.class
 gui\swing\CustomJTextField.class
+gui\component\Header$2.class
 gui\form\ProcessesLoading$1.class
 gui\swing\MenuAnimation$1.class
 gui\swing\MenuItem$2.class
@@ -66,8 +71,10 @@ gui\form\Form_MatHang.class
 connectDB\ConnectDB.class
 gui\swing\MenuItem.class
 entity\TaiKhoan.class
+gui\form\Form_QuenMatKhau.class
 gui\swing\CustomPanel.class
 gui\Application$1$2.class
+dao\LoaiNV_DAO.class
 gui\swing\MenuButton.class
 gui\main\Main$1.class
 gui\swing\RadiusButton$2.class
@@ -80,6 +87,7 @@ entity\MatHang.class
 entity\DichVu.class
 entity\ChiTietHoaDonDV.class
 gui\main\Main.class
+gui\form\Form_Login$5.class
 gui\swing\MenuButton$1.class
 gui\swing\RadiusButton$1.class
 gui\main\Main$2.class
