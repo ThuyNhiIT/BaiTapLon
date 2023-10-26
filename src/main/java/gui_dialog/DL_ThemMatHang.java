@@ -47,14 +47,12 @@ public class DL_ThemMatHang extends javax.swing.JFrame {
         lblGia.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblGia.setText("Giá:");
 
-        txtTenMH.setText("Bia");
         txtTenMH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTenMHActionPerformed(evt);
             }
         });
 
-        txtGia.setText("300000");
         txtGia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtGiaActionPerformed(evt);
