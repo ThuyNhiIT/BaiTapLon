@@ -3,11 +3,8 @@ gui\event\EventShowPopUpMenu.class
 gui_dialog\DL_DoiMatKhau$2.class
 gui_dialog\DL_SuaPhong$1.class
 gui\form\Form_QuanLyNhanVien.class
-<<<<<<< HEAD
-dao\NhanVien_DAO.class
-=======
 gui_dialog\DL_ThemPhong$2.class
->>>>>>> 1a4a59ba65f74a6e8b105687570e5d13cfa51ce9
+dao\NhanVien_DAO.class
 gui\form\Form_Login.class
 gui\form\Form_Setting.class
 gui_dialog\DL_CapNhatMatHang$2.class
@@ -27,17 +24,9 @@ gui\event\EventCheckConnectDB.class
 gui_dialog\DL_ThuePhong$1.class
 gui_dialog\DL_ThongTinDatPhong$2.class
 gui\swing\PanelPopUp.class
-<<<<<<< HEAD
-<<<<<<< HEAD
 gui\swing\ButtonGradient.class
-=======
-gui_dialog\DoiMatKhau.class
-gui_dialog\DL_DatPhong$1.class
->>>>>>> 9b203fa787b1a5020e8ca6dfa287600f7bf06efc
-=======
 gui_dialog\DL_DatPhong$1.class
 gui\swing\TimKiem$2.class
->>>>>>> 1a4a59ba65f74a6e8b105687570e5d13cfa51ce9
 gui\swing\CustomJPasswordField.class
 gui\swing\scrollbar\ModernScrollBarUI$ScrollBarButton.class
 gui\swing\RadiusButton.class
@@ -63,11 +52,7 @@ gui_dialog\DL_ThongTinKhachHang.class
 gui_dialog\DL_ThemPhong$1.class
 gui\form\ProcessesLoading.class
 gui\swing\CustomJTextField.class
-<<<<<<< HEAD
-gui\component\Header$2.class
-=======
 gui_dialog\DL_CapNhatMatHang$1.class
->>>>>>> 1a4a59ba65f74a6e8b105687570e5d13cfa51ce9
 gui\form\ProcessesLoading$1.class
 gui\swing\MenuAnimation$1.class
 gui\swing\MenuItem$2.class
