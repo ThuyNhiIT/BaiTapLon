@@ -38,33 +38,26 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="btnMenu" min="-2" pref="41" max="-2" attributes="0"/>
-              <EmptySpace pref="622" max="32767" attributes="0"/>
-              <Component id="txtLock" min="-2" pref="74" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jSeparator1" min="-2" pref="7" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="340" max="-2" attributes="0"/>
+              <Component id="txtLock" pref="74" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="315" max="-2" attributes="0"/>
               <Component id="btnChiTietNhanVien" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="btnChiTietNhanVien" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtLock" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnMenu" max="32767" attributes="0"/>
                   </Group>
+                  <Component id="txtLock" alignment="1" max="32767" attributes="0"/>
+                  <Component id="btnChiTietNhanVien" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jSeparator1" min="-2" pref="23" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -86,11 +79,6 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JSeparator" name="jSeparator1">
-      <Properties>
-        <Property name="orientation" type="int" value="1"/>
-      </Properties>
-    </Component>
     <Component class="gui.swing.ButtonGradient" name="btnChiTietNhanVien">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -99,7 +87,7 @@
         <Property name="text" type="java.lang.String" value="H&#x1ed3; Minh H&#x1ead;u"/>
         <Property name="toolTipText" type="java.lang.String" value="Chi ti&#x1ebf;t nh&#xe2;n vi&#xea;n "/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="14" style="0"/>
+          <Font name="Leelawadee UI Semilight" size="14" style="0"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="2"/>
       </Properties>

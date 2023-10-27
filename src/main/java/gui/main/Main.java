@@ -42,7 +42,6 @@ public class Main extends javax.swing.JFrame {
     private MainForm main;
     private Animator animator;
    
-
     public Main() {
         initComponents();
         init();
