@@ -39,7 +39,6 @@ public class Application {
                 Form_Login formLogin = new Form_Login();
                 // Hiển thị giao diện "ProcessesLoading"
                 processesLoading.setVisible(true);
-
                 // Kết nối đến cơ sở dữ liệu
                 try {
                     db.connect();
