@@ -34,7 +34,7 @@ import org.jdesktop.animation.timing.TimingTargetAdapter;
  *
  * @author HO MINH HAU
  */
-public class Main extends javax.swing.JFrame {
+public class GD_Chinh extends javax.swing.JFrame {
 
     private MigLayout layout;
     private Menu menu;
@@ -42,7 +42,7 @@ public class Main extends javax.swing.JFrame {
     private MainForm main;
     private Animator animator;
    
-    public Main() {
+    public GD_Chinh() {
         initComponents();
         init();
     }
@@ -113,9 +113,9 @@ public class Main extends javax.swing.JFrame {
             @Override
             public void showPopUp(Component com) {
                 MenuItem item = (MenuItem) com;
-                PopupMenu popup = new PopupMenu(Main.this, item.getIndex(), item.getEventSelected(), item.getMenu().getSubMenu());
-                int x = Main.this.getX() + 52;
-                int y = Main.this.getY() + com.getY() + 86;
+                PopupMenu popup = new PopupMenu(GD_Chinh.this, item.getIndex(), item.getEventSelected(), item.getMenu().getSubMenu());
+                int x = GD_Chinh.this.getX() + 52;
+                int y = GD_Chinh.this.getY() + com.getY() + 86;
                 popup.setLocation(x, y);
                 popup.setVisible(true);
             }
@@ -231,28 +231,29 @@ public class Main extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Main.class
+            java.util.logging.Logger.getLogger(GD_Chinh.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Main.class
+            java.util.logging.Logger.getLogger(GD_Chinh.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Main.class
+            java.util.logging.Logger.getLogger(GD_Chinh.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Main.class
+            java.util.logging.Logger.getLogger(GD_Chinh.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Main().setVisible(true);
+                new GD_Chinh().setVisible(true);
             }
         });
     }

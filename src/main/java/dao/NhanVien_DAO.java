@@ -7,6 +7,7 @@ package dao;
  */
 public class NhanVien_DAO {
     public NhanVien_DAO() {
+        
     }
 
 }

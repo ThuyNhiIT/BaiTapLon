@@ -3,7 +3,7 @@ package gui.form;
 import connectDB.ConnectDB;
 import dao.TaiKhoan_DAO;
 import entity.TaiKhoan;
-import gui.main.Main;
+import gui.main.GD_Chinh;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -239,7 +239,7 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
             // Đóng Form_Login
             this.dispose(); // Đóng cửa sổ hiện tại (Form_Login)
             // Mở Form_Main
-            new Main().setVisible(true);
+            new GD_Chinh().setVisible(true);
         }else{
         ConnectDB db = ConnectDB.getInstance();
         try {
@@ -255,7 +255,7 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
                 // Đóng Form_Login
                 this.dispose(); // Đóng cửa sổ hiện tại (Form_Login)
                 // Mở Form_Main
-                new Main().setVisible(true);
+                new GD_Chinh().setVisible(true);
             } else {
                 // Xử lý khi đăng nhập thất bại (ví dụ: thông báo lỗi)
                 JOptionPane.showMessageDialog(this, "Đăng nhập không thành công. Vui lòng kiểm tra tên đăng nhập và mật khẩu.");
