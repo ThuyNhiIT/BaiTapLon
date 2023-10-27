@@ -84,8 +84,8 @@ public class Form_MatHang extends javax.swing.JPanel {
             pnHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnHeaderLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
-                .addComponent(pnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 427, Short.MAX_VALUE)
+                .addComponent(pnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 451, Short.MAX_VALUE)
                 .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(75, 75, 75))
         );
@@ -98,7 +98,7 @@ public class Form_MatHang extends javax.swing.JPanel {
             .addGroup(pnHeaderLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(pnTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         tblMatHang.setModel(new javax.swing.table.DefaultTableModel(
