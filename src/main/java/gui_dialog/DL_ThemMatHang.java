@@ -26,22 +26,18 @@ public class DL_ThemMatHang extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblThemMH = new javax.swing.JLabel();
         pnThem = new javax.swing.JPanel();
         lblTenMH = new javax.swing.JLabel();
         lblGia = new javax.swing.JLabel();
-        btnThem = new javax.swing.JButton();
-        btnXoaR = new javax.swing.JButton();
-        btnThoat = new javax.swing.JButton();
         txtTenMH = new javax.swing.JTextField();
         txtGia = new javax.swing.JTextField();
+        btnThem = new gui.swing.RadiusButton();
+        btnXoaR = new gui.swing.RadiusButton();
+        btnThoat = new gui.swing.RadiusButton();
+        lblThemMH = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-
-        lblThemMH.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        lblThemMH.setForeground(new java.awt.Color(41, 173, 86));
-        lblThemMH.setText("THÊM MẶT HÀNG");
 
         pnThem.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -51,45 +47,38 @@ public class DL_ThemMatHang extends javax.swing.JFrame {
         lblGia.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblGia.setText("Giá:");
 
-        btnThem.setBackground(new java.awt.Color(41, 173, 86));
-        btnThem.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        btnThem.setForeground(new java.awt.Color(255, 255, 255));
-        btnThem.setText("Thêm");
-
-        btnXoaR.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        btnXoaR.setText("Xóa rỗng");
-
-        btnThoat.setBackground(new java.awt.Color(205, 13, 13));
-        btnThoat.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        btnThoat.setForeground(new java.awt.Color(255, 255, 255));
-        btnThoat.setText("Thoát");
-
-        txtTenMH.setText("Bia");
         txtTenMH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTenMHActionPerformed(evt);
             }
         });
 
-        txtGia.setText("300000");
         txtGia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtGiaActionPerformed(evt);
             }
         });
 
+        btnThem.setBackground(new java.awt.Color(41, 173, 86));
+        btnThem.setForeground(new java.awt.Color(255, 255, 255));
+        btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
+
+        btnXoaR.setBackground(new java.awt.Color(204, 204, 204));
+        btnXoaR.setText("Xóa rỗng");
+
+        btnThoat.setBackground(new java.awt.Color(205, 13, 13));
+        btnThoat.setForeground(new java.awt.Color(255, 255, 255));
+        btnThoat.setText("Thoát");
+
         javax.swing.GroupLayout pnThemLayout = new javax.swing.GroupLayout(pnThem);
         pnThem.setLayout(pnThemLayout);
         pnThemLayout.setHorizontalGroup(
             pnThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnThemLayout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(btnThem)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnXoaR)
-                .addGap(62, 62, 62)
-                .addComponent(btnThoat)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(pnThemLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(pnThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -101,7 +90,15 @@ public class DL_ThemMatHang extends javax.swing.JFrame {
                         .addComponent(lblGia, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(80, 80, 80)
                         .addComponent(txtGia, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(52, 52, 52))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(pnThemLayout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
+                .addComponent(btnXoaR, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
         );
         pnThemLayout.setVerticalGroup(
             pnThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,27 +111,30 @@ public class DL_ThemMatHang extends javax.swing.JFrame {
                 .addGroup(pnThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblGia)
                     .addComponent(txtGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                .addGap(32, 32, 32)
                 .addGroup(pnThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnThem)
-                    .addComponent(btnXoaR)
-                    .addComponent(btnThoat))
+                    .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnXoaR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
+
+        lblThemMH.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        lblThemMH.setForeground(new java.awt.Color(41, 173, 86));
+        lblThemMH.setText("THÊM MẶT HÀNG");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(231, 231, 231)
-                        .addComponent(lblThemMH, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addComponent(pnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addGap(81, 81, 81)
+                .addComponent(pnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(101, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblThemMH, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(197, 197, 197))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,6 +156,10 @@ public class DL_ThemMatHang extends javax.swing.JFrame {
     private void txtTenMHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenMHActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTenMHActionPerformed
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnThemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -193,9 +197,9 @@ public class DL_ThemMatHang extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnThem;
-    private javax.swing.JButton btnThoat;
-    private javax.swing.JButton btnXoaR;
+    private gui.swing.RadiusButton btnThem;
+    private gui.swing.RadiusButton btnThoat;
+    private gui.swing.RadiusButton btnXoaR;
     private javax.swing.JLabel lblGia;
     private javax.swing.JLabel lblTenMH;
     private javax.swing.JLabel lblThemMH;
