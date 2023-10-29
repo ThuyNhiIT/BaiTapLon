@@ -26,22 +26,22 @@ public class Form_MatHang extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        pnHeader = new javax.swing.JPanel();
-        pnTim = new javax.swing.JPanel();
+        pnlMatHang = new javax.swing.JPanel();
+        pnlHeader = new javax.swing.JPanel();
+        pnlTim = new javax.swing.JPanel();
         lblTim = new javax.swing.JLabel();
         btnTim = new gui.swing.RadiusButton();
         txtTim = new javax.swing.JTextField();
         btnThem = new gui.swing.RadiusButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        scr = new javax.swing.JScrollPane();
         tblMatHang = new javax.swing.JTable();
 
-        jPanel1.setBackground(new java.awt.Color(235, 249, 249));
+        pnlMatHang.setBackground(new java.awt.Color(235, 249, 249));
 
-        pnHeader.setBackground(new java.awt.Color(235, 249, 249));
-        pnHeader.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlHeader.setBackground(new java.awt.Color(235, 249, 249));
+        pnlHeader.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        pnTim.setBackground(new java.awt.Color(255, 255, 255));
+        pnlTim.setBackground(new java.awt.Color(255, 255, 255));
 
         lblTim.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTim.setText("Tìm kiếm");
@@ -50,11 +50,11 @@ public class Form_MatHang extends javax.swing.JPanel {
         btnTim.setBorder(null);
         btnTim.setText("Tìm");
 
-        javax.swing.GroupLayout pnTimLayout = new javax.swing.GroupLayout(pnTim);
-        pnTim.setLayout(pnTimLayout);
-        pnTimLayout.setHorizontalGroup(
-            pnTimLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnTimLayout.createSequentialGroup()
+        javax.swing.GroupLayout pnlTimLayout = new javax.swing.GroupLayout(pnlTim);
+        pnlTim.setLayout(pnlTimLayout);
+        pnlTimLayout.setHorizontalGroup(
+            pnlTimLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTimLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblTim)
                 .addGap(27, 27, 27)
@@ -63,11 +63,11 @@ public class Form_MatHang extends javax.swing.JPanel {
                 .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(81, 81, 81))
         );
-        pnTimLayout.setVerticalGroup(
-            pnTimLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnTimLayout.createSequentialGroup()
+        pnlTimLayout.setVerticalGroup(
+            pnlTimLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTimLayout.createSequentialGroup()
                 .addContainerGap(16, Short.MAX_VALUE)
-                .addGroup(pnTimLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlTimLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTim)
                     .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -78,25 +78,25 @@ public class Form_MatHang extends javax.swing.JPanel {
         btnThem.setForeground(new java.awt.Color(255, 255, 255));
         btnThem.setText("Thêm mặt hàng");
 
-        javax.swing.GroupLayout pnHeaderLayout = new javax.swing.GroupLayout(pnHeader);
-        pnHeader.setLayout(pnHeaderLayout);
-        pnHeaderLayout.setHorizontalGroup(
-            pnHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnHeaderLayout.createSequentialGroup()
+        javax.swing.GroupLayout pnlHeaderLayout = new javax.swing.GroupLayout(pnlHeader);
+        pnlHeader.setLayout(pnlHeaderLayout);
+        pnlHeaderLayout.setHorizontalGroup(
+            pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlHeaderLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
-                .addComponent(pnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlTim, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 459, Short.MAX_VALUE)
                 .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(70, 70, 70))
         );
-        pnHeaderLayout.setVerticalGroup(
-            pnHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnHeaderLayout.createSequentialGroup()
-                .addGroup(pnHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnHeaderLayout.createSequentialGroup()
+        pnlHeaderLayout.setVerticalGroup(
+            pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlHeaderLayout.createSequentialGroup()
+                .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlHeaderLayout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addComponent(pnTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnHeaderLayout.createSequentialGroup()
+                        .addComponent(pnlTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlHeaderLayout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(25, Short.MAX_VALUE))
@@ -149,25 +149,25 @@ public class Form_MatHang extends javax.swing.JPanel {
                 "STT", "Mã mặt hàng", "Tên mặt hàng", "Số lượng", "Giá", "Hành động"
             }
         ));
-        jScrollPane1.setViewportView(tblMatHang);
+        scr.setViewportView(tblMatHang);
         tblMatHang.getAccessibleContext().setAccessibleName("");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlMatHangLayout = new javax.swing.GroupLayout(pnlMatHang);
+        pnlMatHang.setLayout(pnlMatHangLayout);
+        pnlMatHangLayout.setHorizontalGroup(
+            pnlMatHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMatHangLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(scr)
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(pnHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        pnlMatHangLayout.setVerticalGroup(
+            pnlMatHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMatHangLayout.createSequentialGroup()
+                .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+                .addComponent(scr, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
                 .addGap(110, 110, 110))
         );
 
@@ -175,11 +175,11 @@ public class Form_MatHang extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlMatHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlMatHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -187,11 +187,11 @@ public class Form_MatHang extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.swing.RadiusButton btnThem;
     private gui.swing.RadiusButton btnTim;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTim;
-    private javax.swing.JPanel pnHeader;
-    private javax.swing.JPanel pnTim;
+    private javax.swing.JPanel pnlHeader;
+    private javax.swing.JPanel pnlMatHang;
+    private javax.swing.JPanel pnlTim;
+    private javax.swing.JScrollPane scr;
     private javax.swing.JTable tblMatHang;
     private javax.swing.JTextField txtTim;
     // End of variables declaration//GEN-END:variables

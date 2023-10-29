@@ -23,12 +23,12 @@ public class Form_Setting extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        pnlCaiDat = new javax.swing.JPanel();
         DoiMK = new javax.swing.JButton();
         HDSD = new javax.swing.JButton();
         DangXuat = new javax.swing.JButton();
 
-        jPanel1.setBackground(new java.awt.Color(235, 249, 249));
+        pnlCaiDat.setBackground(new java.awt.Color(235, 249, 249));
 
         DoiMK.setBackground(new java.awt.Color(205, 13, 13));
         DoiMK.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
@@ -44,21 +44,21 @@ public class Form_Setting extends javax.swing.JPanel {
         DangXuat.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         DangXuat.setText("Đăng xuất");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlCaiDatLayout = new javax.swing.GroupLayout(pnlCaiDat);
+        pnlCaiDat.setLayout(pnlCaiDatLayout);
+        pnlCaiDatLayout.setHorizontalGroup(
+            pnlCaiDatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCaiDatLayout.createSequentialGroup()
                 .addContainerGap(492, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlCaiDatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(DangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(HDSD, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(DoiMK, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(279, 279, 279))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        pnlCaiDatLayout.setVerticalGroup(
+            pnlCaiDatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCaiDatLayout.createSequentialGroup()
                 .addGap(88, 88, 88)
                 .addComponent(DoiMK, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(66, 66, 66)
@@ -72,11 +72,11 @@ public class Form_Setting extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlCaiDat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlCaiDat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -85,6 +85,6 @@ public class Form_Setting extends javax.swing.JPanel {
     private javax.swing.JButton DangXuat;
     private javax.swing.JButton DoiMK;
     private javax.swing.JButton HDSD;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel pnlCaiDat;
     // End of variables declaration//GEN-END:variables
 }
