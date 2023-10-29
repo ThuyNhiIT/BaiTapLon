@@ -49,7 +49,6 @@ public class Menu extends javax.swing.JPanel {
     public void setShowMenu(boolean showMenu) {
         this.showMenu = showMenu;
     }
-
     /**
      * Kiểm tra xem menu đang hiển thị hay ẩn.
      *
@@ -98,6 +97,16 @@ public class Menu extends javax.swing.JPanel {
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/setting.png")), "Cài Đặt"));
 
     }
+    public void initMenuItemTN() {
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/TrangChu1.png")), "Trang Chủ"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/booking.png")), "Quản Lí Đặt Phòng"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/smartphone.png")), "Quản Lí Phòng Hát"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/service.png")), "Quản Lí Khách Hàng"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/dairy-products.png")), "Quản Lí Mặt Hàng", "     Mặt Hàng", "     Dịch Vụ"));
+//        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/teamwork.png")), "Quản Lí Nhân Viên "));
+//        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/bar-chart.png")), "Thống Kê", "     Thống Kê Mặt Hàng", "     Thống Kê Doanh Thu"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/setting.png")), "Cài Đặt"));
+    }
 
     /**
      * Thêm một mục menu vào thanh menu. Ở đây có 2 panel là pnlItem và
@@ -140,7 +149,6 @@ public class Menu extends javax.swing.JPanel {
             }
         };
     }
-
     /**
      * Ẩn tất cả các menu đang mở.
      */
