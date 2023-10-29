@@ -1,32 +1,36 @@
 package gui.form;
 
 import connectDB.ConnectDB;
+import dao.NhanVien_DAO;
 import dao.TaiKhoan_DAO;
-import entity.TaiKhoan;
+import entity.NhanVien;
 import gui.main.Main;
-import java.awt.Color;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.Toolkit;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
- *
  * @author 84934 NguyenThiQuynhGiang
  */
 public class Form_Login extends javax.swing.JFrame implements ActionListener, MouseListener {
+    private NhanVien_DAO nv_dao;
+    private TaiKhoan_DAO tk_dao;
+    private static NhanVien nhanVienDangNhap;
 
-//    private TaiKhoan_DAO tk_dao;
+    public static NhanVien getNhanVienDangNhap() {
+        return nhanVienDangNhap;
+    }
+
+    public static void setNhanVienDangNhap(NhanVien nhanVien) {
+        nhanVienDangNhap = nhanVien;
+    }
 
     /**
      * Creates new form Form_Login
@@ -36,7 +40,9 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
         setLocationRelativeTo(null);
         btnThoat.addActionListener(this);
         btnQuenMatKhau.addActionListener(this);
+
     }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -235,38 +241,47 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
         String userNameValue = txtTenDangNhap.getText();
         String passwordValue = String.valueOf(txtPassword.getPassword());
-        if (userNameValue.equals("admin") && passwordValue.equals("admin")) {
-            // Đóng Form_Login
-            this.dispose(); // Đóng cửa sổ hiện tại (Form_Login)
-            // Mở Form_Main
-            new Main().setVisible(true);
-        }else{
-        ConnectDB db = ConnectDB.getInstance();
-        try {
-            db.connect();
-        } catch (SQLException ex) {
-            Logger.getLogger(Form_Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        TaiKhoan_DAO taiKhoanDAO = new TaiKhoan_DAO();
-
-        try {
-            // Kiểm tra thông tin đăng nhập sử dụng TaiKhoan_DAO
-            if (taiKhoanDAO.authenticate(userNameValue, passwordValue)) {
-                // Đóng Form_Login
-                this.dispose(); // Đóng cửa sổ hiện tại (Form_Login)
-                // Mở Form_Main
-                new Main().setVisible(true);
-            } else {
-                // Xử lý khi đăng nhập thất bại (ví dụ: thông báo lỗi)
-                JOptionPane.showMessageDialog(this, "Đăng nhập không thành công. Vui lòng kiểm tra tên đăng nhập và mật khẩu.");
+        if (!userNameValue.isEmpty() || !passwordValue.isEmpty()) {
+            ConnectDB db = ConnectDB.getInstance();
+            try {
+                db.connect();
+            } catch (SQLException ex) {
+                Logger.getLogger(Form_Login.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (Exception e) {
-            // Xử lý lỗi khi kiểm traNVN thông tin đăng nhập
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi khi kiểm tra thông tin đăng nhập.");
+             tk_dao = new TaiKhoan_DAO();
+            nv_dao = new NhanVien_DAO();
+            try {
+                // Kiểm tra thông tin đăng nhập sử dụng TaiKhoan_DAO
+                if (tk_dao.authenticate(userNameValue, passwordValue)) {
+                    // Lấy thông tin nhân viên từ database
+                    ArrayList<NhanVien> nv = nv_dao.getNhanVienTheoMaNV(userNameValue);
+                    if (!nv.isEmpty()) {
+                        nhanVienDangNhap = nv.get(0); // Assuming there is only one NhanVien for the given username
+
+                    }
+
+                    // Lưu thông tin nhân viên vào biến toàn cục "nhanVienDangNhap"
+                    setNhanVienDangNhap(nhanVienDangNhap);
+
+
+                    // Hiển thị thông tin nhân viên lên Form_Main
+
+                    // Xử lý khi đăng nhập thành cônn
+                        // Đóng Form_Login
+                        this.dispose(); // Đóng cửa sổ hiện tại (Form_Login)
+                        // Mở Form_Main
+                        new Main().setVisible(true);
+
+                } else {
+                    // Xử lý khi đăng nhập thất bại (ví dụ: thông báo lỗi)
+                    JOptionPane.showMessageDialog(this, "Đăng nhập không thành công. Vui lòng kiểm tra tên đăng nhập và mật khẩu.");
+                }
+            } catch (Exception e) {
+                // Xử lý lỗi khi kiểm traNVN thông tin đăng nhập
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi khi kiểm tra thông tin đăng nhập.");
+            }
         }
-        }
-        
 
 
     }//GEN-LAST:event_btnDangNhapActionPerformed
@@ -310,6 +325,7 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
             }
         });
     }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.swing.RadiusButton btnDangNhap;
     private gui.swing.Button btnQuenMatKhau;

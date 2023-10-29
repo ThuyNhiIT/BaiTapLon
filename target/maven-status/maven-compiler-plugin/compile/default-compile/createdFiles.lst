@@ -84,7 +84,6 @@ gui_dialog\DL_ThanhToan$4.class
 gui_dialog\DL_SuaPhong.class
 gui\form\Form_Login$1.class
 gui\swing\Button$2.class
-gui\Login.class
 gui\Application.class
 entity\LoaiPhong.class
 gui\form\Form_QuanLyNhanVien$1.class
