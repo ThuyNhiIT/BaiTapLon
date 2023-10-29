@@ -5,12 +5,11 @@ import gui.component.Menu;
 import gui.form.MainForm;
 import net.miginfocom.swing.MigLayout;
 import gui.event.EventMenuSelected;
-
-
 import gui.event.EventShowPopUpMenu;
 import gui.form.Form_DichVu;
 import gui.form.Form_Home;
 import gui.form.Form_MatHang;
+import gui.form.Form_QuanLiHoaDon;
 import gui.form.Form_QuanLyDatPhong;
 import gui.form.Form_QuanLyKhachHang;
 import gui.form.Form_QuanLyNhanVien;
@@ -42,7 +41,6 @@ public class Main extends javax.swing.JFrame {
     private MainForm main;
     private Animator animator;
    
-
     public Main() {
         initComponents();
         init();
@@ -86,18 +84,23 @@ public class Main extends javax.swing.JFrame {
                     } else if (subMenuIndex == 1) {
                         main.showForm(new Form_DichVu());
                     }
-                } else if (menuIndex == 5) {
+                     } else if (menuIndex == 5) {
+                    if (subMenuIndex == -1) {
+                        main.showForm(new Form_QuanLiHoaDon());
+                    }
+                    
+                } else if (menuIndex == 6) {
                     if (subMenuIndex == -1) {
                         main.showForm(new Form_QuanLyNhanVien());
                     }
-                } else if (menuIndex == 6) {
+                } else if (menuIndex == 7) {
                     if (subMenuIndex == -1 || subMenuIndex == 0) {
                         main.showForm(new Form_ThongKeMatHang());
                     } else if (subMenuIndex == 1) {
                         main.showForm(new Form_ThongKeDoanhThu());
                     }
 
-                } else if (menuIndex == 7) {
+                } else if (menuIndex == 8) {
                     if (subMenuIndex == -1) {
                         main.showForm(new Form_Setting());
                     }

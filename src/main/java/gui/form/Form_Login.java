@@ -1,5 +1,8 @@
 package gui.form;
 
+import connectDB.ConnectDB;
+import dao.TaiKhoan_DAO;
+import entity.TaiKhoan;
 import gui.main.Main;
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -11,6 +14,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -19,6 +25,8 @@ import javax.swing.JOptionPane;
  * @author 84934 NguyenThiQuynhGiang
  */
 public class Form_Login extends javax.swing.JFrame implements ActionListener, MouseListener {
+
+//    private TaiKhoan_DAO tk_dao;
 
     /**
      * Creates new form Form_Login
@@ -250,17 +258,40 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
         String userNameValue = txtTenDangNhap.getText();
         String passwordValue = String.valueOf(txtPassword.getPassword());
-       if (userNameValue.equals("admin") && passwordValue.equals("admin")) {
-        // Đóng Form_Login
-        this.dispose(); // Đóng cửa sổ hiện tại (Form_Login)
-        // Mở Form_Main
-           new Main().setVisible(true);
-    } else {
-        // Xử lý khi đăng nhập thất bại (ví dụ: thông báo lỗi)
-        JOptionPane.showMessageDialog(this, "Đăng nhập không thành công. Vui lòng kiểm tra tên đăng nhập và mật khẩu.");
-    }
-            
+        if (userNameValue.equals("admin") && passwordValue.equals("admin")) {
+            // Đóng Form_Login
+            this.dispose(); // Đóng cửa sổ hiện tại (Form_Login)
+            // Mở Form_Main
+            new Main().setVisible(true);
+        }else{
+        ConnectDB db = ConnectDB.getInstance();
+        try {
+            db.connect();
+        } catch (SQLException ex) {
+            Logger.getLogger(Form_Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        TaiKhoan_DAO taiKhoanDAO = new TaiKhoan_DAO();
+
+        try {
+            // Kiểm tra thông tin đăng nhập sử dụng TaiKhoan_DAO
+            if (taiKhoanDAO.authenticate(userNameValue, passwordValue)) {
+                // Đóng Form_Login
+                this.dispose(); // Đóng cửa sổ hiện tại (Form_Login)
+                // Mở Form_Main
+                new Main().setVisible(true);
+            } else {
+                // Xử lý khi đăng nhập thất bại (ví dụ: thông báo lỗi)
+                JOptionPane.showMessageDialog(this, "Đăng nhập không thành công. Vui lòng kiểm tra tên đăng nhập và mật khẩu.");
+            }
+        } catch (Exception e) {
+            // Xử lý lỗi khi kiểm traNVN thông tin đăng nhập
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Đã xảy ra lỗi khi kiểm tra thông tin đăng nhập.");
+        }
+        }
         
+
+
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
     //Event

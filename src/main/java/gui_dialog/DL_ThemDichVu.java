@@ -76,6 +76,7 @@ public class DL_ThemDichVu extends javax.swing.JFrame {
             }
         });
 
+        btnXoaR.setBackground(new java.awt.Color(204, 204, 204));
         btnXoaR.setText("Xóa rỗng");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
