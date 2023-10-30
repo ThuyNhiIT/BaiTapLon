@@ -4,17 +4,24 @@
  */
 package gui.form;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 /**
  *
- * @author 84934
+ * @author 84934 NguyenThiQuynhGiang
  */
-public class Form_QuenMatKhau extends javax.swing.JFrame {
+public class Form_QuenMatKhau extends javax.swing.JFrame implements ActionListener, MouseListener{
 
     /**
      * Creates new form Form_QuenMatKhau
      */
     public Form_QuenMatKhau() {
         initComponents();
+        setLocationRelativeTo(null);
+        btnOK.addActionListener(this);
     }
 
     /**
@@ -26,17 +33,72 @@ public class Form_QuenMatKhau extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pnlTong = new javax.swing.JPanel();
+        lblQuenMatKhau = new javax.swing.JLabel();
+        lblEmailOrSdt = new javax.swing.JLabel();
+        txtEmailOrSdt = new gui.swing.CustomJTextField();
+        btnOK = new gui.swing.RadiusButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        pnlTong.setBackground(new java.awt.Color(255, 255, 255));
+
+        lblQuenMatKhau.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        lblQuenMatKhau.setText("Quên Mật Khẩu");
+
+        lblEmailOrSdt.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblEmailOrSdt.setText("Email hoặc SDT");
+
+        txtEmailOrSdt.setText("customJTextField1");
+        txtEmailOrSdt.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+
+        btnOK.setBackground(new java.awt.Color(41, 173, 86));
+        btnOK.setText("OK");
+        btnOK.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+
+        javax.swing.GroupLayout pnlTongLayout = new javax.swing.GroupLayout(pnlTong);
+        pnlTong.setLayout(pnlTongLayout);
+        pnlTongLayout.setHorizontalGroup(
+            pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTongLayout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addComponent(lblEmailOrSdt)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addComponent(txtEmailOrSdt, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47))
+            .addGroup(pnlTongLayout.createSequentialGroup()
+                .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlTongLayout.createSequentialGroup()
+                        .addGap(192, 192, 192)
+                        .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlTongLayout.createSequentialGroup()
+                        .addGap(139, 139, 139)
+                        .addComponent(lblQuenMatKhau)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnlTongLayout.setVerticalGroup(
+            pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTongLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(lblQuenMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEmailOrSdt)
+                    .addComponent(txtEmailOrSdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(42, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 554, Short.MAX_VALUE)
+            .addComponent(pnlTong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 396, Short.MAX_VALUE)
+            .addComponent(pnlTong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -78,5 +140,44 @@ public class Form_QuenMatKhau extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private gui.swing.RadiusButton btnOK;
+    private javax.swing.JLabel lblEmailOrSdt;
+    private javax.swing.JLabel lblQuenMatKhau;
+    private javax.swing.JPanel pnlTong;
+    private gui.swing.CustomJTextField txtEmailOrSdt;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object o = e.getSource();
+        if(o.equals(btnOK)){
+            Form_XacNhanQMK cf = new Form_XacNhanQMK();
+            cf.setVisible(true);
+        }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
