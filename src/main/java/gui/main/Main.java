@@ -11,7 +11,6 @@ import net.miginfocom.swing.MigLayout;
 import gui.event.EventMenuSelected;
 import gui.form.Form_Login;
 
-
 import gui.event.EventShowPopUpMenu;
 import gui.swing.MenuItem;
 import gui.swing.PopupMenu;
@@ -32,7 +31,6 @@ import org.jdesktop.animation.timing.TimingTargetAdapter;
  * @author HO MINH HAU
  */
 public class Main extends javax.swing.JFrame {
-
 
     private MigLayout layout;
     private Menu menu;
@@ -55,21 +53,19 @@ public class Main extends javax.swing.JFrame {
         header = new Header();
         main = new MainForm();
 
-
-
         // Thêm sự kiện cho menu khi cần hiển thị menu con (pop-up menu).
         // Khi thu nhỏ menu thì gọi sự kiện này để hiển thị popupmenu
         menu.addEventShowPopUpMenu(new EventShowPopUpMenu() {
             @Override
             public void showPopUp(Component com) {
-                                           MenuItem item = (MenuItem) com;
-                                           PopupMenu popup = new PopupMenu(Main.this, item.getIndex(), item.getEventSelected(), item.getMenu().getSubMenu());
-                                           int x = Main.this.getX() + 52;
-                                           int y = Main.this.getY() + com.getY() + 86;
-                                           popup.setLocation(x, y);
-                                           popup.setVisible(true);
-                                       }
-                                   }
+                MenuItem item = (MenuItem) com;
+                PopupMenu popup = new PopupMenu(Main.this, item.getIndex(), item.getEventSelected(), item.getMenu().getSubMenu());
+                int x = Main.this.getX() + 52;
+                int y = Main.this.getY() + com.getY() + 86;
+                popup.setLocation(x, y);
+                popup.setVisible(true);
+            }
+        }
         );
         NhanVien nhanVienDangNhap = Form_Login.getNhanVienDangNhap();
         if (nhanVienDangNhap != null) {
@@ -81,8 +77,6 @@ public class Main extends javax.swing.JFrame {
         } else {
             // Xử lý khi không tìm thấy thông tin nhân viên đăng nhập
         }
-
-
 
         //check data để phân quyền nhân viên
 //       String  maNV ="NV002";
@@ -118,7 +112,6 @@ public class Main extends javax.swing.JFrame {
         animator.setDeceleration(0.5f);
         animator.setAcceleration(0.5f);
 
-
 // Thêm sự kiện cho nút menu (hiển thị hoặc ẩn menu).
         header.addMenuEvent(new ActionListener() {
             @Override
@@ -138,94 +131,102 @@ public class Main extends javax.swing.JFrame {
             }
         });
     }
-    private void phanQuyenQL(){
+
+    private void phanQuyenQL() {
         menu.addEvent(new EventMenuSelected() {
-                          @Override
-                          public void menuSelect(int menuIndex, int subMenuIndex) {
-                              System.out.println("Menu Index:" + menuIndex + "SubMenuIndex:" + subMenuIndex);
-                              // Xử lý khi một mục menu được chọn
-                              // Ví dụ: Hiển thị một form tương ứng với mục menu được chọn.
-                              if (menuIndex == 0) {
-                                  if (subMenuIndex == -1) {
-                                      main.showForm(new Form_Home());
-                                  }
-                              } else if (menuIndex == 1) {
-                                  if (subMenuIndex == -1) {
-                                      main.showForm(new Form_QuanLyDatPhong());
-                                  }
-                              } else if (menuIndex == 2) {
-                                  if (subMenuIndex == -1) {
-                                      main.showForm(new Form_QuanLyPhongHat());
-                                  }
-                              } else if (menuIndex == 3) {
-                                  if (subMenuIndex == -1) {
-                                      main.showForm(new Form_QuanLyKhachHang());
-                                  }
-                              } else if (menuIndex == 4) {
-                                  if (subMenuIndex == -1 || subMenuIndex == 0) {
-                                      main.showForm(new Form_MatHang());
-                                  } else if (subMenuIndex == 1) {
-                                      main.showForm(new Form_DichVu());
-                                  }
-                              } else if (menuIndex == 5) {
-                                  if (subMenuIndex == -1) {
-                                      main.showForm(new Form_QuanLyNhanVien());
-                                  }
-                              } else if (menuIndex == 6) {
-                                  if (subMenuIndex == -1 || subMenuIndex == 0) {
-                                      main.showForm(new Form_ThongKeMatHang());
-                                  } else if (subMenuIndex == 1) {
-                                      main.showForm(new Form_ThongKeDoanhThu());
-                                  }
+            @Override
+            public void menuSelect(int menuIndex, int subMenuIndex) {
+                System.out.println("Menu Index:" + menuIndex + "SubMenuIndex:" + subMenuIndex);
+                // Xử lý khi một mục menu được chọn
+                // Ví dụ: Hiển thị một form tương ứng với mục menu được chọn.
+                if (menuIndex == 0) {
+                    if (subMenuIndex == -1) {
+                        main.showForm(new Form_Home());
+                    }
+                } else if (menuIndex == 1) {
+                    if (subMenuIndex == -1) {
+                        main.showForm(new Form_QuanLyDatPhong());
+                    }
+                } else if (menuIndex == 2) {
+                    if (subMenuIndex == -1) {
+                        main.showForm(new Form_QuanLyPhongHat());
+                    }
+                } else if (menuIndex == 3) {
+                    if (subMenuIndex == -1) {
+                        main.showForm(new Form_QuanLyKhachHang());
+                    }
+                } else if (menuIndex == 4) {
+                    if (subMenuIndex == -1 || subMenuIndex == 0) {
+                        main.showForm(new Form_MatHang());
+                    } else if (subMenuIndex == 1) {
+                        main.showForm(new Form_DichVu());
+                    }
+                } else if (menuIndex == 5) {
+                    if (subMenuIndex == -1) {
+                        main.showForm(new Form_QuanLiHoaDon());
+                    }
+                } else if (menuIndex == 6) {
+                    if (subMenuIndex == -1) {
+                        main.showForm(new Form_QuanLyNhanVien());
+                    }
+                } else if (menuIndex == 7) {
+                    if (subMenuIndex == -1 || subMenuIndex == 0) {
+                        main.showForm(new Form_ThongKeMatHang());
+                    } else if (subMenuIndex == 1) {
+                        main.showForm(new Form_ThongKeDoanhThu());
+                    }
+                } else if (menuIndex == 8) {
+                    if (subMenuIndex == -1) {
+                        main.showForm(new Form_Setting());
+                    }
+                }
 
-                              } else if (menuIndex == 7) {
-                                  if (subMenuIndex == -1) {
-                                      main.showForm(new Form_Setting());
-                                  }
-                              }
-
-                          }
-                      }
+            }
+        }
         );
         menu.initMenuItem();
     }
-    private void phanQuyenTN(){
-        menu.addEvent(new EventMenuSelected() {
-                          @Override
-                          public void menuSelect(int menuIndex, int subMenuIndex) {
-                              System.out.println("Menu Index:" + menuIndex + "SubMenuIndex:" + subMenuIndex);
-                              // Xử lý khi một mục menu được chọn
-                              // Ví dụ: Hiển thị một form tương ứng với mục menu được chọn.
-                              if (menuIndex == 0) {
-                                  if (subMenuIndex == -1) {
-                                      main.showForm(new Form_Home());
-                                  }
-                              } else if (menuIndex == 1) {
-                                  if (subMenuIndex == -1) {
-                                      main.showForm(new Form_QuanLyDatPhong());
-                                  }
-                              } else if (menuIndex == 2) {
-                                  if (subMenuIndex == -1) {
-                                      main.showForm(new Form_QuanLyPhongHat());
-                                  }
-                              } else if (menuIndex == 3) {
-                                  if (subMenuIndex == -1) {
-                                      main.showForm(new Form_QuanLyKhachHang());
-                                  }
-                              } else if (menuIndex == 4) {
-                                  if (subMenuIndex == -1 || subMenuIndex == 0) {
-                                      main.showForm(new Form_MatHang());
-                                  } else if (subMenuIndex == 1) {
-                                      main.showForm(new Form_DichVu());
-                                  }
-                              } else if (menuIndex == 5) {
-                                  if (subMenuIndex == -1) {
-                                      main.showForm(new Form_Setting());
-                                  }
-                              }
 
-                          }
-                      }
+    private void phanQuyenTN() {
+        menu.addEvent(new EventMenuSelected() {
+            @Override
+            public void menuSelect(int menuIndex, int subMenuIndex) {
+                System.out.println("Menu Index:" + menuIndex + "SubMenuIndex:" + subMenuIndex);
+                // Xử lý khi một mục menu được chọn
+                // Ví dụ: Hiển thị một form tương ứng với mục menu được chọn.
+                if (menuIndex == 0) {
+                    if (subMenuIndex == -1) {
+                        main.showForm(new Form_Home());
+                    }
+                } else if (menuIndex == 1) {
+                    if (subMenuIndex == -1) {
+                        main.showForm(new Form_QuanLyDatPhong());
+                    }
+                } else if (menuIndex == 2) {
+                    if (subMenuIndex == -1) {
+                        main.showForm(new Form_QuanLyPhongHat());
+                    }
+                } else if (menuIndex == 3) {
+                    if (subMenuIndex == -1) {
+                        main.showForm(new Form_QuanLyKhachHang());
+                    }
+                } else if (menuIndex == 4) {
+                    if (subMenuIndex == -1 || subMenuIndex == 0) {
+                        main.showForm(new Form_MatHang());
+                    } else if (subMenuIndex == 1) {
+                        main.showForm(new Form_DichVu());
+                    }
+                } else if (menuIndex == 5) {
+                    if (subMenuIndex == -1) {
+                        main.showForm(new Form_QuanLiHoaDon());
+                    }
+                } else if (menuIndex == 6) {
+                    if (subMenuIndex == -1) {
+                        main.showForm(new Form_Setting());
+                    }
+                }
+            }
+        }
         );
         menu.initMenuItemTN();
     }
@@ -243,23 +244,23 @@ public class Main extends javax.swing.JFrame {
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
-            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1221, Short.MAX_VALUE)
+                bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 1221, Short.MAX_VALUE)
         );
         bgLayout.setVerticalGroup(
-            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+                bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 700, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(bg)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(bg)
         );
 
         pack();
