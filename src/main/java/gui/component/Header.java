@@ -1,5 +1,8 @@
 package gui.component;
 
+import entity.NhanVien;
+import gui.form.Form_Login;
+
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -31,8 +34,13 @@ public class Header extends javax.swing.JPanel {
         initComponents();
         setOpaque(false);
         lock();
+        setTenNhanVien();
     }
-
+    public void setTenNhanVien(){
+        NhanVien nhanVienDangNhap = Form_Login.getNhanVienDangNhap();
+        String tenNV = nhanVienDangNhap.getTenNV();
+        btnChiTietNhanVien.setText(tenNV);
+    }
     /**
      * sự kiện cho nút menu
      *
