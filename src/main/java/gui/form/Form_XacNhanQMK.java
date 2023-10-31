@@ -6,8 +6,7 @@ package gui.form;
 
 /**
  *
- * @author 84934 NguyenThiQuynhGiang
- */
+ * @author 84934 NguyenThiQuyn
 public class Form_XacNhanQMK extends javax.swing.JFrame {
 
     /**
