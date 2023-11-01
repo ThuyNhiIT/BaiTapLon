@@ -155,7 +155,7 @@ public class Form_QuenMatKhau extends javax.swing.JFrame implements ActionListen
     public void actionPerformed(ActionEvent e){
         Object o = e.getSource();
         if(o.equals(btnHuy)){
-            System.exit(0);
+            this.dispose();
             return;
         }
     }
