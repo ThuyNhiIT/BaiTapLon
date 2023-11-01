@@ -190,7 +190,7 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void txtTongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTongActionPerformed
@@ -212,4 +212,4 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
     private javax.swing.JTextField txtTim;
     private javax.swing.JTextField txtTong;
     // End of variables declaration//GEN-END:variables
-}
+} 
