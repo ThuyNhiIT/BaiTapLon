@@ -1,5 +1,7 @@
 package gui.form;
 
+import gui_dialog.DL_ThemDichVu;
+
 /**
  *
  * @author HO MINH HAU
@@ -145,6 +147,11 @@ public class Form_DichVu extends javax.swing.JPanel {
         btnThem.setBackground(new java.awt.Color(41, 173, 86));
         btnThem.setForeground(new java.awt.Color(255, 255, 255));
         btnThem.setText("Thêm dịch vụ");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlHeaderLayout = new javax.swing.GroupLayout(pnlHeader);
         pnlHeader.setLayout(pnlHeaderLayout);
@@ -214,6 +221,10 @@ public class Form_DichVu extends javax.swing.JPanel {
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
      
     }//GEN-LAST:event_btnTimActionPerformed
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+       new DL_ThemDichVu().setVisible(true);
+    }//GEN-LAST:event_btnThemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

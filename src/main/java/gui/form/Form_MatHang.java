@@ -1,5 +1,7 @@
 package gui.form;
 
+import gui_dialog.DL_ThemMatHang;
+
 /**
  *
  * @author HO MINH HAU
@@ -64,6 +66,11 @@ public class Form_MatHang extends javax.swing.JPanel {
         btnThem.setBackground(new java.awt.Color(41, 173, 86));
         btnThem.setForeground(new java.awt.Color(255, 255, 255));
         btnThem.setText("Thêm mặt hàng");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlHeaderLayout = new javax.swing.GroupLayout(pnlHeader);
         pnlHeader.setLayout(pnlHeaderLayout);
@@ -169,6 +176,10 @@ public class Form_MatHang extends javax.swing.JPanel {
             .addComponent(pnlMatHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+       new DL_ThemMatHang().setVisible(true);
+    }//GEN-LAST:event_btnThemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

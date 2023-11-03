@@ -18,6 +18,7 @@ gui_dialog\DL_ThongTinKhachHang$1.class
 gui_dialog\DL_ThanhToan.class
 entity\NhanVien.class
 gui\main\Main$6.class
+gui\form\Form_QuanLyDatPhong$1.class
 gui\event\EventMenu.class
 gui\form\Form_DichVu$3.class
 gui_dialog\DL_CapNhatMatHang.class

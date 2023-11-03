@@ -1,5 +1,7 @@
 package gui.form;
 
+import gui_dialog.DL_ThongTinKhachHang;
+
 /**
  *
  * @author HO MINH HAU
@@ -65,6 +67,11 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
         btnThem.setBackground(new java.awt.Color(41, 173, 86));
         btnThem.setForeground(new java.awt.Color(255, 255, 255));
         btnThem.setText("Thêm khách hàng");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlHeaderLayout = new javax.swing.GroupLayout(pnlHeader);
         pnlHeader.setLayout(pnlHeaderLayout);
@@ -170,6 +177,11 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
             .addComponent(pnlKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+        new DL_ThongTinKhachHang().setVisible(true);
+    }//GEN-LAST:event_btnThemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

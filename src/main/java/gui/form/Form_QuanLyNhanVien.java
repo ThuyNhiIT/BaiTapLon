@@ -1,5 +1,8 @@
 package gui.form;
 
+import gui_dialog.DL_SuaNV;
+import gui_dialog.DL_ThemNV;
+
 /**
  *
  * @author HO MINH HAU
@@ -39,6 +42,11 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
         btnThem.setBackground(new java.awt.Color(41, 173, 86));
         btnThem.setForeground(new java.awt.Color(255, 255, 255));
         btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         btnSua.setBackground(new java.awt.Color(205, 13, 13));
         btnSua.setForeground(new java.awt.Color(255, 255, 255));
@@ -190,12 +198,16 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        // TODO add your handling code here:
+        new DL_SuaNV().setVisible(true);
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void txtTongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTongActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTongActionPerformed
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+    new DL_ThemNV().setVisible(true);
+    }//GEN-LAST:event_btnThemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -212,4 +224,4 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
     private javax.swing.JTextField txtTim;
     private javax.swing.JTextField txtTong;
     // End of variables declaration//GEN-END:variables
-}
+} 
