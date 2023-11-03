@@ -50,16 +50,16 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
         buttonGroup1 = new javax.swing.ButtonGroup();
         pnlTong = new javax.swing.JPanel();
         pnlRight = new javax.swing.JPanel();
-        lbl_Img = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         pnlLeft = new gui.swing.CustomPanel();
         btnThoat = new gui.swing.RadiusButton();
         btnDangNhap = new gui.swing.RadiusButton();
         txtPassword = new gui.swing.CustomJPasswordField();
         txtTenDangNhap = new gui.swing.CustomJTextField();
         lblMatKhau = new javax.swing.JLabel();
+        btnQuenMatKhau = new gui.swing.Button();
         lblTenDangNhap = new javax.swing.JLabel();
         lblDangNhap = new javax.swing.JLabel();
-        btnQuenMatKhau = new gui.swing.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Karaoke APLUS");
@@ -85,7 +85,7 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        lbl_Img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/img_LoginBlue.gif"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/img_LoginBlue.gif"))); // NOI18N
 
         pnlLeft.setEnabled(false);
         pnlLeft.setOpaque(false);
@@ -122,21 +122,20 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
         lblMatKhau.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lblMatKhau.setText("Mật khẩu");
 
-        lblTenDangNhap.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lblTenDangNhap.setText("Tên đăng nhập");
-
-        lblDangNhap.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
-        lblDangNhap.setText("ĐĂNG NHẬP");
-
         btnQuenMatKhau.setBackground(new java.awt.Color(115, 211, 221));
-        btnQuenMatKhau.setBorder(null);
-        btnQuenMatKhau.setText("Quên mật khẩu");
-        btnQuenMatKhau.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnQuenMatKhau.setText("Quên Mật Khẩu");
+        btnQuenMatKhau.setFont(new java.awt.Font("Dialog", 2, 14)); // NOI18N
         btnQuenMatKhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnQuenMatKhauActionPerformed(evt);
             }
         });
+
+        lblTenDangNhap.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblTenDangNhap.setText("Tên đăng nhập");
+
+        lblDangNhap.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        lblDangNhap.setText("ĐĂNG NHẬP");
 
         javax.swing.GroupLayout pnlLeftLayout = new javax.swing.GroupLayout(pnlLeft);
         pnlLeft.setLayout(pnlLeftLayout);
@@ -145,11 +144,6 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
             .addGroup(pnlLeftLayout.createSequentialGroup()
                 .addGroup(pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlLeftLayout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(btnDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(55, 55, 55)
-                        .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlLeftLayout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addGroup(pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -157,12 +151,6 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
                         .addGap(32, 32, 32)
                         .addGroup(pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtTenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-<<<<<<< HEAD
-                            .addComponent(customJPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(23, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLeftLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-=======
                             .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pnlLeftLayout.createSequentialGroup()
                         .addGap(78, 78, 78)
@@ -172,18 +160,11 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
                 .addContainerGap(23, Short.MAX_VALUE))
             .addGroup(pnlLeftLayout.createSequentialGroup()
                 .addContainerGap(92, Short.MAX_VALUE)
->>>>>>> 7e5967129f3fce660cc8e4d22dac80f5a6a612b7
                 .addGroup(pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLeftLayout.createSequentialGroup()
                         .addComponent(lblDangNhap)
                         .addGap(88, 88, 88))
-<<<<<<< HEAD
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLeftLayout.createSequentialGroup()
-                        .addComponent(btnQuenMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
-=======
                     .addComponent(btnQuenMatKhau, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
->>>>>>> 7e5967129f3fce660cc8e4d22dac80f5a6a612b7
         );
         pnlLeftLayout.setVerticalGroup(
             pnlLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,7 +195,7 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
             .addGroup(pnlTongLayout.createSequentialGroup()
                 .addComponent(pnlLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lbl_Img, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlRight, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(701, 701, 701))
@@ -224,7 +205,7 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
             .addComponent(pnlRight, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTongLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lbl_Img))
+                .addComponent(jLabel2))
             .addComponent(pnlLeft, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -244,6 +225,10 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnQuenMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuenMatKhauActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnQuenMatKhauActionPerformed
+
     private void txtTenDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenDangNhapActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTenDangNhapActionPerformed
@@ -252,14 +237,6 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
         // TODO add your handling code here:
     }//GEN-LAST:event_btnThoatActionPerformed
 
-<<<<<<< HEAD
-    private void btnQuenMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuenMatKhauActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnQuenMatKhauActionPerformed
-
-   //Event
-    public void actionPerformed(ActionEvent e){
-=======
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
         String userNameValue = txtTenDangNhap.getText();
         String passwordValue = String.valueOf(txtPassword.getPassword());
@@ -310,21 +287,13 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
 
     //Event
     public void actionPerformed(ActionEvent e) {
->>>>>>> 7e5967129f3fce660cc8e4d22dac80f5a6a612b7
         Object o = e.getSource();
         if (o.equals(btnThoat)) {
             System.exit(0);
             return;
-<<<<<<< HEAD
-        }
-        else if(o.equals(btnQuenMatKhau)){
-           Form_DoiMatKhau mk = new Form_DoiMatKhau();
-           mk.setVisible(true);
-=======
         } else if (o.equals(btnQuenMatKhau)) {
             Form_QuenMatKhau quen_mk = new Form_QuenMatKhau();
             quen_mk.setVisible(true);
->>>>>>> 7e5967129f3fce660cc8e4d22dac80f5a6a612b7
         }
     }
 
@@ -360,16 +329,11 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
     private gui.swing.RadiusButton btnDangNhap;
     private gui.swing.Button btnQuenMatKhau;
     private gui.swing.RadiusButton btnThoat;
-<<<<<<< HEAD
-    private gui.swing.CustomJPasswordField customJPasswordField1;
-=======
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel2;
->>>>>>> 7e5967129f3fce660cc8e4d22dac80f5a6a612b7
     private javax.swing.JLabel lblDangNhap;
     private javax.swing.JLabel lblMatKhau;
     private javax.swing.JLabel lblTenDangNhap;
-    private javax.swing.JLabel lbl_Img;
     private gui.swing.CustomPanel pnlLeft;
     private javax.swing.JPanel pnlRight;
     private javax.swing.JPanel pnlTong;

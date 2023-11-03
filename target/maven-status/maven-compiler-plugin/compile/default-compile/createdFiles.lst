@@ -18,11 +18,11 @@ gui_dialog\DL_ThongTinKhachHang$1.class
 gui_dialog\DL_ThanhToan.class
 entity\NhanVien.class
 gui\main\Main$6.class
-gui\form\Form_QuanLyDatPhong$1.class
 gui\event\EventMenu.class
 gui\form\Form_DichVu$3.class
 gui_dialog\DL_CapNhatMatHang.class
 gui_dialog\DL_ThemDichVu$1.class
+gui\swing\tabbed\MaterialTabbed.class
 gui\event\EventCheckConnectDB.class
 gui_dialog\DL_ThuePhong$1.class
 gui_dialog\DL_ThongTinDatPhong$2.class
@@ -104,6 +104,7 @@ gui\form\Form_QuanLiHoaDon$1.class
 gui\swing\Button.class
 gui_dialog\DL_ThemPhong$3.class
 gui\form\Form_MatHang.class
+gui\swing\tabbed\MaterialTabbed$MaterialTabbedUI.class
 connectDB\ConnectDB.class
 gui_dialog\DL_ThemDichVu.class
 gui_dialog\DL_ThemNV.class
@@ -122,6 +123,7 @@ gui_dialog\DL_DatPhong$2.class
 gui\Application$1$2.class
 dao\LoaiNV_DAO.class
 gui\swing\MenuButton.class
+gui\swing\tabbed\MaterialTabbed$MaterialTabbedUI$1.class
 gui\form\NewJFrame1$2.class
 gui_dialog\DL_ThemDichVu$2.class
 gui_dialog\DL_SuaNV$2.class
