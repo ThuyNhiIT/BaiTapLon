@@ -33,6 +33,7 @@ public class DL_ThemPhong extends javax.swing.JFrame {
         radSuDung = new javax.swing.JRadioButton();
         radCho = new javax.swing.JRadioButton();
         btnThem = new gui.swing.RadiusButton();
+        btnThoat = new gui.swing.RadiusButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -103,19 +104,23 @@ public class DL_ThemPhong extends javax.swing.JFrame {
         btnThem.setForeground(new java.awt.Color(255, 255, 255));
         btnThem.setText("Thêm");
 
+        btnThoat.setBackground(new java.awt.Color(205, 13, 13));
+        btnThoat.setForeground(new java.awt.Color(255, 255, 255));
+        btnThoat.setText("Thoát");
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoatActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnThemPhongLayout = new javax.swing.GroupLayout(pnThemPhong);
         pnThemPhong.setLayout(pnThemPhongLayout);
         pnThemPhongLayout.setHorizontalGroup(
             pnThemPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnThemPhongLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnThemPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnThemPhongLayout.createSequentialGroup()
-                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(217, 217, 217))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnThemPhongLayout.createSequentialGroup()
-                        .addComponent(lblThemPhong)
-                        .addGap(176, 176, 176))))
+                .addComponent(lblThemPhong)
+                .addGap(176, 176, 176))
             .addGroup(pnThemPhongLayout.createSequentialGroup()
                 .addGap(59, 59, 59)
                 .addGroup(pnThemPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,6 +153,12 @@ public class DL_ThemPhong extends javax.swing.JFrame {
                                     .addComponent(radSuDung, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(radCho, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(pnThemPhongLayout.createSequentialGroup()
+                .addGap(133, 133, 133)
+                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(103, 103, 103)
+                .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnThemPhongLayout.setVerticalGroup(
             pnThemPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,7 +194,9 @@ public class DL_ThemPhong extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(radCho)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnThemPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
@@ -217,6 +230,11 @@ public class DL_ThemPhong extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMaPhongActionPerformed
 
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
+        this.dispose();
+        return;
+    }//GEN-LAST:event_btnThoatActionPerformed
+
   
     public static void main(String args[]) {
       
@@ -229,6 +247,7 @@ public class DL_ThemPhong extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.swing.RadiusButton btnThem;
+    private gui.swing.RadiusButton btnThoat;
     private javax.swing.JLabel lblGia;
     private javax.swing.JLabel lblLoaiPhong;
     private javax.swing.JLabel lblMaLoaiPhong;

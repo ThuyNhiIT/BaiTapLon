@@ -35,6 +35,7 @@ public class DL_SuaPhong extends javax.swing.JFrame {
         radSuDung = new javax.swing.JRadioButton();
         radCho = new javax.swing.JRadioButton();
         btnSua = new gui.swing.RadiusButton();
+        btnThoat = new gui.swing.RadiusButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -83,6 +84,15 @@ public class DL_SuaPhong extends javax.swing.JFrame {
         btnSua.setForeground(new java.awt.Color(255, 255, 255));
         btnSua.setText("Sửa");
 
+        btnThoat.setBackground(new java.awt.Color(205, 13, 13));
+        btnThoat.setForeground(new java.awt.Color(255, 255, 255));
+        btnThoat.setText("Thoát");
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoatActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnSuaPhongLayout = new javax.swing.GroupLayout(pnSuaPhong);
         pnSuaPhong.setLayout(pnSuaPhongLayout);
         pnSuaPhongLayout.setHorizontalGroup(
@@ -113,10 +123,12 @@ public class DL_SuaPhong extends javax.swing.JFrame {
                         .addComponent(lblSuaPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(radSuDung))
                 .addGap(76, 76, 76))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnSuaPhongLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(pnSuaPhongLayout.createSequentialGroup()
+                .addGap(144, 144, 144)
                 .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(222, 222, 222))
+                .addGap(107, 107, 107)
+                .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnSuaPhongLayout.setVerticalGroup(
             pnSuaPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,7 +165,9 @@ public class DL_SuaPhong extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(radCho)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnSuaPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
         );
 
@@ -175,6 +189,11 @@ public class DL_SuaPhong extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
+        this.dispose();
+        return;
+    }//GEN-LAST:event_btnThoatActionPerformed
+
     
     public static void main(String args[]) {
        
@@ -187,6 +206,7 @@ public class DL_SuaPhong extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.swing.RadiusButton btnSua;
+    private gui.swing.RadiusButton btnThoat;
     private javax.swing.JLabel lblGia;
     private javax.swing.JLabel lblLoaiPhong;
     private javax.swing.JLabel lblMaLoaiPhong;

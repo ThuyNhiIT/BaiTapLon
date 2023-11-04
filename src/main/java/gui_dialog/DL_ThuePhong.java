@@ -25,6 +25,7 @@ public class DL_ThuePhong extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblThongTinKH = new javax.swing.JTable();
         btnOK = new gui.swing.RadiusButton();
+        btnThoat = new gui.swing.RadiusButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -41,8 +42,7 @@ public class DL_ThuePhong extends javax.swing.JFrame {
         lblSDT.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblSDT.setText("Số điện thoại:");
 
-        btnKiemTra.setBackground(new java.awt.Color(205, 13, 13));
-        btnKiemTra.setForeground(new java.awt.Color(255, 255, 255));
+        btnKiemTra.setBackground(new java.awt.Color(166, 208, 238));
         btnKiemTra.setText("Kiểm tra");
 
         tblThongTinKH.setModel(new javax.swing.table.DefaultTableModel(
@@ -64,6 +64,15 @@ public class DL_ThuePhong extends javax.swing.JFrame {
         btnOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOKActionPerformed(evt);
+            }
+        });
+
+        btnThoat.setBackground(new java.awt.Color(205, 13, 13));
+        btnThoat.setForeground(new java.awt.Color(255, 255, 255));
+        btnThoat.setText("Thoát");
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoatActionPerformed(evt);
             }
         });
 
@@ -92,10 +101,13 @@ public class DL_ThuePhong extends javax.swing.JFrame {
                         .addGap(20, 20, 20))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlThongTinKHLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(53, 53, 53))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlThongTinKHLayout.createSequentialGroup()
-                        .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(231, 231, 231))))
+                        .addGap(53, 53, 53))))
+            .addGroup(pnlThongTinKHLayout.createSequentialGroup()
+                .addGap(115, 115, 115)
+                .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(82, 82, 82)
+                .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlThongTinKHLayout.setVerticalGroup(
             pnlThongTinKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,7 +127,9 @@ public class DL_ThuePhong extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlThongTinKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
@@ -137,6 +151,11 @@ public class DL_ThuePhong extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnOKActionPerformed
 
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
+        this.dispose();
+        return;
+    }//GEN-LAST:event_btnThoatActionPerformed
+
   
     public static void main(String args[]) {
       
@@ -150,6 +169,7 @@ public class DL_ThuePhong extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.swing.RadiusButton btnKiemTra;
     private gui.swing.RadiusButton btnOK;
+    private gui.swing.RadiusButton btnThoat;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblSDT;
     private javax.swing.JLabel lblTenKH;

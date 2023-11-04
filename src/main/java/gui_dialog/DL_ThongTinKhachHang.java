@@ -209,7 +209,8 @@ public class DL_ThongTinKhachHang extends javax.swing.JFrame {
     }//GEN-LAST:event_btnXoaRActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
-        System.exit(0);
+        this.dispose();
+        return;
     }//GEN-LAST:event_btnThoatActionPerformed
 
     public static void main(String args[]) {

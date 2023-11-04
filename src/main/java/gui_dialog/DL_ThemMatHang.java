@@ -11,7 +11,6 @@ public class DL_ThemMatHang extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
 
- 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -153,11 +152,12 @@ public class DL_ThemMatHang extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTenMHActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        return;
     }//GEN-LAST:event_btnThoatActionPerformed
 
     public static void main(String args[]) {
-           
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new DL_ThemMatHang().setVisible(true);

@@ -11,7 +11,6 @@ public class DL_DichVu extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -116,6 +115,11 @@ public class DL_DichVu extends javax.swing.JFrame {
         btnThoat.setBackground(new java.awt.Color(205, 13, 13));
         btnThoat.setForeground(new java.awt.Color(255, 255, 255));
         btnThoat.setText("Thoát");
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoatActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnDSDVThemLayout = new javax.swing.GroupLayout(pnDSDVThem);
         pnDSDVThem.setLayout(pnDSDVThemLayout);
@@ -188,10 +192,13 @@ public class DL_DichVu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
+        this.dispose();
+        return;
+    }//GEN-LAST:event_btnThoatActionPerformed
+
     public static void main(String args[]) {
-        
-       
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new DL_DichVu().setVisible(true);

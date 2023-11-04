@@ -11,7 +11,6 @@ public class DL_ThanhToan extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -99,8 +98,7 @@ public class DL_ThanhToan extends javax.swing.JFrame {
 
         jLabel11.setText("jLabel11");
 
-        btnKiemTra.setBackground(new java.awt.Color(205, 13, 13));
-        btnKiemTra.setForeground(new java.awt.Color(255, 255, 255));
+        btnKiemTra.setBackground(new java.awt.Color(166, 208, 238));
         btnKiemTra.setText("Kiểm tra");
         btnKiemTra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,7 +117,14 @@ public class DL_ThanhToan extends javax.swing.JFrame {
         btnThanhToan.setForeground(new java.awt.Color(255, 255, 255));
         btnThanhToan.setText("Thanh toán");
 
+        btnThoat.setBackground(new java.awt.Color(205, 13, 13));
+        btnThoat.setForeground(new java.awt.Color(255, 255, 255));
         btnThoat.setText("Thoát");
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoatActionPerformed(evt);
+            }
+        });
 
         txtTong.setEditable(false);
 
@@ -255,8 +260,13 @@ public class DL_ThanhToan extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_chkXuatActionPerformed
 
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
+        this.dispose();
+        return;
+    }//GEN-LAST:event_btnThoatActionPerformed
+
     public static void main(String args[]) {
-       
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new DL_ThanhToan().setVisible(true);

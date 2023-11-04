@@ -2,7 +2,7 @@ package entity;
 
 import java.util.Objects;
 
-public class DichVu {
+public class DichVu extends MatHang{
 
     private String maDV;
     private String tenDV;
