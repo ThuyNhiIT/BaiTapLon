@@ -47,8 +47,8 @@ public class Form_Setting extends javax.swing.JPanel {
                 .addGroup(pnlCaiDatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(DangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(HDSD, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DoiMK, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(402, Short.MAX_VALUE))
+                    .addComponent(DoiMK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(402, 402, 402))
         );
         pnlCaiDatLayout.setVerticalGroup(
             pnlCaiDatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
