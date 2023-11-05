@@ -2,10 +2,27 @@ package entity;
 
 import java.util.Objects;
 
-public class DichVu {
+public class DichVu extends MatHang {
 
     private String maDV;
     private String tenDV;
+
+    public DichVu(String maDV, String tenDV, String maMH, String tenMH, double gia, boolean trangThai) {
+        super(maMH, tenMH, gia, trangThai);
+        this.maDV = maDV;
+        this.tenDV = tenDV;
+    }
+
+    public DichVu(String maDV, String tenDV, String maMH) {
+        super(maMH);
+        this.maDV = maDV;
+        this.tenDV = tenDV;
+    }
+
+    public DichVu(String maDV, String tenDV) {
+        this.maDV = maDV;
+        this.tenDV = tenDV;
+    }
 
     public DichVu() {
         super();
@@ -14,12 +31,6 @@ public class DichVu {
 
     public DichVu(String maDV) {
         this.maDV = maDV;
-    }
-
-    public DichVu(String maDV, String tenDV) {
-        super();
-        this.maDV = maDV;
-        this.tenDV = tenDV;
     }
 
     public String getMaDV() {

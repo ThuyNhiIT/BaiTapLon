@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+=======
+>>>>>>> 162276a2f699918a5b837c2c6ca81e26c48a8c42
 package dao;
 
 import connectDB.ConnectDB;
@@ -39,7 +42,11 @@ public class KhachHang_DAO {
                String SDT = rs.getString(3);
                Boolean GioiTinh = rs.getBoolean(4);
                
+<<<<<<< HEAD
                KhachHang kh = new KhachHang(maKH, tenKH, SDT, true);
+=======
+               KhachHang kh = new KhachHang(maKH, tenKH, SDT, GioiTinh);
+>>>>>>> 162276a2f699918a5b837c2c6ca81e26c48a8c42
                dsKH.add(kh);
            }
         }
@@ -102,7 +109,11 @@ public class KhachHang_DAO {
                String SDT = rs.getString(3);
                Boolean GioiTinh = rs.getBoolean(4);
                
+<<<<<<< HEAD
                KhachHang kh = new KhachHang(maKH, tenKH, SDT,  GioiTinh);
+=======
+               KhachHang kh = new KhachHang(maKH, tenKH, SDT, GioiTinh);
+>>>>>>> 162276a2f699918a5b837c2c6ca81e26c48a8c42
                dsKH.add(kh);
             }
         }
@@ -179,7 +190,11 @@ public class KhachHang_DAO {
                String SDT = rs.getString(3);
                Boolean GioiTinh = rs.getBoolean(4);
                
+<<<<<<< HEAD
                kh = new KhachHang(maKH, tenKH, SDT, true);
+=======
+               kh = new KhachHang(maKH, tenKH, SDT, GioiTinh);
+>>>>>>> 162276a2f699918a5b837c2c6ca81e26c48a8c42
             }
         }
         catch(Exception e){
