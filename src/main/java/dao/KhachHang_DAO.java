@@ -67,7 +67,7 @@ public class KhachHang_DAO {
                String SDT = rs.getString(3);
                Boolean GioiTinh = rs.getBoolean(4);
                
-               KhachHang kh = new KhachHang(maKH, tenKH, SDT, true);
+               KhachHang kh = new KhachHang(maKH, tenKH, SDT, GioiTinh);
                dsKH.add(kh);
            }
         }
@@ -102,7 +102,7 @@ public class KhachHang_DAO {
                String SDT = rs.getString(3);
                Boolean GioiTinh = rs.getBoolean(4);
                
-               KhachHang kh = new KhachHang(maKH, tenKH, SDT, true);
+               KhachHang kh = new KhachHang(maKH, tenKH, SDT,  GioiTinh);
                dsKH.add(kh);
             }
         }
