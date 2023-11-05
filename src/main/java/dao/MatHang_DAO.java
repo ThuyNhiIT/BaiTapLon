@@ -15,16 +15,14 @@ import java.util.ArrayList;
  */
 public class MatHang_DAO {
 
-    ArrayList<MatHang> dsmh;
-    MatHang mh;
     private Statement statement;
 
     public MatHang_DAO() {
-        dsmh = new ArrayList<MatHang>();
-        mh = new MatHang();
+
     }
 
-    public ArrayList<MatHang> docTuBang() throws SQLException {
+    public ArrayList<MatHang> getalltbMatHang() {
+        ArrayList<MatHang> dsmh = new ArrayList<MatHang>();
         try {
             ConnectDB db = ConnectDB.getInstance();
             db.connect();
@@ -43,16 +41,47 @@ public class MatHang_DAO {
                 MatHang mh = new MatHang(maMH, tenMH, gia, trangThai);
                 dsmh.add(mh);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
         return dsmh;
 
     }
-// Thêm mặt hàng
 
-    public boolean createMH(MatHang mh) {
+    public ArrayList<MatHang> getMatHangTheoMaMH(String id) {
+        ArrayList<MatHang> dsmh = new ArrayList<MatHang>();
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement statement = null;
+
+        try {
+            String sql = "SELECT *FROM MatHang WHERE maMH=?";
+            statement = con.prepareStatement(sql);
+            statement.setString(1, id);
+
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                String maMH = rs.getString(1);
+                String tenMH = rs.getString(2);
+                Double gia = rs.getDouble(3);
+                Boolean trangThai = rs.getBoolean(4);
+                MatHang mh = new MatHang(maMH, tenMH, gia, trangThai);
+                dsmh.add(mh);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return dsmh;
+    }
+
+// Thêm mặt hàng
+    public boolean addMatHang(MatHang mh) {
         ConnectDB db = ConnectDB.getInstance();
         Connection con = db.getConnection();
         PreparedStatement stmt = null;
@@ -67,15 +96,19 @@ public class MatHang_DAO {
             n = stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                stmt.close();
+            } catch (SQLException e2) {
+                e2.printStackTrace();
+            }
         }
-
         return n > 0;
     }
 
     // Xóa mặt hàng
-    public boolean xoaMH(String maMH) {
-        ConnectDB db = ConnectDB.getInstance();
-        Connection con = db.getConnection();
+    public boolean DeleteMatHang(String maMH) {
+        Connection con = ConnectDB.getInstance().getConnection();
         PreparedStatement stmt = null;
         int n = 0;
         try {
@@ -88,11 +121,10 @@ public class MatHang_DAO {
         return n > 0;
     }
 
-//    Tìm mặt hành 
-    public MatHang timKiem(String maTim) {
+//    Tìm mặt hàng 
+    public MatHang findMatHang(String maTim) {
         MatHang mh = null;
-        ConnectDB db = ConnectDB.getInstance();
-        Connection con = db.getConnection();
+        Connection con = ConnectDB.getInstance().getConnection();
         PreparedStatement stmt = null;
         try {
             String sql = "Select *from MatHang where maMH=?";
@@ -113,9 +145,9 @@ public class MatHang_DAO {
     }
 
     // Sửa mặt hàng
-    public boolean update(MatHang mh) {
-        ConnectDB db = ConnectDB.getInstance();
-        Connection con = db.getConnection();
+    public boolean editMatHang(MatHang mh) {
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
         PreparedStatement stmt = null;
         int n = 0;
         try {
@@ -128,6 +160,12 @@ public class MatHang_DAO {
             n = stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                stmt.close();
+            } catch (SQLException e2) {
+                e2.printStackTrace();
+            }
         }
         return n > 0;
     }
