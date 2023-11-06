@@ -2,6 +2,7 @@ D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\dao\TaiKhoan_DAO.java
 D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\entity\TaiKhoan.java
 D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\gui\form\Form_QuanLiHoaDon.java
 D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\entity\DonDatPhong.java
+D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\gui\model\ModelRoom.java
 D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\gui\swing\TimKiem.java
 D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\gui\event\EventCheckConnectDB.java
 D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\gui\form\Form_DichVu.java
@@ -10,6 +11,7 @@ D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\gui\swing\TableActionEven
 D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\gui\swing\CustomJPasswordField.java
 D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\entity\ChiTietHoaDonPhong.java
 D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\dao\NhanVien_DAO.java
+D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\gui\component\Room.java
 D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\gui\swing\ButtonGradient.java
 D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\gui\swing\scrollbar\ScrollBarCustomUI.java
 D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\gui\swing\TableActionCellRender.java
@@ -27,7 +29,6 @@ D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\gui\form\Form_QuanLyNhanV
 D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\gui\form\Form_QuanLyPhongHat.java
 D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\gui\form\Form_ThongKeMatHang.java
 D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\gui_dialog\DL_ThongTinDatPhong.java
-D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\dao\connectDB.java
 D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\gui\form\NewJFrame.java
 D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\gui_dialog\DL_ThemPhong.java
 D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\entity\NhanVien.java
@@ -75,7 +76,9 @@ D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\gui\swing\scrollbar\Scrol
 D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\dao\MatHang_DAO.java
 D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\gui\swing\scrollbar\TextAreaCellRenderer.java
 D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\gui\event\EventMenu.java
+D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\gui\form\Form_DoiMatKhau.java
 D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\gui\swing\MenuItem.java
+D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\dao\PhongHat_DAO.java
 D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\gui\model\ModelMenu.java
 D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\dao\LoaiNV_DAO.java
 D:\Desktop\HK1-N3\Code_PTUD\KaraokeAPLUS\src\main\java\gui\swing\scrollbar\TableScrollButton.java
