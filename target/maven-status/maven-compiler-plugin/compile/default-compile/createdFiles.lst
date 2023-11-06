@@ -38,6 +38,7 @@ gui\model\ModelMenu.class
 gui\swing\scrollbar\TableHeaderCustomCellRender.class
 gui_dialog\DL_ThemNV$2.class
 gui_dialog\DL_ThuePhong$3.class
+gui\form\Form_QuanLyKhachHang$2.class
 gui\form\ProcessesLoading.class
 gui\swing\CustomJTextField.class
 gui_dialog\DL_CapNhatMatHang$1.class
@@ -127,6 +128,7 @@ gui\component\Header$3.class
 entity\PhongHat.class
 gui_dialog\DL_ThongTinKhachHang$4.class
 gui\form\Form_DichVu$3.class
+gui\form\Form_MatHang$2.class
 gui_dialog\DL_ThuePhong$1.class
 gui_dialog\DL_ThanhToan$5.class
 gui\swing\TimKiem$2.class
@@ -184,6 +186,7 @@ gui\form\Form_MatHang.class
 gui\swing\scrollbar\TableScrollButton$1.class
 gui_dialog\DL_ThemDichVu.class
 gui_dialog\DL_ThemNV.class
+dao\DichVu_DAO.class
 gui_dialog\DL_ThongTinKhachHang$2.class
 gui\form\Form_QuanLyNhanVien$2.class
 entity\TaiKhoan.class

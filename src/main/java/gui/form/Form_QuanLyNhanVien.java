@@ -1,7 +1,12 @@
 package gui.form;
 
+import dao.NhanVien_DAO;
+import entity.NhanVien;
 import gui_dialog.DL_SuaNV;
 import gui_dialog.DL_ThemNV;
+import javax.swing.JLabel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -9,8 +14,24 @@ import gui_dialog.DL_ThemNV;
  */
 public class Form_QuanLyNhanVien extends javax.swing.JPanel {
 
+    private NhanVien_DAO nv_dao;
+    private DefaultTableModel dtmNhanVien;
+
     public Form_QuanLyNhanVien() {
         initComponents();
+        nv_dao = new NhanVien_DAO();
+        dtmNhanVien = (DefaultTableModel) tblDSNV.getModel();
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        for (int i = 0; i < tblDSNV.getColumnCount(); i++) {
+            tblDSNV.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+//          public void DocDuLieu() {
+//        List<NhanVien> list = nv_dao.getalltbNh();
+//        for (NhanVien kh : list) {
+//            dtmKNhanVien.addRow(new Object[]{});
+//        }
+//    }
     }
 
     @SuppressWarnings("unchecked")
@@ -206,7 +227,7 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTongActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-    new DL_ThemNV().setVisible(true);
+        new DL_ThemNV().setVisible(true);
     }//GEN-LAST:event_btnThemActionPerformed
 
 
@@ -224,4 +245,4 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
     private javax.swing.JTextField txtTim;
     private javax.swing.JTextField txtTong;
     // End of variables declaration//GEN-END:variables
-} 
+}
