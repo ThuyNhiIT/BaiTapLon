@@ -1,21 +1,19 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
 package gui.form;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 /**
  *
  * @author 84934 NguyenThiQuynhGiang
  */
-public class Form_QuenMatKhau extends javax.swing.JFrame {
+public class Form_DoiMatKhau extends javax.swing.JFrame {
 
     /**
-     * Creates new form Form_QuenMatKhau
+     * Creates new form Form_DoiMatKhau
      */
-    public Form_QuenMatKhau() {
+    public Form_DoiMatKhau() {
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -31,44 +29,46 @@ public class Form_QuenMatKhau extends javax.swing.JFrame {
 
         pnlTong = new javax.swing.JPanel();
         lblNhapMatKhauMoi = new javax.swing.JLabel();
-        txtNhapMatKhauMoi = new gui.swing.CustomJPasswordField();
-        lblNhapLaiMatKhau = new javax.swing.JLabel();
-        txtNhapLaiMatKhau = new gui.swing.CustomJPasswordField();
-        btnHuy = new gui.swing.RadiusButton();
+        lblDoiMatKhau = new javax.swing.JLabel();
+        lblNhapLaiMatKhauMoi = new javax.swing.JLabel();
+        txtNhapMKMoi = new gui.swing.CustomJPasswordField();
+        txtNhapLaiMKMoi = new gui.swing.CustomJPasswordField();
         btnXacNhan = new gui.swing.RadiusButton();
+        btnHuy = new gui.swing.RadiusButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(400, 280));
-        setResizable(false);
 
-        lblNhapMatKhauMoi.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        pnlTong.setBackground(new java.awt.Color(255, 255, 255));
+
+        lblNhapMatKhauMoi.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lblNhapMatKhauMoi.setText("Nhập mật khẩu mới");
 
-        txtNhapMatKhauMoi.setText("MatKhauMoi");
-        txtNhapMatKhauMoi.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lblDoiMatKhau.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        lblDoiMatKhau.setText("ĐỔI MẬT KHẨU");
 
-        lblNhapLaiMatKhau.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        lblNhapLaiMatKhau.setText("Nhập lại mật khẩu");
+        lblNhapLaiMatKhauMoi.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblNhapLaiMatKhauMoi.setText("Nhập lại mật khẩu mới");
 
-        txtNhapLaiMatKhau.setText("MatKhauMoi");
-        txtNhapLaiMatKhau.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        txtNhapMKMoi.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
-        btnHuy.setBackground(new java.awt.Color(255, 51, 51));
-        btnHuy.setText("Hủy");
-        btnHuy.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnHuy.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHuyActionPerformed(evt);
-            }
-        });
+        txtNhapLaiMKMoi.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
         btnXacNhan.setBackground(new java.awt.Color(41, 173, 86));
         btnXacNhan.setText("Xác nhận");
-        btnXacNhan.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnXacNhan.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnXacNhan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXacNhanActionPerformed(evt);
+            }
+        });
+
+        btnHuy.setBackground(new java.awt.Color(255, 51, 51));
+        btnHuy.setText("Hủy");
+        btnHuy.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnHuy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHuyActionPerformed(evt);
             }
         });
 
@@ -77,38 +77,46 @@ public class Form_QuenMatKhau extends javax.swing.JFrame {
         pnlTongLayout.setHorizontalGroup(
             pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTongLayout.createSequentialGroup()
-                .addContainerGap(36, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblDoiMatKhau)
+                .addGap(99, 99, 99))
+            .addGroup(pnlTongLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblNhapMatKhauMoi)
+                        .addComponent(lblNhapLaiMatKhauMoi)))
                 .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNhapLaiMatKhau)
                     .addGroup(pnlTongLayout.createSequentialGroup()
-                        .addGap(166, 166, 166)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNhapMatKhauMoi, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                            .addComponent(txtNhapLaiMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(txtNhapMKMoi, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+                            .addComponent(txtNhapLaiMKMoi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(40, 40, 40))
                     .addGroup(pnlTongLayout.createSequentialGroup()
-                        .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblNhapMatKhauMoi))
-                        .addGap(59, 59, 59)
-                        .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(32, 32, 32))
+                        .addGap(71, 71, 71)
+                        .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(82, Short.MAX_VALUE))))
         );
         pnlTongLayout.setVerticalGroup(
             pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTongLayout.createSequentialGroup()
-                .addGap(54, 54, 54)
+                .addGap(31, 31, 31)
+                .addComponent(lblDoiMatKhau)
+                .addGap(34, 34, 34)
                 .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNhapMatKhauMoi)
-                    .addComponent(txtNhapMatKhauMoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                    .addComponent(txtNhapMKMoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
                 .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNhapLaiMatKhau)
-                    .addComponent(txtNhapLaiMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                    .addComponent(lblNhapLaiMatKhauMoi)
+                    .addComponent(txtNhapLaiMKMoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48))
+                .addGap(46, 46, 46))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -125,14 +133,15 @@ public class Form_QuenMatKhau extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
-        // TODO add your handling code here:
-         setVisible(false);
-    }//GEN-LAST:event_btnHuyActionPerformed
-
     private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnXacNhanActionPerformed
+
+    private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+    }//GEN-LAST:event_btnHuyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,37 +160,32 @@ public class Form_QuenMatKhau extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Form_QuenMatKhau.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Form_DoiMatKhau.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Form_QuenMatKhau.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Form_DoiMatKhau.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Form_QuenMatKhau.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Form_DoiMatKhau.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Form_QuenMatKhau.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Form_DoiMatKhau.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Form_QuenMatKhau().setVisible(true);
+                new Form_DoiMatKhau().setVisible(true);
             }
         });
     }
-    
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.swing.RadiusButton btnHuy;
     private gui.swing.RadiusButton btnXacNhan;
-    private javax.swing.JLabel lblNhapLaiMatKhau;
+    private javax.swing.JLabel lblDoiMatKhau;
+    private javax.swing.JLabel lblNhapLaiMatKhauMoi;
     private javax.swing.JLabel lblNhapMatKhauMoi;
     private javax.swing.JPanel pnlTong;
-    private gui.swing.CustomJPasswordField txtNhapLaiMatKhau;
-    private gui.swing.CustomJPasswordField txtNhapMatKhauMoi;
+    private gui.swing.CustomJPasswordField txtNhapLaiMKMoi;
+    private gui.swing.CustomJPasswordField txtNhapMKMoi;
     // End of variables declaration//GEN-END:variables
-
-    
-
-    
 }

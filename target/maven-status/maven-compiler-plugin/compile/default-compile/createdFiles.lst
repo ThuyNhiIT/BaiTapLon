@@ -12,11 +12,11 @@ gui\main\Main$6.class
 gui\event\EventMenu.class
 gui_dialog\DL_CapNhatMatHang.class
 gui_dialog\DL_ThemDichVu$1.class
-dao\connectDB.class
 gui\swing\PanelAction$1.class
 gui\swing\tabbed\MaterialTabbed.class
 gui\event\EventCheckConnectDB.class
 gui\swing\scrollbar\TableCustom$1.class
+gui\form\Form_QuenMatKhau$3.class
 gui_dialog\DL_ThongTinDatPhong$2.class
 gui\swing\PanelPopUp.class
 gui\swing\ButtonGradient.class
@@ -80,6 +80,7 @@ gui_dialog\DL_DoiMatKhau$4.class
 gui\swing\tabbed\MaterialTabbed$MaterialTabbedUI.class
 gui\swing\TableActionCellRender.class
 connectDB\ConnectDB.class
+gui\form\Form_DoiMatKhau.class
 gui\swing\scrollbar\ScrollPaneWin11.class
 gui\swing\ActionButton.class
 gui_dialog\DL_SuaNV$1.class
@@ -124,6 +125,7 @@ dao\NhanVien_DAO.class
 gui\form\Form_Login.class
 gui\form\Form_Setting.class
 gui_dialog\DL_DichVu.class
+gui\form\Form_Setting$2.class
 gui\component\Header$3.class
 entity\PhongHat.class
 gui_dialog\DL_ThongTinKhachHang$4.class
@@ -160,6 +162,7 @@ gui_dialog\DL_ThongTinKhachHang$5.class
 gui_dialog\DL_ThongTinDatPhong.class
 gui\form\Form_MatHang$1.class
 gui_dialog\DL_ThemMatHang$3.class
+gui\form\Form_DoiMatKhau$3.class
 gui\swing\PopupMenu$1.class
 gui\swing\MenuItem$1.class
 gui\form\Form_Home.class
@@ -168,6 +171,7 @@ gui\form\Form_DichVu$4.class
 gui\form\Form_DichVu$1.class
 gui_dialog\DL_ThemMatHang$4.class
 gui_dialog\DL_ThanhToan$4.class
+gui\form\Form_QuenMatKhau$2.class
 gui\swing\PanelAction$3.class
 gui\swing\Button$2.class
 gui\Application.class
@@ -176,6 +180,7 @@ gui\swing\scrollbar\TableCustom$TableType.class
 gui_dialog\DL_ThongTinKhachHang$3.class
 gui\form\Form_QuanLyNhanVien$1.class
 dao\KhachHang_DAO.class
+gui\form\Form_Setting$1.class
 gui\form\NewJFrame.class
 gui\form\Form_Login$4.class
 gui\swing\scrollbar\ScrollPaneWin11$ScrollLayout.class
@@ -190,6 +195,7 @@ dao\DichVu_DAO.class
 gui_dialog\DL_ThongTinKhachHang$2.class
 gui\form\Form_QuanLyNhanVien$2.class
 entity\TaiKhoan.class
+gui\form\Form_DoiMatKhau$1.class
 gui_dialog\DL_SuaNV.class
 gui_dialog\DL_ThemMatHang$5.class
 gui\swing\CustomPanel.class
@@ -197,6 +203,7 @@ gui_dialog\DL_DatPhong$2.class
 gui\swing\MenuButton.class
 gui\swing\TableActionEvent.class
 gui\swing\RadiusButton$2.class
+gui\form\Form_DoiMatKhau$2.class
 gui_dialog\DL_DatPhong$3.class
 gui\form\Form_QuanLyKhachHang.class
 entity\MatHang.class

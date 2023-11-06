@@ -59,7 +59,7 @@ public class NhanVien {
 
     }
 
-    public Boolean getGioiTinh() {
+    public Boolean isGioiTinh() {
         return gioiTinh;
     }
 

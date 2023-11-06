@@ -1,3 +1,4 @@
+
 package dao;
 
 import connectDB.ConnectDB;
@@ -7,6 +8,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+
+import java.util.ArrayList;
+
+import java.util.ArrayList;
+
+import connectDB.ConnectDB;
+
 import java.util.ArrayList;
 
 /**
@@ -35,7 +44,9 @@ public class KhachHang_DAO {
                String SDT = rs.getString(3);
                Boolean GioiTinh = rs.getBoolean(4);
                
+
                KhachHang kh = new KhachHang(maKH, tenKH, SDT, GioiTinh);
+
                dsKH.add(kh);
            }
         }
@@ -97,8 +108,9 @@ public class KhachHang_DAO {
                String tenKH = rs.getString(2);
                String SDT = rs.getString(3);
                Boolean GioiTinh = rs.getBoolean(4);
-               
+
                KhachHang kh = new KhachHang(maKH, tenKH, SDT, GioiTinh);
+
                dsKH.add(kh);
             }
         }
@@ -175,7 +187,9 @@ public class KhachHang_DAO {
                String SDT = rs.getString(3);
                Boolean GioiTinh = rs.getBoolean(4);
                
+
                kh = new KhachHang(maKH, tenKH, SDT, GioiTinh);
+
             }
         }
         catch(Exception e){
