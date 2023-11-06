@@ -1,14 +1,26 @@
 package gui_dialog;
 
+import connectDB.ConnectDB;
+import dao.KhachHang_DAO;
+import entity.KhachHang;
+import java.awt.print.Book;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author 84343
  */
 public class DL_ThuePhong extends javax.swing.JFrame {
 
+    private KhachHang_DAO kh_dao;
+
     public DL_ThuePhong() {
         initComponents();
         setLocationRelativeTo(null);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -22,19 +34,19 @@ public class DL_ThuePhong extends javax.swing.JFrame {
         lblSDT = new javax.swing.JLabel();
         btnKiemTra = new gui.swing.RadiusButton();
         btnThuePhong = new gui.swing.RadiusButton();
-        customJTextField1 = new gui.swing.CustomJTextField();
-        customJTextField2 = new gui.swing.CustomJTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        btnThuePhong1 = new gui.swing.RadiusButton();
+        btnThoat = new gui.swing.RadiusButton();
+        txtSDT = new gui.swing.CustomJTextField();
+        txtTenKH = new gui.swing.CustomJTextField();
+        lblThongBao = new javax.swing.JLabel();
+        lblGioiTinh = new javax.swing.JLabel();
+        radNam = new javax.swing.JRadioButton();
+        radNu = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
         pnlThongTinKH.setBackground(new java.awt.Color(255, 255, 255));
-        pnlThongTinKH.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pnlThongTinKH.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         lblThongTinKH.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         lblThongTinKH.setForeground(new java.awt.Color(41, 173, 86));
@@ -46,9 +58,13 @@ public class DL_ThuePhong extends javax.swing.JFrame {
         lblSDT.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblSDT.setText("Số điện thoại:");
 
-        btnKiemTra.setBackground(new java.awt.Color(0, 204, 255));
-        btnKiemTra.setForeground(new java.awt.Color(255, 255, 255));
+        btnKiemTra.setBackground(new java.awt.Color(166, 208, 238));
         btnKiemTra.setText("Kiểm tra");
+        btnKiemTra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKiemTraActionPerformed(evt);
+            }
+        });
 
         btnThuePhong.setBackground(new java.awt.Color(41, 173, 86));
         btnThuePhong.setForeground(new java.awt.Color(255, 255, 255));
@@ -59,33 +75,31 @@ public class DL_ThuePhong extends javax.swing.JFrame {
             }
         });
 
-        customJTextField1.addActionListener(new java.awt.event.ActionListener() {
+        btnThoat.setBackground(new java.awt.Color(205, 13, 13));
+        btnThoat.setForeground(new java.awt.Color(255, 255, 255));
+        btnThoat.setText("Thoát");
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                customJTextField1ActionPerformed(evt);
+                btnThoatActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
-        jLabel1.setText("Không tìm thấy khách hàng vui lòng nhập thông tin khách hàng");
+        lblThongBao.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        lblThongBao.setText("không tìm thấy thông tin khách hàng ");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setText("Giới tính:");
+        lblGioiTinh.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblGioiTinh.setText("Giới Tính:");
 
-        jRadioButton1.setText("Nam");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        radNam.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(radNam);
+        radNam.setText("Nam");
+
+        radNu.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(radNu);
+        radNu.setText("Nữ");
+        radNu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
-            }
-        });
-
-        jRadioButton2.setText("Nữ");
-
-        btnThuePhong1.setBackground(new java.awt.Color(255, 0, 51));
-        btnThuePhong1.setForeground(new java.awt.Color(255, 255, 255));
-        btnThuePhong1.setText("Thoát");
-        btnThuePhong1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThuePhong1ActionPerformed(evt);
+                radNuActionPerformed(evt);
             }
         });
 
@@ -96,67 +110,65 @@ public class DL_ThuePhong extends javax.swing.JFrame {
             .addGroup(pnlThongTinKHLayout.createSequentialGroup()
                 .addGroup(pnlThongTinKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlThongTinKHLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
+                        .addGap(40, 40, 40)
                         .addGroup(pnlThongTinKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
+                            .addGroup(pnlThongTinKHLayout.createSequentialGroup()
+                                .addComponent(lblTenKH)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtTenKH, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnlThongTinKHLayout.createSequentialGroup()
+                                .addComponent(lblSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnKiemTra, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pnlThongTinKHLayout.createSequentialGroup()
                                 .addGroup(pnlThongTinKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblTenKH, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGroup(pnlThongTinKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(pnlThongTinKHLayout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(customJTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(24, 24, 24)
-                                        .addComponent(btnKiemTra, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(lblGioiTinh)
+                                        .addGap(62, 62, 62)
+                                        .addComponent(radNam, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(pnlThongTinKHLayout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addGroup(pnlThongTinKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(customJTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlThongTinKHLayout.createSequentialGroup()
-                                                .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(68, 68, 68)
-                                                .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(39, 39, 39))))))
-                            .addGroup(pnlThongTinKHLayout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jLabel1))))
+                                        .addGap(52, 52, 52)
+                                        .addComponent(btnThuePhong, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(29, 29, 29)
+                                .addGroup(pnlThongTinKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(radNu, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(pnlThongTinKHLayout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addComponent(btnThuePhong, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(71, 71, 71)
-                        .addComponent(btnThuePhong1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlThongTinKHLayout.createSequentialGroup()
-                        .addGap(107, 107, 107)
+                        .addGap(103, 103, 103)
                         .addComponent(lblThongTinKH)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlThongTinKHLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblThongBao, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         pnlThongTinKHLayout.setVerticalGroup(
             pnlThongTinKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlThongTinKHLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(23, 23, 23)
                 .addComponent(lblThongTinKH, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(31, 31, 31)
                 .addGroup(pnlThongTinKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnKiemTra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSDT)
-                    .addComponent(customJTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnKiemTra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addComponent(lblThongBao)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(pnlThongTinKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(customJTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTenKH))
-                .addGap(26, 26, 26)
+                    .addComponent(lblTenKH)
+                    .addComponent(txtTenKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
                 .addGroup(pnlThongTinKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
-                .addGap(22, 22, 22)
+                    .addComponent(lblGioiTinh)
+                    .addComponent(radNam)
+                    .addComponent(radNu))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(pnlThongTinKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThuePhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnThuePhong1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28))
+                    .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -167,7 +179,7 @@ public class DL_ThuePhong extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlThongTinKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlThongTinKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -177,42 +189,68 @@ public class DL_ThuePhong extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnThuePhongActionPerformed
 
-    private void customJTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customJTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_customJTextField1ActionPerformed
+    private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnThoatActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void radNuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radNuActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_radNuActionPerformed
 
-    private void btnThuePhong1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThuePhong1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnThuePhong1ActionPerformed
+    private void btnKiemTraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKiemTraActionPerformed
+        String sdt = txtSDT.getText();
+        ConnectDB db = ConnectDB.getInstance();
 
-  
-//    public static void main(String args[]) {
-//      
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new DL_ThuePhong().setVisible(true);
-//            }
-//        });
-//    }
+        try {
+            db.connect();
+
+            kh_dao = new KhachHang_DAO();
+            ArrayList<KhachHang> kh = kh_dao.getKhachHangTheoSdtKH(sdt);
+            if (!kh.isEmpty()) {
+                lblThongBao.setText("Tìm thấy thông tin khách hàng");
+                KhachHang khachHang = kh.get(0);
+                String tenKH = khachHang.getTenKH();
+                boolean gt = khachHang.isGioitinh();
+                // Gán thông tin vào các thành phần giao diện bên dưới
+                txtTenKH.setText(tenKH);
+                if (gt) {
+                    radNam.setSelected(true); // Nam
+                } else {
+                    radNu.setSelected(true); // Nữ
+                }
+
+            } else {
+                lblThongBao.setText("Nhập lại số điện thoại hoặc thêm khách hàng bên dưới");
+                // Tại đây, bạn có thể thực hiện các hành động khác khi không tìm thấy thông tin khách hàng.
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DL_ThuePhong.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnKiemTraActionPerformed
+
+    public static void main(String args[]) {
+
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new DL_ThuePhong().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.swing.RadiusButton btnKiemTra;
+    private gui.swing.RadiusButton btnThoat;
     private gui.swing.RadiusButton btnThuePhong;
-    private gui.swing.RadiusButton btnThuePhong1;
     private javax.swing.ButtonGroup buttonGroup1;
-    private gui.swing.CustomJTextField customJTextField1;
-    private gui.swing.CustomJTextField customJTextField2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JLabel lblGioiTinh;
     private javax.swing.JLabel lblSDT;
     private javax.swing.JLabel lblTenKH;
+    private javax.swing.JLabel lblThongBao;
     private javax.swing.JLabel lblThongTinKH;
     private javax.swing.JPanel pnlThongTinKH;
+    private javax.swing.JRadioButton radNam;
+    private javax.swing.JRadioButton radNu;
+    private gui.swing.CustomJTextField txtSDT;
+    private gui.swing.CustomJTextField txtTenKH;
     // End of variables declaration//GEN-END:variables
 }

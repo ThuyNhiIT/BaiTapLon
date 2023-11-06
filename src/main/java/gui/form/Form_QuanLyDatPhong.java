@@ -1,6 +1,7 @@
 package gui.form;
 
 import connectDB.ConnectDB;
+import dao.KhachHang_DAO;
 import dao.PhongHat_DAO;
 import entity.LoaiPhong;
 import entity.PhongHat;
@@ -33,6 +34,7 @@ import net.miginfocom.swing.MigLayout;
 public class Form_QuanLyDatPhong extends javax.swing.JPanel {
 
     private PhongHat_DAO ph_dao;
+  
 
     public Form_QuanLyDatPhong() {
         initComponents();
@@ -67,7 +69,8 @@ public class Form_QuanLyDatPhong extends javax.swing.JPanel {
                         }
                     });
                     thuePhongFrame.setVisible(true);
-
+                  
+                    
                 }
             }
         });
