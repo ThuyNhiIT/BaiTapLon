@@ -1,6 +1,13 @@
 package gui.form;
 
+import dao.KhachHang_DAO;
+import entity.KhachHang;
 import gui_dialog.DL_ThongTinKhachHang;
+import java.lang.invoke.MethodHandles;
+import java.util.List;
+import javax.swing.JLabel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -8,11 +15,30 @@ import gui_dialog.DL_ThongTinKhachHang;
  */
 public class Form_QuanLyKhachHang extends javax.swing.JPanel {
 
+    private KhachHang_DAO kh_dao;
+    private DefaultTableModel dtmKhachHang;
+
     public Form_QuanLyKhachHang() {
         initComponents();
+         kh_dao = new KhachHang_DAO();
+        dtmKhachHang = (DefaultTableModel) tblDSKH.getModel();
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+        for (int i = 0; i < tblDSKH.getColumnCount(); i++) {
+            tblDSKH.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+        DocDuLieu();
+
     }
 
-   
+    public void DocDuLieu() {
+        List<KhachHang> list = kh_dao.getalltbKhachHang();
+        for (KhachHang kh : list) {
+            dtmKhachHang.addRow(new Object[]{kh.getMaKH(), kh.getTenKH(), kh.getSdt(), kh.isGioitinh() ? "Nam" : "Nữ"});
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -99,51 +125,20 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
 
         tblDSKH.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Mã khách hàng", "Tên khách hàng", "Số điện thoại", "Giới tính", "Hành động"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, true, true, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblDSKH.setSelectionForeground(new java.awt.Color(255, 255, 255));
         scr.setViewportView(tblDSKH);
 
@@ -162,8 +157,8 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
             .addGroup(pnlKhachHangLayout.createSequentialGroup()
                 .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
-                .addComponent(scr, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addComponent(scr, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -181,6 +176,7 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
         new DL_ThongTinKhachHang().setVisible(true);
+
     }//GEN-LAST:event_btnThemActionPerformed
 
 

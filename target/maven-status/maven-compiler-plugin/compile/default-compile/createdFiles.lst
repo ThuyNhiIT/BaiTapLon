@@ -13,6 +13,12 @@ gui\swing\scrollbar\HoverIndex.class
 gui\model\ModelMenu.class
 gui_dialog\DL_ThemNV$2.class
 gui_dialog\DL_ThuePhong$3.class
+<<<<<<< HEAD
+=======
+gui\form\Form_QuanLyKhachHang$2.class
+gui\form\ProcessesLoading.class
+gui\swing\CustomJTextField.class
+>>>>>>> 40a44934ae53ee8b8e9c8df9e6ac6d4f56530f88
 gui_dialog\DL_CapNhatMatHang$1.class
 gui_dialog\DL_SuaNV$4.class
 gui\event\EventMenuSelected.class
@@ -41,6 +47,18 @@ gui\form\Form_Setting.class
 gui\form\Form_Setting$2.class
 entity\PhongHat.class
 gui_dialog\DL_ThongTinKhachHang$4.class
+<<<<<<< HEAD
+=======
+gui\form\Form_DichVu$3.class
+gui\form\Form_MatHang$2.class
+gui_dialog\DL_ThuePhong$1.class
+gui_dialog\DL_ThanhToan$5.class
+gui\swing\TimKiem$2.class
+gui\swing\CustomJPasswordField.class
+gui\swing\scrollbar\ScrollBarWin11UI$2.class
+gui\swing\scrollbar\TableScrollButton$ScrollLayerUI.class
+gui\swing\scrollbar\ModernScrollBarUI$ScrollBarButton.class
+>>>>>>> 40a44934ae53ee8b8e9c8df9e6ac6d4f56530f88
 gui\swing\RadiusButton.class
 gui_dialog\DL_ThuePhong$2.class
 dao\MatHang_DAO.class

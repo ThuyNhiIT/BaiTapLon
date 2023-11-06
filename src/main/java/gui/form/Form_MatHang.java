@@ -1,6 +1,12 @@
 package gui.form;
 
+import dao.MatHang_DAO;
+import entity.MatHang;
 import gui_dialog.DL_ThemMatHang;
+import java.util.List;
+import javax.swing.JLabel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -8,9 +14,27 @@ import gui_dialog.DL_ThemMatHang;
  */
 public class Form_MatHang extends javax.swing.JPanel {
 
+    private MatHang_DAO mh_dao;
+    private DefaultTableModel dtmMatHang;
+
     public Form_MatHang() {
         initComponents();
+        mh_dao = new MatHang_DAO();
+         dtmMatHang = (DefaultTableModel) tblMatHang.getModel();
+          DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+         for (int i = 0; i < tblMatHang.getColumnCount(); i++) {
+            tblMatHang.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+        DocDuLieu();
     }
+     public void DocDuLieu() {
+        List<MatHang> list = mh_dao.getalltbMatHang();
+        for (MatHang mh : list) {
+            dtmMatHang.addRow(new Object[]{mh.getMaMH(), mh.getTenMH(), mh.getGia()});
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -88,7 +112,7 @@ public class Form_MatHang extends javax.swing.JPanel {
             .addGroup(pnlHeaderLayout.createSequentialGroup()
                 .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlHeaderLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
+                        .addGap(13, 13, 13)
                         .addComponent(pnlTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlHeaderLayout.createSequentialGroup()
                         .addGap(37, 37, 37)
@@ -98,51 +122,20 @@ public class Form_MatHang extends javax.swing.JPanel {
 
         tblMatHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
-                "STT", "Mã mặt hàng", "Tên mặt hàng", "Số lượng", "Giá", "Hành động"
+                "STT", "Mã mặt hàng", "Tên mặt hàng", "Giá", "Hành động"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, true, true, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         scr.setViewportView(tblMatHang);
         tblMatHang.getAccessibleContext().setAccessibleName("");
 
@@ -178,7 +171,7 @@ public class Form_MatHang extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-       new DL_ThemMatHang().setVisible(true);
+        new DL_ThemMatHang().setVisible(true);
     }//GEN-LAST:event_btnThemActionPerformed
 
 

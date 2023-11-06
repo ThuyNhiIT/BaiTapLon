@@ -203,7 +203,6 @@ public class DL_ThuePhong extends javax.swing.JFrame {
 
         try {
             db.connect();
-
             kh_dao = new KhachHang_DAO();
             ArrayList<KhachHang> kh = kh_dao.getKhachHangTheoSdtKH(sdt);
             if (!kh.isEmpty()) {
@@ -211,7 +210,6 @@ public class DL_ThuePhong extends javax.swing.JFrame {
                 KhachHang khachHang = kh.get(0);
                 String tenKH = khachHang.getTenKH();
                 boolean gt = khachHang.isGioitinh();
-                // Gán thông tin vào các thành phần giao diện bên dưới
                 txtTenKH.setText(tenKH);
                 if (gt) {
                     radNam.setSelected(true); // Nam
@@ -221,7 +219,7 @@ public class DL_ThuePhong extends javax.swing.JFrame {
 
             } else {
                 lblThongBao.setText("Nhập lại số điện thoại hoặc thêm khách hàng bên dưới");
-                // Tại đây, bạn có thể thực hiện các hành động khác khi không tìm thấy thông tin khách hàng.
+                
             }
         } catch (SQLException ex) {
             Logger.getLogger(DL_ThuePhong.class.getName()).log(Level.SEVERE, null, ex);
