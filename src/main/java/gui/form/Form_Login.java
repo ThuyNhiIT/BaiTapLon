@@ -16,9 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/**
- * @author 84934 NguyenThiQuynhGiang
- */
 public class Form_Login extends javax.swing.JFrame implements ActionListener, MouseListener {
     private NhanVien_DAO nv_dao;
     private TaiKhoan_DAO tk_dao;
