@@ -1,8 +1,14 @@
 package gui_dialog;
 
+import connectDB.ConnectDB;
 import dao.KhachHang_DAO;
 import entity.KhachHang;
 import java.awt.List;
+import java.util.ArrayList;
+import gui.form.Form_QuanLyKhachHang;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -11,10 +17,13 @@ import java.awt.List;
 public class DL_ThongTinKhachHang extends javax.swing.JFrame {
 
     private KhachHang_DAO kh_dao;
-
+    private JTable tblDSKH;
+    private DefaultTableModel dtmKhachHang;
+    
     public DL_ThongTinKhachHang() {
         initComponents();
         setLocationRelativeTo(null);
+        
     }
 
 //    public  String phatSinhMaKH(){
@@ -25,6 +34,46 @@ public class DL_ThongTinKhachHang extends javax.swing.JFrame {
 //        }
 //        int count = 
 //    }
+    
+   public boolean validData(){
+       String maKH = txtMaKH.getText();
+       String tenKH = txtTenKH.getText();
+       String SDT = txtSDT.getText();
+       return true;
+   }
+   
+   public KhachHang revertKhachHang(){
+       String maKH = txtMaKH.getText().trim();
+       String tenKH = txtTenKH.getText().trim();
+       String SDT = txtSDT.getText().trim();
+       Boolean gioiTinh = radNam.isSelected();
+       
+       return new KhachHang(maKH, tenKH, SDT, gioiTinh);
+   }
+   
+//   public void DocDuLieu() {
+//        java.util.List<KhachHang> list = kh_dao.getalltbKhachHang();
+//        for (KhachHang kh : list) {
+//            dtmKhachHang.addRow(new Object[]{kh.getMaKH(), kh.getTenKH(), kh.getSdt(), kh.isGioitinh() ? "Nam" : "Nữ"});
+//        }
+//    }
+    
+    public void loadTable(ArrayList<KhachHang> ds){
+        if(ds == null){
+            clearJTable();
+            return;
+        }
+        clearJTable();
+        for(KhachHang khachHang : ds){
+            dtmKhachHang.addRow(khachHang.getObject());
+        }
+    }
+
+    public void clearJTable(){
+        while(tblDSKH.getRowCount() > 0){
+            dtmKhachHang.removeRow(0);
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -196,8 +245,21 @@ public class DL_ThongTinKhachHang extends javax.swing.JFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
 
+        if(validData()){
+            KhachHang kh = revertKhachHang();
+            if(!kh_dao.addCustomer(kh)){
+                JOptionPane.showMessageDialog(this, "Thêm không thành công !" );
+            }
+            else{
+//                loadTable(kh_dao.getalltbKhachHang());
+                  new Form_QuanLyKhachHang().loadTable(kh_dao.getalltbKhachHang());
+            }
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
+    ConnectDB db = ConnectDB.getInstance();
+//    db.connect
+    
     private void btnXoaRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaRActionPerformed
         txtMaKH.setText("");
         txtTenKH.setText("");

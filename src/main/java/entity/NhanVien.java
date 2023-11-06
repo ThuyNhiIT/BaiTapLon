@@ -59,7 +59,7 @@ public class NhanVien {
 
     }
 
-    public Boolean getGioiTinh() {
+    public Boolean isGioiTinh() {
         return gioiTinh;
     }
 
@@ -132,6 +132,10 @@ public class NhanVien {
                 + SDT + ", diaChi=" + diaChi + ", caLam=" + caLam + ", loaiNV=" + loaiNV + "]";
     }
 
+    public Object[] getObject(){
+        return new Object[] {maNV, tenNV, gioiTinh, CCCD, SDT, diaChi, caLam, loaiNV.getMaLoai()};
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;

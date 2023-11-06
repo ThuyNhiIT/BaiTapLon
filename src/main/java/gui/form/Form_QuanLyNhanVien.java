@@ -1,7 +1,14 @@
 package gui.form;
 
+import dao.NhanVien_DAO;
+import entity.NhanVien;
 import gui_dialog.DL_SuaNV;
 import gui_dialog.DL_ThemNV;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JLabel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -9,8 +16,49 @@ import gui_dialog.DL_ThemNV;
  */
 public class Form_QuanLyNhanVien extends javax.swing.JPanel {
 
+    private NhanVien_DAO nv_dao;
+    private DefaultTableModel dtmNhanVien;
+    private int soThuTu = 1;
+
     public Form_QuanLyNhanVien() {
         initComponents();
+        nv_dao = new NhanVien_DAO();
+        dtmNhanVien = (DefaultTableModel) tblDSNV.getModel();
+        
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        for (int i = 0; i < tblDSNV.getColumnCount(); i++) {
+            tblDSNV.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+        DocDuLieu();
+//        loadTable(nv_dao.getalltbNhanVien());
+    }
+    
+//     public void loadTable(ArrayList<NhanVien> ds){
+//        if(ds == null){
+//            clearJTable();
+//            return;
+//        }
+//        clearJTable();
+//        for(NhanVien nhanVien : ds){
+//            dtmNhanVien.addRow(nhanVien.getObject());
+//        }
+//        soThuTu++;
+//    }
+
+    public void clearJTable(){
+        while(tblDSNV.getRowCount() > 0){
+           dtmNhanVien.removeRow(0);
+        }
+    }
+    public void DocDuLieu(){
+        List<NhanVien> list = nv_dao.getalltbNhanVien();
+        for(NhanVien nv : list){
+            dtmNhanVien.addRow(new Object[] {
+                nv.getMaNV(), nv.getTenNV(), nv.isGioiTinh() ? "Nam" : "Nữ", nv.getSDT(), nv.getCCCD(), nv.getSDT(),
+                nv.getDiaChi(), nv.getCaLam(), nv.getLoaiNV().getMaLoai()
+            });
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -95,49 +143,10 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
 
         tblDSNV.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "STT", "Mã nhân viên", "Tên nhân viên", "Địa chỉ", "CCCD", "Số điện thoại", "Loại nhân viên", "Ca", "Giới tính"
+                "STT", "Mã nhân viên", "Tên nhân viên", "Giới tính", "CCCD", "Số điện thoại", "Địa chỉ", "Ca", "Loại NV"
             }
         ));
         scr.setViewportView(tblDSNV);
@@ -206,7 +215,7 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTongActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-    new DL_ThemNV().setVisible(true);
+        new DL_ThemNV().setVisible(true);
     }//GEN-LAST:event_btnThemActionPerformed
 
 
@@ -224,4 +233,4 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
     private javax.swing.JTextField txtTim;
     private javax.swing.JTextField txtTong;
     // End of variables declaration//GEN-END:variables
-} 
+}
