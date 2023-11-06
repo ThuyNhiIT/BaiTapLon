@@ -4,8 +4,11 @@ import dao.NhanVien_DAO;
 import entity.NhanVien;
 import gui_dialog.DL_SuaNV;
 import gui_dialog.DL_ThemNV;
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
+=======
+>>>>>>> bbc4b4ffa1d6b3ca3f843fc5d810767c0a34c9ce
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -18,18 +21,25 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
 
     private NhanVien_DAO nv_dao;
     private DefaultTableModel dtmNhanVien;
+<<<<<<< HEAD
     private int soThuTu = 1;
+=======
+>>>>>>> bbc4b4ffa1d6b3ca3f843fc5d810767c0a34c9ce
 
     public Form_QuanLyNhanVien() {
         initComponents();
         nv_dao = new NhanVien_DAO();
         dtmNhanVien = (DefaultTableModel) tblDSNV.getModel();
+<<<<<<< HEAD
         
+=======
+>>>>>>> bbc4b4ffa1d6b3ca3f843fc5d810767c0a34c9ce
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         for (int i = 0; i < tblDSNV.getColumnCount(); i++) {
             tblDSNV.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
         }
+<<<<<<< HEAD
         DocDuLieu();
 //        loadTable(nv_dao.getalltbNhanVien());
     }
@@ -59,6 +69,14 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
                 nv.getDiaChi(), nv.getCaLam(), nv.getLoaiNV().getMaLoai()
             });
         }
+=======
+//          public void DocDuLieu() {
+//        List<NhanVien> list = nv_dao.getalltbNh();
+//        for (NhanVien kh : list) {
+//            dtmKNhanVien.addRow(new Object[]{});
+//        }
+//    }
+>>>>>>> bbc4b4ffa1d6b3ca3f843fc5d810767c0a34c9ce
     }
 
     @SuppressWarnings("unchecked")

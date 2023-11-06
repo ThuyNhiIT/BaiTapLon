@@ -6,7 +6,11 @@ package gui.form;
 
 /**
  *
+<<<<<<< HEAD
  * @author 84934
+=======
+ * @author 84934 NguyenThiQuynhGiang
+>>>>>>> bbc4b4ffa1d6b3ca3f843fc5d810767c0a34c9ce
  */
 public class Form_DoiMatKhau extends javax.swing.JFrame {
 
@@ -15,6 +19,10 @@ public class Form_DoiMatKhau extends javax.swing.JFrame {
      */
     public Form_DoiMatKhau() {
         initComponents();
+<<<<<<< HEAD
+=======
+        setLocationRelativeTo(null);
+>>>>>>> bbc4b4ffa1d6b3ca3f843fc5d810767c0a34c9ce
     }
 
     /**
@@ -26,22 +34,137 @@ public class Form_DoiMatKhau extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+<<<<<<< HEAD
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+=======
+        pnlTong = new javax.swing.JPanel();
+        lblNhapMatKhauMoi = new javax.swing.JLabel();
+        lblDoiMatKhau = new javax.swing.JLabel();
+        lblNhapLaiMatKhauMoi = new javax.swing.JLabel();
+        txtNhapMKMoi = new gui.swing.CustomJPasswordField();
+        txtNhapLaiMKMoi = new gui.swing.CustomJPasswordField();
+        btnXacNhan = new gui.swing.RadiusButton();
+        btnHuy = new gui.swing.RadiusButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+
+        pnlTong.setBackground(new java.awt.Color(255, 255, 255));
+
+        lblNhapMatKhauMoi.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblNhapMatKhauMoi.setText("Nhập mật khẩu mới");
+
+        lblDoiMatKhau.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        lblDoiMatKhau.setText("ĐỔI MẬT KHẨU");
+
+        lblNhapLaiMatKhauMoi.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblNhapLaiMatKhauMoi.setText("Nhập lại mật khẩu mới");
+
+        txtNhapMKMoi.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+
+        txtNhapLaiMKMoi.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+
+        btnXacNhan.setBackground(new java.awt.Color(41, 173, 86));
+        btnXacNhan.setText("Xác nhận");
+        btnXacNhan.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnXacNhan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXacNhanActionPerformed(evt);
+            }
+        });
+
+        btnHuy.setBackground(new java.awt.Color(255, 51, 51));
+        btnHuy.setText("Hủy");
+        btnHuy.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnHuy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHuyActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlTongLayout = new javax.swing.GroupLayout(pnlTong);
+        pnlTong.setLayout(pnlTongLayout);
+        pnlTongLayout.setHorizontalGroup(
+            pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTongLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblDoiMatKhau)
+                .addGap(99, 99, 99))
+            .addGroup(pnlTongLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblNhapMatKhauMoi)
+                        .addComponent(lblNhapLaiMatKhauMoi)))
+                .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlTongLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNhapMKMoi, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+                            .addComponent(txtNhapLaiMKMoi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(40, 40, 40))
+                    .addGroup(pnlTongLayout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(82, Short.MAX_VALUE))))
+        );
+        pnlTongLayout.setVerticalGroup(
+            pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTongLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(lblDoiMatKhau)
+                .addGap(34, 34, 34)
+                .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNhapMatKhauMoi)
+                    .addComponent(txtNhapMKMoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNhapLaiMatKhauMoi)
+                    .addComponent(txtNhapLaiMKMoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46))
+        );
+>>>>>>> bbc4b4ffa1d6b3ca3f843fc5d810767c0a34c9ce
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
             .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 300, Short.MAX_VALUE)
+=======
+            .addComponent(pnlTong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlTong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+>>>>>>> bbc4b4ffa1d6b3ca3f843fc5d810767c0a34c9ce
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< HEAD
+=======
+    private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnXacNhanActionPerformed
+
+    private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+    }//GEN-LAST:event_btnHuyActionPerformed
+
+>>>>>>> bbc4b4ffa1d6b3ca3f843fc5d810767c0a34c9ce
     /**
      * @param args the command line arguments
      */
@@ -78,5 +201,16 @@ public class Form_DoiMatKhau extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+<<<<<<< HEAD
+=======
+    private gui.swing.RadiusButton btnHuy;
+    private gui.swing.RadiusButton btnXacNhan;
+    private javax.swing.JLabel lblDoiMatKhau;
+    private javax.swing.JLabel lblNhapLaiMatKhauMoi;
+    private javax.swing.JLabel lblNhapMatKhauMoi;
+    private javax.swing.JPanel pnlTong;
+    private gui.swing.CustomJPasswordField txtNhapLaiMKMoi;
+    private gui.swing.CustomJPasswordField txtNhapMKMoi;
+>>>>>>> bbc4b4ffa1d6b3ca3f843fc5d810767c0a34c9ce
     // End of variables declaration//GEN-END:variables
 }

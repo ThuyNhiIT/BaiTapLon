@@ -38,6 +38,7 @@ CREATE TABLE MatHang (
 );
 GO
 
+<<<<<<< HEAD
 INSERT INTO MatHang (maMH, tenMH, Gia, trangThai) VALUES ('MH001', N'Bia Heineken lon 330ml', 20000, 1);
 INSERT INTO MatHang (maMH, tenMH, Gia, trangThai) VALUES ('MH002', N'Bia Heineken chai 330ml', 50000, 1);
 INSERT INTO MatHang (maMH, tenMH, Gia, trangThai) VALUES ('MH003', N'Bia Tiger lon 330ml', 17000, 1);
@@ -48,17 +49,34 @@ INSERT INTO MatHang (maMH, tenMH, Gia, trangThai) VALUES ('MH007', N'Bia Sapporo
 INSERT INTO MatHang (maMH, tenMH, Gia, trangThai) VALUES ('MH008', N'Nước suối Aquafina', 10000, 1);
 INSERT INTO MatHang (maMH, tenMH, Gia, trangThai) VALUES ('MH009', N'Nước ngọt Cocacola', 12000, 1);
 INSERT INTO MatHang (maMH, tenMH, Gia, trangThai) VALUES ('MH010', N'Nước ngọt Pepsi', 12000, 1);
+=======
+INSERT INTO MatHang (maMH, tenMH, Gia, trangThai) VALUES ('MH001', 'Bia Heineken lon 330ml', 20000, 1);
+INSERT INTO MatHang (maMH, tenMH, Gia, trangThai) VALUES ('MH002', 'Bia Heineken chai 330ml', 50000, 1);
+INSERT INTO MatHang (maMH, tenMH, Gia, trangThai) VALUES ('MH003', 'Bia Tiger lon 330ml', 17000, 1);
+INSERT INTO MatHang (maMH, tenMH, Gia, trangThai) VALUES ('MH004', 'Bia Tiger Crystal lon 330ml', 19000, 1);
+INSERT INTO MatHang (maMH, tenMH, Gia, trangThai) VALUES ('MH005', 'Bia Budweiser lon 330ml', 18000, 1);
+INSERT INTO MatHang (maMH, tenMH, Gia, trangThai) VALUES ('MH006', 'Bia Budweiser chai 330ml', 22000, 1);
+INSERT INTO MatHang (maMH, tenMH, Gia, trangThai) VALUES ('MH007', 'Bia Sapporo lon 330ml', 19000, 1);
+INSERT INTO MatHang (maMH, tenMH, Gia, trangThai) VALUES ('MH008', 'Nước suối Aquafina', 10000, 1);
+INSERT INTO MatHang (maMH, tenMH, Gia, trangThai) VALUES ('MH009', 'Nước ngọt Cocacola', 12000, 1);
+INSERT INTO MatHang (maMH, tenMH, Gia, trangThai) VALUES ('MH010', 'Nước ngọt Pepsi', 12000, 1);
+>>>>>>> bbc4b4ffa1d6b3ca3f843fc5d810767c0a34c9ce
 
 
 -- Tạo bảng DichVu
 CREATE TABLE DichVu (
     maDV VARCHAR(50) PRIMARY KEY,
+<<<<<<< HEAD
     tenDV NVARCHAR(255),
+=======
+    tenDV VARCHAR(255),
+>>>>>>> bbc4b4ffa1d6b3ca3f843fc5d810767c0a34c9ce
 	maMH VARCHAR(50),
 	FOREIGN KEY (maMH) REFERENCES MatHang(maMH)
 );
 GO
 
+<<<<<<< HEAD
 INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV001', N'Bia Heineken lon 330ml', 'MH001');
 INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV002', N'Bia Heineken chai 330ml', 'MH002');
 INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV003', N'Bia Tiger lon 330ml', 'MH003');
@@ -69,6 +87,18 @@ INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV007', N'Bia Sapporo lon 330ml'
 INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV008', N'Nước suối Aquafina', 'MH008');
 INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV009', N'Nước ngọt Cocacola', 'MH009');
 INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV010', N'Nước ngọt Pepsi', 'MH010');
+=======
+INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV001', 'Bia Heineken lon 330ml', 'MH001');
+INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV002', 'Bia Heineken chai 330ml', 'MH002');
+INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV003', 'Bia Tiger lon 330ml', 'MH003');
+INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV004', 'Bia Tiger Crystal lon 330ml', 'MH004');
+INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV005', 'Bia Budweiser lon 330ml', 'MH005');
+INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV006', 'Bia Budweiser chai 330ml', 'MH006');
+INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV007', 'Bia Sapporo lon 330ml', 'MH007');
+INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV008', 'Nước suối Aquafina', 'MH008');
+INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV009', 'Nước ngọt Cocacola', 'MH009');
+INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV010', 'Nước ngọt Pepsi', 'MH010');
+>>>>>>> bbc4b4ffa1d6b3ca3f843fc5d810767c0a34c9ce
 
 
 -- Tạo bảng KhachHang
@@ -172,6 +202,7 @@ CREATE TABLE PhongHat (
 GO
 
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
+<<<<<<< HEAD
 VALUES ('P001', 'V001 ', 'LP001', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P002', 'V002 ', 'LP001', 'Cho');
@@ -191,6 +222,27 @@ INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P008', 'T008', 'LP002', 'Cho');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P009', 'T009', 'LP002', 'Dang su dung');
+=======
+VALUES ('P001', 'Phong hat 001 ', 'LP001', 'Trong');
+INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
+VALUES ('P002', 'Phong hat 002 ', 'LP001', 'Cho');
+INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
+VALUES ('P003', 'Phong hat 003 ', 'LP001', 'Dang su dung');
+
+INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
+VALUES ('P004', 'Phong hat 004 ', 'LP002', 'Trong');
+INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
+VALUES ('P005', 'Phong hat 005 ', 'LP002', 'Cho');
+INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
+VALUES ('P006', 'Phong hat 006 ', 'LP002', 'Dang su dung');
+
+INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
+VALUES ('P007', 'Phong hat 007 ', 'LP002', 'Trong');
+INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
+VALUES ('P008', 'Phong hat 008 ', 'LP002', 'Cho');
+INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
+VALUES ('P009', 'Phong hat 009 ', 'LP002', 'Dang su dung');
+>>>>>>> bbc4b4ffa1d6b3ca3f843fc5d810767c0a34c9ce
 
 -- Tạo bảng TaiKhoan
 CREATE TABLE TaiKhoan (
@@ -200,11 +252,19 @@ CREATE TABLE TaiKhoan (
 );
 GO
 
+<<<<<<< HEAD
 INSERT INTO TaiKhoan (maNV, Password) VALUES ('NV001', '123A');
 INSERT INTO TaiKhoan (maNV, Password) VALUES ('NV002', '123A');
 INSERT INTO TaiKhoan (maNV, Password) VALUES ('NV003', '123A');
 INSERT INTO TaiKhoan (maNV, Password) VALUES ('NV004', '123A');
 INSERT INTO TaiKhoan (maNV, Password) VALUES ('NV005', '123A');
+=======
+INSERT INTO TaiKhoan (maNV, Password) VALUES ('NV001', '123456A');
+INSERT INTO TaiKhoan (maNV, Password) VALUES ('NV002', '123456A');
+INSERT INTO TaiKhoan (maNV, Password) VALUES ('NV003', '123456A');
+INSERT INTO TaiKhoan (maNV, Password) VALUES ('NV004', '123456A');
+INSERT INTO TaiKhoan (maNV, Password) VALUES ('NV005', '123456A');
+>>>>>>> bbc4b4ffa1d6b3ca3f843fc5d810767c0a34c9ce
 
 -- Tạo bảng DonDatPhong
 CREATE TABLE DonDatPhong (

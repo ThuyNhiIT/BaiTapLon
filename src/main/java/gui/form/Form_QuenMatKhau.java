@@ -10,7 +10,7 @@ import java.awt.event.MouseListener;
  *
  * @author 84934 NguyenThiQuynhGiang
  */
-public class Form_QuenMatKhau extends javax.swing.JFrame implements ActionListener, MouseListener{
+public class Form_QuenMatKhau extends javax.swing.JFrame {
 
     /**
      * Creates new form Form_QuenMatKhau
@@ -18,7 +18,6 @@ public class Form_QuenMatKhau extends javax.swing.JFrame implements ActionListen
     public Form_QuenMatKhau() {
         initComponents();
         setLocationRelativeTo(null);
-        btnHuy.addActionListener(this);
     }
 
     /**
@@ -36,7 +35,7 @@ public class Form_QuenMatKhau extends javax.swing.JFrame implements ActionListen
         lblNhapLaiMatKhau = new javax.swing.JLabel();
         txtNhapLaiMatKhau = new gui.swing.CustomJPasswordField();
         btnHuy = new gui.swing.RadiusButton();
-        btnXacNhan1 = new gui.swing.RadiusButton();
+        btnXacNhan = new gui.swing.RadiusButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -58,10 +57,20 @@ public class Form_QuenMatKhau extends javax.swing.JFrame implements ActionListen
         btnHuy.setBackground(new java.awt.Color(255, 51, 51));
         btnHuy.setText("Hủy");
         btnHuy.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnHuy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHuyActionPerformed(evt);
+            }
+        });
 
-        btnXacNhan1.setBackground(new java.awt.Color(0, 204, 0));
-        btnXacNhan1.setText("Xác nhận");
-        btnXacNhan1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnXacNhan.setBackground(new java.awt.Color(41, 173, 86));
+        btnXacNhan.setText("Xác nhận");
+        btnXacNhan.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnXacNhan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXacNhanActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlTongLayout = new javax.swing.GroupLayout(pnlTong);
         pnlTong.setLayout(pnlTongLayout);
@@ -78,7 +87,7 @@ public class Form_QuenMatKhau extends javax.swing.JFrame implements ActionListen
                             .addComponent(txtNhapLaiMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(pnlTongLayout.createSequentialGroup()
                         .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnXacNhan1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblNhapMatKhauMoi))
                         .addGap(59, 59, 59)
                         .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -97,7 +106,7 @@ public class Form_QuenMatKhau extends javax.swing.JFrame implements ActionListen
                     .addComponent(txtNhapLaiMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnXacNhan1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48))
         );
@@ -115,6 +124,15 @@ public class Form_QuenMatKhau extends javax.swing.JFrame implements ActionListen
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
+        // TODO add your handling code here:
+         setVisible(false);
+    }//GEN-LAST:event_btnHuyActionPerformed
+
+    private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnXacNhanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,19 +169,11 @@ public class Form_QuenMatKhau extends javax.swing.JFrame implements ActionListen
         });
     }
     
-    //Event
-    public void actionPerformed(ActionEvent e){
-        Object o = e.getSource();
-        if(o.equals(btnHuy)){
-            this.dispose();
-            return;
-        }
-    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.swing.RadiusButton btnHuy;
-    private gui.swing.RadiusButton btnXacNhan1;
+    private gui.swing.RadiusButton btnXacNhan;
     private javax.swing.JLabel lblNhapLaiMatKhau;
     private javax.swing.JLabel lblNhapMatKhauMoi;
     private javax.swing.JPanel pnlTong;
@@ -173,28 +183,5 @@ public class Form_QuenMatKhau extends javax.swing.JFrame implements ActionListen
 
     
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 }

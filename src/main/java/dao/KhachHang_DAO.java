@@ -1,3 +1,4 @@
+
 package dao;
 
 import connectDB.ConnectDB;
@@ -7,6 +8,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+
+import java.util.ArrayList;
+
+import java.util.ArrayList;
+
+import connectDB.ConnectDB;
+
 import java.util.ArrayList;
 
 /**
@@ -35,7 +44,9 @@ public class KhachHang_DAO {
                String SDT = rs.getString(3);
                Boolean GioiTinh = rs.getBoolean(4);
                
+
                KhachHang kh = new KhachHang(maKH, tenKH, SDT, GioiTinh);
+
                dsKH.add(kh);
            }
         }
@@ -80,40 +91,42 @@ public class KhachHang_DAO {
         return dsKH;
     }
     
-    public ArrayList<KhachHang> getKhachHangTheoSdtKH(String id){
-        ArrayList<KhachHang> dsKH = new ArrayList<KhachHang>();
-        ConnectDB.getInstance();
-        Connection con = ConnectDB.getConnection();
-        PreparedStatement statement = null;
-        
-        try{
-            String sql = "SELECT *FROM KhachHang WHERE SDT=?";
-            statement = con.prepareStatement(sql);
-            statement.setString(1, id);
-            
-            ResultSet rs = statement.executeQuery(sql);
-            while(rs.next()){
-               String maKH = rs.getString(1);
-               String tenKH = rs.getString(2);
-               String SDT = rs.getString(3);
-               Boolean GioiTinh = rs.getBoolean(4);
-               
-               KhachHang kh = new KhachHang(maKH, tenKH, SDT, GioiTinh);
-               dsKH.add(kh);
-            }
+   public ArrayList<KhachHang> getKhachHangTheoSdtKH(String sdt){
+    ArrayList<KhachHang> dsKH = new ArrayList<KhachHang>();
+    ConnectDB.getInstance();
+    Connection con = ConnectDB.getConnection();
+    PreparedStatement statement = null;
+    
+    try{
+        String sql = "SELECT * FROM KhachHang WHERE SDT=?";
+        statement = con.prepareStatement(sql);
+        statement.setString(1, sdt);
+      
+        ResultSet rs = statement.executeQuery();
+        while(rs.next()){
+           String maKH = rs.getString(1);
+           String tenKH = rs.getString(2);
+           String SDT = rs.getString(3);
+           Boolean GioiTinh = rs.getBoolean(4);
+
+           KhachHang kh = new KhachHang(maKH, tenKH, SDT, GioiTinh);
+
+           dsKH.add(kh);
         }
-        catch(SQLException e){
+    }
+    catch(SQLException e){
+        e.printStackTrace();
+    }
+    finally{
+        try {
+            statement.close();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        finally{
-            try {
-                statement.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return dsKH;
     }
+    return dsKH;
+}
+
     
     public boolean addCustomer(KhachHang kh){
         ConnectDB.getInstance();
@@ -175,6 +188,31 @@ public class KhachHang_DAO {
                String SDT = rs.getString(3);
                Boolean GioiTinh = rs.getBoolean(4);
                
+
+               kh = new KhachHang(maKH, tenKH, SDT, GioiTinh);
+
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return kh;
+    }
+     public KhachHang timKhachHangbySDT(String sdt){
+        KhachHang kh = null;
+        Connection con = ConnectDB.getInstance().getConnection();
+        PreparedStatement stmt = null;
+        
+        try{
+            String sql = "SELECT *FROM KhachHang WHERE SDT=?";
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, sdt);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+               String maKH = rs.getString(1);
+               String tenKH = rs.getString(2);
+               String SDT = rs.getString(3);
+               Boolean GioiTinh = rs.getBoolean(4);
                kh = new KhachHang(maKH, tenKH, SDT, GioiTinh);
             }
         }

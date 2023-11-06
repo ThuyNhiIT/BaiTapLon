@@ -49,6 +49,10 @@ public class NhanVien_DAO {
         return dsNV;
     }
     
+<<<<<<< HEAD
+=======
+    
+>>>>>>> bbc4b4ffa1d6b3ca3f843fc5d810767c0a34c9ce
     public ArrayList<NhanVien> getNhanVienTheoMaNV(String id) {
         ArrayList<NhanVien> dsnv = new ArrayList<NhanVien>();
         ConnectDB.getInstance();
@@ -176,7 +180,10 @@ public class NhanVien_DAO {
         }
         return nv;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> bbc4b4ffa1d6b3ca3f843fc5d810767c0a34c9ce
 }
 
 

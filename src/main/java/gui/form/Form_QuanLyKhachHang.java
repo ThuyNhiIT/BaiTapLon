@@ -2,6 +2,7 @@ package gui.form;
 
 import dao.KhachHang_DAO;
 import entity.KhachHang;
+<<<<<<< HEAD
 import gui.swing.CustomJOptionPane;
 import gui_dialog.DL_ThongTinKhachHang;
 import java.lang.invoke.MethodHandles;
@@ -9,6 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+=======
+import gui_dialog.DL_ThongTinKhachHang;
+import java.lang.invoke.MethodHandles;
+import java.util.List;
+import javax.swing.JLabel;
+>>>>>>> bbc4b4ffa1d6b3ca3f843fc5d810767c0a34c9ce
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -31,6 +38,7 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
         for (int i = 0; i < tblDSKH.getColumnCount(); i++) {
             tblDSKH.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
         }
+<<<<<<< HEAD
 //        DocDuLieu();
         loadTable(kh_dao.getalltbKhachHang());
 
@@ -66,6 +74,19 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
     }
     
     
+=======
+        DocDuLieu();
+
+    }
+
+    public void DocDuLieu() {
+        List<KhachHang> list = kh_dao.getalltbKhachHang();
+        for (KhachHang kh : list) {
+            dtmKhachHang.addRow(new Object[]{kh.getMaKH(), kh.getTenKH(), kh.getSdt(), kh.isGioitinh() ? "Nam" : "Nữ"});
+        }
+    }
+
+>>>>>>> bbc4b4ffa1d6b3ca3f843fc5d810767c0a34c9ce
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
