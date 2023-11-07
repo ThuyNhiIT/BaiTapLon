@@ -125,11 +125,11 @@ public class Form_MatHang extends javax.swing.JPanel {
 
             },
             new String [] {
-                "STT", "Mã mặt hàng", "Tên mặt hàng", "Giá", "Hành động"
+                "Mã mặt hàng", "Tên mặt hàng", "Giá", "Hành động"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, true, true, true, false
+                true, true, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

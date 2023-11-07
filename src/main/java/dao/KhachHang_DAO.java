@@ -136,7 +136,7 @@ public class KhachHang_DAO {
         
         try{
             stmt = con.prepareStatement("insert into" +
-                    "KhachHang(maKH,tenKH,SDT,GioiTinh) values (?, ?, ?, ?)");
+                    "KhachHang(maKH,tenKH,SDT,GioiTinh) values (?, ?, ?, ?, ?)");
             stmt.setString(1, kh.getMaKH());
             stmt.setString(2, kh.getTenKH());
             stmt.setString(3, kh.getSdt());
