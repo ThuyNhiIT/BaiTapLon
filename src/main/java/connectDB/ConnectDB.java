@@ -7,9 +7,11 @@ import java.sql.SQLException;
 public class ConnectDB {
     public static Connection con = null;
     private static ConnectDB instance = new ConnectDB();
+
     public static ConnectDB getInstance() {
         return instance;
     }
+
     public void connect() throws SQLException {
         String url = "jdbc:sqlserver://localhost:1433;databaseName=KaraokeAPLUS"; 
         String user = "sa";

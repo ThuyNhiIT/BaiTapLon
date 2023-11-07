@@ -16,14 +16,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-<<<<<<< HEAD
+
 /**
  * @author 84934 NguyenThiQuynhGiang
  */
 public class Form_Login extends javax.swing.JFrame{
-=======
-public class Form_Login extends javax.swing.JFrame implements ActionListener, MouseListener {
->>>>>>> bbc4b4ffa1d6b3ca3f843fc5d810767c0a34c9ce
     private NhanVien_DAO nv_dao;
     private TaiKhoan_DAO tk_dao;
     private static NhanVien nhanVienDangNhap;

@@ -2,7 +2,6 @@ package gui.form;
 
 import dao.KhachHang_DAO;
 import entity.KhachHang;
-<<<<<<< HEAD
 import gui.swing.CustomJOptionPane;
 import gui_dialog.DL_ThongTinKhachHang;
 import java.lang.invoke.MethodHandles;
@@ -10,12 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-=======
 import gui_dialog.DL_ThongTinKhachHang;
 import java.lang.invoke.MethodHandles;
 import java.util.List;
 import javax.swing.JLabel;
->>>>>>> bbc4b4ffa1d6b3ca3f843fc5d810767c0a34c9ce
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -27,10 +24,11 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
 
     private KhachHang_DAO kh_dao;
     private DefaultTableModel dtmKhachHang;
+    private ArrayList<KhachHang> customers;
 
     public Form_QuanLyKhachHang() {
         initComponents();
-         kh_dao = new KhachHang_DAO();
+        kh_dao = new KhachHang_DAO();
         dtmKhachHang = (DefaultTableModel) tblDSKH.getModel();
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
@@ -38,20 +36,21 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
         for (int i = 0; i < tblDSKH.getColumnCount(); i++) {
             tblDSKH.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
         }
-<<<<<<< HEAD
-//        DocDuLieu();
-        loadTable(kh_dao.getalltbKhachHang());
+        DocDuLieu();
+//        loadTable(kh_dao.getalltbKhachHang());
 
     }
 
 //    public void DocDuLieu() {
-//        List<KhachHang> list = kh_dao.getalltbKhachHang();
-//        for (KhachHang kh : list) {
+//        List<KhachHang> lists = kh_dao.getalltbKhachHang();
+//        for (KhachHang kh : lists) {
 //            dtmKhachHang.addRow(new Object[]{kh.getMaKH(), kh.getTenKH(), kh.getSdt(), kh.isGioitinh() ? "Nam" : "Nữ"});
 //        }
 //    }
     
+    
     public void loadTable(ArrayList<KhachHang> ds){
+        dtmKhachHang.setRowCount(0);//reset nd trong bang ve 0
         if(ds == null){
             clearJTable();
             return;
@@ -73,11 +72,7 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
         dtm.getDataVector().removeAllElements();
     }
     
-    
-=======
-        DocDuLieu();
 
-    }
 
     public void DocDuLieu() {
         List<KhachHang> list = kh_dao.getalltbKhachHang();
@@ -86,7 +81,6 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
         }
     }
 
->>>>>>> bbc4b4ffa1d6b3ca3f843fc5d810767c0a34c9ce
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -228,8 +222,8 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        new DL_ThongTinKhachHang().setVisible(true);
-
+        DL_ThongTinKhachHang ttkh = new DL_ThongTinKhachHang();
+        ttkh.setVisible(true);
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
