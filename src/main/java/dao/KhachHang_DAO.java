@@ -135,8 +135,8 @@ public class KhachHang_DAO {
         int n = 0;
         
         try{
-            stmt = con.prepareStatement("insert into" +
-                    "KhachHang(maKH,tenKH,SDT,GioiTinh) values (?, ?, ?, ?)");
+            stmt = con.prepareStatement("INSERT INTO KhachHang (maKH, tenKH, SDT, GioiTinh) VALUES (?, ?, ?, ?)");
+
             stmt.setString(1, kh.getMaKH());
             stmt.setString(2, kh.getTenKH());
             stmt.setString(3, kh.getSdt());
@@ -229,8 +229,8 @@ public class KhachHang_DAO {
         int n = 0;
         
         try{
-            stmt = con.prepareStatement("update" + 
-                    "KhachHang set tenKH=?, SDT=?, GioiTinh=? where maKH=?");
+          stmt = con.prepareStatement("INSERT INTO KhachHang (maKH, tenKH, SDT, GioiTinh) VALUES (?, ?, ?, ?)");
+
             stmt.setString(1, kh.getTenKH());
             stmt.setString(2, kh.getSdt());
             stmt.setBoolean(3, kh.isGioitinh());

@@ -3,9 +3,12 @@ package gui_dialog;
 import connectDB.ConnectDB;
 import dao.KhachHang_DAO;
 import entity.KhachHang;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.print.Book;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,6 +23,33 @@ public class DL_ThuePhong extends javax.swing.JFrame {
     public DL_ThuePhong() {
         initComponents();
         setLocationRelativeTo(null);
+
+    }
+
+    public String phatSinhMaKH() {
+
+        List<KhachHang> khs = kh_dao.getalltbKhachHang();
+        String temp = null;
+        for (KhachHang kh : khs) {
+            temp = kh.getMaKH();
+        }
+        int count = laySoDuoi(temp);
+
+        count++;
+
+        String maVe = String.format("KH%03d", count);
+
+        return maVe;
+    }
+
+    public int laySoDuoi(String str) {
+        if (str == null) {
+            return 0;
+        } else {
+            String numberStr = str.substring(2); // loại bỏ ký tự "KH"
+            int number = Integer.parseInt(numberStr); // chuyển đổi chuỗi thành số nguyên
+            return number;
+        }
 
     }
 
@@ -210,16 +240,27 @@ public class DL_ThuePhong extends javax.swing.JFrame {
                 KhachHang khachHang = kh.get(0);
                 String tenKH = khachHang.getTenKH();
                 boolean gt = khachHang.isGioitinh();
+                // Gán thông tin vào các thành phần giao diện bên dưới
                 txtTenKH.setText(tenKH);
                 if (gt) {
                     radNam.setSelected(true); // Nam
                 } else {
                     radNu.setSelected(true); // Nữ
                 }
-
             } else {
                 lblThongBao.setText("Nhập lại số điện thoại hoặc thêm khách hàng bên dưới");
-                
+                String maKH = phatSinhMaKH();
+                String tenKH = txtTenKH.getText();
+                String Sdt = txtSDT.getText();
+                Boolean gt = radNam.isSelected();
+                KhachHang addKh =new KhachHang(maKH, tenKH, Sdt, gt);
+                btnThuePhong.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        kh_dao.addCustomer(addKh);
+                    }
+
+                });
             }
         } catch (SQLException ex) {
             Logger.getLogger(DL_ThuePhong.class.getName()).log(Level.SEVERE, null, ex);

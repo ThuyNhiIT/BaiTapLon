@@ -1,6 +1,8 @@
 
 package gui.form;
 
+import gui.main.Main;
+
 
 /**
  *
@@ -92,7 +94,7 @@ public class Form_Setting extends javax.swing.JPanel {
 
     private void DangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DangXuatActionPerformed
         // TODO add your handling code here:
-      
+     
     }//GEN-LAST:event_DangXuatActionPerformed
 
 
