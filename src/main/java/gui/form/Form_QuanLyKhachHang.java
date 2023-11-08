@@ -21,18 +21,18 @@ import javax.swing.table.DefaultTableModel;
  * @author HO MINH HAU
  */
 public class Form_QuanLyKhachHang extends javax.swing.JPanel {
-
+    
     private KhachHang_DAO kh_dao;
     private DefaultTableModel dtmKhachHang;
     private ArrayList<KhachHang> customers;
-
+    
     public Form_QuanLyKhachHang() {
         initComponents();
         kh_dao = new KhachHang_DAO();
         dtmKhachHang = (DefaultTableModel) tblDSKH.getModel();
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-
+        
         for (int i = 0; i < tblDSKH.getColumnCount(); i++) {
             tblDSKH.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
         }
@@ -47,40 +47,36 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
 //            dtmKhachHang.addRow(new Object[]{kh.getMaKH(), kh.getTenKH(), kh.getSdt(), kh.isGioitinh() ? "Nam" : "Nữ"});
 //        }
 //    }
-    
-    
-    public void loadTable(ArrayList<KhachHang> ds){
+    public void loadTable(ArrayList<KhachHang> ds) {
         dtmKhachHang.setRowCount(0);//reset nd trong bang ve 0
-        if(ds == null){
+        if (ds == null) {
             clearJTable();
             return;
         }
         clearJTable();
-        for(KhachHang kh : ds){
+        for (KhachHang kh : ds) {
             dtmKhachHang.addRow(new Object[]{kh.getMaKH(), kh.getTenKH(), kh.getSdt(), kh.isGioitinh() ? "Nam" : "Nữ"});
         }
     }
-
-    public void clearJTable(){
-        while(tblDSKH.getRowCount() > 0){
+    
+    public void clearJTable() {
+        while (tblDSKH.getRowCount() > 0) {
             dtmKhachHang.removeRow(0);
         }
     }
     
-    public void clearDataOnModel(){
+    public void clearDataOnModel() {
         DefaultTableModel dtm = (DefaultTableModel) tblDSKH.getModel();
         dtm.getDataVector().removeAllElements();
     }
     
-
-
     public void DocDuLieu() {
         List<KhachHang> list = kh_dao.getalltbKhachHang();
         for (KhachHang kh : list) {
             dtmKhachHang.addRow(new Object[]{kh.getMaKH(), kh.getTenKH(), kh.getSdt(), kh.isGioitinh() ? "Nam" : "Nữ"});
         }
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -222,34 +218,33 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        DL_ThongTinKhachHang ttkh = new DL_ThongTinKhachHang();
-        ttkh.setVisible(true);
+//        DL_ThongTinKhachHang ttkh = new DL_ThongTinKhachHang();
+//        ttkh.setVisible(true);
+        new DL_ThongTinKhachHang().setVisible(true);
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
         // TODO add your handling code here:
         String sdtKH = txtTim.getText().trim();
-        if(!(sdtKH.length() > 0 && sdtKH.matches("\\d{10}"))){
-            CustomJOptionPane.showMessageDialog( "Số điện thoại phải gồm 10 số !!!");
-        }
-        else{
+        if (!(sdtKH.length() > 0 && sdtKH.matches("\\d{10}"))) {
+            CustomJOptionPane.showMessageDialog("Số điện thoại phải gồm 10 số !!!");
+        } else {
             String maTim = txtTim.getText();
             ArrayList<KhachHang> dsKHtim = null;
             
-            for(KhachHang kh : kh_dao.getalltbKhachHang()){
-                if(kh.getSdt().equals(maTim)){
+            for (KhachHang kh : kh_dao.getalltbKhachHang()) {
+                if (kh.getSdt().equals(maTim)) {
                     dsKHtim = new ArrayList<KhachHang>();
                     dsKHtim.add(kh);
                 }
             }
             
-            if(dsKHtim != null){
+            if (dsKHtim != null) {
                 clearDataOnModel();
-                for(KhachHang kh : dsKHtim){
+                for (KhachHang kh : dsKHtim) {
                     dtmKhachHang.addRow(new Object[]{kh.getMaKH(), kh.getTenKH(), kh.getSdt(), kh.isGioitinh() ? "Nam" : "Nữ"});
                 }
-            }
-            else if (dsKHtim == null){
+            } else if (dsKHtim == null) {
                 CustomJOptionPane.showMessageDialog("Không tìm thấy !!!");
             }
         }
