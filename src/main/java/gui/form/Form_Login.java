@@ -16,7 +16,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-public class Form_Login extends javax.swing.JFrame implements ActionListener, MouseListener {
+
+/**
+ * @author 84934 NguyenThiQuynhGiang
+ */
+public class Form_Login extends javax.swing.JFrame{
     private NhanVien_DAO nv_dao;
     private TaiKhoan_DAO tk_dao;
     private static NhanVien nhanVienDangNhap;
@@ -35,8 +39,8 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
     public Form_Login() {
         initComponents();
         setLocationRelativeTo(null);
-        btnThoat.addActionListener(this);
-        btnQuenMatKhau.addActionListener(this);
+//        btnThoat.addActionListener(this);
+//        btnQuenMatKhau.addActionListener(this);
 
     }
 
@@ -225,6 +229,7 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
 
     private void btnQuenMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuenMatKhauActionPerformed
         // TODO add your handling code here:
+        new Form_QuenMatKhau().setVisible(true);
     }//GEN-LAST:event_btnQuenMatKhauActionPerformed
 
     private void txtTenDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenDangNhapActionPerformed
@@ -233,6 +238,7 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         // TODO add your handling code here:
+       System.exit(0);
     }//GEN-LAST:event_btnThoatActionPerformed
 
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
@@ -284,16 +290,16 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
     //Event
-    public void actionPerformed(ActionEvent e) {
-        Object o = e.getSource();
-        if (o.equals(btnThoat)) {
-            System.exit(0);
-            return;
-        } else if (o.equals(btnQuenMatKhau)) {
-            Form_QuenMatKhau quen_mk = new Form_QuenMatKhau();
-            quen_mk.setVisible(true);
-        }
-    }
+//    public void actionPerformed(ActionEvent e) {
+//        Object o = e.getSource();
+//        if (o.equals(btnThoat)) {
+//            System.exit(0);
+//            return;
+//        } else if (o.equals(btnQuenMatKhau)) {
+//            Form_QuenMatKhau quen_mk = new Form_QuenMatKhau();
+//            quen_mk.setVisible(true);
+//        }
+//    }
 
     public static void main(String args[]) {
 
@@ -339,28 +345,5 @@ public class Form_Login extends javax.swing.JFrame implements ActionListener, Mo
     private gui.swing.CustomJTextField txtTenDangNhap;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 }

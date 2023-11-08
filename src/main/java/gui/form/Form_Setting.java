@@ -89,7 +89,7 @@ public class Form_Setting extends javax.swing.JPanel {
 
     private void DoiMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DoiMKActionPerformed
         // TODO add your handling code here:
-        new Form_DoiMatKhau().setVisible(true);
+//        new Form_DoiMatKhau().setVisible(true);
     }//GEN-LAST:event_DoiMKActionPerformed
 
     private void DangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DangXuatActionPerformed

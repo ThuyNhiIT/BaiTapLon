@@ -2,6 +2,13 @@ package gui.form;
 
 import dao.KhachHang_DAO;
 import entity.KhachHang;
+import gui.swing.CustomJOptionPane;
+import gui_dialog.DL_ThongTinKhachHang;
+import java.lang.invoke.MethodHandles;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import gui_dialog.DL_ThongTinKhachHang;
 import java.lang.invoke.MethodHandles;
 import java.util.List;
@@ -17,10 +24,11 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
 
     private KhachHang_DAO kh_dao;
     private DefaultTableModel dtmKhachHang;
+    private ArrayList<KhachHang> customers;
 
     public Form_QuanLyKhachHang() {
         initComponents();
-         kh_dao = new KhachHang_DAO();
+        kh_dao = new KhachHang_DAO();
         dtmKhachHang = (DefaultTableModel) tblDSKH.getModel();
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
@@ -29,8 +37,42 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
             tblDSKH.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
         }
         DocDuLieu();
+//        loadTable(kh_dao.getalltbKhachHang());
 
     }
+
+//    public void DocDuLieu() {
+//        List<KhachHang> lists = kh_dao.getalltbKhachHang();
+//        for (KhachHang kh : lists) {
+//            dtmKhachHang.addRow(new Object[]{kh.getMaKH(), kh.getTenKH(), kh.getSdt(), kh.isGioitinh() ? "Nam" : "Nữ"});
+//        }
+//    }
+    
+    
+    public void loadTable(ArrayList<KhachHang> ds){
+        dtmKhachHang.setRowCount(0);//reset nd trong bang ve 0
+        if(ds == null){
+            clearJTable();
+            return;
+        }
+        clearJTable();
+        for(KhachHang kh : ds){
+            dtmKhachHang.addRow(new Object[]{kh.getMaKH(), kh.getTenKH(), kh.getSdt(), kh.isGioitinh() ? "Nam" : "Nữ"});
+        }
+    }
+
+    public void clearJTable(){
+        while(tblDSKH.getRowCount() > 0){
+            dtmKhachHang.removeRow(0);
+        }
+    }
+    
+    public void clearDataOnModel(){
+        DefaultTableModel dtm = (DefaultTableModel) tblDSKH.getModel();
+        dtm.getDataVector().removeAllElements();
+    }
+    
+
 
     public void DocDuLieu() {
         List<KhachHang> list = kh_dao.getalltbKhachHang();
@@ -65,6 +107,11 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
 
         btnTim.setBackground(new java.awt.Color(166, 208, 238));
         btnTim.setText("Tìm");
+        btnTim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlTraCuuLayout = new javax.swing.GroupLayout(pnlTraCuu);
         pnlTraCuu.setLayout(pnlTraCuuLayout);
@@ -175,9 +222,38 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        new DL_ThongTinKhachHang().setVisible(true);
-
+        DL_ThongTinKhachHang ttkh = new DL_ThongTinKhachHang();
+        ttkh.setVisible(true);
     }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
+        // TODO add your handling code here:
+        String sdtKH = txtTim.getText().trim();
+        if(!(sdtKH.length() > 0 && sdtKH.matches("\\d{10}"))){
+            CustomJOptionPane.showMessageDialog( "Số điện thoại phải gồm 10 số !!!");
+        }
+        else{
+            String maTim = txtTim.getText();
+            ArrayList<KhachHang> dsKHtim = null;
+            
+            for(KhachHang kh : kh_dao.getalltbKhachHang()){
+                if(kh.getSdt().equals(maTim)){
+                    dsKHtim = new ArrayList<KhachHang>();
+                    dsKHtim.add(kh);
+                }
+            }
+            
+            if(dsKHtim != null){
+                clearDataOnModel();
+                for(KhachHang kh : dsKHtim){
+                    dtmKhachHang.addRow(new Object[]{kh.getMaKH(), kh.getTenKH(), kh.getSdt(), kh.isGioitinh() ? "Nam" : "Nữ"});
+                }
+            }
+            else if (dsKHtim == null){
+                CustomJOptionPane.showMessageDialog("Không tìm thấy !!!");
+            }
+        }
+    }//GEN-LAST:event_btnTimActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

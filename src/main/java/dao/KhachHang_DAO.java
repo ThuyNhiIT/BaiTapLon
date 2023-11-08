@@ -229,8 +229,8 @@ public class KhachHang_DAO {
         int n = 0;
         
         try{
-          stmt = con.prepareStatement("INSERT INTO KhachHang (maKH, tenKH, SDT, GioiTinh) VALUES (?, ?, ?, ?)");
-
+            stmt = con.prepareStatement("update" + 
+                    "KhachHang set tenKH=?, SDT=?, GioiTinh=? where maKH=?");
             stmt.setString(1, kh.getTenKH());
             stmt.setString(2, kh.getSdt());
             stmt.setBoolean(3, kh.isGioitinh());

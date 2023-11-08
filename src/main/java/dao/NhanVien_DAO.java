@@ -49,7 +49,6 @@ public class NhanVien_DAO {
         return dsNV;
     }
     
-    
     public ArrayList<NhanVien> getNhanVienTheoMaNV(String id) {
         ArrayList<NhanVien> dsnv = new ArrayList<NhanVien>();
         ConnectDB.getInstance();
