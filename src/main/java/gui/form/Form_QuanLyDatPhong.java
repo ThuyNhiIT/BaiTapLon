@@ -7,7 +7,7 @@ import entity.LoaiPhong;
 import entity.PhongHat;
 import gui.component.Room;
 import gui.model.ModelRoom;
-import gui.swing.scrollbar.ScrollBarCustom;
+import gui.swing.ScrollBarCustom;
 import gui_dialog.DL_ThemPhong;
 import gui_dialog.DL_ThuePhong;
 import java.awt.FlowLayout;
