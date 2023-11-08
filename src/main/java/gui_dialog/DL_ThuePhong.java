@@ -238,28 +238,31 @@ public class DL_ThuePhong extends javax.swing.JFrame {
             if (!kh.isEmpty()) {
                 lblThongBao.setText("Tìm thấy thông tin khách hàng");
                 KhachHang khachHang = kh.get(0);
-                String tenKH = khachHang.getTenKH();
-                boolean gt = khachHang.isGioitinh();
-                // Gán thông tin vào các thành phần giao diện bên dưới
-                txtTenKH.setText(tenKH);
-                if (gt) {
-                    radNam.setSelected(true); // Nam
+                // Set the customer's name
+                txtTenKH.setText(khachHang.getTenKH());
+
+                // Set the gender radio buttons based on khachHang.isGioitinh()
+                if (khachHang.isGioitinh()) {
+                    radNam.setSelected(true); // Set the "Nam" radio button as selected
+                    radNu.setSelected(false); // Deselect the "Nữ" radio button
                 } else {
-                    radNu.setSelected(true); // Nữ
+                    radNam.setSelected(false); // Deselect the "Nam" radio button
+                    radNu.setSelected(true); // Set the "Nữ" radio button as selected
                 }
             } else {
                 lblThongBao.setText("Nhập lại số điện thoại hoặc thêm khách hàng bên dưới");
-                String maKH = phatSinhMaKH();
-                String tenKH = txtTenKH.getText();
-                String Sdt = txtSDT.getText();
-                Boolean gt = radNam.isSelected();
-                KhachHang addKh =new KhachHang(maKH, tenKH, Sdt, gt);
+
                 btnThuePhong.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        String maKH = phatSinhMaKH();
+                        String tenKH = txtTenKH.getText();
+                        System.out.println(tenKH);
+                        String Sdt = txtSDT.getText();
+                        Boolean gt = radNam.isSelected();
+                        KhachHang addKh = new KhachHang(maKH, tenKH, Sdt, gt);
                         kh_dao.addCustomer(addKh);
                     }
-
                 });
             }
         } catch (SQLException ex) {
@@ -267,14 +270,14 @@ public class DL_ThuePhong extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnKiemTraActionPerformed
 
-    public static void main(String args[]) {
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DL_ThuePhong().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new DL_ThuePhong().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.swing.RadiusButton btnKiemTra;

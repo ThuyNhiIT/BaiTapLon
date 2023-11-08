@@ -1,6 +1,5 @@
 package entity;
 
-import static java.util.Collections.list;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -77,11 +76,10 @@ public class KhachHang {
 
         this.gioiTinh = true;
     }
-
     public Object[] getObject(){
         return new Object[] {maKH, tenKH, sdt, gioiTinh};
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 7;
