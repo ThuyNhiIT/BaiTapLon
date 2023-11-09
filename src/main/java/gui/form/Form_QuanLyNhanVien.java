@@ -17,6 +17,32 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
         scr.setVerticalScrollBar(new ScrollBarTable());
         scr.setBorder(null);
         initComponents();
+<<<<<<< HEAD
+=======
+        nv_dao = new NhanVien_DAO();
+        dtmNhanVien = (DefaultTableModel) tblDSNV.getModel();
+
+//        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+//        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+//        for (int i = 0; i < tblDSNV.getColumnCount(); i++) {
+//            tblDSNV.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+//        }
+
+//        DocDuLieu();
+        loadTable(nv_dao.getalltbNhanVien());
+    }
+//    
+     public void loadTable(ArrayList<NhanVien> ds){
+        if(ds == null){
+            clearJTable();
+            return;
+        }
+        clearJTable();
+        for(NhanVien nhanVien : ds){
+            dtmNhanVien.addRow(new Object[] {nhanVien.getMaNV(), nhanVien.getTenNV(), nhanVien.isGioiTinh() ? "Nam" : "Nữ",
+                        nhanVien.getCCCD(), nhanVien.getSDT(), nhanVien.getDiaChi(), nhanVien.getCaLam(), nhanVien.getLoaiNV().getMaLoai()});
+        }
+>>>>>>> e0f2b38523396337036a76ca50766ace8ebbc817
     }
 
     @SuppressWarnings("unchecked")

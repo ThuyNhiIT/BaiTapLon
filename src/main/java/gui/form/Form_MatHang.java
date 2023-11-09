@@ -20,12 +20,12 @@ public class Form_MatHang extends javax.swing.JPanel {
     public Form_MatHang() {
         initComponents();
         mh_dao = new MatHang_DAO();
-         dtmMatHang = (DefaultTableModel) tblMatHang.getModel();
-          DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-         for (int i = 0; i < tblMatHang.getColumnCount(); i++) {
-            tblMatHang.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-        }
+        dtmMatHang = (DefaultTableModel) tblMatHang.getModel();
+//          DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+//        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+//         for (int i = 0; i < tblMatHang.getColumnCount(); i++) {
+//            tblMatHang.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+//        }
         DocDuLieu();
     }
      public void DocDuLieu() {
