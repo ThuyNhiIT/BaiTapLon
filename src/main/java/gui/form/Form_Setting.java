@@ -86,14 +86,12 @@ public class Form_Setting extends javax.swing.JPanel {
 //        new Form_DoiMatKhau().setVisible(true);
     }//GEN-LAST:event_DoiMKActionPerformed
 
-<<<<<<< HEAD
-=======
+
     private void DangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DangXuatActionPerformed
         // TODO add your handling code here:
      
     }//GEN-LAST:event_DangXuatActionPerformed
 
->>>>>>> 3e1327a94272f0ea69970128b3e16bce168eac07
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DoiMK;

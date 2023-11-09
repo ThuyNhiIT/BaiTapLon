@@ -6,6 +6,7 @@ package gui_dialog;
  */
 public class DL_ThemNV extends javax.swing.JFrame {
 
+    
     public DL_ThemNV() {
         initComponents();
         setLocationRelativeTo(null);

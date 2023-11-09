@@ -24,18 +24,18 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
     
     private KhachHang_DAO kh_dao;
     private DefaultTableModel dtmKhachHang;
-    private ArrayList<KhachHang> customers;
     
     public Form_QuanLyKhachHang() {
         initComponents();
         kh_dao = new KhachHang_DAO();
         dtmKhachHang = (DefaultTableModel) tblDSKH.getModel();
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         
-        for (int i = 0; i < tblDSKH.getColumnCount(); i++) {
-            tblDSKH.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-        }
+//        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+//        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+//        
+//        for (int i = 0; i < tblDSKH.getColumnCount(); i++) {
+//            tblDSKH.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+//        }
         DocDuLieu();
 //        loadTable(kh_dao.getalltbKhachHang());
 

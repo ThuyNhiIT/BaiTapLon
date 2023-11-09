@@ -59,7 +59,7 @@ CREATE TABLE DichVu (
 );
 GO
 
-<<<<<<< HEAD
+
 INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV001', N'Bia Heineken lon 330ml', 'MH001');
 INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV002', N'Bia Heineken chai 330ml', 'MH002');
 INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV003', N'Bia Tiger lon 330ml', 'MH003');
