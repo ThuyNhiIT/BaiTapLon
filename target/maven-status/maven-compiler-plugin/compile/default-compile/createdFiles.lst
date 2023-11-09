@@ -1,10 +1,13 @@
 gui\event\EventShowPopUpMenu.class
 gui_dialog\DL_CapNhatMatHang$2.class
+<<<<<<< HEAD
 gui\model\ModelRoom.class
 gui\form\Form_QuanLyPhongHat.class
 gui\swing\scrollbar\ScrollBarCustomUI$1.class
 gui\swing\scrollbar\ModernScrollBarUI.class
 gui\form\MainForm.class
+=======
+>>>>>>> bdaefa4e2409f583cb0740e3c2c4c94dc931979a
 gui_dialog\DL_ThongTinKhachHang$1.class
 gui\form\Form_QuanLyNhanVien$3.class
 gui_dialog\DL_ThanhToan.class
@@ -24,6 +27,7 @@ gui\swing\PanelPopUp.class
 gui\swing\ButtonGradient.class
 gui_dialog\DL_DatPhong$1.class
 gui_dialog\DL_ThemNV$3.class
+<<<<<<< HEAD
 gui_dialog\DL_ThuePhong$4.class
 gui\form\Form_QuanLiHoaDon.class
 gui\form\Form_QuanLyKhachHang$1.class
@@ -37,6 +41,12 @@ gui\form\Form_Login$3.class
 gui\swing\MenuAnimation.class
 gui\swing\PopupMenu$3.class
 gui\swing\scrollbar\TableCustom.class
+=======
+<<<<<<< HEAD
+=======
+gui\swing\scrollbar\HoverIndex.class
+>>>>>>> d6c0b61e4e89b3581d993c775ba802f034c37d4a
+>>>>>>> bdaefa4e2409f583cb0740e3c2c4c94dc931979a
 gui\component\Header.class
 gui\model\ModelMenu.class
 gui\swing\scrollbar\TableHeaderCustomCellRender.class
@@ -46,6 +56,16 @@ gui\form\Form_QuanLyKhachHang$2.class
 gui\form\ProcessesLoading.class
 gui\swing\CustomJTextField.class
 gui_dialog\DL_CapNhatMatHang$1.class
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+gui\swing\CustomJOptionPane$RoundedGradientButton.class
+=======
+<<<<<<< HEAD
+>>>>>>> a996315c7c3093f30019167af6039564bb2180d4
+>>>>>>> bdaefa4e2409f583cb0740e3c2c4c94dc931979a
 gui\form\Form_QuanLyDatPhong$3.class
 gui\swing\CustomJOptionPane$RoundedGradientButton.class
 gui\form\ProcessesLoading$1.class
@@ -58,6 +78,15 @@ gui\main\Main$5.class
 gui\swing\Button$1.class
 gui\form\Form_Login$2.class
 gui\swing\ActionButtonTable.class
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 3e1327a94272f0ea69970128b3e16bce168eac07
+>>>>>>> d6c0b61e4e89b3581d993c775ba802f034c37d4a
+>>>>>>> a996315c7c3093f30019167af6039564bb2180d4
+>>>>>>> bdaefa4e2409f583cb0740e3c2c4c94dc931979a
 gui_dialog\DL_SuaNV$4.class
 gui\swing\scrollbar\TextAreaCellRenderer.class
 gui\event\EventMenuSelected.class
@@ -66,6 +95,7 @@ entity\KhachHang.class
 gui\form\Form_QuanLyDatPhong.class
 entity\HoaDon.class
 gui\form\Form_QuanLyKhachHang$3.class
+<<<<<<< HEAD
 entity\ChiTietHoaDonPhong.class
 gui_dialog\DL_ThongTinDatPhong$3.class
 gui\swing\scrollbar\ScrollBarWin11UI.class
@@ -74,6 +104,12 @@ gui\swing\scrollbar\ScrollBarCustomUI$ScrollButton$1.class
 gui\swing\scrollbar\TableCustom$2.class
 gui_dialog\DL_SuaPhong.class
 gui\form\Form_Login$1.class
+=======
+<<<<<<< HEAD
+=======
+gui\swing\scrollbar\ScrollBarCustomUI$ScrollButton$1.class
+>>>>>>> d6c0b61e4e89b3581d993c775ba802f034c37d4a
+>>>>>>> bdaefa4e2409f583cb0740e3c2c4c94dc931979a
 entity\LoaiPhong.class
 gui_dialog\DL_ThemMatHang.class
 entity\LoaiNhanVien.class
@@ -91,18 +127,22 @@ connectDB\ConnectDB.class
 gui\swing\scrollbar\ScrollPaneWin11.class
 gui\swing\ActionButton.class
 gui_dialog\DL_SuaNV$1.class
+<<<<<<< HEAD
 gui_dialog\DL_DoiMatKhau$1.class
 gui\swing\PanelAction.class
 gui\swing\MenuItem.class
 gui_dialog\DL_ThemPhong.class
 gui\form\Form_QuenMatKhau.class
 gui_dialog\DL_ThuePhong$6.class
+=======
+>>>>>>> bdaefa4e2409f583cb0740e3c2c4c94dc931979a
 gui\Application$1$2.class
 dao\LoaiNV_DAO.class
 gui\swing\tabbed\MaterialTabbed$MaterialTabbedUI$1.class
 gui_dialog\DL_CapNhatMatHang$3.class
 gui_dialog\DL_ThemDichVu$2.class
 gui_dialog\DL_SuaNV$2.class
+<<<<<<< HEAD
 gui_dialog\DL_ThuePhong.class
 gui\swing\scrollbar\ScrollBarCustomUI$ScrollButton.class
 gui\main\Main$1.class
@@ -112,6 +152,8 @@ gui\form\Form_DichVu.class
 gui_dialog\DL_ThemPhong$4.class
 gui_dialog\DL_DoiMatKhau.class
 gui_dialog\DL_DatPhong.class
+=======
+>>>>>>> bdaefa4e2409f583cb0740e3c2c4c94dc931979a
 gui\Application$1$1.class
 gui_dialog\DL_ThuePhong$5.class
 gui\component\Menu$1.class
@@ -124,6 +166,17 @@ entity\ChiTietHoaDonDV.class
 gui_dialog\DL_ThemPhong$5.class
 gui\main\Main.class
 gui\swing\MenuButton$1.class
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+gui\swing\RoundedButtonUI_v1.class
+gui\form\Form_QuanLyNhanVien.class
+=======
+<<<<<<< HEAD
+>>>>>>> a996315c7c3093f30019167af6039564bb2180d4
+>>>>>>> bdaefa4e2409f583cb0740e3c2c4c94dc931979a
 gui\main\Main$2.class
 gui\swing\scrollbar\TableCustom$3.class
 gui\component\Room.class
@@ -133,6 +186,15 @@ gui_dialog\DL_DoiMatKhau$2.class
 gui_dialog\DL_SuaPhong$1.class
 gui\form\Form_QuanLyNhanVien.class
 gui_dialog\DL_ThemPhong$2.class
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 3e1327a94272f0ea69970128b3e16bce168eac07
+>>>>>>> d6c0b61e4e89b3581d993c775ba802f034c37d4a
+>>>>>>> a996315c7c3093f30019167af6039564bb2180d4
+>>>>>>> bdaefa4e2409f583cb0740e3c2c4c94dc931979a
 dao\NhanVien_DAO.class
 gui\form\Form_Login.class
 gui\form\Form_Setting.class
@@ -160,7 +222,10 @@ gui\form\Form_QuanLyPhongHat$1.class
 gui\form\Form_QuenMatKhau$1.class
 gui_dialog\DL_ThuePhong$2.class
 gui\swing\scrollbar\ScrollBarCustom.class
+<<<<<<< HEAD
 gui\swing\scrollbar\ScrollBarWin11UI$1.class
+=======
+>>>>>>> bdaefa4e2409f583cb0740e3c2c4c94dc931979a
 dao\MatHang_DAO.class
 gui_dialog\DL_ThemMatHang$2.class
 gui\Application$1.class
@@ -227,5 +292,8 @@ gui\form\Form_DichVu$2.class
 gui\form\Form_ThongKeDoanhThu$1.class
 gui\form\Form_Login$5.class
 gui\swing\RadiusButton$1.class
+<<<<<<< HEAD
 gui\swing\scrollbar\ScrollBarCustomUI.class
 gui\form\Form_QuanLyDatPhong$1$1.class
+=======
+>>>>>>> bdaefa4e2409f583cb0740e3c2c4c94dc931979a

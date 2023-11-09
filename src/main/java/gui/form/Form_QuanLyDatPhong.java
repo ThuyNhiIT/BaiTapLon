@@ -7,7 +7,7 @@ import entity.LoaiPhong;
 import entity.PhongHat;
 import gui.component.Room;
 import gui.model.ModelRoom;
-import gui.swing.scrollbar.ScrollBarCustom;
+import gui.swing.ScrollBarCustom;
 import gui_dialog.DL_ThemPhong;
 import gui_dialog.DL_ThuePhong;
 import java.awt.FlowLayout;
@@ -38,8 +38,12 @@ public class Form_QuanLyDatPhong extends javax.swing.JPanel {
 
     public Form_QuanLyDatPhong() {
         initComponents();
-        scrollPhongTrong.getViewport().setOpaque(false);
-        scrollPhongTrong.setVerticalScrollBar(new ScrollBarCustom());
+        jScrollPane1.getViewport().setOpaque(false);
+        jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
+        jScrollPane2.getViewport().setOpaque(false);
+        jScrollPane2.setVerticalScrollBar(new ScrollBarCustom());
+        jScrollPane3.getViewport().setOpaque(false);
+        jScrollPane3.setVerticalScrollBar(new ScrollBarCustom());
         ph_dao = new PhongHat_DAO();
         phongTrong();
         phongDangSuDung();
@@ -210,17 +214,17 @@ public class Form_QuanLyDatPhong extends javax.swing.JPanel {
     private void initComponents() {
 
         pnlCover = new javax.swing.JPanel();
-        materialTabbed2 = new gui.swing.tabbed.MaterialTabbed();
-        scrollPhongTrong = new javax.swing.JScrollPane();
+        tabbed = new gui.swing.tabbed.MaterialTabbed();
+        jScrollPane1 = new javax.swing.JScrollPane();
         pnlPhongTrong = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
         pnlPhongDangSuDung = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
         pnlPhongCho = new javax.swing.JPanel();
 
         pnlCover.setBackground(new java.awt.Color(255, 255, 255));
 
-        materialTabbed2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        scrollPhongTrong.setBorder(null);
+        jScrollPane1.setBorder(null);
 
         pnlPhongTrong.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -232,12 +236,14 @@ public class Form_QuanLyDatPhong extends javax.swing.JPanel {
         );
         pnlPhongTrongLayout.setVerticalGroup(
             pnlPhongTrongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 531, Short.MAX_VALUE)
+            .addGap(0, 697, Short.MAX_VALUE)
         );
 
-        scrollPhongTrong.setViewportView(pnlPhongTrong);
+        jScrollPane1.setViewportView(pnlPhongTrong);
 
-        materialTabbed2.addTab("Phòng Trống", scrollPhongTrong);
+        tabbed.addTab("Phòng trống", jScrollPane1);
+
+        jScrollPane2.setBorder(null);
 
         pnlPhongDangSuDung.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -245,14 +251,18 @@ public class Form_QuanLyDatPhong extends javax.swing.JPanel {
         pnlPhongDangSuDung.setLayout(pnlPhongDangSuDungLayout);
         pnlPhongDangSuDungLayout.setHorizontalGroup(
             pnlPhongDangSuDungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1043, Short.MAX_VALUE)
+            .addGap(0, 1041, Short.MAX_VALUE)
         );
         pnlPhongDangSuDungLayout.setVerticalGroup(
             pnlPhongDangSuDungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 531, Short.MAX_VALUE)
+            .addGap(0, 695, Short.MAX_VALUE)
         );
 
-        materialTabbed2.addTab("Phòng đang sử dụng", pnlPhongDangSuDung);
+        jScrollPane2.setViewportView(pnlPhongDangSuDung);
+
+        tabbed.addTab("Phòng đang sử dụng", jScrollPane2);
+
+        jScrollPane3.setBorder(null);
 
         pnlPhongCho.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -260,14 +270,16 @@ public class Form_QuanLyDatPhong extends javax.swing.JPanel {
         pnlPhongCho.setLayout(pnlPhongChoLayout);
         pnlPhongChoLayout.setHorizontalGroup(
             pnlPhongChoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1043, Short.MAX_VALUE)
+            .addGap(0, 1041, Short.MAX_VALUE)
         );
         pnlPhongChoLayout.setVerticalGroup(
             pnlPhongChoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 531, Short.MAX_VALUE)
+            .addGap(0, 695, Short.MAX_VALUE)
         );
 
-        materialTabbed2.addTab("Phòng chờ", pnlPhongCho);
+        jScrollPane3.setViewportView(pnlPhongCho);
+
+        tabbed.addTab("Phòng chờ", jScrollPane3);
 
         javax.swing.GroupLayout pnlCoverLayout = new javax.swing.GroupLayout(pnlCover);
         pnlCover.setLayout(pnlCoverLayout);
@@ -275,15 +287,15 @@ public class Form_QuanLyDatPhong extends javax.swing.JPanel {
             pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCoverLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(materialTabbed2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tabbed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pnlCoverLayout.setVerticalGroup(
             pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCoverLayout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(materialTabbed2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(5, 5, 5))
+                .addGap(62, 62, 62)
+                .addComponent(tabbed, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -300,11 +312,13 @@ public class Form_QuanLyDatPhong extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private gui.swing.tabbed.MaterialTabbed materialTabbed2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JPanel pnlCover;
     private javax.swing.JPanel pnlPhongCho;
     private javax.swing.JPanel pnlPhongDangSuDung;
     private javax.swing.JPanel pnlPhongTrong;
-    private javax.swing.JScrollPane scrollPhongTrong;
+    private gui.swing.tabbed.MaterialTabbed tabbed;
     // End of variables declaration//GEN-END:variables
 }

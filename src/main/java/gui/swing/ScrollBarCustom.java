@@ -1,4 +1,4 @@
-package gui.swing.scrollbar;
+package gui.swing;
 
 import java.awt.Color;
 import java.awt.Dimension;
