@@ -30,23 +30,13 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
         kh_dao = new KhachHang_DAO();
         dtmKhachHang = (DefaultTableModel) tblDSKH.getModel();
         
-//        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-//        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-//        
-//        for (int i = 0; i < tblDSKH.getColumnCount(); i++) {
-//            tblDSKH.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-//        }
+
         DocDuLieu();
-//        loadTable(kh_dao.getalltbKhachHang());
+
 
     }
 
-//    public void DocDuLieu() {
-//        List<KhachHang> lists = kh_dao.getalltbKhachHang();
-//        for (KhachHang kh : lists) {
-//            dtmKhachHang.addRow(new Object[]{kh.getMaKH(), kh.getTenKH(), kh.getSdt(), kh.isGioitinh() ? "Nam" : "Nữ"});
-//        }
-//    }
+
     public void loadTable(ArrayList<KhachHang> ds) {
         dtmKhachHang.setRowCount(0);//reset nd trong bang ve 0
         if (ds == null) {

@@ -1,14 +1,21 @@
 package gui.form;
 
+import dao.NhanVien_DAO;
+import entity.NhanVien;
 import gui.swing.scrollbar.ScrollBarTable;
 import gui_dialog.DL_SuaNV;
 import gui_dialog.DL_ThemNV;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author HO MINH HAU
  */
 public class Form_QuanLyNhanVien extends javax.swing.JPanel {
+
+    private final NhanVien_DAO nv_dao;
+    private final DefaultTableModel dtmNhanVien;
 
     public Form_QuanLyNhanVien() {
 
@@ -17,8 +24,8 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
         scr.setVerticalScrollBar(new ScrollBarTable());
         scr.setBorder(null);
         initComponents();
-<<<<<<< HEAD
-=======
+
+
         nv_dao = new NhanVien_DAO();
         dtmNhanVien = (DefaultTableModel) tblDSNV.getModel();
 
@@ -34,15 +41,15 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
 //    
      public void loadTable(ArrayList<NhanVien> ds){
         if(ds == null){
-            clearJTable();
+//            clearJTable();
             return;
         }
-        clearJTable();
+//        clearJTable();
         for(NhanVien nhanVien : ds){
             dtmNhanVien.addRow(new Object[] {nhanVien.getMaNV(), nhanVien.getTenNV(), nhanVien.isGioiTinh() ? "Nam" : "Nữ",
                         nhanVien.getCCCD(), nhanVien.getSDT(), nhanVien.getDiaChi(), nhanVien.getCaLam(), nhanVien.getLoaiNV().getMaLoai()});
         }
->>>>>>> e0f2b38523396337036a76ca50766ace8ebbc817
+
     }
 
     @SuppressWarnings("unchecked")
@@ -51,9 +58,6 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
 
         pnlNhanVien = new javax.swing.JPanel();
         pnlHeader = new javax.swing.JPanel();
-        btnTim = new gui.swing.RadiusButton();
-        btnThem = new gui.swing.RadiusButton();
-        btnSua = new gui.swing.RadiusButton();
         txtTim = new javax.swing.JTextField();
         cmb = new javax.swing.JComboBox<>();
         lblDSNV = new javax.swing.JLabel();
@@ -68,27 +72,6 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
         pnlHeader.setBackground(new java.awt.Color(235, 249, 249));
         pnlHeader.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnTim.setBackground(new java.awt.Color(166, 208, 238));
-        btnTim.setText("Tìm");
-
-        btnThem.setBackground(new java.awt.Color(41, 173, 86));
-        btnThem.setForeground(new java.awt.Color(255, 255, 255));
-        btnThem.setText("Thêm");
-        btnThem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemActionPerformed(evt);
-            }
-        });
-
-        btnSua.setBackground(new java.awt.Color(205, 13, 13));
-        btnSua.setForeground(new java.awt.Color(255, 255, 255));
-        btnSua.setText("Sửa");
-        btnSua.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSuaActionPerformed(evt);
-            }
-        });
-
         cmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout pnlHeaderLayout = new javax.swing.GroupLayout(pnlHeader);
@@ -96,12 +79,7 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
         pnlHeaderLayout.setHorizontalGroup(
             pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlHeaderLayout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnSua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                .addGap(194, 194, 194)
                 .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(89, 89, 89)
                 .addComponent(cmb, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -112,14 +90,9 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
             .addGroup(pnlHeaderLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         lblDSNV.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -243,9 +216,6 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private gui.swing.RadiusButton btnSua;
-    private gui.swing.RadiusButton btnThem;
-    private gui.swing.RadiusButton btnTim;
     private javax.swing.JComboBox<String> cmb;
     private javax.swing.JLabel lblDSNV;
     private javax.swing.JLabel lblTong;

@@ -2,7 +2,9 @@ package gui.form;
 
 import dao.MatHang_DAO;
 import entity.MatHang;
+import gui_dialog.DL_CapNhatMatHang;
 import gui_dialog.DL_ThemMatHang;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -21,18 +23,38 @@ public class Form_MatHang extends javax.swing.JPanel {
         initComponents();
         mh_dao = new MatHang_DAO();
         dtmMatHang = (DefaultTableModel) tblMatHang.getModel();
-//          DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-//        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-//         for (int i = 0; i < tblMatHang.getColumnCount(); i++) {
-//            tblMatHang.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-//        }
         DocDuLieu();
+        System.out.println("BBBB");
     }
-     public void DocDuLieu() {
+
+    public void DocDuLieu() {
         List<MatHang> list = mh_dao.getalltbMatHang();
         for (MatHang mh : list) {
+            dtmMatHang.addRow(new Object[]{mh.getMaMH(), mh.getTenMH(), mh.getGia(), mh.isTrangThai()? "Còn hàng" : "Hết hàng"});
+        }
+    }
+
+    public void clearJTable() {
+        while (tblMatHang.getRowCount() > 0) {
+            dtmMatHang.removeRow(0);
+        }
+    }
+
+    public void loadTable(ArrayList<MatHang> ds) {
+        dtmMatHang.setRowCount(0);
+        if (ds == null) {
+            clearJTable();
+            return;
+        }
+        clearJTable();
+        for (MatHang mh : ds) {
             dtmMatHang.addRow(new Object[]{mh.getMaMH(), mh.getTenMH(), mh.getGia()});
         }
+    }
+
+    public void clearDataOnModel() {
+        DefaultTableModel dtm = (DefaultTableModel) tblMatHang.getModel();
+        dtm.getDataVector().removeAllElements();
     }
 
     @SuppressWarnings("unchecked")
@@ -46,6 +68,7 @@ public class Form_MatHang extends javax.swing.JPanel {
         btnTim = new gui.swing.RadiusButton();
         txtTim = new javax.swing.JTextField();
         btnThem = new gui.swing.RadiusButton();
+        btnSua = new gui.swing.RadiusButton();
         scr = new javax.swing.JScrollPane();
         tblMatHang = new javax.swing.JTable();
 
@@ -96,6 +119,13 @@ public class Form_MatHang extends javax.swing.JPanel {
             }
         });
 
+        btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlHeaderLayout = new javax.swing.GroupLayout(pnlHeader);
         pnlHeader.setLayout(pnlHeaderLayout);
         pnlHeaderLayout.setHorizontalGroup(
@@ -103,7 +133,9 @@ public class Form_MatHang extends javax.swing.JPanel {
             .addGroup(pnlHeaderLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(pnlTim, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 459, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 366, Short.MAX_VALUE)
+                .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63)
                 .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(70, 70, 70))
         );
@@ -116,7 +148,9 @@ public class Form_MatHang extends javax.swing.JPanel {
                         .addComponent(pnlTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlHeaderLayout.createSequentialGroup()
                         .addGap(37, 37, 37)
-                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -125,11 +159,11 @@ public class Form_MatHang extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã mặt hàng", "Tên mặt hàng", "Giá", "Hành động"
+                "Mã mặt hàng", "Tên mặt hàng", "Giá", "Trạng thái", "Hành động"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, true, true, false
+                true, true, true, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -174,8 +208,13 @@ public class Form_MatHang extends javax.swing.JPanel {
         new DL_ThemMatHang().setVisible(true);
     }//GEN-LAST:event_btnThemActionPerformed
 
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+       new DL_CapNhatMatHang().setVisible(true);
+    }//GEN-LAST:event_btnSuaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private gui.swing.RadiusButton btnSua;
     private gui.swing.RadiusButton btnThem;
     private gui.swing.RadiusButton btnTim;
     private javax.swing.JLabel lblTim;
