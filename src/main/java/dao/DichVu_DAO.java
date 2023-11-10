@@ -27,7 +27,7 @@ public class DichVu_DAO {
             ConnectDB db = ConnectDB.getInstance();
             db.connect();
             Connection con = db.getConnection();
-            String sql = "Select *from DichVu";
+            String sql = "SELECT *FROM DichVu";
             statement = con.createStatement();
 
             // Thực thi câu lệnh SQL trả về đối tượng ResultSet
@@ -36,7 +36,11 @@ public class DichVu_DAO {
             while (rs.next()) {
                 String maDV = rs.getString(1);
                 String tenDV = rs.getString(2);
-                DichVu dv = new DichVu(maDV, tenDV);
+                String maMH = rs.getString(3);
+//                String tenMH = rs.getString(4);
+//                Double gia = rs.getDouble(4);
+                DichVu dv = new DichVu(maDV, tenDV, maMH);
+
                 dsDV.add(dv);
             }
         } catch (Exception e) {
@@ -61,7 +65,8 @@ public class DichVu_DAO {
             while (rs.next()) {
                 String maDV = rs.getString(1);
                 String tenDV = rs.getString(2);
-                DichVu dv = new DichVu(maDV, tenDV);
+                String maMH = rs.getString(3);
+                DichVu dv = new DichVu(maDV, tenDV, maMH);
                 dsDV.add(dv);
             }
         } catch (SQLException e) {
@@ -84,9 +89,11 @@ public class DichVu_DAO {
         int n = 0;
 
         try {
-            stmt = con.prepareStatement("insert into" + "DichVu(maDV, tenDV) values (?, ?)");
-            stmt.setString(1, dv.getTenDV());
-            stmt.setString(2, dv.getMaDV());
+            stmt = con.prepareStatement("insert into DichVu(maDV, tenDV) values (?, ?)");
+            stmt.setString(2, dv.getTenDV());
+            stmt.setString(1, dv.getMaDV());
+//            stmt.setString(3, dv.getMaMH());
+
             n = stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

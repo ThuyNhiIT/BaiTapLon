@@ -1,6 +1,11 @@
 package gui.form;
 
+import dao.DichVu_DAO;
+import entity.DichVu;
+import entity.MatHang;
 import gui_dialog.DL_ThemDichVu;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -8,8 +13,22 @@ import gui_dialog.DL_ThemDichVu;
  */
 public class Form_DichVu extends javax.swing.JPanel {
 
+    private DichVu_DAO dv_dao;
+    private DefaultTableModel dtmDichVu;
+
     public Form_DichVu() {
         initComponents();
+        dv_dao = new DichVu_DAO();
+        dtmDichVu = (DefaultTableModel) tblDichVu.getModel();
+        DocDuLieu();
+        System.out.println("Test");
+    }
+
+    public void DocDuLieu() {
+        List<DichVu> list = dv_dao.getalltbDichVu();
+        for (DichVu dv : list) {
+            dtmDichVu.addRow(new Object[]{dv.getMaDV(), dv.getTenDV(), dv.getMaMH(), dv.getGia()});
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -18,7 +37,7 @@ public class Form_DichVu extends javax.swing.JPanel {
 
         pnlDichVu = new javax.swing.JPanel();
         scr = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblDichVu = new javax.swing.JTable();
         pnlHeader = new javax.swing.JPanel();
         pnlTraCuu = new javax.swing.JPanel();
         lblTimKiem = new javax.swing.JLabel();
@@ -30,55 +49,15 @@ public class Form_DichVu extends javax.swing.JPanel {
 
         pnlDichVu.setBackground(new java.awt.Color(235, 249, 249));
 
-        jTable1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblDichVu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Mã dịch vụ", "Tên dịch vụ", "Số lượng", "Đơn giá", "Hành động"
+                "Mã dịch vụ", "Tên dịch vụ", "Mã mặt hàng", "Đơn giá"
             }
         ));
-        scr.setViewportView(jTable1);
+        scr.setViewportView(tblDichVu);
 
         pnlHeader.setBackground(new java.awt.Color(235, 249, 249));
         pnlHeader.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -211,19 +190,19 @@ public class Form_DichVu extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbActionPerformed
-    
+
     }//GEN-LAST:event_cmbActionPerformed
 
     private void txtTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimActionPerformed
-       
+
     }//GEN-LAST:event_txtTimActionPerformed
 
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
-     
+
     }//GEN-LAST:event_btnTimActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-       new DL_ThemDichVu().setVisible(true);
+        new DL_ThemDichVu().setVisible(true);
     }//GEN-LAST:event_btnThemActionPerformed
 
 
@@ -231,13 +210,13 @@ public class Form_DichVu extends javax.swing.JPanel {
     private gui.swing.RadiusButton btnThem;
     private gui.swing.RadiusButton btnTim;
     private javax.swing.JComboBox<String> cmb;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblDKTraCuu;
     private javax.swing.JLabel lblTimKiem;
     private javax.swing.JPanel pnlDichVu;
     private javax.swing.JPanel pnlHeader;
     private javax.swing.JPanel pnlTraCuu;
     private javax.swing.JScrollPane scr;
+    private javax.swing.JTable tblDichVu;
     private javax.swing.JTextField txtTim;
     // End of variables declaration//GEN-END:variables
 }

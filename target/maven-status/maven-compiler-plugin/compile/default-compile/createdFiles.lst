@@ -106,9 +106,11 @@ gui\swing\RoundedButtonUI_v2.class
 gui_dialog\DL_DichVu$1.class
 entity\ChiTietHoaDonDV.class
 gui_dialog\DL_ThemPhong$5.class
+gui_dialog\DL_CapNhatMatHang$4.class
 gui\main\Main.class
 gui\swing\MenuButton$1.class
 gui\main\Main$2.class
+gui_dialog\DL_ThemDichVu$3.class
 gui\component\Room.class
 gui\main\Main$3.class
 gui\swing\ModernScrollBarUI$ScrollBarButton.class
@@ -193,6 +195,7 @@ gui\swing\TableActionEvent.class
 gui\swing\RadiusButton$2.class
 gui_dialog\DL_ThemMatHang$6.class
 gui\swing\ModernScrollBarUI.class
+gui\form\Form_MatHang$4.class
 gui_dialog\DL_DatPhong$3.class
 gui\form\Form_QuanLyKhachHang.class
 gui\swing\CustomJOptionPane$1.class

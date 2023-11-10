@@ -7,6 +7,7 @@ import gui_dialog.DL_ThemMatHang;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,7 +31,7 @@ public class Form_MatHang extends javax.swing.JPanel {
     public void DocDuLieu() {
         List<MatHang> list = mh_dao.getalltbMatHang();
         for (MatHang mh : list) {
-            dtmMatHang.addRow(new Object[]{mh.getMaMH(), mh.getTenMH(), mh.getGia(), mh.isTrangThai()? "Còn hàng" : "Hết hàng"});
+            dtmMatHang.addRow(new Object[]{mh.getMaMH(), mh.getTenMH(), mh.getGia(), mh.isTrangThai() ? "Còn hàng" : "Hết hàng"});
         }
     }
 
@@ -69,6 +70,7 @@ public class Form_MatHang extends javax.swing.JPanel {
         txtTim = new javax.swing.JTextField();
         btnThem = new gui.swing.RadiusButton();
         btnSua = new gui.swing.RadiusButton();
+        btnXoa = new gui.swing.RadiusButton();
         scr = new javax.swing.JScrollPane();
         tblMatHang = new javax.swing.JTable();
 
@@ -126,6 +128,13 @@ public class Form_MatHang extends javax.swing.JPanel {
             }
         });
 
+        btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlHeaderLayout = new javax.swing.GroupLayout(pnlHeader);
         pnlHeader.setLayout(pnlHeaderLayout);
         pnlHeaderLayout.setHorizontalGroup(
@@ -133,8 +142,10 @@ public class Form_MatHang extends javax.swing.JPanel {
             .addGroup(pnlHeaderLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(pnlTim, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 366, Short.MAX_VALUE)
-                .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
+                .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63)
                 .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(70, 70, 70))
@@ -150,7 +161,8 @@ public class Form_MatHang extends javax.swing.JPanel {
                         .addGap(37, 37, 37)
                         .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -209,14 +221,59 @@ public class Form_MatHang extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-       new DL_CapNhatMatHang().setVisible(true);
+        mh_dao = new MatHang_DAO();
+        if (tblMatHang.getSelectedRowCount() > 0) {
+            if (JOptionPane.showConfirmDialog(this, "Xác nhận sửa mặt hàng đã chọn?", "Warring", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
+                int[] selectedRows = tblMatHang.getSelectedRows();
+                System.out.println("Chọn xong");
+                new DL_CapNhatMatHang().setVisible(true);
+//                for (int i = selectedRows.length - 1; i >= 0; i--) {
+//                    List<MatHang> mhs = mh_dao.getalltbMatHang();
+//                    MatHang mh = mhs.get(selectedRows[i]);
+//                    mh_dao.editMatHang(mh);
+//                }
+
+                clearJTable();
+                DocDuLieu();
+                System.out.println("Load xong");
+                JOptionPane.showMessageDialog(this, "Sửa thành công");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Chọn dòng cần sửa!");
+
+        }
+
+//                DL_KiemTravsAddKH kiemTraVsAddKH = new DL_KiemTravsAddKH((java.awt.Frame) SwingUtilities.getWindowAncestor((Component) e.getSource()), true);
+//                kiemTraVsAddKH.setLocationRelativeTo(Form_QuanLyDatPhong.this);
     }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        mh_dao = new MatHang_DAO();
+        if (tblMatHang.getSelectedRowCount() > 0) {
+            if (JOptionPane.showConfirmDialog(this, "Xác nhận xóa mặt hàng đã chọn?", "Warring", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
+                int[] selectedRows = tblMatHang.getSelectedRows();
+                for (int i = selectedRows.length - 1; i >= 0; i--) {
+                    List<MatHang> mhs = mh_dao.getalltbMatHang();
+                    MatHang mh = mhs.get(selectedRows[i]);
+                    String maMH = mh.getMaMH();
+                    mh_dao.DeleteMatHang(maMH);
+                }
+                clearJTable();
+                DocDuLieu();
+                JOptionPane.showMessageDialog(this, "Xóa thành công");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Chọn dòng cần xóa!");
+        }
+
+    }//GEN-LAST:event_btnXoaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.swing.RadiusButton btnSua;
     private gui.swing.RadiusButton btnThem;
     private gui.swing.RadiusButton btnTim;
+    private gui.swing.RadiusButton btnXoa;
     private javax.swing.JLabel lblTim;
     private javax.swing.JPanel pnlHeader;
     private javax.swing.JPanel pnlMatHang;
