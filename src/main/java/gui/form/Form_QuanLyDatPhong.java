@@ -44,12 +44,6 @@ public class Form_QuanLyDatPhong extends javax.swing.JPanel {
         jScrollPane3.getViewport().setOpaque(false);
         jScrollPane3.setVerticalScrollBar(new ScrollBarCustom());
         ph_dao = new PhongHat_DAO();
-        ConnectDB db = ConnectDB.getInstance();
-        try {
-            db.connect();
-        } catch (SQLException ex) {
-            Logger.getLogger(Form_QuanLyDatPhong.class.getName()).log(Level.SEVERE, null, ex);
-        }
         phongTrong();
         phongDangSuDung();
         phongCho();
@@ -95,7 +89,12 @@ public class Form_QuanLyDatPhong extends javax.swing.JPanel {
     public void phongTrong() {
         // Xóa tất cả phòng trên giao diện trước khi thêm mới
         pnlPhongTrong.removeAll();
-        
+        ConnectDB db = ConnectDB.getInstance();
+        try {
+            db.connect();
+        } catch (SQLException ex) {
+            Logger.getLogger(Form_QuanLyDatPhong.class.getName()).log(Level.SEVERE, null, ex);
+        }
         // Lấy danh sách phòng có trạng thái "Trong" từ cơ sở dữ liệu
         ArrayList<PhongHat> phongTrongList = ph_dao.getPhongByTinhTrang("Trong");
         Icon icon;
@@ -146,7 +145,11 @@ public class Form_QuanLyDatPhong extends javax.swing.JPanel {
         // Xóa tất cả phòng trên giao diện trước khi thêm mới
         pnlPhongDangSuDung.removeAll();
         ConnectDB db = ConnectDB.getInstance();
-       
+        try {
+            db.connect();
+        } catch (SQLException ex) {
+            Logger.getLogger(Form_QuanLyDatPhong.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         // Lấy danh sách phòng có trạng thái "Dang su dung" từ cơ sở dữ liệu
         ArrayList<PhongHat> phongTrongList = ph_dao.getPhongByTinhTrang("Dang su dung");
@@ -191,7 +194,12 @@ public class Form_QuanLyDatPhong extends javax.swing.JPanel {
         // Xóa tất cả phòng trên giao diện trước khi thêm mới
         pnlPhongCho.removeAll();
         ConnectDB db = ConnectDB.getInstance();
-       
+        try {
+            db.connect();
+        } catch (SQLException ex) {
+            Logger.getLogger(Form_QuanLyDatPhong.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         // Lấy danh sách phòng có trạng thái "Cho" từ cơ sở dữ liệu
         ArrayList<PhongHat> phongTrongList = ph_dao.getPhongByTinhTrang("Cho");
         Icon icon;
