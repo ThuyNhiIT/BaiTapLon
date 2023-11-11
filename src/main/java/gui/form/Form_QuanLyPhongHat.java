@@ -1,11 +1,6 @@
 package gui.form;
 
-import dao.PhongHat_DAO;
-import entity.PhongHat;
 import gui_dialog.DL_ThemPhong;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,16 +8,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Form_QuanLyPhongHat extends javax.swing.JPanel {
 
-    private PhongHat_DAO ph_dao;
-    private DefaultTableModel dtmPhongHat;
-    
   
     public Form_QuanLyPhongHat() {
         initComponents();
-        ph_dao = new PhongHat_DAO();
-        dtmPhongHat = (DefaultTableModel) tblDSPH.getModel();
-//        loadTable(ph_dao.getAllPhongHat());
-        DocDuLieu();
     }
 
     @SuppressWarnings("unchecked")
@@ -122,20 +110,51 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
 
         tblDSPH.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Mã phòng", "Tên phòng", "Mã loại phòng", "Trạng thái", "Hành động", "Giá"
+                "Mã phòng", "Tên phòng", "Mã loại phòng", "Giá", "Trạng thái", "Hành động"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                true, true, true, true, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         scr.setViewportView(tblDSPH);
 
         lblTong.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -226,32 +245,8 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-//    public void loadTable(ArrayList<PhongHat> ds) {
-//        dtmPhongHat.setRowCount(0);//reset nd trong bang ve 0
-//        if (ds == null) {
-//            clearJTable();
-//            return;
-//        }
-//        clearJTable();
-//        for (PhongHat ph : ds) {
-//            dtmPhongHat.addRow(new Object[] {ph.getMaPhong(), ph.getTenPhong(), ph.getLoaiPhong().getMaLoaiPhong(), ph.getTinhTrangPhong()});
-//        }
-//    }
-//    
-//    public void clearJTable() {
-//        while (tblDSPH.getRowCount() > 0) {
-//            dtmPhongHat.removeRow(0);
-//        }
-//    }
-    
-    public void DocDuLieu() {
-        List<PhongHat> list = ph_dao.getAllPhongHat();
-        for (PhongHat ph : list) {
-            dtmPhongHat.addRow(new Object[] {ph.getMaPhong(), ph.getTenPhong(), ph.getLoaiPhong().getMaLoaiPhong(), ph.getTinhTrangPhong()});
-        }
-    }
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        new DL_ThemPhong().setVisible(true);
+   new DL_ThemPhong().setVisible(true);
     }//GEN-LAST:event_btnThemActionPerformed
 
 

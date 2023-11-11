@@ -16,9 +16,12 @@ import java.util.logging.Logger;
  */
 public class DL_ThemNV extends javax.swing.JFrame {
 
+<<<<<<< HEAD
     private NhanVien_DAO nv_dao;
     private Form_QuanLyNhanVien qlnv;
     
+=======
+>>>>>>> 403099b83f1a6c18e43f876f7522b363834cae84
     public DL_ThemNV() {
         initComponents();
         setLocationRelativeTo(null);

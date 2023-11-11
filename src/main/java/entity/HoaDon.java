@@ -9,19 +9,29 @@ public class HoaDon {
     private LocalDate ngayLapHD;
     private KhachHang khachHang;
     private NhanVien nhanVien;
+    private double tongTien;
+    public double getTongTien() {
+        return tongTien;
+    }
+
+    public void setTongTien(double tongTien) {
+        this.tongTien = tongTien;
+    }
 
     public HoaDon() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-    public HoaDon(String maHD, LocalDate ngayLapHD, KhachHang khachHang, NhanVien nhanVien) {
-        super();
+    public HoaDon(String maHD, LocalDate ngayLapHD, KhachHang khachHang, NhanVien nhanVien, double tongTien) {
         this.maHD = maHD;
         this.ngayLapHD = ngayLapHD;
         this.khachHang = khachHang;
         this.nhanVien = nhanVien;
+        this.tongTien = tongTien;
     }
+
+    
 
     public String getMaHD() {
         return maHD;

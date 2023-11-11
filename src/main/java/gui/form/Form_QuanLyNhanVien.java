@@ -32,11 +32,11 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
         nv_dao = new NhanVien_DAO();
         dtmNhanVien = (DefaultTableModel) tblDSNV.getModel();
 
-//        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-//        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-//        for (int i = 0; i < tblDSNV.getColumnCount(); i++) {
-//            tblDSNV.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-//        }
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        for (int i = 0; i < tblDSNV.getColumnCount(); i++) {
+            tblDSNV.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
 
 //        DefaultComboBoxModel<LoaiNhanVien> dataModelLop = new DefaultComboBoxModel<LoaiNhanVien>();
 //        cmbLoaiNhanVien.setModel(dataModelLop);
