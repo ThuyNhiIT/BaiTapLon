@@ -1,14 +1,52 @@
 package gui_dialog;
 
+import connectDB.ConnectDB;
+import dao.MatHang_DAO;
+import entity.MatHang;
+import gui.form.Form_MatHang;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author 84343
  */
 public class DL_ThemMatHang extends javax.swing.JFrame {
 
+    private MatHang_DAO mh_dao;
+    private Form_MatHang qlmh;
+
     public DL_ThemMatHang() {
         initComponents();
         setLocationRelativeTo(null);
+        mh_dao = new MatHang_DAO();
+
+    }
+
+    public String phatSinhMaMH() {
+        List<MatHang> mhs = mh_dao.getalltbMatHang();
+        String temp = null;
+
+        for (MatHang mh : mhs) {
+            temp = mh.getMaMH();
+        }
+        int count = laySoDuoi(temp);
+        count++;
+
+        String maMHang = String.format("MH%03d", count);
+        return maMHang;
+    }
+
+    public int laySoDuoi(String str) {
+        if (str == null) {
+            return 0;
+        } else {
+            String numberStr = str.substring(2);//Loại bỏ kí tự "MH"
+            int number = Integer.parseInt(numberStr);
+            return number;
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -24,6 +62,7 @@ public class DL_ThemMatHang extends javax.swing.JFrame {
         btnXoaR = new gui.swing.RadiusButton();
         btnThoat = new gui.swing.RadiusButton();
         lblThemMH = new javax.swing.JLabel();
+        radNhap = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -60,6 +99,11 @@ public class DL_ThemMatHang extends javax.swing.JFrame {
 
         btnXoaR.setBackground(new java.awt.Color(204, 204, 204));
         btnXoaR.setText("Xóa rỗng");
+        btnXoaR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaRActionPerformed(evt);
+            }
+        });
 
         btnThoat.setBackground(new java.awt.Color(205, 13, 13));
         btnThoat.setForeground(new java.awt.Color(255, 255, 255));
@@ -73,6 +117,9 @@ public class DL_ThemMatHang extends javax.swing.JFrame {
         lblThemMH.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         lblThemMH.setForeground(new java.awt.Color(41, 173, 86));
         lblThemMH.setText("THÊM MẶT HÀNG");
+
+        radNhap.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        radNhap.setText("Nhập hàng");
 
         javax.swing.GroupLayout pnThemLayout = new javax.swing.GroupLayout(pnThem);
         pnThem.setLayout(pnThemLayout);
@@ -90,6 +137,9 @@ public class DL_ThemMatHang extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnThemLayout.createSequentialGroup()
+                        .addComponent(lblThemMH, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(187, 187, 187))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnThemLayout.createSequentialGroup()
                         .addGroup(pnThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(pnThemLayout.createSequentialGroup()
                                 .addComponent(lblTenMH, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -98,26 +148,27 @@ public class DL_ThemMatHang extends javax.swing.JFrame {
                             .addGroup(pnThemLayout.createSequentialGroup()
                                 .addComponent(lblGia, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(80, 80, 80)
-                                .addComponent(txtGia, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(90, 90, 90))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnThemLayout.createSequentialGroup()
-                        .addComponent(lblThemMH, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(187, 187, 187))))
+                                .addGroup(pnThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(radNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtGia, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(90, 90, 90))))
         );
         pnThemLayout.setVerticalGroup(
             pnThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnThemLayout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(17, Short.MAX_VALUE)
                 .addComponent(lblThemMH, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addGroup(pnThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTenMH, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTenMH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                .addGap(18, 18, 18)
                 .addGroup(pnThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblGia)
                     .addComponent(txtGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(radNhap)
+                .addGap(25, 25, 25)
                 .addGroup(pnThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnXoaR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -144,7 +195,21 @@ public class DL_ThemMatHang extends javax.swing.JFrame {
     }//GEN-LAST:event_txtGiaActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        // TODO add your handling code here:
+        ConnectDB db = ConnectDB.getInstance();
+        try {
+            db.connect();
+            String maMH = phatSinhMaMH();
+            String tenMH = txtTenMH.getText();
+            Double gia = Double.parseDouble(txtGia.getText());
+            Boolean tinhTrang = radNhap.isSelected();
+            MatHang addMH = new MatHang(maMH, tenMH, gia, tinhTrang);
+            mh_dao.addMatHang(addMH);
+            System.out.println("AAA");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DL_ThemMatHang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void txtTenMHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenMHActionPerformed
@@ -155,6 +220,13 @@ public class DL_ThemMatHang extends javax.swing.JFrame {
         this.dispose();
         return;
     }//GEN-LAST:event_btnThoatActionPerformed
+
+    private void btnXoaRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaRActionPerformed
+        txtTenMH.setText("");
+        txtGia.setText("");
+        radNhap.isSelected();
+        txtTenMH.requestFocus();
+    }//GEN-LAST:event_btnXoaRActionPerformed
 
     public static void main(String args[]) {
 
@@ -173,6 +245,7 @@ public class DL_ThemMatHang extends javax.swing.JFrame {
     private javax.swing.JLabel lblTenMH;
     private javax.swing.JLabel lblThemMH;
     private javax.swing.JPanel pnThem;
+    private javax.swing.JRadioButton radNhap;
     private javax.swing.JTextField txtGia;
     private javax.swing.JTextField txtTenMH;
     // End of variables declaration//GEN-END:variables

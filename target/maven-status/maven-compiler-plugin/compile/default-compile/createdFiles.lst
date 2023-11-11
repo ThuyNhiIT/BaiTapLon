@@ -2,7 +2,9 @@ gui\event\EventShowPopUpMenu.class
 gui_dialog\DL_test$5.class
 gui_dialog\DL_CapNhatMatHang$2.class
 gui_dialog\DL_ThongTinKhachHang$1.class
+gui\form\Form_QuanLyNhanVien$3.class
 entity\NhanVien.class
+gui\form\Form_MatHang$5.class
 gui\event\EventMenu.class
 gui_dialog\DL_CapNhatMatHang.class
 gui_dialog\DL_ThemDichVu$1.class
@@ -10,7 +12,9 @@ gui\component\PanelKiemTraThongTinvsAddKH.class
 gui_dialog\DL_KiemTravsAddKH$4.class
 gui\swing\tabbed\MaterialTabbed.class
 gui\swing\PanelPopUp.class
+gui_dialog\DL_CapNhatMatHangh.class
 gui_dialog\DL_ThemNV$3.class
+dao\HoaDon_DAO.class
 gui_dialog\DL_KiemTravsAddKH$3.class
 gui\component\PanelKiemTraThongTinvsAddKH$3.class
 gui\component\Header.class
@@ -47,6 +51,7 @@ gui_dialog\DL_test$1.class
 gui\swing\RoundedButtonUI_v3.class
 gui\swing\tabbed\MaterialTabbed$MaterialTabbedUI.class
 gui\swing\TableActionCellRender.class
+dao\ChiTietHoaDonDichVu_DAO.class
 gui_dialog\DL_SuaNV$1.class
 gui_dialog\DL_test$4.class
 gui\Application$1$2.class
@@ -89,8 +94,10 @@ gui_dialog\DL_ThongTinKhachHang.class
 gui_dialog\DL_ThemNV$1.class
 gui\swing\CustomJOptionPane.class
 gui_dialog\DL_ThongTinKhachHang$5.class
+gui_dialog\DL_CapNhatMatHangh$1.class
 gui_dialog\DL_KiemTravsAddKH$2.class
 gui\Application.class
+gui_dialog\DL_CapNhatMatHangh$2.class
 gui_dialog\DL_ThongTinKhachHang$3.class
 gui\component\PanelKiemTraThongTinvsAddKH$4.class
 dao\KhachHang_DAO.class
@@ -100,14 +107,18 @@ gui\form\Form_QuanLyNhanVien$4.class
 gui_dialog\DL_ThemDichVu.class
 gui_dialog\DL_ThemNV.class
 gui_dialog\DL_ThongTinKhachHang$2.class
+gui\form\Form_QuanLyNhanVien$2.class
 entity\TaiKhoan.class
 gui_dialog\DL_SuaNV.class
 gui\swing\CustomPanel.class
 gui_dialog\DL_KiemTravsAddKH.class
+gui_dialog\DL_CapNhatMatHangh$3.class
 gui\swing\MenuButton.class
 gui\swing\RadiusButton$2.class
+gui_dialog\DL_CapNhatMatHang$4$1.class
 gui\form\Form_QuanLyKhachHang.class
 gui\swing\CustomJOptionPane$1.class
 entity\MatHang.class
+gui_dialog\DL_CapNhatMatHangh$4.class
 gui\swing\RadiusButton$1.class
 gui\component\PanelKiemTraThongTinvsAddKH$5.class
