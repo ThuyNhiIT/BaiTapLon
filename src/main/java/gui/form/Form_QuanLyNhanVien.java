@@ -1,6 +1,8 @@
 package gui.form;
 
+import dao.LoaiNV_DAO;
 import dao.NhanVien_DAO;
+import entity.LoaiNhanVien;
 import entity.NhanVien;
 import gui.swing.CustomJOptionPane;
 import gui_dialog.DL_SuaNV;
@@ -10,6 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,7 +24,8 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
 
     private NhanVien_DAO nv_dao;
     private DefaultTableModel dtmNhanVien;
-
+    private LoaiNV_DAO loainv_dao = new LoaiNV_DAO();
+    
 
     public Form_QuanLyNhanVien() {
         initComponents();
@@ -32,11 +38,14 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
             tblDSNV.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
         }
 
+//        DefaultComboBoxModel<LoaiNhanVien> dataModelLop = new DefaultComboBoxModel<LoaiNhanVien>();
+//        cmbLoaiNhanVien.setModel(dataModelLop);
 //        DocDuLieu();
+//        loadLoaiNhanVien();
         loadTable(nv_dao.getalltbNhanVien());
     }
 //    
-     public void loadTable(ArrayList<NhanVien> ds){
+    public void loadTable(ArrayList<NhanVien> ds){
         if(ds == null){
             clearJTable();
             return;
@@ -47,7 +56,8 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
                         nhanVien.getCCCD(), nhanVien.getSDT(), nhanVien.getDiaChi(), nhanVien.getCaLam(), nhanVien.getLoaiNV().getMaLoai()});
         }
     }
-
+    
+    
     public void clearJTable(){
         while(tblDSNV.getRowCount() > 0){
            dtmNhanVien.removeRow(0);
@@ -63,11 +73,22 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
         }
 
     }
+    
+//    public void loadLoaiNhanVien(){
+//        ArrayList<LoaiNhanVien> ds = loainv_dao.getAllLoaiNhanVien();
+//        if(ds == null){
+//            return;
+//        }
+//        for(LoaiNhanVien loaiNhanVien : ds){
+//            cmbLoaiNhanVien.addItem(loaiNhanVien);
+//        }
+//    }
 
     public void clearDataOnModel(){
         DefaultTableModel dtm = (DefaultTableModel) tblDSNV.getModel();
         dtm.getDataVector().removeAllElements();
     }
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -79,12 +100,19 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
         btnThem = new gui.swing.RadiusButton();
         btnSua = new gui.swing.RadiusButton();
         txtTim = new javax.swing.JTextField();
-        cmb = new javax.swing.JComboBox<>();
+        cmbLoaiNhanVien = new javax.swing.JComboBox<>();
+        btnLoc = new gui.swing.RadiusButton();
         lblDSNV = new javax.swing.JLabel();
         scr = new javax.swing.JScrollPane();
         tblDSNV = new javax.swing.JTable();
         lblTong = new javax.swing.JLabel();
         txtTong = new javax.swing.JTextField();
+
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
         pnlNhanVien.setBackground(new java.awt.Color(235, 249, 249));
         pnlNhanVien.setFocusCycleRoot(true);
@@ -118,7 +146,15 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
             }
         });
 
-        cmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbLoaiNhanVien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NVQL ", "NVTN" }));
+
+        btnLoc.setBackground(new java.awt.Color(166, 208, 238));
+        btnLoc.setText("Lọc");
+        btnLoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLocActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlHeaderLayout = new javax.swing.GroupLayout(pnlHeader);
         pnlHeader.setLayout(pnlHeaderLayout);
@@ -133,8 +169,10 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
                 .addGap(40, 40, 40)
                 .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(89, 89, 89)
-                .addComponent(cmb, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(532, Short.MAX_VALUE))
+                .addComponent(cmbLoaiNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(btnLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(429, Short.MAX_VALUE))
         );
         pnlHeaderLayout.setVerticalGroup(
             pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,7 +181,8 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
                 .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbLoaiNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
@@ -262,12 +301,31 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnTimActionPerformed
 
+    private void btnLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocActionPerformed
+        // TODO add your handling code here:
+//        ArrayList<NhanVien> ds = nv_dao.getNVTheoLoai((LoaiNhanVien) cmbLoaiNhanVien.getSelectedItem());
+//        if(ds.size() > 0){
+//            clearJTable();
+//            loadTable(ds);
+//            return;
+//        }else{
+//            clearJTable();
+//            JOptionPane.showMessageDialog(this, "Không tìm thấy !!!");
+//        }
+    }//GEN-LAST:event_btnLocActionPerformed
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_formMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private gui.swing.RadiusButton btnLoc;
     private gui.swing.RadiusButton btnSua;
     private gui.swing.RadiusButton btnThem;
     private gui.swing.RadiusButton btnTim;
-    private javax.swing.JComboBox<String> cmb;
+    private javax.swing.JComboBox<LoaiNhanVien> cmbLoaiNhanVien;
     private javax.swing.JLabel lblDSNV;
     private javax.swing.JLabel lblTong;
     private javax.swing.JPanel pnlHeader;
