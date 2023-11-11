@@ -4,7 +4,9 @@ import dao.DichVu_DAO;
 import entity.DichVu;
 import entity.MatHang;
 import gui_dialog.DL_ThemDichVu;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -29,6 +31,28 @@ public class Form_DichVu extends javax.swing.JPanel {
         for (DichVu dv : list) {
             dtmDichVu.addRow(new Object[]{dv.getMaDV(), dv.getTenDV(), dv.getMaMH(), dv.getGia()});
         }
+    }
+public void clearJTable() {
+        while (tblDichVu.getRowCount() > 0) {
+            dtmDichVu.removeRow(0);
+        }
+    }
+
+    public void loadTable(ArrayList<MatHang> ds) {
+        dtmDichVu.setRowCount(0);
+        if (ds == null) {
+            clearJTable();
+            return;
+        }
+        clearJTable();
+        for (MatHang mh : ds) {
+            dtmDichVu.addRow(new Object[]{mh.getMaMH(), mh.getTenMH(), mh.getGia()});
+        }
+    }
+
+    public void clearDataOnModel() {
+        DefaultTableModel dtm = (DefaultTableModel) tblDichVu.getModel();
+        dtm.getDataVector().removeAllElements();
     }
 
     @SuppressWarnings("unchecked")
@@ -198,7 +222,28 @@ public class Form_DichVu extends javax.swing.JPanel {
     }//GEN-LAST:event_txtTimActionPerformed
 
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
-
+ String maDV = txtTim.getText().trim();
+         if(!(maDV.length() > 0)){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập mã dịch vụ");
+        }else{
+             String maTim = txtTim.getText();
+            ArrayList<DichVu> dsDVTim = null;
+            for(DichVu dv : dv_dao.getalltbDichVu()){
+                if(dv.getMaDV().equals(maTim)){
+                    dsDVTim = new ArrayList<DichVu>();
+                    dsDVTim.add(dv);
+                }
+            }
+            if(dsDVTim != null){
+                clearDataOnModel();
+                for(DichVu dv : dsDVTim){
+                    dtmDichVu.addRow(new Object[]{dv.getMaDV(), dv.getTenDV(), dv.getMaMH()});
+                }
+            }else if(dsDVTim== null){
+                JOptionPane.showMessageDialog(this, "Không tìm thấy");
+            }
+        
+         }
     }//GEN-LAST:event_btnTimActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed

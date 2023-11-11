@@ -87,6 +87,11 @@ public class Form_MatHang extends javax.swing.JPanel {
         btnTim.setBackground(new java.awt.Color(166, 208, 238));
         btnTim.setBorder(null);
         btnTim.setText("Tìm");
+        btnTim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlTimLayout = new javax.swing.GroupLayout(pnlTim);
         pnlTim.setLayout(pnlTimLayout);
@@ -121,6 +126,7 @@ public class Form_MatHang extends javax.swing.JPanel {
             }
         });
 
+        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/edit.png"))); // NOI18N
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,6 +134,7 @@ public class Form_MatHang extends javax.swing.JPanel {
             }
         });
 
+        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/delete.png"))); // NOI18N
         btnXoa.setText("Xóa");
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,11 +149,11 @@ public class Form_MatHang extends javax.swing.JPanel {
             .addGroup(pnlHeaderLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(pnlTim, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
-                .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 211, Short.MAX_VALUE)
+                .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54)
+                .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(70, 70, 70))
         );
@@ -171,17 +178,9 @@ public class Form_MatHang extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã mặt hàng", "Tên mặt hàng", "Giá", "Trạng thái", "Hành động"
+                "Mã mặt hàng", "Tên mặt hàng", "Giá", "Trạng thái"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                true, true, true, true, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         scr.setViewportView(tblMatHang);
         tblMatHang.getAccessibleContext().setAccessibleName("");
 
@@ -200,7 +199,7 @@ public class Form_MatHang extends javax.swing.JPanel {
             .addGroup(pnlMatHangLayout.createSequentialGroup()
                 .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
-                .addComponent(scr, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+                .addComponent(scr, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
                 .addGap(110, 110, 110))
         );
 
@@ -267,6 +266,30 @@ public class Form_MatHang extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
+          String maMH = txtTim.getText().trim();
+        if(!(maMH.length() > 0)){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập mã mặt hàng");
+        }else{
+            String maTim = txtTim.getText();
+            ArrayList<MatHang> dsMHTim = null;
+            for(MatHang mh : mh_dao.getalltbMatHang()){
+                if(mh.getMaMH().equals(maTim)){
+                    dsMHTim = new ArrayList<MatHang>();
+                    dsMHTim.add(mh);
+                }
+            }
+            if(dsMHTim != null){
+                clearDataOnModel();
+                for(MatHang mh : dsMHTim){
+                    dtmMatHang.addRow(new Object[]{mh.getMaMH(), mh.getTenMH(), mh.getGia(), mh.isTrangThai() ? "Còn hàng" : "Hết hàng"});
+                }
+            }else if(dsMHTim == null){
+                JOptionPane.showMessageDialog(this, "Không tìm thấy");
+            }
+        }
+    }//GEN-LAST:event_btnTimActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
