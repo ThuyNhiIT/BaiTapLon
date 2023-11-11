@@ -1,6 +1,7 @@
 package gui.form;
 
 import dao.DichVu_DAO;
+import dao.MatHang_DAO;
 import entity.DichVu;
 import entity.MatHang;
 import gui_dialog.DL_ThemDichVu;
@@ -68,9 +69,8 @@ public class Form_DichVu extends javax.swing.JPanel {
         lblTimKiem = new javax.swing.JLabel();
         txtTim = new javax.swing.JTextField();
         btnTim = new gui.swing.RadiusButton();
-        lblDKTraCuu = new javax.swing.JLabel();
-        cmb = new javax.swing.JComboBox<>();
         btnThem = new gui.swing.RadiusButton();
+        btnXoa = new gui.swing.RadiusButton();
 
         pnlDichVu.setBackground(new java.awt.Color(235, 249, 249));
 
@@ -106,16 +106,6 @@ public class Form_DichVu extends javax.swing.JPanel {
             }
         });
 
-        lblDKTraCuu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblDKTraCuu.setText("Tra cứu theo");
-
-        cmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cmb.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout pnlTraCuuLayout = new javax.swing.GroupLayout(pnlTraCuu);
         pnlTraCuu.setLayout(pnlTraCuuLayout);
         pnlTraCuuLayout.setHorizontalGroup(
@@ -127,11 +117,7 @@ public class Form_DichVu extends javax.swing.JPanel {
                 .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(lblDKTraCuu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cmb, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         pnlTraCuuLayout.setVerticalGroup(
             pnlTraCuuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,10 +127,7 @@ public class Form_DichVu extends javax.swing.JPanel {
                     .addGroup(pnlTraCuuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlTraCuuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblDKTraCuu)
-                        .addComponent(cmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
@@ -157,6 +140,14 @@ public class Form_DichVu extends javax.swing.JPanel {
             }
         });
 
+        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/delete.png"))); // NOI18N
+        btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlHeaderLayout = new javax.swing.GroupLayout(pnlHeader);
         pnlHeader.setLayout(pnlHeaderLayout);
         pnlHeaderLayout.setHorizontalGroup(
@@ -164,7 +155,9 @@ public class Form_DichVu extends javax.swing.JPanel {
             .addGroup(pnlHeaderLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(pnlTraCuu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 307, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 380, Short.MAX_VALUE)
+                .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59)
                 .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(70, 70, 70))
         );
@@ -174,7 +167,9 @@ public class Form_DichVu extends javax.swing.JPanel {
                 .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlHeaderLayout.createSequentialGroup()
                         .addGap(37, 37, 37)
-                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pnlHeaderLayout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(pnlTraCuu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -214,49 +209,66 @@ public class Form_DichVu extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbActionPerformed
-
-    }//GEN-LAST:event_cmbActionPerformed
-
     private void txtTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimActionPerformed
-     
+
     }//GEN-LAST:event_txtTimActionPerformed
 
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
-   String maDV = txtTim.getText().trim();
-         if(!(maDV.length() > 0)){
+        String maDV = txtTim.getText().trim();
+        if (!(maDV.length() > 0)) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập mã dịch vụ");
-        }else{
-             String maTim = txtTim.getText();
+        } else {
+            String maTim = txtTim.getText();
             ArrayList<DichVu> dsDVTim = null;
-            for(DichVu dv : dv_dao.getalltbDichVu()){
-                if(dv.getMaDV().equals(maTim)){
+            for (DichVu dv : dv_dao.getalltbDichVu()) {
+                if (dv.getMaDV().equals(maTim)) {
                     dsDVTim = new ArrayList<DichVu>();
                     dsDVTim.add(dv);
                 }
             }
-            if(dsDVTim != null){
+            if (dsDVTim != null) {
                 clearDataOnModel();
-                for(DichVu dv : dsDVTim){
+                for (DichVu dv : dsDVTim) {
                     dtmDichVu.addRow(new Object[]{dv.getMaDV(), dv.getTenDV(), dv.getMaMH()});
                 }
-            }else if(dsDVTim== null){
+            } else if (dsDVTim == null) {
                 JOptionPane.showMessageDialog(this, "Không tìm thấy");
             }
-        
-         }
+
+        }
     }//GEN-LAST:event_btnTimActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         new DL_ThemDichVu().setVisible(true);
     }//GEN-LAST:event_btnThemActionPerformed
 
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        dv_dao = new DichVu_DAO();
+        if (tblDichVu.getSelectedRowCount() > 0) {
+            if (JOptionPane.showConfirmDialog(this, "Xác nhận xóa mặt hàng đã chọn?", "Warring", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
+                int[] selectedRows = tblDichVu.getSelectedRows();
+                for (int i = selectedRows.length - 1; i >= 0; i--) {
+                    List<DichVu> dvs = dv_dao.getalltbDichVu();
+                    DichVu dv = dvs.get(selectedRows[i]);
+                    String maDV = dv.getMaDV();
+                    dv_dao.DeleteDichVu(maDV);
+                }
+                clearJTable();
+                DocDuLieu();
+                JOptionPane.showMessageDialog(this, "Xóa thành công");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Chọn dòng cần xóa!");
+        }
+
+
+    }//GEN-LAST:event_btnXoaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.swing.RadiusButton btnThem;
     private gui.swing.RadiusButton btnTim;
-    private javax.swing.JComboBox<String> cmb;
-    private javax.swing.JLabel lblDKTraCuu;
+    private gui.swing.RadiusButton btnXoa;
     private javax.swing.JLabel lblTimKiem;
     private javax.swing.JPanel pnlDichVu;
     private javax.swing.JPanel pnlHeader;
