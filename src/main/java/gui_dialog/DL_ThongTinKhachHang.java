@@ -3,10 +3,13 @@ package gui_dialog;
 import connectDB.ConnectDB;
 import dao.KhachHang_DAO;
 import entity.KhachHang;
-import java.awt.List;
 import java.util.ArrayList;
 import gui.form.Form_QuanLyKhachHang;
 import java.awt.Frame;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -18,66 +21,82 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DL_ThongTinKhachHang extends javax.swing.JDialog {
 
+    private Form_QuanLyKhachHang qlkh;
+
     private KhachHang_DAO kh_dao;
     private JTable tblDSKH;
     private DefaultTableModel dtmKhachHang;
-    
+
     private Form_QuanLyKhachHang qlKH;
-    
+
     public DL_ThongTinKhachHang() {
         initComponents();
         setLocationRelativeTo(null);
     }
 
+    public String phatSinhMaKH() {
+        List<KhachHang> khs = kh_dao.getalltbKhachHang();
+        String temp = null;
 
-//    public  String phatSinhMaKH(){
-//        List<KhachHang> khs = kh_dao.docTuBang();
-//        String temp = null;
-//        for(KhachHang kh : khs){
-//            temp = kh.getMaKH();
-//        }
-//        int count = 
-//    }
-    
-   public boolean validData(){
-       String maKH = txtMaKH.getText();
-       String tenKH = txtTenKH.getText();
-       String SDT = txtSDT.getText();
-       return true;
-   }
-   
-   public KhachHang revertKhachHang(){
-       String maKH = txtMaKH.getText().trim();
-       String tenKH = txtTenKH.getText().trim();
-       String SDT = txtSDT.getText().trim();
-       Boolean gioiTinh = radNam.isSelected();
-       
-       return new KhachHang(maKH, tenKH, SDT, gioiTinh);
-   }
-   
+        for (KhachHang kh : khs) {
+            temp = kh.getMaKH();
+        }
+        int count = laySoDuoi(temp);
+        count++;
+
+        String maKHang = String.format("KH%03d", count);
+        return maKHang;
+    }
+
+    public int laySoDuoi(String str) {
+        if (str == null) {
+            return 0;
+        } else {
+            String numberStr = str.substring(2);//Loại bỏ kí tự "KH"
+            int number = Integer.parseInt(numberStr);
+            return number;
+        }
+    }
+
+    public boolean validData() {
+        String maKH = txtMaKH.getText();
+        String tenKH = txtTenKH.getText();
+        String SDT = txtSDT.getText();
+        return true;
+    }
+
+    public KhachHang revertKhachHang() {
+        String maKH = txtMaKH.getText().trim();
+        String tenKH = txtTenKH.getText().trim();
+        String SDT = txtSDT.getText().trim();
+        Boolean gioiTinh = radNam.isSelected();
+
+        return new KhachHang(maKH, tenKH, SDT, gioiTinh);
+    }
+
 //   public void DocDuLieu() {
 //        java.util.List<KhachHang> list = kh_dao.getalltbKhachHang();
 //        for (KhachHang kh : list) {
 //            dtmKhachHang.addRow(new Object[]{kh.getMaKH(), kh.getTenKH(), kh.getSdt(), kh.isGioitinh() ? "Nam" : "Nữ"});
 //        }
 //    }
-    
-    public void loadTable(ArrayList<KhachHang> ds){
-        if(ds == null){
+    public void loadTable(ArrayList<KhachHang> ds) {
+        if (ds == null) {
             clearJTable();
             return;
         }
         clearJTable();
-        for(KhachHang khachHang : ds){
+        for (KhachHang khachHang : ds) {
             dtmKhachHang.addRow(khachHang.getObject());
         }
     }
 
-    public void clearJTable(){
-        while(tblDSKH.getRowCount() > 0){
+    public void clearJTable() {
+        while (tblDSKH.getRowCount() > 0) {
             dtmKhachHang.removeRow(0);
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -243,52 +262,25 @@ public class DL_ThongTinKhachHang extends javax.swing.JDialog {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
 
-<<<<<<< HEAD
         ConnectDB db = ConnectDB.getInstance();
         try {
-                
+
             db.connect();
             String maKH = phatSinhMaKH();
             String tenKH = txtTenKH.getText();
             String Sdt = txtSDT.getText();
             Boolean gt = radNam.isSelected();
-            KhachHang addKh =new KhachHang(maKH, tenKH, Sdt, gt);
+            KhachHang addKh = new KhachHang(maKH, tenKH, Sdt, gt);
             kh_dao.addCustomer(addKh);
             qlkh.DocDuLieu();
         } catch (SQLException ex) {
             Logger.getLogger(DL_ThongTinKhachHang.class.getName()).log(Level.SEVERE, null, ex);
         }
-=======
-//        if(validData()){
-//            KhachHang kh = revertKhachHang();
-//            if(!kh_dao.addCustomer(kh)){
-//                JOptionPane.showMessageDialog(this, "Thêm không thành công !" );
-//            }
-//            else{
-////                loadTable(kh_dao.getalltbKhachHang());
-////                new Form_QuanLyKhachHang().loadTable(kh_dao.getalltbKhachHang());
-//                  qlKH.loadTable(kh_dao.getalltbKhachHang());
-//        }  
-//        }
-       String maKH = txtMaKH.getText();
-       String tenKH = txtTenKH.getText();
-       String SDT = txtSDT.getText();
-       Boolean gioiTinh = radNam.isSelected();
-       
-       
-        KhachHang khachHang = new KhachHang(maKH, tenKH, SDT, gioiTinh);
-        kh_dao.addCustomer(khachHang);
-//            JOptionPane.showMessageDialog(rootPane, 
-//                    "Chúc mừng bạn, thêm thành công!");
-//            txtMaKH.setText("");
-//            txtTenKH.setText("");
-//            txtSDT.setText("");
 
-      
->>>>>>> 403099b83f1a6c18e43f876f7522b363834cae84
+
     }//GEN-LAST:event_btnThemActionPerformed
 
-    
+
     private void btnXoaRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaRActionPerformed
         txtMaKH.setText("");
         txtTenKH.setText("");
