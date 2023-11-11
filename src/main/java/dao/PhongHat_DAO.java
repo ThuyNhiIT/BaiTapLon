@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
 /**
  *
  * @author HO MINH HAU
@@ -33,7 +32,6 @@ public class PhongHat_DAO {
                 String tenPhong = rs.getString(2);
                 String loaiPhong = rs.getString(3);
                 String tinhTrang = rs.getString(4);
-
                 PhongHat ph = new PhongHat(maPhong, tenPhong, new LoaiPhong(loaiPhong), tinhTrang);
                 dsPH.add(ph);
 
@@ -75,7 +73,7 @@ public class PhongHat_DAO {
         try {
             ConnectDB.getInstance();
             Connection con = ConnectDB.getConnection();
-            String sql = "UPDATE PhongHat SET tinhTrang = ? WHERE maPhong = ?";
+            String sql = "UPDATE PhongHat SET tinhTrangPhong = ? WHERE maPhong = ?";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, tinhTrangMoi);
             statement.setString(2, maPhong);

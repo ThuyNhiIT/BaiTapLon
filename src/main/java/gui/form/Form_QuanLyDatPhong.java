@@ -3,18 +3,16 @@ package gui.form;
 import connectDB.ConnectDB;
 import dao.KhachHang_DAO;
 import dao.PhongHat_DAO;
-import entity.LoaiPhong;
+import entity.KhachHang;
 import entity.PhongHat;
 import gui.component.Room;
 import gui.model.ModelRoom;
 import gui.swing.scrollbar.ScrollBarCustom;
-import gui_dialog.DL_ThemPhong;
-import gui_dialog.DL_ThuePhong;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.Label;
+import gui_dialog.DL_KiemTravsAddKH;
+import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.sql.SQLException;
@@ -23,7 +21,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 import net.miginfocom.swing.MigLayout;
 
@@ -34,9 +31,11 @@ import net.miginfocom.swing.MigLayout;
 public class Form_QuanLyDatPhong extends javax.swing.JPanel {
 
     private PhongHat_DAO ph_dao;
-  
+
+    private static String selectedRoom;
 
     public Form_QuanLyDatPhong() {
+
         initComponents();
         jScrollPane1.getViewport().setOpaque(false);
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
@@ -45,37 +44,45 @@ public class Form_QuanLyDatPhong extends javax.swing.JPanel {
         jScrollPane3.getViewport().setOpaque(false);
         jScrollPane3.setVerticalScrollBar(new ScrollBarCustom());
         ph_dao = new PhongHat_DAO();
+        ConnectDB db = ConnectDB.getInstance();
+        try {
+            db.connect();
+        } catch (SQLException ex) {
+            Logger.getLogger(Form_QuanLyDatPhong.class.getName()).log(Level.SEVERE, null, ex);
+        }
         phongTrong();
         phongDangSuDung();
         phongCho();
 
     }
 
+    public static void setRoomSelected(String roomID) {
+        selectedRoom = roomID;
+    }
+
+    public static String getRoomSelected() {
+        return selectedRoom;
+    }
+
     public void addPhongTrong(ModelRoom data) {
         Room room = new Room();
         room.setData(data);
-
-        // Add a MouseListener if needed
         room.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+                setRoomSelected(data.getRoomId());
+                DL_KiemTravsAddKH kiemTraVsAddKH = new DL_KiemTravsAddKH((java.awt.Frame) SwingUtilities.getWindowAncestor((Component) e.getSource()), true);
                 if (SwingUtilities.isLeftMouseButton(e)) {
-                    DL_ThuePhong thuePhongFrame = new DL_ThuePhong();
-                    thuePhongFrame.addWindowFocusListener(new WindowFocusListener() {
-                        @Override
-                        public void windowGainedFocus(WindowEvent e) {
-                            // Không cần thực hiện gì khi cửa sổ được tập trung vào
-                        }
-                        @Override
-                        public void windowLostFocus(WindowEvent e) {
-                            // Đóng cửa sổ khi nó mất trọng tâm (bấm ra ngoài)
-                            thuePhongFrame.dispose();
-                        }
-                    });
-                    thuePhongFrame.setVisible(true);
-                  
-                    
+                    kiemTraVsAddKH.setLocationRelativeTo(Form_QuanLyDatPhong.this);
+                    kiemTraVsAddKH.setVisible(true);                
                 }
+                kiemTraVsAddKH.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                   // khi đống thì tao cho nó refresh lại mấy cái room 
+                    refreshRooms();
+                }
+            });
             }
         });
         MigLayout migLayout = new MigLayout("wrap 4, gapx 100, gapy 80", "[grow, fill]");
@@ -85,16 +92,10 @@ public class Form_QuanLyDatPhong extends javax.swing.JPanel {
         pnlPhongTrong.repaint();
     }
 
-    private void phongTrong() {
+    public void phongTrong() {
         // Xóa tất cả phòng trên giao diện trước khi thêm mới
         pnlPhongTrong.removeAll();
-        ConnectDB db = ConnectDB.getInstance();
-        try {
-            db.connect();
-        } catch (SQLException ex) {
-            Logger.getLogger(Form_QuanLyDatPhong.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        
         // Lấy danh sách phòng có trạng thái "Trong" từ cơ sở dữ liệu
         ArrayList<PhongHat> phongTrongList = ph_dao.getPhongByTinhTrang("Trong");
         Icon icon;
@@ -110,7 +111,15 @@ public class Form_QuanLyDatPhong extends javax.swing.JPanel {
                 icon = iconPhongVip;
             }
             addPhongTrong(new ModelRoom(phong.getMaPhong(), phong.getTenPhong(), icon));
+
         }
+
+    }
+
+    public void refreshRooms() {
+        phongTrong();
+        phongDangSuDung();
+        phongCho();
     }
 
     public void addPhongDangSuDung(ModelRoom data) {
@@ -137,11 +146,7 @@ public class Form_QuanLyDatPhong extends javax.swing.JPanel {
         // Xóa tất cả phòng trên giao diện trước khi thêm mới
         pnlPhongDangSuDung.removeAll();
         ConnectDB db = ConnectDB.getInstance();
-        try {
-            db.connect();
-        } catch (SQLException ex) {
-            Logger.getLogger(Form_QuanLyDatPhong.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
 
         // Lấy danh sách phòng có trạng thái "Dang su dung" từ cơ sở dữ liệu
         ArrayList<PhongHat> phongTrongList = ph_dao.getPhongByTinhTrang("Dang su dung");
@@ -164,6 +169,7 @@ public class Form_QuanLyDatPhong extends javax.swing.JPanel {
     public void addPhongCho(ModelRoom data) {
         Room room = new Room();
         room.setData(data);
+        String selectedRoom = data.getRoomId();
 
         // Add a MouseListener if needed
         room.addMouseListener(new MouseAdapter() {
@@ -185,12 +191,7 @@ public class Form_QuanLyDatPhong extends javax.swing.JPanel {
         // Xóa tất cả phòng trên giao diện trước khi thêm mới
         pnlPhongCho.removeAll();
         ConnectDB db = ConnectDB.getInstance();
-        try {
-            db.connect();
-        } catch (SQLException ex) {
-            Logger.getLogger(Form_QuanLyDatPhong.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+       
         // Lấy danh sách phòng có trạng thái "Cho" từ cơ sở dữ liệu
         ArrayList<PhongHat> phongTrongList = ph_dao.getPhongByTinhTrang("Cho");
         Icon icon;

@@ -42,11 +42,8 @@ public class KhachHang_DAO {
                String maKH = rs.getString(1);
                String tenKH = rs.getString(2);
                String SDT = rs.getString(3);
-               Boolean GioiTinh = rs.getBoolean(4);
-               
-
+               Boolean GioiTinh = rs.getBoolean(4);               
                KhachHang kh = new KhachHang(maKH, tenKH, SDT, GioiTinh);
-
                dsKH.add(kh);
            }
         }
