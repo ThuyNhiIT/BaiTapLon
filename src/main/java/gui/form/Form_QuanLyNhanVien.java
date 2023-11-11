@@ -1,6 +1,8 @@
 package gui.form;
 
+import dao.LoaiNV_DAO;
 import dao.NhanVien_DAO;
+import entity.LoaiNhanVien;
 import entity.NhanVien;
 import gui.swing.CustomJOptionPane;
 import gui_dialog.DL_SuaNV;
@@ -10,6 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,7 +24,9 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
 
     private NhanVien_DAO nv_dao;
     private DefaultTableModel dtmNhanVien;
-
+    private LoaiNV_DAO loainv_dao = new LoaiNV_DAO();
+//    private DefaultComboBoxModel<LoaiNhanVien>;
+    
 
     public Form_QuanLyNhanVien() {
         initComponents();
@@ -32,11 +39,14 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
             tblDSNV.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
         }
 
+//        DefaultComboBoxModel<LoaiNhanVien> dataModelLop = new DefaultComboBoxModel<LoaiNhanVien>();
+//        cmbLoaiNhanVien.setModel(dataModelLop);
 //        DocDuLieu();
+//        loadLoaiNhanVien();
         loadTable(nv_dao.getalltbNhanVien());
     }
 //    
-     public void loadTable(ArrayList<NhanVien> ds){
+    public void loadTable(ArrayList<NhanVien> ds){
         if(ds == null){
             clearJTable();
             return;
@@ -47,7 +57,8 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
                         nhanVien.getCCCD(), nhanVien.getSDT(), nhanVien.getDiaChi(), nhanVien.getCaLam(), nhanVien.getLoaiNV().getMaLoai()});
         }
     }
-
+    
+    
     public void clearJTable(){
         while(tblDSNV.getRowCount() > 0){
            dtmNhanVien.removeRow(0);
@@ -63,11 +74,22 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
         }
 
     }
+    
+//    public void loadLoaiNhanVien(){
+//        ArrayList<LoaiNhanVien> ds = loainv_dao.getAllLoaiNhanVien();
+//        if(ds == null){
+//            return;
+//        }
+//        for(LoaiNhanVien loaiNhanVien : ds){
+//            cmbLoaiNhanVien.addItem(loaiNhanVien);
+//        }
+//    }
 
     public void clearDataOnModel(){
         DefaultTableModel dtm = (DefaultTableModel) tblDSNV.getModel();
         dtm.getDataVector().removeAllElements();
     }
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -75,11 +97,7 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
 
         pnlNhanVien = new javax.swing.JPanel();
         pnlHeader = new javax.swing.JPanel();
-        btnTim = new gui.swing.RadiusButton();
-        btnThem = new gui.swing.RadiusButton();
-        btnSua = new gui.swing.RadiusButton();
         txtTim = new javax.swing.JTextField();
-        cmb = new javax.swing.JComboBox<>();
         lblDSNV = new javax.swing.JLabel();
         scr = new javax.swing.JScrollPane();
         tblDSNV = new javax.swing.JTable();
@@ -92,63 +110,21 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
         pnlHeader.setBackground(new java.awt.Color(235, 249, 249));
         pnlHeader.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnTim.setBackground(new java.awt.Color(166, 208, 238));
-        btnTim.setText("Tìm");
-        btnTim.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTimActionPerformed(evt);
-            }
-        });
-
-        btnThem.setBackground(new java.awt.Color(41, 173, 86));
-        btnThem.setForeground(new java.awt.Color(255, 255, 255));
-        btnThem.setText("Thêm");
-        btnThem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemActionPerformed(evt);
-            }
-        });
-
-        btnSua.setBackground(new java.awt.Color(205, 13, 13));
-        btnSua.setForeground(new java.awt.Color(255, 255, 255));
-        btnSua.setText("Sửa");
-        btnSua.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSuaActionPerformed(evt);
-            }
-        });
-
-        cmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         javax.swing.GroupLayout pnlHeaderLayout = new javax.swing.GroupLayout(pnlHeader);
         pnlHeader.setLayout(pnlHeaderLayout);
         pnlHeaderLayout.setHorizontalGroup(
             pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlHeaderLayout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnSua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                .addGap(194, 194, 194)
                 .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(89, 89, 89)
-                .addComponent(cmb, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(532, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlHeaderLayout.setVerticalGroup(
             pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlHeaderLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         lblDSNV.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -156,10 +132,49 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
 
         tblDSNV.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã nhân viên", "Tên nhân viên", "Giới tính", "CCCD", "Số điện thoại", "Địa chỉ", "Ca", "Loại NV"
+                "Mã nhân viên", "Tên nhân viên", "Địa chỉ", "CCCD", "Số điện thoại", "Loại nhân viên", "Ca", "Giới tính"
             }
         ));
         scr.setViewportView(tblDSNV);
@@ -190,7 +205,7 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
                     .addGroup(pnlNhanVienLayout.createSequentialGroup()
                         .addGap(416, 416, 416)
                         .addComponent(lblDSNV, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(610, Short.MAX_VALUE))
         );
         pnlNhanVienLayout.setVerticalGroup(
             pnlNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,12 +277,26 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnTimActionPerformed
 
+    private void btnLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocActionPerformed
+        // TODO add your handling code here:
+//        ArrayList<NhanVien> ds = nv_dao.getNVTheoLoai((LoaiNhanVien) cmbLoaiNhanVien.getSelectedItem());
+//        if(ds.size() > 0){
+//            clearJTable();
+//            loadTable(ds);
+//            return;
+//        }else{
+//            clearJTable();
+//            JOptionPane.showMessageDialog(this, "Không tìm thấy !!!");
+//        }
+    }//GEN-LAST:event_btnLocActionPerformed
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_formMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private gui.swing.RadiusButton btnSua;
-    private gui.swing.RadiusButton btnThem;
-    private gui.swing.RadiusButton btnTim;
-    private javax.swing.JComboBox<String> cmb;
     private javax.swing.JLabel lblDSNV;
     private javax.swing.JLabel lblTong;
     private javax.swing.JPanel pnlHeader;

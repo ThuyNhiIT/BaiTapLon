@@ -15,10 +15,10 @@ import java.util.ArrayList;
  */
 public class MatHang_DAO {
 
-    private Statement statement;
+    private ArrayList<MatHang> ls;
 
     public MatHang_DAO() {
-
+        ls = new ArrayList<>();
     }
 
     public ArrayList<MatHang> getalltbMatHang() {
@@ -27,8 +27,8 @@ public class MatHang_DAO {
             ConnectDB db = ConnectDB.getInstance();
             db.connect();
             Connection con = db.getConnection();
-            String sql = "Select *from MatHang";
-            statement = con.createStatement();
+            String sql = "SELECT *FROM MatHang";
+            Statement statement = con.createStatement();
 
             // Thực thi câu lệnh SQL trả về đối tượng ResultSet
             ResultSet rs = statement.executeQuery(sql);
@@ -46,6 +46,10 @@ public class MatHang_DAO {
         }
         return dsmh;
 
+    }
+
+    public int traVeViTri(MatHang mh) {
+        return ls.indexOf(mh);
     }
 
     public ArrayList<MatHang> getMatHangTheoMaMH(String id) {
@@ -88,7 +92,8 @@ public class MatHang_DAO {
         int n = 0;
 
         try {
-            stmt = con.prepareStatement("insert into" + "MatHang(maMH, tenMH, SDT, tinhTrang) values (?, ?, ?, ?)");
+            stmt = con.prepareStatement("INSERT INTO MatHang(maMH, tenMH, Gia, trangThai) VALUES (?, ?, ?, ?)");
+//               stmt = con.prepareStatement("INSERT INTO KhachHang (maKH, tenKH, SDT, GioiTinh) VALUES (?, ?, ?, ?)");
             stmt.setString(1, mh.getMaMH());
             stmt.setString(2, mh.getTenMH());
             stmt.setDouble(3, mh.getGia());
@@ -112,7 +117,7 @@ public class MatHang_DAO {
         PreparedStatement stmt = null;
         int n = 0;
         try {
-            stmt = con.prepareStatement("Delete MatHang from MatHang where maMH =?");
+            stmt = con.prepareStatement("delete MatHang from MatHang where maMH=?");
             stmt.setString(1, maMH);
             n = stmt.executeUpdate();
         } catch (Exception e) {
@@ -151,13 +156,15 @@ public class MatHang_DAO {
         PreparedStatement stmt = null;
         int n = 0;
         try {
-            stmt = con.prepareStatement("update " + "MatHang set TenMH=?, gia=?,trangThai=? where maMH=?");
-
+            stmt = con.prepareStatement("update MatHang set TenMH=?, Gia=?, trangThai=? where maMH=?");
             stmt.setString(1, mh.getTenMH());
+            System.out.println("Kiêm Tra 1");
             stmt.setDouble(2, mh.getGia());
+            System.out.println("Kiêm Tra 2");
             stmt.setBoolean(3, mh.isTrangThai());
             stmt.setString(4, mh.getMaMH());
             n = stmt.executeUpdate();
+            System.out.println("Kiêm Tra xong");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

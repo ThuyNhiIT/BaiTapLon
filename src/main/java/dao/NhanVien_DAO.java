@@ -87,6 +87,36 @@ public class NhanVien_DAO {
         }
         return dsnv;
     }
+    
+    public ArrayList<NhanVien> getNVTheoLoai(LoaiNhanVien lnv){
+        ArrayList<NhanVien> ds = new ArrayList<NhanVien>();
+        PreparedStatement sta = null;
+        
+        try{
+            Connection con = ConnectDB.getInstance().getConnection();
+            String sql = "SELECT *FROM NhanVien nv join LoaiNhanVien lnv on nv.maLoai = lnv.maLoai where lnv.maLoai=?";
+            sta = con.prepareStatement(sql);
+            sta.setString(1, lnv.getMaLoai());
+            
+            ResultSet rs = sta.executeQuery();
+            while(rs.next()){
+                String maNV = rs.getString(1);
+                String tenNV = rs.getString(2);
+                Boolean gioiTinh = rs.getBoolean(3);
+                String cccd = rs.getString(4);
+                String sdt = rs.getString(5);
+                String diaChi = rs.getString(6);
+                String caLam = rs.getString(7);
+                String loaiNV = rs.getString(8);
+                
+                NhanVien nv = new NhanVien(maNV, tenNV, gioiTinh, cccd, sdt, diaChi, caLam, new LoaiNhanVien(loaiNV));
+                ds.add(nv);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return ds;
+    }
 
     public boolean addStaff(NhanVien nv){
         ConnectDB.getInstance();
@@ -95,8 +125,7 @@ public class NhanVien_DAO {
         int n = 0;
         
         try{
-            stmt = con.prepareStatement("insert into" + 
-                   "NhanVien values(?, ?, ?, ?, ?, ?, ?, ?)" );
+            stmt = con.prepareStatement("INSERT INTO NhanVien VALUES(?, ?, ?, ?, ?, ?, ?, ?)" );
             stmt.setString(1, nv.getMaNV());
             stmt.setString(2, nv.getTenNV());
             stmt.setBoolean(3, nv.isGioiTinh());

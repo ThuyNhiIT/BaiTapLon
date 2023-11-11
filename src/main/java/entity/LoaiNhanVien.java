@@ -11,6 +11,10 @@ public class LoaiNhanVien {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    public LoaiNhanVien(String maLoai){
+        this.maLoai = maLoai;
+    }
 
     public LoaiNhanVien(String maLoai, String tenLoai) {
         super();
@@ -56,10 +60,6 @@ public class LoaiNhanVien {
         }
         final LoaiNhanVien other = (LoaiNhanVien) obj;
         return Objects.equals(this.maLoai, other.maLoai);
-    }
-
-    public LoaiNhanVien(String maLoai) {
-        this.maLoai = maLoai;
     }
 
     @Override
