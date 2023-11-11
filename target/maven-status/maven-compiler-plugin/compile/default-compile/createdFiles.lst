@@ -1,6 +1,7 @@
 gui\event\EventShowPopUpMenu.class
 gui_dialog\DL_test$5.class
 gui_dialog\DL_CapNhatMatHang$2.class
+gui_dialog\DL_PhongDangSuDung$3.class
 gui_dialog\DL_ThongTinKhachHang$1.class
 entity\NhanVien.class
 gui\event\EventMenu.class
@@ -18,10 +19,12 @@ gui\model\ModelMenu.class
 gui_dialog\DL_ThemNV$2.class
 gui_dialog\DL_test.class
 gui_dialog\DL_ThuePhong$3.class
+gui_dialog\DL_PhongDangSuDung$3$1.class
 gui\form\Form_QuanLyKhachHang$2.class
 gui_dialog\DL_CapNhatMatHang$1.class
 gui\form\Form_QuanLyDatPhong$3.class
 gui\swing\CustomJOptionPane$RoundedGradientButton.class
+gui_dialog\DL_PhongDangSuDung$2.class
 gui\form\ProcessesLoading$1.class
 gui\swing\MenuAnimation$1.class
 gui\swing\MenuItem$2.class
@@ -34,6 +37,7 @@ gui\swing\Button$1.class
 gui\form\Form_Login$2.class
 gui\swing\ActionButtonTable.class
 gui_dialog\DL_SuaNV$4.class
+gui\form\Form_QuanLyDatPhong$2$1.class
 gui\event\EventMenuSelected.class
 entity\KhachHang.class
 gui_dialog\DL_KiemTravsAddKH$5.class
@@ -80,12 +84,14 @@ gui_dialog\DL_ThongTinKhachHang$4.class
 gui\form\Form_MatHang$2.class
 gui_dialog\DL_KiemTravsAddKH$1.class
 gui\swing\RadiusButton.class
+gui_dialog\DL_PhongDangSuDung$1.class
 gui_dialog\DL_ThuePhong$2.class
 gui\swing\scrollbar\ScrollBarCustom.class
 dao\MatHang_DAO.class
 gui\Application$1.class
 gui_dialog\DL_test$5$1.class
 gui_dialog\DL_ThongTinKhachHang.class
+gui_dialog\DL_PhongDangSuDung.class
 gui_dialog\DL_ThemNV$1.class
 gui\swing\CustomJOptionPane.class
 gui_dialog\DL_ThongTinKhachHang$5.class
