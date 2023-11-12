@@ -9,6 +9,7 @@ import gui.component.Room;
 import gui.model.ModelRoom;
 import gui.swing.scrollbar.ScrollBarCustom;
 import gui_dialog.DL_KiemTravsAddKH;
+import gui_dialog.DL_PhongDangSuDung;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -33,6 +34,7 @@ public class Form_QuanLyDatPhong extends javax.swing.JPanel {
     private PhongHat_DAO ph_dao;
 
     private static String selectedRoom;
+    private static String selectedRoomName;
 
     public Form_QuanLyDatPhong() {
 
@@ -58,6 +60,14 @@ public class Form_QuanLyDatPhong extends javax.swing.JPanel {
         return selectedRoom;
     }
 
+    public static void setRoomSelectedName(String roomName) {
+        selectedRoomName = roomName;
+    }
+
+    public static String getRoomSelectedName() {
+        return selectedRoomName;
+    }
+
     public void addPhongTrong(ModelRoom data) {
         Room room = new Room();
         room.setData(data);
@@ -68,15 +78,15 @@ public class Form_QuanLyDatPhong extends javax.swing.JPanel {
                 DL_KiemTravsAddKH kiemTraVsAddKH = new DL_KiemTravsAddKH((java.awt.Frame) SwingUtilities.getWindowAncestor((Component) e.getSource()), true);
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     kiemTraVsAddKH.setLocationRelativeTo(Form_QuanLyDatPhong.this);
-                    kiemTraVsAddKH.setVisible(true);                
+                    kiemTraVsAddKH.setVisible(true);
                 }
                 kiemTraVsAddKH.addWindowListener(new WindowAdapter() {
-                @Override
-                public void windowClosed(WindowEvent e) {
-                   // khi đống thì tao cho nó refresh lại mấy cái room 
-                    refreshRooms();
-                }
-            });
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        // khi đống thì tao cho nó refresh lại mấy cái room 
+                        refreshRooms();
+                    }
+                });
             }
         });
         MigLayout migLayout = new MigLayout("wrap 4, gapx 100, gapy 80", "[grow, fill]");
@@ -129,9 +139,20 @@ public class Form_QuanLyDatPhong extends javax.swing.JPanel {
         room.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+                setRoomSelected(data.getRoomId());
+                setRoomSelectedName(data.getRoomName());
+                DL_PhongDangSuDung pdsd = new DL_PhongDangSuDung((java.awt.Frame) SwingUtilities.getWindowAncestor((Component) e.getSource()), true);
                 if (SwingUtilities.isLeftMouseButton(e)) {
-
+                    pdsd.setLocationRelativeTo(Form_QuanLyDatPhong.this);
+                    pdsd.setVisible(true);
                 }
+                pdsd.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        // khi đống thì tao cho nó refresh lại mấy cái room 
+                        refreshRooms();
+                    }
+                });
             }
         });
         MigLayout migLayout = new MigLayout("wrap 4, gapx 80, gapy 80, inset 20", "[grow, fill]");
