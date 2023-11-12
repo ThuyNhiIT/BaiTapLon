@@ -178,17 +178,9 @@ public class Form_MatHang extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã mặt hàng", "Tên mặt hàng", "Giá", "Trạng thái", "Hành động"
+                "Mã mặt hàng", "Tên mặt hàng", "Giá", "Trạng thái"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                true, true, true, true, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         scr.setViewportView(tblMatHang);
         tblMatHang.getAccessibleContext().setAccessibleName("");
 
@@ -230,28 +222,33 @@ public class Form_MatHang extends javax.swing.JPanel {
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         mh_dao = new MatHang_DAO();
         if (tblMatHang.getSelectedRowCount() > 0) {
-            if (JOptionPane.showConfirmDialog(this, "Xác nhận sửa mặt hàng đã chọn?", "Warring", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
+            if (JOptionPane.showConfirmDialog(this, "Xác nhận sửa mặt hàng đã chọn?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 int[] selectedRows = tblMatHang.getSelectedRows();
-                System.out.println("Chọn xong");
-                new DL_CapNhatMatHangh().setVisible(true);
-//                for (int i = selectedRows.length - 1; i >= 0; i--) {
-//                    List<MatHang> mhs = mh_dao.getalltbMatHang();
-//                    MatHang mh = mhs.get(selectedRows[i]);
-//                    mh_dao.editMatHang(mh);
-//                }
-
+                for (int i = 0; i < selectedRows.length; i++) {
+                    int rowIndex = selectedRows[i];
+                    // Lấy dữ liệu từ bảng
+                    String maHang = tblMatHang.getValueAt(rowIndex, 0).toString();
+                    String tenHang = tblMatHang.getValueAt(rowIndex, 1).toString();
+                    Double gia = Double.parseDouble(tblMatHang.getValueAt(rowIndex, 2).toString()); // Ví dụ cột giá ở cột thứ 2
+                    Boolean trangThai = Boolean.parseBoolean(tblMatHang.getValueAt(rowIndex, 3).toString()); // Ví dụ cột trạng thái ở cột thứ 3
+                    // Tạo đối tượng MatHang từ dữ liệu đã lấy
+                    MatHang mh = new MatHang(maHang, tenHang, gia, trangThai);
+                    // Thực hiện việc sửa mặt hàng trong cơ sở dữ liệu
+                    boolean isSuccess = mh_dao.editMatHang(mh);
+                    if (isSuccess) {
+                        JOptionPane.showMessageDialog(this, "Sửa thành công");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Sửa thất bại");
+                    }
+                }
+                // Xóa nội dung hiện tại của bảng
                 clearJTable();
+                // Tải lại dữ liệu từ cơ sở dữ liệu
                 DocDuLieu();
-                System.out.println("Load xong");
-                JOptionPane.showMessageDialog(this, "Sửa thành công");
             }
         } else {
             JOptionPane.showMessageDialog(this, "Chọn dòng cần sửa!");
-
         }
-
-//                DL_KiemTravsAddKH kiemTraVsAddKH = new DL_KiemTravsAddKH((java.awt.Frame) SwingUtilities.getWindowAncestor((Component) e.getSource()), true);
-//                kiemTraVsAddKH.setLocationRelativeTo(Form_QuanLyDatPhong.this);
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
@@ -278,7 +275,7 @@ public class Form_MatHang extends javax.swing.JPanel {
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
         String maMH = txtTim.getText().trim();
         if (!(maMH.length() > 0)) {
-             JOptionPane.showMessageDialog(this, "Vui lòng nhập mã mặt hàng");
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập mã mặt hàng");
         } else {
             String maTim = txtTim.getText();
             ArrayList<MatHang> dsMHTim = null;
@@ -289,7 +286,7 @@ public class Form_MatHang extends javax.swing.JPanel {
                 }
             }
             if (dsMHTim != null) {
-                  clearDataOnModel();
+                clearDataOnModel();
                 for (MatHang mh : dsMHTim) {
                     dtmMatHang.addRow(new Object[]{mh.getMaMH(), mh.getTenMH(), mh.getGia(), mh.isTrangThai() ? "Còn hàng" : "Hết hàng"});
 //                    int index = mh_dao.traVeViTri(mh);
@@ -298,19 +295,7 @@ public class Form_MatHang extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Không tìm thấy");
             }
 
-//        }
-//        if (txtTim.getText().equals(""))
-//            JOptionPane.showMessageDialog(this, "Vui lòng nhập mã");
-//        else {
-//            MatHang mh = new MatHang();
-//            mh = mh_dao.findMatHang(txtTim.getText());
-//            if (mh == null) {
-//                JOptionPane.showMessageDialog(this, "Không tìm thấy mã");
-//            } else {
-//                int index = mh_dao.traVeViTri(mh);
-//                tblMatHang.setRowSelectionInterval(index, index);
-//            }
-//        }
+
     }//GEN-LAST:event_btnTimActionPerformed
     }
 

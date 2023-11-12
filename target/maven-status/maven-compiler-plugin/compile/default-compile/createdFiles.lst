@@ -4,7 +4,6 @@ gui_dialog\DL_CapNhatMatHang$2.class
 gui\form\Form_QuanLyPhongHat.class
 gui_dialog\DL_ThongTinKhachHang$1.class
 entity\NhanVien.class
-gui\form\Form_MatHang$5.class
 gui\event\EventMenu.class
 gui_dialog\DL_CapNhatMatHang.class
 gui_dialog\DL_ThemDichVu$1.class

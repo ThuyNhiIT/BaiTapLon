@@ -16,21 +16,31 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Form_DichVu extends javax.swing.JPanel {
 
+    private MatHang_DAO mh_dao;
+    private DefaultTableModel dtmMatHang;
     private DichVu_DAO dv_dao;
     private DefaultTableModel dtmDichVu;
 
     public Form_DichVu() {
         initComponents();
-        dv_dao = new DichVu_DAO();
-        dtmDichVu = (DefaultTableModel) tblDichVu.getModel();
+//        dv_dao = new DichVu_DAO();
+//        dtmDichVu = (DefaultTableModel) tblDichVu.getModel();
+        mh_dao = new MatHang_DAO();
+        dtmMatHang = (DefaultTableModel) tblDichVu.getModel();
+
         DocDuLieu();
         System.out.println("Test");
     }
 
     public void DocDuLieu() {
-        List<DichVu> list = dv_dao.getalltbDichVu();
-        for (DichVu dv : list) {
-            dtmDichVu.addRow(new Object[]{dv.getMaDV(), dv.getTenDV(), dv.getMaMH(), dv.getGia()});
+        List<MatHang> list = mh_dao.getalltbMatHang();
+        	int stt = 1;
+
+        for (MatHang mh : list) {
+            if (mh.isTrangThai()) {
+                dtmMatHang.addRow(new Object[]{stt++ + "", mh.getMaMH(), mh.getTenMH(), mh.getGia()});
+            }
+
         }
     }
 
@@ -79,10 +89,13 @@ public class Form_DichVu extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã dịch vụ", "Tên dịch vụ", "Mã mặt hàng", "Đơn giá"
+                "STT", "Mã dịch vụ", "Tên dịch vụ", "Đơn giá"
             }
         ));
         scr.setViewportView(tblDichVu);
+        if (tblDichVu.getColumnModel().getColumnCount() > 0) {
+            tblDichVu.getColumnModel().getColumn(0).setPreferredWidth(50);
+        }
 
         pnlHeader.setBackground(new java.awt.Color(235, 249, 249));
         pnlHeader.setBorder(javax.swing.BorderFactory.createEtchedBorder());
