@@ -246,8 +246,8 @@ public class Form_MatHang extends javax.swing.JPanel {
                     MatHang mh = new MatHang(maHang, tenHang, gia, trangThai);
                     // Thực hiện việc sửa mặt hàng trong cơ sở dữ liệu
                     boolean isSuccess = mh_dao.editMatHang(mh);
-                    
-                   System.out.print("Sửa xong");
+
+                    System.out.print("Sửa xong");
                     if (isSuccess) {
                         JOptionPane.showMessageDialog(this, "Sửa thành công");
                     } else {
@@ -274,9 +274,10 @@ public class Form_MatHang extends javax.swing.JPanel {
                     MatHang mh = mhs.get(selectedRows[i]);
                     String maMH = mh.getMaMH();
                     mh_dao.DeleteMatHang(maMH);
+                    clearJTable();
+                    DocDuLieu();
                 }
-                clearJTable();
-                DocDuLieu();
+
                 JOptionPane.showMessageDialog(this, "Xóa thành công");
             }
         } else {
