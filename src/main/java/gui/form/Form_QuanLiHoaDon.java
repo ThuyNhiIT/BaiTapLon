@@ -4,19 +4,38 @@
  */
 package gui.form;
 
+import dao.HoaDon_DAO;
+import entity.HoaDon;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author HO MINH HAU
  */
 public class Form_QuanLiHoaDon extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Form_QuanLiHoaDon
-     */
+      private HoaDon_DAO hd_dao;
+    private DefaultTableModel dtmhd;
     public Form_QuanLiHoaDon() {
         initComponents();
+        hd_dao = new HoaDon_DAO();
+        dtmhd = (DefaultTableModel) tblHD.getModel();
+        DocDuLieu();
+     
     }
-
+      public void clearDataOnModel() {
+        DefaultTableModel dtm = (DefaultTableModel) tblHD.getModel();
+        dtm.getDataVector().removeAllElements();
+    }
+  public void DocDuLieu() {
+        List<HoaDon> list = hd_dao.getalltbHoaDon();
+        for (HoaDon hd : list) {
+            dtmhd.addRow(new Object[]{hd.getMaHD(), hd.getNgayLapHD(), hd.getKhachHang().getMaKH(), hd.getNhanVien().getMaNV(), hd.getTongTien()});
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,7 +48,7 @@ public class Form_QuanLiHoaDon extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblHD = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -52,54 +71,18 @@ public class Form_QuanLiHoaDon extends javax.swing.JPanel {
 
         jPanel4.setBackground(new java.awt.Color(235, 249, 249));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblHD.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Tên", "Thời gian/Số lượng", "Đơn giá", "Thành tiền"
+                "Mã hóa đơn", "Ngày lập HD", "Mã khách hàng", "Mã nhân viên", "Tổng tiền"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tblHD);
+        if (tblHD.getColumnModel().getColumnCount() > 0) {
+            tblHD.getColumnModel().getColumn(0).setResizable(false);
+        }
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Tên khách hàng");
@@ -147,6 +130,11 @@ public class Form_QuanLiHoaDon extends javax.swing.JPanel {
         btnTim.setBackground(new java.awt.Color(166, 208, 238));
         btnTim.setBorder(null);
         btnTim.setText("Tìm");
+        btnTim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlTimLayout = new javax.swing.GroupLayout(pnlTim);
         pnlTim.setLayout(pnlTimLayout);
@@ -282,6 +270,32 @@ public class Form_QuanLiHoaDon extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
 
+    private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
+        String maHD = txtTim.getText().trim();
+        if (!(maHD.length() > 0)) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập mã hóa đơn");
+        } else {
+            String maTim = txtTim.getText();
+            ArrayList<HoaDon> dsHDTim = null;
+            for (HoaDon hd : hd_dao.getalltbHoaDon()) {
+                if (hd.getMaHD().equals(maTim)) {
+                    dsHDTim = new ArrayList<HoaDon>();
+                    dsHDTim.add(hd);
+                }
+            }
+            if (dsHDTim != null) {
+                clearDataOnModel();
+                for (HoaDon hd : dsHDTim) {
+                  dtmhd.addRow(new Object[]{hd.getMaHD(), hd.getNgayLapHD(), hd.getKhachHang().getMaKH(), hd.getNhanVien().getMaNV(), hd.getTongTien()});
+//                    int index = mh_dao.traVeViTri(mh);
+                }
+            } else if (dsHDTim == null) {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy");
+            }
+
+        }
+    }//GEN-LAST:event_btnTimActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.swing.RadiusButton btnTim;
@@ -294,7 +308,6 @@ public class Form_QuanLiHoaDon extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -304,6 +317,7 @@ public class Form_QuanLiHoaDon extends javax.swing.JPanel {
     private javax.swing.JLabel lblTim;
     private javax.swing.JPanel pnlHeader;
     private javax.swing.JPanel pnlTim;
+    private javax.swing.JTable tblHD;
     private javax.swing.JTextField txtTim;
     // End of variables declaration//GEN-END:variables
 }

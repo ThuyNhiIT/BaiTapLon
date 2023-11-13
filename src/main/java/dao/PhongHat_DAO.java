@@ -9,14 +9,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
 /**
  *
  * @author HO MINH HAU
  */
 public class PhongHat_DAO {
 
-    public PhongHat_DAO() {
+    private ArrayList<PhongHat> ls;
 
+    public PhongHat_DAO() {
+        ls = new ArrayList<>();
     }
 
     public ArrayList<PhongHat> getAllPhongHat() {
@@ -33,8 +36,7 @@ public class PhongHat_DAO {
                 String loaiPhong = rs.getString(3);
                 String tinhTrang = rs.getString(4);
                 PhongHat ph = new PhongHat(maPhong, tenPhong, new LoaiPhong(loaiPhong), tinhTrang);
-                dsPH.add(ph);
-
+                dsPH.add(ph); 
             }
 
         } catch (SQLException e) {
@@ -85,4 +87,34 @@ public class PhongHat_DAO {
         }
     }
 
+    public boolean editPhongHat(PhongHat ph) {
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement stmt = null;
+        int n = 0;
+        try {
+            stmt = con.prepareStatement("update PhongHat set tenPhong=?, maLoaiPhong=?, tinhTrangPhong=? where maPhong=?");
+            stmt.setString(1, ph.getTenPhong());
+            stmt.setString(2, ph.getLoaiPhong().getMaLoaiPhong());
+            stmt.setString(3, ph.getTinhTrangPhong());
+            stmt.setString(4, ph.getMaPhong());
+            n = stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return n > 0;
+    }
+       public boolean DeletePhongHat(String maPH) {
+        Connection con = ConnectDB.getInstance().getConnection();
+        PreparedStatement stmt = null;
+        int n = 0;
+        try {
+            stmt = con.prepareStatement("delete PhongHat from PhongHat where maPhong=?");
+            stmt.setString(1, maPH);
+            n = stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return n > 0;
+    }
 }

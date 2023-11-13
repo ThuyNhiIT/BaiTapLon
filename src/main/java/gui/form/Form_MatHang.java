@@ -2,12 +2,13 @@ package gui.form;
 
 import dao.MatHang_DAO;
 import entity.MatHang;
-import gui_dialog.DL_CapNhatMatHangh;
 import gui_dialog.DL_ThemMatHang;
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -149,11 +150,11 @@ public class Form_MatHang extends javax.swing.JPanel {
             .addGroup(pnlHeaderLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(pnlTim, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 250, Short.MAX_VALUE)
                 .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addGap(38, 38, 38)
                 .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
+                .addGap(47, 47, 47)
                 .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(70, 70, 70))
         );
@@ -180,7 +181,15 @@ public class Form_MatHang extends javax.swing.JPanel {
             new String [] {
                 "Mã mặt hàng", "Tên mặt hàng", "Giá", "Trạng thái"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         scr.setViewportView(tblMatHang);
         tblMatHang.getAccessibleContext().setAccessibleName("");
 
@@ -216,7 +225,9 @@ public class Form_MatHang extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        new DL_ThemMatHang().setVisible(true);
+        DL_ThemMatHang themMH = new DL_ThemMatHang((java.awt.Frame) SwingUtilities.getWindowAncestor((Component) evt.getSource()), true);
+        themMH.setLocationRelativeTo(Form_MatHang.this);
+        themMH.setVisible(true);
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
@@ -235,6 +246,8 @@ public class Form_MatHang extends javax.swing.JPanel {
                     MatHang mh = new MatHang(maHang, tenHang, gia, trangThai);
                     // Thực hiện việc sửa mặt hàng trong cơ sở dữ liệu
                     boolean isSuccess = mh_dao.editMatHang(mh);
+                    
+                   System.out.print("Sửa xong");
                     if (isSuccess) {
                         JOptionPane.showMessageDialog(this, "Sửa thành công");
                     } else {
