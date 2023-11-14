@@ -173,6 +173,22 @@ public ChiTietHoaDonPhong getChiTietHoaDonPhongTheoMaHD(String id) {
         return n > 0;
     }
 
+    //update room
+    public Boolean doiPhong(String maHD, String maPhong){
+
+        Connection con = ConnectDB.getInstance().getConnection();
+        PreparedStatement stmt = null;
+        int n = 0;
+        try{
+            stmt = con.prepareStatement("UPDATE ChiTietHoaDonPhong SET maPhong = ? WHERE maHD = ?");
+            stmt.setString(1, maPhong);
+            stmt.setString(2, maHD);
+            n = stmt.executeUpdate();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return n > 0;
+    }
 
 
 }

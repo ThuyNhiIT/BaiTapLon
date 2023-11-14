@@ -53,6 +53,7 @@ public class Main extends javax.swing.JFrame {
         menu = new Menu();
         header = new Header();
         main = new MainForm();
+        main.showForm(new Form_Home());
 
         // Thêm sự kiện cho menu khi cần hiển thị menu con (pop-up menu).
         // Khi thu nhỏ menu thì gọi sự kiện này để hiển thị popupmenu

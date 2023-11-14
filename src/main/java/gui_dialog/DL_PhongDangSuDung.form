@@ -193,6 +193,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Chuy&#x1ec3;n Ph&#xf2;ng"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChuyenPhongActionPerformed"/>
+          </Events>
         </Component>
         <Component class="gui.swing.Button" name="btnExit">
           <Properties>
