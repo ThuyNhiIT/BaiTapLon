@@ -5,10 +5,13 @@ import dao.PhongHat_DAO;
 import entity.LoaiPhong;
 import entity.PhongHat;
 import gui.form.Form_QuanLyPhongHat;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 
 /**
@@ -69,12 +72,8 @@ public class DL_ThemPhongHat extends javax.swing.JDialog {
         lblThemPhong = new javax.swing.JLabel();
         lblTenPhong = new javax.swing.JLabel();
         lblLoaiPhong = new javax.swing.JLabel();
-        lblMaLoaiPhong = new javax.swing.JLabel();
-        lblGia = new javax.swing.JLabel();
         lblTrangThai = new javax.swing.JLabel();
         txtTenPhong = new javax.swing.JTextField();
-        txtMaLoaiPhong = new javax.swing.JTextField();
-        txtGia = new javax.swing.JTextField();
         radVIP = new javax.swing.JRadioButton();
         radThuong = new javax.swing.JRadioButton();
         btnThem = new gui.swing.RadiusButton();
@@ -100,12 +99,6 @@ public class DL_ThemPhongHat extends javax.swing.JDialog {
         lblLoaiPhong.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblLoaiPhong.setText("Loại phòng:");
 
-        lblMaLoaiPhong.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblMaLoaiPhong.setText("Mã loại phòng:");
-
-        lblGia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblGia.setText("Giá:");
-
         lblTrangThai.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTrangThai.setText("Trạng thái:");
 
@@ -114,10 +107,6 @@ public class DL_ThemPhongHat extends javax.swing.JDialog {
                 txtTenPhongActionPerformed(evt);
             }
         });
-
-        txtMaLoaiPhong.setEditable(false);
-
-        txtGia.setEditable(false);
 
         radVIP.setText("Phòng VIP");
         radVIP.addActionListener(new java.awt.event.ActionListener() {
@@ -187,8 +176,6 @@ public class DL_ThemPhongHat extends javax.swing.JDialog {
                         .addGroup(pnThemPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblLoaiPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblTenPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblMaLoaiPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblGia, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(pnThemPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,16 +192,15 @@ public class DL_ThemPhongHat extends javax.swing.JDialog {
                                         .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(pnThemPhongLayout.createSequentialGroup()
                                         .addGroup(pnThemPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(pnThemPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(txtMaLoaiPhong, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
-                                                .addGroup(pnThemPhongLayout.createSequentialGroup()
-                                                    .addComponent(radVIP, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGap(62, 62, 62)
-                                                    .addComponent(radThuong, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addComponent(txtGia, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE))
-                                            .addComponent(radTrong, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(radBaoTri, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 8, Short.MAX_VALUE)))))
+                                            .addGroup(pnThemPhongLayout.createSequentialGroup()
+                                                .addComponent(radVIP, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(61, 61, 61)
+                                                .addComponent(radThuong, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(pnThemPhongLayout.createSequentialGroup()
+                                                .addComponent(radTrong, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(radBaoTri, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(0, 31, Short.MAX_VALUE)))))
                         .addGap(35, 35, 35))))
         );
         pnThemPhongLayout.setVerticalGroup(
@@ -230,27 +216,18 @@ public class DL_ThemPhongHat extends javax.swing.JDialog {
                 .addGroup(pnThemPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTenPhong)
                     .addComponent(txtTenPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addGroup(pnThemPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLoaiPhong)
                     .addComponent(radVIP)
                     .addComponent(radThuong))
-                .addGap(18, 18, 18)
-                .addGroup(pnThemPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMaLoaiPhong)
-                    .addComponent(txtMaLoaiPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pnThemPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblGia))
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addGroup(pnThemPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTrangThai)
-                    .addGroup(pnThemPhongLayout.createSequentialGroup()
+                    .addGroup(pnThemPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(radTrong)
-                        .addGap(18, 18, 18)
                         .addComponent(radBaoTri)))
-                .addGap(25, 25, 25)
+                .addGap(32, 32, 32)
                 .addGroup(pnThemPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnXoaR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -294,7 +271,7 @@ public class DL_ThemPhongHat extends javax.swing.JDialog {
             String tinhTrang = radVIP.isSelected() ? "Trong" : "Dang bao tri";
             PhongHat addPH = new PhongHat(maPH, tenPH, new LoaiPhong(LP), tinhTrang);
             ph_dao.addPhongHat(addPH);
-             JOptionPane.showMessageDialog(null, "Thêm thành công");
+            JOptionPane.showMessageDialog(null, "Thêm thành công");
         } catch (SQLException ex) {
             Logger.getLogger(DL_ThemPhongHat.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -302,7 +279,6 @@ public class DL_ThemPhongHat extends javax.swing.JDialog {
 
     private void btnXoaRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaRActionPerformed
         txtTenPhong.setText("");
-        txtGia.setText("");
         radThuong.setSelected(false);
         radVIP.setSelected(false);
         txtTenPhong.requestFocus();
@@ -364,9 +340,7 @@ public class DL_ThemPhongHat extends javax.swing.JDialog {
     private gui.swing.RadiusButton btnXoaR;
     private javax.swing.ButtonGroup group1;
     private javax.swing.ButtonGroup group2;
-    private javax.swing.JLabel lblGia;
     private javax.swing.JLabel lblLoaiPhong;
-    private javax.swing.JLabel lblMaLoaiPhong;
     private javax.swing.JLabel lblTenPhong;
     private javax.swing.JLabel lblThemPhong;
     private javax.swing.JLabel lblTrangThai;
@@ -375,8 +349,7 @@ public class DL_ThemPhongHat extends javax.swing.JDialog {
     private javax.swing.JRadioButton radThuong;
     private javax.swing.JRadioButton radTrong;
     private javax.swing.JRadioButton radVIP;
-    private javax.swing.JTextField txtGia;
-    private javax.swing.JTextField txtMaLoaiPhong;
     private javax.swing.JTextField txtTenPhong;
     // End of variables declaration//GEN-END:variables
+
 }
