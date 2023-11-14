@@ -25,21 +25,18 @@ import javax.swing.table.DefaultTableModel;
  * @author HO MINH HAU
  */
 public class Form_QuanLyKhachHang extends javax.swing.JPanel {
-    
+
     private KhachHang_DAO kh_dao;
     private DefaultTableModel dtmKhachHang;
     private ArrayList<KhachHang> customers;
-    
+
     public Form_QuanLyKhachHang() {
         initComponents();
         kh_dao = new KhachHang_DAO();
         dtmKhachHang = (DefaultTableModel) tblDSKH.getModel();
-//        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-//        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-//        
-//        for (int i = 0; i < tblDSKH.getColumnCount(); i++) {
-//            tblDSKH.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-//        }
+        KhachHang_DAO KH = new KhachHang_DAO();
+        int tongKH = KH.getSoLuongKhachHang();
+        txtTong.setText(String.valueOf(tongKH));
         DocDuLieu();
 //        loadTable(kh_dao.getalltbKhachHang());
 
@@ -62,30 +59,30 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
             dtmKhachHang.addRow(new Object[]{kh.getMaKH(), kh.getTenKH(), kh.getSdt(), kh.isGioitinh() ? "Nam" : "Nữ"});
         }
     }
-    
+
     public void clearJTable() {
         while (tblDSKH.getRowCount() > 0) {
             dtmKhachHang.removeRow(0);
         }
     }
-    
+
     public void clearDataOnModel() {
         DefaultTableModel dtm = (DefaultTableModel) tblDSKH.getModel();
         dtm.getDataVector().removeAllElements();
     }
-    
+
     public void DocDuLieu() {
         List<KhachHang> list = kh_dao.getalltbKhachHang();
         for (KhachHang kh : list) {
             dtmKhachHang.addRow(new Object[]{kh.getMaKH(), kh.getTenKH(), kh.getSdt(), kh.isGioitinh() ? "Nam" : "Nữ"});
         }
     }
-    
-    public String phatSinhMaKH(){
+
+    public String phatSinhMaKH() {
         List<KhachHang> khs = kh_dao.getalltbKhachHang();
         String temp = null;
 
-        for(KhachHang kh : khs){
+        for (KhachHang kh : khs) {
             temp = kh.getMaKH();
         }
         int count = laySoDuoi(temp);
@@ -95,16 +92,16 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
         return maKHang;
     }
 
-    public int laySoDuoi(String str){
-        if(str == null){
+    public int laySoDuoi(String str) {
+        if (str == null) {
             return 0;
-        }else{
+        } else {
             String numberStr = str.substring(2);//Loại bỏ kí tự "KH"
             int number = Integer.parseInt(numberStr);
             return number;
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -223,6 +220,8 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
         lblTong.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTong.setText("Tổng số khách hàng");
 
+        txtTong.setEditable(false);
+
         btnCapNhatTotalKH.setBackground(new java.awt.Color(166, 208, 238));
         btnCapNhatTotalKH.setText("Cập nhật");
         btnCapNhatTotalKH.addActionListener(new java.awt.event.ActionListener() {
@@ -290,7 +289,7 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
         } else {
             String maTim = txtTim.getText();
             ArrayList<KhachHang> dsKHtim = null;
-            
+
             for (KhachHang kh : kh_dao.getalltbKhachHang()) {
                 if (kh.getSdt().equals(maTim)) {
                     dsKHtim = new ArrayList<KhachHang>();
@@ -308,20 +307,20 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnTimActionPerformed
 
-   
+
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
 
-        
+
     }//GEN-LAST:event_btnSuaActionPerformed
 
-    private void updateTotalCustomer(){
+    private void updateTotalCustomer() {
         int totalCustomer = dtmKhachHang.getRowCount();
-        txtTong.setText("" +totalCustomer);
+        txtTong.setText("" + totalCustomer);
     }
-    
+
     private void btnCapNhatTotalKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatTotalKHActionPerformed
         // TODO add your handling code here:
-       updateTotalCustomer();
+        updateTotalCustomer();
     }//GEN-LAST:event_btnCapNhatTotalKHActionPerformed
 
 

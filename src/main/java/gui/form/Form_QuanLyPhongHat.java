@@ -33,6 +33,9 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
         ph_dao = new PhongHat_DAO();
         lp_dao = new LoaiPhong_DAO();
         dtmPhongHat = (DefaultTableModel) tblDSPH.getModel();
+        PhongHat_DAO KH = new PhongHat_DAO();
+        int tongPH = KH.getTongSoPhong();
+        txtTong.setText(String.valueOf(tongPH));
         DocDuLieu();
     }
 
@@ -89,6 +92,8 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
         lblDSPH = new javax.swing.JLabel();
         scr = new javax.swing.JScrollPane();
         tblDSPH = new javax.swing.JTable();
+        lblTong = new javax.swing.JLabel();
+        txtTong = new javax.swing.JTextField();
 
         pnlPhongHat.setBackground(new java.awt.Color(235, 249, 249));
 
@@ -201,6 +206,11 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
         ));
         scr.setViewportView(tblDSPH);
 
+        lblTong.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblTong.setText("Tổng số phòng");
+
+        txtTong.setEditable(false);
+
         javax.swing.GroupLayout pnlPhongHatLayout = new javax.swing.GroupLayout(pnlPhongHat);
         pnlPhongHat.setLayout(pnlPhongHatLayout);
         pnlPhongHatLayout.setHorizontalGroup(
@@ -216,6 +226,12 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
                         .addComponent(lblDSPH)
                         .addGap(0, 505, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(pnlPhongHatLayout.createSequentialGroup()
+                .addGap(92, 92, 92)
+                .addComponent(lblTong)
+                .addGap(40, 40, 40)
+                .addComponent(txtTong, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlPhongHatLayout.setVerticalGroup(
             pnlPhongHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,7 +241,11 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
                 .addComponent(lblDSPH)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scr, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(pnlPhongHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTong)
+                    .addComponent(txtTong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -344,11 +364,13 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
     private gui.swing.RadiusButton btnXoa;
     private javax.swing.JLabel lblDSPH;
     private javax.swing.JLabel lblTim;
+    private javax.swing.JLabel lblTong;
     private javax.swing.JPanel pnlHeader;
     private javax.swing.JPanel pnlPhongHat;
     private javax.swing.JPanel pnlTim;
     private javax.swing.JScrollPane scr;
     private javax.swing.JTable tblDSPH;
     private javax.swing.JTextField txtTim;
+    private javax.swing.JTextField txtTong;
     // End of variables declaration//GEN-END:variables
 }

@@ -86,24 +86,24 @@ public class PhongHat_DAO {
             return false;
         }
     }
+
     //find phong by maPhong
-    public PhongHat getPhongHatByMaPhong(String maPhong){
+    public PhongHat getPhongHatByMaPhong(String maPhong) {
         PhongHat ph = null;
-        try{
+        try {
             ConnectDB.getInstance();
             Connection con = ConnectDB.getConnection();
             String sql = "SELECT * FROM PhongHat WHERE maPhong = ?";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, maPhong);
             ResultSet rs = statement.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 String tenPhong = rs.getString(2);
                 String loaiPhong = rs.getString(3);
                 String tinhTrang = rs.getString(4);
                 ph = new PhongHat(maPhong, tenPhong, new LoaiPhong(loaiPhong), tinhTrang);
             }
-        }
-        catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return ph;
@@ -169,6 +169,7 @@ public class PhongHat_DAO {
     public static final String TABLE_NAME = "PhongHat";
     public static final String COLUMN_TINH_TRANG_PHONG = "tinhTrangPhong";
     public static final String COLUMN_SO_PHONG_TRONG = "SoPhongTrong";
+    public static final String COLUMN_SO_PHONG = "SoPhong";
 
     public int getSoPhongTrong() {
         ConnectDB.getInstance();
@@ -179,6 +180,22 @@ public class PhongHat_DAO {
             ResultSet rs = statement.executeQuery(sql);
             if (rs.next()) {
                 return rs.getInt(COLUMN_SO_PHONG_TRONG);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int getTongSoPhong() {
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        try {
+            String sql = "SELECT COUNT(*) AS SoPhong FROM " + TABLE_NAME + " ";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            if (rs.next()) {
+                return rs.getInt(COLUMN_SO_PHONG);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -210,4 +227,5 @@ public class PhongHat_DAO {
         }
         return n > 0;
     }
+
 }
