@@ -17,6 +17,12 @@ public class MatHang {
     private double gia;
     private boolean trangThai;
 
+    public MatHang(String tenMH, double gia, boolean trangThai) {
+        this.tenMH = tenMH;
+        this.gia = gia;
+        this.trangThai = trangThai;
+    }
+
     public MatHang(String maMH, String tenMH, double gia, boolean trangThai) {
         this.maMH = maMH;
         this.tenMH = tenMH;

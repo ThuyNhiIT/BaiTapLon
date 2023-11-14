@@ -167,12 +167,6 @@ public class MatHang_DAO {
             System.out.println("Kiêm Tra xong");
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                stmt.close();
-            } catch (SQLException e2) {
-                e2.printStackTrace();
-            }
         }
         return n > 0;
     }

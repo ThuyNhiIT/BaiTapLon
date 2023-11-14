@@ -181,15 +181,7 @@ public class Form_MatHang extends javax.swing.JPanel {
             new String [] {
                 "Mã mặt hàng", "Tên mặt hàng", "Giá", "Trạng thái"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, true, true, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         scr.setViewportView(tblMatHang);
         tblMatHang.getAccessibleContext().setAccessibleName("");
 
@@ -248,19 +240,21 @@ public class Form_MatHang extends javax.swing.JPanel {
                     // Tạo đối tượng MatHang từ dữ liệu đã lấy
                     MatHang mh = new MatHang(maHang, tenHang, gia, trangThai);
                     // Thực hiện việc sửa mặt hàng trong cơ sở dữ liệu
-                    boolean isSuccess = mh_dao.editMatHang(mh);
+                    if (mh_dao.editMatHang(mh)) {
 
-                    System.out.print("Sửa xong");
-                    if (isSuccess) {
                         JOptionPane.showMessageDialog(this, "Sửa thành công");
+                        tblMatHang.setValueAt(tenHang, rowIndex, 1);
+                        tblMatHang.setValueAt(gia, rowIndex, 2);
+                        tblMatHang.setValueAt(trangThai, rowIndex, 3);
+                        clearJTable();
+                        DocDuLieu();
+
                     } else {
                         JOptionPane.showMessageDialog(this, "Sửa thất bại");
                     }
                 }
-                // Xóa nội dung hiện tại của bảng
-                clearJTable();
-                // Tải lại dữ liệu từ cơ sở dữ liệu
-                DocDuLieu();
+                // Xóa nội dung hiện tại của bảng  
+
             }
         } else {
             JOptionPane.showMessageDialog(this, "Chọn dòng cần sửa!");
