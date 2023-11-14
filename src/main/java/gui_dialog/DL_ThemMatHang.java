@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,7 +31,8 @@ public class DL_ThemMatHang extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         mh_dao = new MatHang_DAO();
     }
- public String phatSinhMaMH() {
+
+    public String phatSinhMaMH() {
         List<MatHang> mhs = mh_dao.getalltbMatHang();
         String temp = null;
 
@@ -53,6 +55,7 @@ public class DL_ThemMatHang extends javax.swing.JDialog {
             return number;
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -233,7 +236,7 @@ public class DL_ThemMatHang extends javax.swing.JDialog {
             Boolean tinhTrang = radNhap.isSelected();
             MatHang addMH = new MatHang(maMH, tenMH, gia, tinhTrang);
             mh_dao.addMatHang(addMH);
-            System.out.println("AAA");
+            JOptionPane.showMessageDialog(null, "Thêm thành công");
 
         } catch (SQLException ex) {
             Logger.getLogger(DL_ThemMatHang.class.getName()).log(Level.SEVERE, null, ex);
@@ -243,7 +246,7 @@ public class DL_ThemMatHang extends javax.swing.JDialog {
     private void btnXoaRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaRActionPerformed
         txtTenMH.setText("");
         txtGia.setText("");
-        radNhap.isSelected();
+        radNhap.setSelected(false);
         txtTenMH.requestFocus();
     }//GEN-LAST:event_btnXoaRActionPerformed
 

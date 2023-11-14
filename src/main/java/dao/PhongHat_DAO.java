@@ -153,7 +153,7 @@ public class PhongHat_DAO {
         Connection con = ConnectDB.getConnection();
         try {
             String sql = "SELECT COUNT(*) AS SoPhongTrong FROM " + TABLE_NAME + " WHERE " + COLUMN_TINH_TRANG_PHONG + " = 'Trong'";
-           Statement statement = con.createStatement();
+            Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
             if (rs.next()) {
                 return rs.getInt(COLUMN_SO_PHONG_TRONG);
@@ -162,5 +162,30 @@ public class PhongHat_DAO {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    public boolean addPhongHat(PhongHat ph) {
+        ConnectDB db = ConnectDB.getInstance();
+        Connection con = db.getConnection();
+        PreparedStatement stmt = null;
+        int n = 0;
+
+        try {
+            stmt = con.prepareStatement("INSERT INTO PhongHat(maPhong, tenPhong, maLoaiPhong, tinhTrangPhong) VALUES (?, ?, ?, ?)");
+            stmt.setString(1, ph.getMaPhong());
+            stmt.setString(2, ph.getTenPhong());
+            stmt.setString(3, ph.getLoaiPhong().getMaLoaiPhong());
+            stmt.setString(4, ph.getTinhTrangPhong());
+            n = stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                stmt.close();
+            } catch (SQLException e2) {
+                e2.printStackTrace();
+            }
+        }
+        return n > 0;
     }
 }

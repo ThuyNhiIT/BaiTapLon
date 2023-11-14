@@ -117,7 +117,6 @@ gui_dialog\DL_SuaNV$2.class
 gui_dialog\DL_ThuePhong.class
 gui\main\Main$1.class
 gui_dialog\DL_ThanhToan$1.class
-gui_dialog\DL_ThemPhongHat$6$1.class
 gui_dialog\DL_ThongTinDatPhong$1.class
 gui\form\Form_DichVu.class
 gui_dialog\DL_DoiMatKhau.class
@@ -153,6 +152,7 @@ gui\component\Header$3.class
 gui_dialog\DL_ThemPhongHat$2.class
 entity\PhongHat.class
 dao\ChiTietHoaDonPhong_Dao.class
+gui_dialog\DL_ThemPhongHat$7$1.class
 gui_dialog\DL_ThongTinKhachHang$4.class
 gui\form\Form_QuanLyDatPhong$1.class
 gui\form\Form_DichVu$3.class
@@ -176,6 +176,7 @@ gui\swing\scrollbar\ScrollBarCustom.class
 dao\MatHang_DAO.class
 gui_dialog\DL_ThemMatHang$2.class
 gui\Application$1.class
+gui_dialog\DL_ThemPhongHat$7.class
 gui_dialog\DL_test$5$1.class
 gui\swing\TimKiem$1.class
 gui_dialog\DL_SuaPhong$2.class

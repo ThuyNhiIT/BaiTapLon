@@ -336,6 +336,8 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
         DL_ThemPhongHat themPH = new DL_ThemPhongHat((java.awt.Frame) SwingUtilities.getWindowAncestor((Component) evt.getSource()), true);
         themPH.setLocationRelativeTo(Form_QuanLyPhongHat.this);
         themPH.setVisible(true);
+        clearJTable();
+        DocDuLieu();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed

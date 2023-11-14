@@ -46,7 +46,7 @@ public class Form_DichVu extends javax.swing.JPanel {
 
     public void clearJTable() {
         while (tblDichVu.getRowCount() > 0) {
-            dtmDichVu.removeRow(0);
+            dtmMatHang.removeRow(0);
         }
     }
 
@@ -256,18 +256,19 @@ public class Form_DichVu extends javax.swing.JPanel {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        dv_dao = new DichVu_DAO();
+        mh_dao = new MatHang_DAO();
         if (tblDichVu.getSelectedRowCount() > 0) {
-            if (JOptionPane.showConfirmDialog(this, "Xác nhận xóa mặt hàng đã chọn?", "Warring", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
+            if (JOptionPane.showConfirmDialog(this, "Xác nhận xóa dịch vụ đã chọn?", "Warring", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
                 int[] selectedRows = tblDichVu.getSelectedRows();
                 for (int i = selectedRows.length - 1; i >= 0; i--) {
-                    List<DichVu> dvs = dv_dao.getalltbDichVu();
-                    DichVu dv = dvs.get(selectedRows[i]);
-                    String maDV = dv.getMaDV();
-                    dv_dao.DeleteDichVu(maDV);
+                    List<MatHang> mhs = mh_dao.getalltbMatHang();
+                    MatHang mh = mhs.get(selectedRows[i]);
+                    String maMH = mh.getMaMH();
+                    mh_dao.DeleteMatHang(maMH);
+                    clearJTable();
+                    DocDuLieu();
                 }
-                clearJTable();
-                DocDuLieu();
+
                 JOptionPane.showMessageDialog(this, "Xóa thành công");
             }
         } else {

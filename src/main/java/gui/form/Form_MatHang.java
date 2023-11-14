@@ -225,9 +225,12 @@ public class Form_MatHang extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+
         DL_ThemMatHang themMH = new DL_ThemMatHang((java.awt.Frame) SwingUtilities.getWindowAncestor((Component) evt.getSource()), true);
         themMH.setLocationRelativeTo(Form_MatHang.this);
         themMH.setVisible(true);
+        clearJTable();
+        DocDuLieu();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
