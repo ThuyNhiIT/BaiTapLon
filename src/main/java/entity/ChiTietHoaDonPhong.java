@@ -31,7 +31,9 @@ public class ChiTietHoaDonPhong {
         this.gioRa = gioRa;
         this.maGiamGia = maGiamGia;
     }
-
+    public ChiTietHoaDonPhong(HoaDon hoaDon, PhongHat phongHat, Double gia, LocalDateTime gioVao, String maGiamGia) {
+        this(hoaDon, phongHat, gia, gioVao, null, maGiamGia);
+    }
     public HoaDon getHoaDon() {
         return hoaDon;
     }
@@ -76,9 +78,7 @@ public class ChiTietHoaDonPhong {
     }
 
     public void setGioRa(LocalDateTime gioRa) throws Exception {
-        if (gioRa.isBefore(gioVao)) {
-            throw new Exception("Giờ ra sau giờ vào!");
-        }
+
 
         this.gioRa = gioRa;
     }

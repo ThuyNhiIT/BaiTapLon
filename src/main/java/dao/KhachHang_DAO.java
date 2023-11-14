@@ -247,4 +247,38 @@ public class KhachHang_DAO {
         }
         return n > 0;
     }
+    public KhachHang getdataKH(String id){
+
+        KhachHang kh = null;
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement statement = null;
+
+        try{
+            String sql = "SELECT *FROM KhachHang WHERE maKH=?";
+            statement = con.prepareStatement(sql);
+            statement.setString(1, id);
+
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()){
+               String maKH = rs.getString(1);
+               String tenKH = rs.getString(2);
+               String SDT = rs.getString(3);
+               Boolean GioiTinh = rs.getBoolean(4);
+
+               kh = new KhachHang(maKH, tenKH, SDT, GioiTinh);
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        finally{
+            try {
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return kh;
+    }
 }

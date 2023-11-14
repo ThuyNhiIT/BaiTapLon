@@ -4,7 +4,8 @@ import dao.DichVu_DAO;
 import dao.MatHang_DAO;
 import entity.DichVu;
 import entity.MatHang;
-import gui_dialog.DL_ThemDichVu;
+import gui_dialog.DL_ThemDV;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -239,7 +240,7 @@ public class Form_DichVu extends javax.swing.JPanel {
     }//GEN-LAST:event_btnTimActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        new DL_ThemDichVu().setVisible(true);
+
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed

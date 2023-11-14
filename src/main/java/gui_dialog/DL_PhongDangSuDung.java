@@ -1,35 +1,52 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
+
+
 package gui_dialog;
 
 import connectDB.ConnectDB;
 import dao.ChiTietHoaDonPhong_Dao;
 import dao.HoaDon_DAO;
 import dao.KhachHang_DAO;
+import dao.PhongHat_DAO;
 import entity.ChiTietHoaDonPhong;
+import entity.HoaDon;
+import entity.PhongHat;
 import gui.form.Form_QuanLyDatPhong;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Timer;
+import javax.swing.*;
 
 /**
  *
  * @author HO MINH HAU
  */
 public class DL_PhongDangSuDung extends javax.swing.JDialog {
+
     private ChiTietHoaDonPhong_Dao cthdp_dao;
     private HoaDon_DAO hd_dao;
     private KhachHang_DAO kh_dao;
     private static ChiTietHoaDonPhong ctp;
+    private static HoaDon hd;
+    private Timer timer;
+    private LocalDateTime gioVao;
+    private static String maHDDSD;
+    private PhongHat_DAO ph_dao;
+    private Float gia;
+    private Float thanhTien;
+    private String maHDThanhToan;
     /**
      * Creates new form DL_PhongDangSuDung
      */
     public DL_PhongDangSuDung(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        ConnectDB db = ConnectDB.getInstance();
+ ConnectDB db = ConnectDB.getInstance();
         try {
             db.connect();
         } catch (SQLException e) {
@@ -37,21 +54,67 @@ public class DL_PhongDangSuDung extends javax.swing.JDialog {
         }
         cthdp_dao = new ChiTietHoaDonPhong_Dao();
         hd_dao = new HoaDon_DAO();
+        ph_dao = new PhongHat_DAO();
         kh_dao = new KhachHang_DAO();
-
         setLblChiTietPhongDSD();
-        
+
+
     }
-    public void setLblChiTietPhongDSD(){
+    public void setMaHDPDSD(String maHD){
+        maHDDSD = maHD;
+    }
+    public String getMaHDPDSD(){
+        return maHDDSD;
+    }
+    public void setMaHDThanhToan(String maHD){
+        maHDThanhToan = maHD;
+    }
+    public String getMaHDThanhToan(){
+        return maHDThanhToan;
+    }
+
+    public void setLblChiTietPhongDSD() {
         Form_QuanLyDatPhong ph = new Form_QuanLyDatPhong();
         txtMaPhong.setText(ph.getRoomSelected());
         txtTenPhong.setText(ph.getRoomSelectedName());
-        ArrayList<ChiTietHoaDonPhong> cthdp = cthdp_dao.getalltbChiTietHoaDonPhong();
-        ctp = cthdp.get(0);
+        cthdp_dao = new ChiTietHoaDonPhong_Dao();
+        ChiTietHoaDonPhong result = cthdp_dao.finHDByRoomID(ph.getRoomSelected());
+        setMaHDPDSD(result.getHoaDon().getMaHD());
+        // Lấy giờ vào từ kết quả
+        gioVao = result.getGioVao();
 
+        // Bắt đầu timer để cập nhật thời gian sử dụng
+        startTimer();
     }
 
- 
+    private void startTimer() {
+        timer = new Timer();
+        timer.schedule(new java.util.TimerTask() {
+            @Override
+            public void run() {
+                updateUsageTime();
+            }
+        }, 0, 1000);
+    }
+
+
+
+    private void updateUsageTime() {
+        // Lấy thời điểm hiện tại
+        LocalDateTime currentTime = LocalDateTime.now();
+
+        // Tính độ chênh lệch giữa thời điểm hiện tại và giờ vào
+        Duration duration = Duration.between(gioVao, currentTime);
+
+        // Lấy giờ và phút từ độ chênh lệch
+        long hours = duration.toHours();
+        long minutes = duration.toMinutes() % 60;
+
+        // Hiển thị giờ sử dụng
+        txtTime.setText(String.format("%d giờ %d phút", hours, minutes));
+    }
+
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -62,14 +125,12 @@ public class DL_PhongDangSuDung extends javax.swing.JDialog {
         txtMaPhong = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtTenPhong = new javax.swing.JLabel();
-        lblTenKH = new javax.swing.JLabel();
-        txtTenKH = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         btnThanhToan = new gui.swing.RadiusButton();
         btnThemDV = new gui.swing.RadiusButton();
         btnChuyenPhong = new gui.swing.RadiusButton();
         btnExit = new gui.swing.Button();
+        lblTimes = new javax.swing.JLabel();
+        txtTime = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -92,18 +153,6 @@ public class DL_PhongDangSuDung extends javax.swing.JDialog {
         txtTenPhong.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtTenPhong.setText("PhongVip1");
 
-        lblTenKH.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblTenKH.setText("Khách hàng đang sử dụng:");
-
-        txtTenKH.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtTenKH.setText("Hồ Minh Hậu ");
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setText("Thời gian sử dụng:");
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setText("01:05:00");
-
         btnThanhToan.setBackground(new java.awt.Color(0, 204, 204));
         btnThanhToan.setText("Thanh Toán");
         btnThanhToan.addActionListener(new java.awt.event.ActionListener() {
@@ -114,6 +163,11 @@ public class DL_PhongDangSuDung extends javax.swing.JDialog {
 
         btnThemDV.setBackground(new java.awt.Color(0, 204, 51));
         btnThemDV.setText("Thêm Dịch Vụ");
+        btnThemDV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemDVActionPerformed(evt);
+            }
+        });
 
         btnChuyenPhong.setBackground(new java.awt.Color(0, 204, 255));
         btnChuyenPhong.setText("Chuyển Phòng");
@@ -131,73 +185,72 @@ public class DL_PhongDangSuDung extends javax.swing.JDialog {
             }
         });
 
+        lblTimes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblTimes.setText("Thời gian đã sử dụng:");
+
+        txtTime.setText("Hồ Minh Hậu");
+
         javax.swing.GroupLayout pnlCoverLayout = new javax.swing.GroupLayout(pnlCover);
         pnlCover.setLayout(pnlCoverLayout);
         pnlCoverLayout.setHorizontalGroup(
             pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCoverLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblChiTietPhongDSD)
-                .addGap(31, 31, 31)
+                .addContainerGap(345, Short.MAX_VALUE)
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pnlCoverLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(lblChiTietPhongDSD)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCoverLayout.createSequentialGroup()
                 .addGroup(pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlCoverLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
+                        .addGap(21, 21, 21)
                         .addComponent(btnChuyenPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnThemDV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(41, 41, 41)
                         .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlCoverLayout.createSequentialGroup()
-                        .addGap(37, 37, 37)
+                        .addGap(30, 30, 30)
                         .addGroup(pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlCoverLayout.createSequentialGroup()
+                                .addComponent(lblTimes)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(pnlCoverLayout.createSequentialGroup()
                                 .addComponent(lblMaPhong)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtMaPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addGap(43, 43, 43)
                                 .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtTenPhong, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
-                            .addGroup(pnlCoverLayout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlCoverLayout.createSequentialGroup()
-                                .addComponent(lblTenKH)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtTenKH, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(29, 29, 29))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtTenPhong, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)))))
+                .addGap(18, 18, 18))
         );
         pnlCoverLayout.setVerticalGroup(
             pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCoverLayout.createSequentialGroup()
                 .addGroup(pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlCoverLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lblChiTietPhongDSD))
-                    .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMaPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMaPhong)
-                    .addComponent(jLabel1)
-                    .addComponent(txtTenPhong))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTenKH)
-                    .addComponent(txtTenKH))
-                .addGap(18, 18, 18)
-                .addGroup(pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addGroup(pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnThemDV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnChuyenPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27))
+                        .addGap(20, 20, 20)
+                        .addComponent(lblChiTietPhongDSD)
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(txtTenPhong)
+                            .addComponent(txtMaPhong)
+                            .addComponent(lblMaPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTimes)
+                            .addComponent(txtTime))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnChuyenPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnThemDV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -215,12 +268,64 @@ public class DL_PhongDangSuDung extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
-        // TODO add your handling code here:
+        if(JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn thanh toán không?","Thông báo",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
+            timer.cancel();
+            timer.purge();
+//            check connect
+//            ConnectDB db = ConnectDB.getInstance();
+//            try {
+//                db.connect();
+//                if(db!=null){
+//                    Form_QuanLyDatPhong frmPH = new Form_QuanLyDatPhong();
+//
+//                    PhongHat ph = ph_dao.getPhongHatByMaPhong(frmPH.getRoomSelected());
+//                    if(ph.getLoaiPhong().getMaLoaiPhong().equals("LP001")){
+//                        gia = 100000f;
+//                    }
+//                    else{
+//                        gia = 60000f;
+//                    }
+//                    System.out.println(gia);
+//                       ChiTietHoaDonPhong ct= cthdp_dao.getChiTietHoaDonPhongTheoMaHD(maHDDSD);
+//                       setMaHDThanhToan(ct.getHoaDon().getMaHD());
+//                    LocalDateTime oneHourAgo = LocalDateTime.now().minusHours(1);
+//                    if (ct.getGioVao().isBefore(oneHourAgo)) {
+//                        long durationInMinutes = Duration.between(gioVao, LocalDateTime.now()).toMinutes();
+//                         thanhTien = (durationInMinutes / 60.0f) * gia;
+//                        System.out.println(durationInMinutes);
+//                        System.out.println(thanhTien);
+//                    } else {
+//                       thanhTien = gia;
+//                    }
+//
+//
+//                    cthdp_dao.updateGioRaVsGia(maHDDSD,LocalDateTime.now(),thanhTien);
+//
+//                }
+//            } catch (SQLException e) {
+//                throw new RuntimeException(e);
+//            }
+            this.dispose();
+           Form_QuanLyDatPhong updatePhong = new Form_QuanLyDatPhong();
+            ph_dao.updateTinhTrangPhong(updatePhong.getRoomSelected(), "Trong");
+            DL_TraPhongVsThanhToan thanhToan = new DL_TraPhongVsThanhToan((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
+            thanhToan.setLocationRelativeTo(this);
+            thanhToan.setVisible(true);
+        }
+
+        this.dispose();
+
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
+
+    private void btnThemDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDVActionPerformed
+        DL_ThemDV themDV = new DL_ThemDV((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
+        themDV.setLocationRelativeTo(this);
+        themDV.setVisible(true);
+    }//GEN-LAST:event_btnThemDVActionPerformed
 
     /**
      * @param args the command line arguments
@@ -229,7 +334,7 @@ public class DL_PhongDangSuDung extends javax.swing.JDialog {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -270,14 +375,12 @@ public class DL_PhongDangSuDung extends javax.swing.JDialog {
     private gui.swing.RadiusButton btnThanhToan;
     private gui.swing.RadiusButton btnThemDV;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel lblChiTietPhongDSD;
     private javax.swing.JLabel lblMaPhong;
-    private javax.swing.JLabel lblTenKH;
+    private javax.swing.JLabel lblTimes;
     private javax.swing.JPanel pnlCover;
     private javax.swing.JLabel txtMaPhong;
-    private javax.swing.JLabel txtTenKH;
     private javax.swing.JLabel txtTenPhong;
+    private javax.swing.JLabel txtTime;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,6 +8,7 @@ import entity.PhongHat;
 import gui.component.Room;
 import gui.model.ModelRoom;
 import gui.swing.scrollbar.ScrollBarCustom;
+import gui_dialog.DL_ChonDichVu;
 import gui_dialog.DL_KiemTravsAddKH;
 import gui_dialog.DL_PhongDangSuDung;
 import java.awt.Component;
@@ -29,7 +30,7 @@ import net.miginfocom.swing.MigLayout;
  *
  * @author HO MINH HAU
  */
-public class Form_QuanLyDatPhong extends javax.swing.JPanel {
+public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
 
     private PhongHat_DAO ph_dao;
 
@@ -49,7 +50,7 @@ public class Form_QuanLyDatPhong extends javax.swing.JPanel {
         phongTrong();
         phongDangSuDung();
         phongCho();
-
+        refreshRooms();
     }
 
     public static void setRoomSelected(String roomID) {
@@ -80,12 +81,14 @@ public class Form_QuanLyDatPhong extends javax.swing.JPanel {
                     kiemTraVsAddKH.setLocationRelativeTo(Form_QuanLyDatPhong.this);
                     kiemTraVsAddKH.setVisible(true);
                 }
-                kiemTraVsAddKH.addWindowListener(new WindowAdapter() {
+                DL_ChonDichVu cDV = new DL_ChonDichVu((java.awt.Frame) SwingUtilities.getWindowAncestor((Component) e.getSource()), true);
+                cDV.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosed(WindowEvent e) {
-                        // khi đống thì tao cho nó refresh lại mấy cái room 
+
                         refreshRooms();
                     }
+
                 });
             }
         });
@@ -139,6 +142,7 @@ public class Form_QuanLyDatPhong extends javax.swing.JPanel {
         room.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+                System.out.println(data);
                 setRoomSelected(data.getRoomId());
                 setRoomSelectedName(data.getRoomName());
                 DL_PhongDangSuDung pdsd = new DL_PhongDangSuDung((java.awt.Frame) SwingUtilities.getWindowAncestor((Component) e.getSource()), true);
@@ -146,13 +150,19 @@ public class Form_QuanLyDatPhong extends javax.swing.JPanel {
                     pdsd.setLocationRelativeTo(Form_QuanLyDatPhong.this);
                     pdsd.setVisible(true);
                 }
-                pdsd.addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowClosed(WindowEvent e) {
-                        // khi đống thì tao cho nó refresh lại mấy cái room 
-                        refreshRooms();
-                    }
-                });
+//                pdsd.addWindowListener(new WindowAdapter() {
+//                    @Override
+//                    public void windowClosed(WindowEvent e) {
+//                        // khi đống thì tao cho nó refresh lại mấy cái room
+//                        System.out.println("DL_KiemTravsAddKH closed");
+//                        SwingUtilities.invokeLater(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                refreshRooms();
+//                            }
+//                        });
+//                    }
+//                });
             }
         });
         MigLayout migLayout = new MigLayout("wrap 4, gapx 80, gapy 80, inset 20", "[grow, fill]");
@@ -189,6 +199,7 @@ public class Form_QuanLyDatPhong extends javax.swing.JPanel {
             addPhongDangSuDung(new ModelRoom(phong.getMaPhong(), phong.getTenPhong(), icon));
         }
     }
+    ////Get the invoice for the room being used
 
     public void addPhongCho(ModelRoom data) {
         Room room = new Room();
@@ -237,6 +248,21 @@ public class Form_QuanLyDatPhong extends javax.swing.JPanel {
             }
             addPhongCho(new ModelRoom(phong.getMaPhong(), phong.getTenPhong(), icon));
         }
+    }
+
+    //Open DL_ChonDichVu in frame Form_QuanLyDatPhong
+      public void openDL_ChonDichVu() {
+        DL_ChonDichVu chonDV = new DL_ChonDichVu((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
+        chonDV.setLocationRelativeTo(Form_QuanLyDatPhong.this);
+        chonDV.setVisible(true);
+        chonDV.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                System.out.println(".windowClosed()");
+                refreshRooms();
+
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")

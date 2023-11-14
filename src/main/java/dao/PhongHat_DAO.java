@@ -84,5 +84,27 @@ public class PhongHat_DAO {
             return false;
         }
     }
+    //find phong by maPhong
+    public PhongHat getPhongHatByMaPhong(String maPhong){
+        PhongHat ph = null;
+        try{
+            ConnectDB.getInstance();
+            Connection con = ConnectDB.getConnection();
+            String sql = "SELECT * FROM PhongHat WHERE maPhong = ?";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setString(1, maPhong);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()){
+                String tenPhong = rs.getString(2);
+                String loaiPhong = rs.getString(3);
+                String tinhTrang = rs.getString(4);
+                ph = new PhongHat(maPhong, tenPhong, new LoaiPhong(loaiPhong), tinhTrang);
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        return ph;
+    }
 
 }

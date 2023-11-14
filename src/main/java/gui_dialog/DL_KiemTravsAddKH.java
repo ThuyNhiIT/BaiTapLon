@@ -1,14 +1,12 @@
 package gui_dialog;
 
 import connectDB.ConnectDB;
-import dao.ChiTietHoaDonPhong_Dao;
-import dao.HoaDon_DAO;
-import dao.KhachHang_DAO;
-import dao.PhongHat_DAO;
+import dao.*;
 import entity.*;
 
 import gui.form.Form_Login;
 import gui.form.Form_QuanLyDatPhong;
+import java.awt.Component;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +18,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.time.LocalDateTime;
+import javax.swing.SwingUtilities;
+
 
 /**
  * @author HO MINH HAU
@@ -30,6 +30,7 @@ public class DL_KiemTravsAddKH extends javax.swing.JDialog {
     private PhongHat_DAO ph_dao;
     private HoaDon_DAO hd_dao;
     private ChiTietHoaDonPhong_Dao cthdp_dao;
+    private ChiTietHoaDonDichVu_DAO cthddv_dao;
     private static String makhAuto;
     private static String mahdAuto;
 
@@ -64,6 +65,9 @@ public class DL_KiemTravsAddKH extends javax.swing.JDialog {
         return mahdAuto;
     }
 
+//    public static String setDataPhongDat(String maPhong, String maHD){
+//       
+//    }
     public String phatSinhMaKH() {
 
         List<KhachHang> khs = kh_dao.getalltbKhachHang();
@@ -355,12 +359,11 @@ public class DL_KiemTravsAddKH extends javax.swing.JDialog {
         String maPhong = ph.getRoomSelected();
         double gia = 0;
         LocalDateTime gioVao = LocalDateTime.now();
-//        System.out.println(gioVao);
-        // Set gioRa and maGiamGia to appropriate initial values
-           LocalDateTime gioRa = gioVao.plusHours(1);
+
+        LocalDateTime gioRa = gioVao;
         String maGiamGia = null;
 
-        ChiTietHoaDonPhong cthdp = new ChiTietHoaDonPhong(new HoaDon(maHD), new PhongHat(maPhong), gia, gioVao, gioRa, maGiamGia);
+        ChiTietHoaDonPhong cthdp = new ChiTietHoaDonPhong(new HoaDon(maHD), new PhongHat(maPhong), gia, gioVao,gioRa, maGiamGia);
         return cthdp;
     }
 
@@ -374,8 +377,11 @@ public class DL_KiemTravsAddKH extends javax.swing.JDialog {
         cthdp_dao = new ChiTietHoaDonPhong_Dao();
         cthdp_dao.createChiTietHoaDonPhong(revertChiTietHoaDonPhongText());
 
+            ph.refreshRooms();
+
         this.dispose();
 
+        ph.openDL_ChonDichVu();
     }//GEN-LAST:event_btnThuePhongActionPerformed
 
     private void btnDatPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatPhongActionPerformed

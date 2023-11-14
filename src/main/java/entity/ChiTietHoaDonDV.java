@@ -5,7 +5,10 @@ import java.util.Objects;
 public class ChiTietHoaDonDV {
 
     private HoaDon hoaDon;
-    private DichVu dichVu;
+
+
+
+    private MatHang matHang;
     private int soLuong;
     private Double gia;
 
@@ -18,10 +21,11 @@ public class ChiTietHoaDonDV {
         this.hoaDon = hoaDon;
     }
 
-    public ChiTietHoaDonDV(HoaDon hoaDon, DichVu dichVu, int soLuong, Double gia) {
+    public ChiTietHoaDonDV(HoaDon hoaDon,MatHang matHang, int soLuong, Double gia) {
         super();
         this.hoaDon = hoaDon;
-        this.dichVu = dichVu;
+        this.matHang = matHang;
+
         this.soLuong = soLuong;
         this.gia = gia;
     }
@@ -33,14 +37,14 @@ public class ChiTietHoaDonDV {
     public void setHoaDon(HoaDon hoaDon) {
         this.hoaDon = hoaDon;
     }
-
-    public DichVu getDichVu() {
-        return dichVu;
+    public MatHang getMatHang() {
+        return matHang;
     }
 
-    public void setDichVu(DichVu dichVu) {
-        this.dichVu = dichVu;
+    public void setMatHang(MatHang matHang) {
+        this.matHang = matHang;
     }
+
 
     public int getSoLuong() {
         return soLuong;
@@ -92,7 +96,7 @@ public class ChiTietHoaDonDV {
 
     @Override
     public String toString() {
-        return "ChiTietHoaDonDV [hoaDon=" + hoaDon + ", dichVu=" + dichVu + ", gia=" + gia + "]";
+        return "ChiTietHoaDonDV{" + "hoaDon=" + hoaDon + ", matHang=" + matHang + ", soLuong=" + soLuong + ", gia=" + gia + '}';
     }
 
 }

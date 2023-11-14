@@ -17,7 +17,7 @@ public class ConnectDB {
         String user = "sa";
 
 
-        String password = "sa031103";
+        String password = "sapassword";
 
         con = DriverManager.getConnection(url, user, password);
     }
