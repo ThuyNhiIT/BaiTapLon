@@ -103,22 +103,27 @@ public class Form_QuanLiHoaDon extends javax.swing.JPanel {
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setText("Tổng thời gian");
 
-        jTextField1.setText("Huỳnh Ngọc Dương");
+        jTextField1.setEditable(false);
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
-        jTextField2.setText("0967191820");
+        jTextField2.setEditable(false);
 
-        jTextField3.setText("Nhi Nhi");
+        jTextField3.setEditable(false);
 
-        jTextField4.setText("19:11  -  02/10/2023");
+        jTextField4.setEditable(false);
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField4ActionPerformed(evt);
             }
         });
 
-        jTextField5.setText("19:26  -  02/10/2023");
+        jTextField5.setEditable(false);
 
-        jTextField6.setText("15 phút");
+        jTextField6.setEditable(false);
 
         pnlHeader.setBackground(new java.awt.Color(235, 249, 249));
         pnlHeader.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -296,6 +301,10 @@ public class Form_QuanLiHoaDon extends javax.swing.JPanel {
 
         }
     }//GEN-LAST:event_btnTimActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

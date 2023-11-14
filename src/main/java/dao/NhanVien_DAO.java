@@ -150,9 +150,9 @@ public class NhanVien_DAO {
         Connection con = ConnectDB.getConnection();
         PreparedStatement stmt = null;
         int n = 0;
-
         try {
-            stmt = con.prepareStatement("update NhanVien set tenNV= ?, gioiTinh= ?, CCCD= ?, SDT = ? diaChi= ?, caLam= ?, loaiNV= ? WHERE maNV = ?");
+            stmt = con.prepareStatement("update NhanVien set tenNV= ?, gioiTinh= ?, CCCD= ?, SDT = ?, diaChi= ?, caLam= ?, loaiNV= ? WHERE maNV = ?");
+            System.out.println("UP Xongggg");
             stmt.setString(1, nv.getTenNV());
             stmt.setBoolean(2, nv.isGioiTinh());
             stmt.setString(3, nv.getCCCD());
@@ -161,6 +161,8 @@ public class NhanVien_DAO {
             stmt.setString(6, nv.getCaLam());
             stmt.setString(7, nv.getLoaiNV().getMaLoai());
             stmt.setString(8, nv.getMaNV());
+             n = stmt.executeUpdate();
+            System.out.println("Xongggg");
         } catch (SQLException e) {
             e.printStackTrace();
         }
