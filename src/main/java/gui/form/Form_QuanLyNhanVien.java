@@ -26,71 +26,49 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
     private DefaultTableModel dtmNhanVien;
     private LoaiNV_DAO loainv_dao = new LoaiNV_DAO();
 //    private DefaultComboBoxModel<LoaiNhanVien>;
-    
 
     public Form_QuanLyNhanVien() {
         initComponents();
         nv_dao = new NhanVien_DAO();
         dtmNhanVien = (DefaultTableModel) tblDSNV.getModel();
-
-//        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-//        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-//        for (int i = 0; i < tblDSNV.getColumnCount(); i++) {
-//            tblDSNV.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-//        }
-
-//        DefaultComboBoxModel<LoaiNhanVien> dataModelLop = new DefaultComboBoxModel<LoaiNhanVien>();
-//        cmbLoaiNhanVien.setModel(dataModelLop);
-//        DocDuLieu();
-//        loadLoaiNhanVien();
         loadTable(nv_dao.getalltbNhanVien());
     }
 //    
-    public void loadTable(ArrayList<NhanVien> ds){
-        if(ds == null){
+
+    public void loadTable(ArrayList<NhanVien> ds) {
+        if (ds == null) {
             clearJTable();
             return;
         }
         clearJTable();
-        for(NhanVien nhanVien : ds){
-            dtmNhanVien.addRow(new Object[] {nhanVien.getMaNV(), nhanVien.getTenNV(), nhanVien.isGioiTinh() ? "Nam" : "Nữ",
-                        nhanVien.getCCCD(), nhanVien.getSDT(), nhanVien.getDiaChi(), nhanVien.getCaLam(), nhanVien.getLoaiNV().getMaLoai()});
+        for (NhanVien nhanVien : ds) {
+            dtmNhanVien.addRow(new Object[]{nhanVien.getMaNV(), nhanVien.getTenNV(), nhanVien.isGioiTinh() ? "Nam" : "Nữ",
+                nhanVien.getCCCD(), nhanVien.getSDT(), nhanVien.getDiaChi(), nhanVien.getCaLam(), nhanVien.getLoaiNV().getMaLoai()});
         }
     }
-    
-    
-    public void clearJTable(){
-        while(tblDSNV.getRowCount() > 0){
-           dtmNhanVien.removeRow(0);
+
+    public void clearJTable() {
+        while (tblDSNV.getRowCount() > 0) {
+            dtmNhanVien.removeRow(0);
         }
     }
-    public void DocDuLieu(){
+
+    public void DocDuLieu() {
         List<NhanVien> list = nv_dao.getalltbNhanVien();
-        for(NhanVien nv : list){
-            dtmNhanVien.addRow(new Object[] {
+        for (NhanVien nv : list) {
+            dtmNhanVien.addRow(new Object[]{
                 nv.getMaNV(), nv.getTenNV(), nv.isGioiTinh() ? "Nam" : "Nữ", nv.getSDT(), nv.getCCCD(), nv.getSDT(),
                 nv.getDiaChi(), nv.getCaLam(), nv.getLoaiNV().getMaLoai()
             });
         }
 
     }
-    
-//    public void loadLoaiNhanVien(){
-//        ArrayList<LoaiNhanVien> ds = loainv_dao.getAllLoaiNhanVien();
-//        if(ds == null){
-//            return;
-//        }
-//        for(LoaiNhanVien loaiNhanVien : ds){
-//            cmbLoaiNhanVien.addItem(loaiNhanVien);
-//        }
-//    }
 
-    public void clearDataOnModel(){
+    public void clearDataOnModel() {
         DefaultTableModel dtm = (DefaultTableModel) tblDSNV.getModel();
         dtm.getDataVector().removeAllElements();
     }
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -102,6 +80,7 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
         txtTim = new javax.swing.JTextField();
         btnTim = new gui.swing.RadiusButton();
         btnThem = new gui.swing.RadiusButton();
+        btnSua = new gui.swing.RadiusButton();
         lblDSNV = new javax.swing.JLabel();
         scr = new javax.swing.JScrollPane();
         tblDSNV = new javax.swing.JTable();
@@ -115,7 +94,7 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
         pnlHeader.setBackground(new java.awt.Color(255, 255, 255));
         pnlHeader.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        pnlTraCuu.setBackground(new java.awt.Color(255, 255, 255));
+        pnlTraCuu.setBackground(new java.awt.Color(235, 249, 249));
 
         lblTim.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTim.setText("Tìm kiếm");
@@ -161,6 +140,14 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
             }
         });
 
+        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/edit.png"))); // NOI18N
+        btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlHeaderLayout = new javax.swing.GroupLayout(pnlHeader);
         pnlHeader.setLayout(pnlHeaderLayout);
         pnlHeaderLayout.setHorizontalGroup(
@@ -169,6 +156,8 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
                 .addGap(39, 39, 39)
                 .addComponent(pnlTraCuu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55)
                 .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(75, 75, 75))
         );
@@ -180,8 +169,10 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
                 .addContainerGap(22, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHeaderLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
+                .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32))
         );
 
         lblDSNV.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -194,7 +185,16 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
             new String [] {
                 "Mã nhân viên", "Tên nhân viên", "Giới tính", "CCCD", "Số điện thoại", "Địa chỉ", "Ca", "Loại nhân viên"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true, true, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblDSNV.setRowHeight(40);
         scr.setViewportView(tblDSNV);
 
         lblTong.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -259,7 +259,45 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        new DL_SuaNV().setVisible(true);
+        nv_dao = new NhanVien_DAO();
+
+        if (tblDSNV.getSelectedRowCount() > 0) {
+            if (JOptionPane.showConfirmDialog(this, "Xác nhận sửa khách hàng đã chọn?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                int[] selectedRows = tblDSNV.getSelectedRows();
+                for (int i = 0; i < selectedRows.length; i++) {
+                    int rowIndex = selectedRows[i];
+                    String maNV = tblDSNV.getValueAt(rowIndex, 0).toString();
+                    String tenNV = tblDSNV.getValueAt(rowIndex, 1).toString();
+                    Boolean gioiTinh = Boolean.parseBoolean(tblDSNV.getValueAt(rowIndex, 2).toString());
+                    String CCCD = tblDSNV.getValueAt(rowIndex, 3).toString();
+                    String SDT = tblDSNV.getValueAt(rowIndex, 4).toString();
+                    String diaChi = tblDSNV.getValueAt(rowIndex, 5).toString();
+                    String caLam = tblDSNV.getValueAt(rowIndex, 6).toString();
+                    String loaiNV = tblDSNV.getValueAt(rowIndex, 7).toString();
+
+                    tblDSNV.setValueAt(tenNV, rowIndex, 1);
+                    tblDSNV.setValueAt(gioiTinh, rowIndex, 2);
+                    tblDSNV.setValueAt(CCCD, rowIndex, 3);
+                    tblDSNV.setValueAt(SDT, rowIndex, 4);
+                    tblDSNV.setValueAt(diaChi, rowIndex, 5);
+                    tblDSNV.setValueAt(caLam, rowIndex, 6);
+                    tblDSNV.setValueAt(loaiNV, rowIndex, 7);
+                    NhanVien nv = new NhanVien(maNV, tenNV, gioiTinh, CCCD, SDT, diaChi, caLam, new LoaiNhanVien(loaiNV));
+                    if (nv_dao.editStaff(nv)) {
+                        System.out.println("Sửa thành công");
+                        JOptionPane.showMessageDialog(this, "Sửa thành công");
+                    } else {
+                        System.out.println("Sửa thất bại");
+                        JOptionPane.showMessageDialog(this, "Sửa thất bại");
+                    }
+                }
+            }
+
+            clearJTable();
+            DocDuLieu();
+        } else {
+            JOptionPane.showMessageDialog(this, "Chọn dòng cần sửa!");
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
@@ -269,33 +307,32 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
         // TODO add your handling code here:
         String sdtNV = txtTim.getText().trim();
-        if(!(sdtNV.length() > 0 && sdtNV.matches("\\d{10}"))){
+        if (!(sdtNV.length() > 0 && sdtNV.matches("\\d{10}"))) {
             CustomJOptionPane.showMessageDialog("Số điện thoại phải gồm 10 số !!!");
-        }else{
+        } else {
             String maTim = txtTim.getText();
             ArrayList<NhanVien> dsNVTim = null;
-            
-            for(NhanVien nv : nv_dao.getalltbNhanVien()){
-                if(nv.getSDT().equals(maTim)){
+
+            for (NhanVien nv : nv_dao.getalltbNhanVien()) {
+                if (nv.getSDT().equals(maTim)) {
                     dsNVTim = new ArrayList<NhanVien>();
                     dsNVTim.add(nv);
                 }
             }
-            if(dsNVTim != null){
+            if (dsNVTim != null) {
                 clearDataOnModel();
-                for(NhanVien nv : dsNVTim){
+                for (NhanVien nv : dsNVTim) {
                     dtmNhanVien.addRow(new Object[]{
-                        nv.getMaNV(), nv.getTenNV(), nv.isGioiTinh() ? "Nam" : "Nữ", nv.getCCCD(), nv.getSDT(), 
+                        nv.getMaNV(), nv.getTenNV(), nv.isGioiTinh() ? "Nam" : "Nữ", nv.getCCCD(), nv.getSDT(),
                         nv.getDiaChi(), nv.getCaLam(), nv.getLoaiNV().getMaLoai()
                     });
                 }
-            }
-            else if(dsNVTim == null){
+            } else if (dsNVTim == null) {
                 CustomJOptionPane.showMessageDialog("Không tìm thấy !!!");
             }
         }
-        
-        
+
+
     }//GEN-LAST:event_btnTimActionPerformed
 
     private void btnLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocActionPerformed
@@ -316,11 +353,11 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
 
     }//GEN-LAST:event_formMouseClicked
 
-    private void updateTotalEmployees(){
+    private void updateTotalEmployees() {
         int totalEmployees = dtmNhanVien.getRowCount();
-        txtTong.setText("" +totalEmployees);
+        txtTong.setText("" + totalEmployees);
     }
-    
+
     private void btnCapNhatTotalNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatTotalNVActionPerformed
         // TODO add your handling code here:
         updateTotalEmployees();
@@ -329,6 +366,7 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.swing.RadiusButton btnCapNhatTotalNV;
+    private gui.swing.RadiusButton btnSua;
     private gui.swing.RadiusButton btnThem;
     private gui.swing.RadiusButton btnTim;
     private javax.swing.JLabel lblDSNV;

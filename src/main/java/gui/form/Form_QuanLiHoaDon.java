@@ -79,6 +79,7 @@ public class Form_QuanLiHoaDon extends javax.swing.JPanel {
                 "Mã hóa đơn", "Ngày lập HD", "Mã khách hàng", "Mã nhân viên", "Tổng tiền"
             }
         ));
+        tblHD.setRowHeight(40);
         jScrollPane2.setViewportView(tblHD);
         if (tblHD.getColumnModel().getColumnCount() > 0) {
             tblHD.getColumnModel().getColumn(0).setResizable(false);
@@ -122,7 +123,7 @@ public class Form_QuanLiHoaDon extends javax.swing.JPanel {
         pnlHeader.setBackground(new java.awt.Color(235, 249, 249));
         pnlHeader.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        pnlTim.setBackground(new java.awt.Color(255, 255, 255));
+        pnlTim.setBackground(new java.awt.Color(235, 249, 249));
 
         lblTim.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTim.setText("Tìm kiếm");

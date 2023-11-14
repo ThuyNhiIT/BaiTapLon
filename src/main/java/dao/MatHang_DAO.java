@@ -158,13 +158,10 @@ public class MatHang_DAO {
         try {
             stmt = con.prepareStatement("update MatHang set TenMH=?, Gia=?, trangThai=? where maMH=?");
             stmt.setString(1, mh.getTenMH());
-            System.out.println("Kiêm Tra 1");
             stmt.setDouble(2, mh.getGia());
-            System.out.println("Kiêm Tra 2");
             stmt.setBoolean(3, mh.isTrangThai());
             stmt.setString(4, mh.getMaMH());
             n = stmt.executeUpdate();
-            System.out.println("Kiêm Tra xong");
         } catch (Exception e) {
             e.printStackTrace();
         }

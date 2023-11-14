@@ -123,6 +123,7 @@ gui_dialog\DL_CapNhatMatHang$4.class
 gui_dialog\DL_ThemPhongHat.class
 gui\main\Main.class
 gui\main\Main$2.class
+gui\form\Form_QuanLyKhachHang$5.class
 gui\component\Room.class
 gui\main\Main$3.class
 gui_dialog\DL_TraPhongVsThanhToan$7$1.class
@@ -173,6 +174,7 @@ gui_dialog\DL_ThemPhongHat$1.class
 gui\form\Form_QuanLyPhongHat$2.class
 gui_dialog\DL_SuaKhachHang$3.class
 gui_dialog\DL_ThemNV$1.class
+gui\form\Form_QuanLyNhanVien$5.class
 gui_dialog\DL_TraPhongVsThanhToan$4.class
 gui\swing\CustomJOptionPane.class
 gui\form\Form_Setting$3.class

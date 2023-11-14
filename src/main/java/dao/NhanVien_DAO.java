@@ -1,4 +1,3 @@
-
 package dao;
 
 import connectDB.ConnectDB;
@@ -17,20 +16,21 @@ import java.util.ArrayList;
  * @author HO MINH HAU
  */
 public class NhanVien_DAO {
+
     public NhanVien_DAO() {
-        
+
     }
-    
-    public ArrayList<NhanVien> getalltbNhanVien(){
+
+    public ArrayList<NhanVien> getalltbNhanVien() {
         ArrayList<NhanVien> dsNV = new ArrayList<NhanVien>();
-        try{
+        try {
             ConnectDB.getInstance();
             Connection con = ConnectDB.getConnection();
             String sql = "SELECT *FROM NhanVien";
             Statement statement = con.createStatement();
-            
+
             ResultSet rs = statement.executeQuery(sql);
-            while(rs.next()){
+            while (rs.next()) {
                 String maNV = rs.getString(1);
                 String tenNV = rs.getString(2);
                 Boolean gioiTinh = rs.getBoolean(3);
@@ -42,13 +42,12 @@ public class NhanVien_DAO {
                 NhanVien nv = new NhanVien(maNV, tenNV, gioiTinh, cccd, sdt, diaChi, caLam, new LoaiNhanVien(loaiNV));
                 dsNV.add(nv);
             }
-        }
-        catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return dsNV;
     }
-    
+
     public ArrayList<NhanVien> getNhanVienTheoMaNV(String id) {
         ArrayList<NhanVien> dsnv = new ArrayList<NhanVien>();
         ConnectDB.getInstance();
@@ -87,19 +86,19 @@ public class NhanVien_DAO {
         }
         return dsnv;
     }
-    
-    public ArrayList<NhanVien> getNVTheoLoai(LoaiNhanVien lnv){
+
+    public ArrayList<NhanVien> getNVTheoLoai(LoaiNhanVien lnv) {
         ArrayList<NhanVien> ds = new ArrayList<NhanVien>();
         PreparedStatement sta = null;
-        
-        try{
+
+        try {
             Connection con = ConnectDB.getInstance().getConnection();
             String sql = "SELECT *FROM NhanVien nv join LoaiNhanVien lnv on nv.maLoai = lnv.maLoai where lnv.maLoai=?";
             sta = con.prepareStatement(sql);
             sta.setString(1, lnv.getMaLoai());
-            
+
             ResultSet rs = sta.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 String maNV = rs.getString(1);
                 String tenNV = rs.getString(2);
                 Boolean gioiTinh = rs.getBoolean(3);
@@ -108,24 +107,24 @@ public class NhanVien_DAO {
                 String diaChi = rs.getString(6);
                 String caLam = rs.getString(7);
                 String loaiNV = rs.getString(8);
-                
+
                 NhanVien nv = new NhanVien(maNV, tenNV, gioiTinh, cccd, sdt, diaChi, caLam, new LoaiNhanVien(loaiNV));
                 ds.add(nv);
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return ds;
     }
 
-    public boolean addStaff(NhanVien nv){
+    public boolean addStaff(NhanVien nv) {
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
         PreparedStatement stmt = null;
         int n = 0;
-        
-        try{
-            stmt = con.prepareStatement("INSERT INTO NhanVien VALUES(?, ?, ?, ?, ?, ?, ?, ?)" );
+
+        try {
+            stmt = con.prepareStatement("INSERT INTO NhanVien VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
             stmt.setString(1, nv.getMaNV());
             stmt.setString(2, nv.getTenNV());
             stmt.setBoolean(3, nv.isGioiTinh());
@@ -134,11 +133,9 @@ public class NhanVien_DAO {
             stmt.setString(6, nv.getDiaChi());
             stmt.setString(7, nv.getCaLam());
             stmt.setString(8, nv.getLoaiNV().getMaLoai());
-        }
-        catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
-        }
-        finally{
+        } finally {
             try {
                 stmt.close();
             } catch (SQLException e) {
@@ -147,47 +144,40 @@ public class NhanVien_DAO {
         }
         return n > 0;
     }
-    
-    public boolean editStaff(NhanVien nv){
+
+    public boolean editStaff(NhanVien nv) {
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
         PreparedStatement stmt = null;
         int n = 0;
-        
-        try{
-            stmt = con.prepareStatement("update NhanVien set tenNV= ?, gioiTinh= ?, CCCD= ?, "
-                    + "diaChi= ?, caLam= ?, loaiNV= ?");
+
+        try {
+            stmt = con.prepareStatement("update NhanVien set tenNV= ?, gioiTinh= ?, CCCD= ?, SDT = ? diaChi= ?, caLam= ?, loaiNV= ? WHERE maNV = ?");
             stmt.setString(1, nv.getTenNV());
             stmt.setBoolean(2, nv.isGioiTinh());
             stmt.setString(3, nv.getCCCD());
-            stmt.setString(4, nv.getDiaChi());
-            stmt.setString(5, nv.getCaLam());
-            stmt.setString(6, nv.getLoaiNV().getMaLoai());
-        }
-        catch(SQLException e){
+            stmt.setString(4, nv.getSDT());
+            stmt.setString(5, nv.getDiaChi());
+            stmt.setString(6, nv.getCaLam());
+            stmt.setString(7, nv.getLoaiNV().getMaLoai());
+            stmt.setString(8, nv.getMaNV());
+        } catch (SQLException e) {
             e.printStackTrace();
-        }
-        finally{
-            try {
-                stmt.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return n > 0;
     }
-    
-    public NhanVien findStaff(String maTim){
+
+    public NhanVien findStaff(String maTim) {
         NhanVien nv = null;
         Connection con = ConnectDB.getInstance().getConnection();
         PreparedStatement stmt = null;
-        
-        try{
+
+        try {
             String sql = "SELECT *FROM NhanVien WHERE maNV= ?";
             stmt = con.prepareStatement(sql);
             stmt.setString(1, maTim);
             ResultSet rs = stmt.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 String maNV = rs.getString(1);
                 String tenNV = rs.getString(2);
                 Boolean gioiTinh = rs.getBoolean(3);
@@ -196,20 +186,13 @@ public class NhanVien_DAO {
                 String diaChi = rs.getString(6);
                 String caLam = rs.getString(7);
                 String loaiNV = rs.getString(8);
-                
+
                 nv = new NhanVien(maNV, tenNV, gioiTinh, cccd, sdt, diaChi, caLam, new LoaiNhanVien(loaiNV));
             }
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return nv;
     }
-    
+
 }
-
-
-
-
-
-

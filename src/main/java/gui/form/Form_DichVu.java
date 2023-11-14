@@ -93,6 +93,7 @@ public class Form_DichVu extends javax.swing.JPanel {
                 "STT", "Mã dịch vụ", "Tên dịch vụ", "Đơn giá"
             }
         ));
+        tblDichVu.setRowHeight(40);
         scr.setViewportView(tblDichVu);
         if (tblDichVu.getColumnModel().getColumnCount() > 0) {
             tblDichVu.getColumnModel().getColumn(0).setPreferredWidth(50);
@@ -101,7 +102,7 @@ public class Form_DichVu extends javax.swing.JPanel {
         pnlHeader.setBackground(new java.awt.Color(235, 249, 249));
         pnlHeader.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        pnlTraCuu.setBackground(new java.awt.Color(255, 255, 255));
+        pnlTraCuu.setBackground(new java.awt.Color(235, 249, 249));
 
         lblTimKiem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTimKiem.setText("Tìm kiếm");
