@@ -326,36 +326,40 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        //        ph_dao = new PhongHat_DAO();
-        //        if (tblDSPH.getSelectedRowCount() > 0) {
-        //            if (JOptionPane.showConfirmDialog(this, "Xác nhận sửa mặt hàng đã chọn?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-        //                int[] selectedRows = tblDSPH.getSelectedRows();
-        //                for (int i = 0; i < selectedRows.length; i++) {
-        //                    int rowIndex = selectedRows[i];
-        //                    // Lấy dữ liệu từ bảng
-        //                    String MaPhong = tblDSPH.getValueAt(rowIndex, 0).toString();
-        //                    String tenPhong = tblDSPH.getValueAt(rowIndex, 1).toString();
-        //                    String maLoai = tblDSPH.getValueAt(rowIndex, 2).toString();
-        ////                    Double gia = Double.parseDouble(tblDSPH.getValueAt(rowIndex, 3).toString());
-        //                    String tinhTrang = tblDSPH.getValueAt(rowIndex, 3).toString();
-        //                    // Tạo đối tượng PhongHat từ dữ liệu đã lấy
-        //                    PhongHat ph = new PhongHat(MaPhong, tenPhong, new LoaiPhong(maLoai), tinhTrang);
-        //                    // Thực hiện việc sửa mặt hàng trong cơ sở dữ liệu
-        //                    boolean isSuccess = ph_dao.editPhongHat(ph);
-        //                    if (isSuccess) {
-        //                        JOptionPane.showMessageDialog(this, "Sửa thành công");
-        //                    } else {
-        //                        JOptionPane.showMessageDialog(this, "Sửa thất bại");
-        //                    }
-        //                }
-        //                // Xóa nội dung hiện tại của bảng
-        //                clearJTable();
-        //                // Tải lại dữ liệu từ cơ sở dữ liệu
-        //                DocDuLieu();
-        //            }
-        //        } else {
-        //            JOptionPane.showMessageDialog(this, "Chọn dòng cần sửa!");
-        //        }
+        ph_dao = new PhongHat_DAO();
+
+        if (tblDSPH.getSelectedRowCount() > 0) {
+            if (JOptionPane.showConfirmDialog(this, "Xác nhận sửa mặt hàng đã chọn?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                int[] selectedRows = tblDSPH.getSelectedRows();
+                for (int i = 0; i < selectedRows.length; i++) {
+                    int rowIndex = selectedRows[i];
+                    String maPhong = tblDSPH.getValueAt(rowIndex, 0).toString();
+                    String tenPhong = tblDSPH.getValueAt(rowIndex, 1).toString();
+                    String maLoai = tblDSPH.getValueAt(rowIndex, 2).toString();
+                    Double gia = Double.parseDouble(tblDSPH.getValueAt(rowIndex, 3).toString());
+                    String trangThai = tblDSPH.getValueAt(rowIndex, 4).toString();
+                    PhongHat ph = new PhongHat(maPhong, tenPhong, new LoaiPhong(maLoai), trangThai);
+
+                    tblDSPH.setValueAt(tenPhong, rowIndex, 1);
+                    tblDSPH.setValueAt(maLoai, rowIndex, 2);
+                    tblDSPH.setValueAt(gia, rowIndex, 3);
+                    tblDSPH.setValueAt(trangThai, rowIndex, 4);
+
+                    if (ph_dao.editPhongHat(ph)) {
+                        System.out.println("Sửa thành công");
+                        JOptionPane.showMessageDialog(this, "Sửa thành công");
+                    } else {
+                        System.out.println("Sửa thất bại");
+                        JOptionPane.showMessageDialog(this, "Sửa thất bại");
+                    }
+                }
+            }
+
+            clearJTable();
+            DocDuLieu();
+        } else {
+            JOptionPane.showMessageDialog(this, "Chọn dòng cần sửa!");
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
 
