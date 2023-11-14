@@ -24,7 +24,7 @@ gui\swing\tabbed\MaterialTabbed.class
 gui\form\Form_QuanLyDatPhong$4.class
 gui\swing\PanelPopUp.class
 gui_dialog\DL_XacNhanTraPhong$2.class
-gui_dialog\DL_ThemNV$3.class
+gui_dialog\DL_XacNhanTraPhong$2.class
 dao\HoaDon_DAO.class
 gui_dialog\DL_ThuePhong$4.class
 gui\form\Form_QuanLiHoaDon.class
@@ -39,7 +39,6 @@ gui\swing\MenuAnimation.class
 gui\swing\PopupMenu$3.class
 gui\component\Header.class
 gui\model\ModelMenu.class
-gui_dialog\DL_ThemNV$2.class
 gui_dialog\DL_test.class
 gui\swing\table\PanelAction$3.class
 gui_dialog\DL_ThuePhong$3.class
@@ -207,7 +206,7 @@ gui\form\Form_Setting$1.class
 gui_dialog\DL_ThemDV$3.class
 gui\component\Menu.class
 gui\form\Form_QuanLyNhanVien$4.class
-gui_dialog\DL_ChonDichVu$3.class
+gui_dialog\DL_ThemDichVu.class
 gui_dialog\DL_ThemNV.class
 dao\DichVu_DAO.class
 gui\form\Form_MatHang$3.class
@@ -219,14 +218,9 @@ gui_dialog\DL_SuaNV.class
 gui_dialog\DL_ThemMatHang$5.class
 gui\swing\CustomPanel.class
 gui_dialog\DL_KiemTravsAddKH.class
-gui_dialog\DL_TraPhongVsThanhToan$2.class
-gui_dialog\DL_ChonDichVu$5.class
 gui\swing\MenuButton.class
 gui\swing\TableActionEvent.class
 gui\swing\RadiusButton$2.class
-gui_dialog\DL_TraPhongVsThanhToan$1.class
-gui\swing\table\TableActionCellRender.class
-gui\swing\table\TableActionEvent.class
 gui\form\Form_QuanLyKhachHang.class
 gui\swing\CustomJOptionPane$1.class
 entity\MatHang.class

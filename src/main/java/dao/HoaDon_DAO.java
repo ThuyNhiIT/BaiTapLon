@@ -1,3 +1,4 @@
+
 package dao;
 
 import connectDB.ConnectDB;
@@ -11,7 +12,6 @@ import java.util.ArrayList;
  * @author HO MINH HAU
  */
 public class HoaDon_DAO {
-
     public HoaDon_DAO() {
 
     }
@@ -54,7 +54,6 @@ public class HoaDon_DAO {
             stmt.setString(3, hd.getKhachHang().getMaKH());
             stmt.setString(4, hd.getNhanVien().getMaNV());
             stmt.setDouble(5, hd.getTongTien());
-
             n = stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -74,7 +73,8 @@ public class HoaDon_DAO {
     public HoaDon getHoaDonTheoMaHD(String maHD) {
         HoaDon hoaDon = null;
 
-        try (Connection con = ConnectDB.getInstance().getConnection(); PreparedStatement stmt = con.prepareStatement("SELECT * FROM HoaDon WHERE maHD = ?")) {
+        try (Connection con = ConnectDB.getInstance().getConnection();
+             PreparedStatement stmt = con.prepareStatement("SELECT * FROM HoaDon WHERE maHD = ?")) {
             stmt.setString(1, maHD);
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
@@ -93,18 +93,18 @@ public class HoaDon_DAO {
     }
 
     // update tongtien cua hoa don bằng maHD
-    public boolean updateTongTien(String maHD, Double tongTien) {
+    public boolean updateTongTien(String maHD,Double tongTien){
 
         Connection con = ConnectDB.getInstance().getConnection();
         PreparedStatement stmt = null;
         int n = 0;
 
-        try {
+        try{
             stmt = con.prepareStatement("UPDATE HoaDon SET tongTien = ? WHERE maHD = ?");
             stmt.setDouble(1, tongTien);
             stmt.setString(2, maHD);
             n = stmt.executeUpdate();
-        } catch (Exception e) {
+        }catch(Exception e){
             e.printStackTrace();
         }
         return n > 0;
@@ -129,5 +129,4 @@ public class HoaDon_DAO {
         }
         return 0;
     }
-
 }

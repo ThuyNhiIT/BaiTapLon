@@ -6,6 +6,8 @@ import entity.ChiTietHoaDonDV;
 import entity.HoaDon;
 import entity.MatHang;
 import gui.form.Form_QuanLyDatPhong;
+import gui.form.MainForm;
+import gui.main.Main;
 import gui.swing.table.PanelAction;
 //import gui.swing.table.TableActionCellEditor;
 import gui.swing.table.TableActionCellEditor;
@@ -429,6 +431,8 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
 
             // Close the dialog
             this.dispose();
+//            MainForm mainForm = new MainForm();
+//            mainForm.showForm(new Form_QuanLyDatPhong());
         } catch (Exception e) {
             // Log the exception or display an error message to the user.
             e.printStackTrace();

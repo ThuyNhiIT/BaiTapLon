@@ -171,6 +171,11 @@ public class DL_PhongDangSuDung extends javax.swing.JDialog {
 
         btnChuyenPhong.setBackground(new java.awt.Color(0, 204, 255));
         btnChuyenPhong.setText("Chuyển Phòng");
+        btnChuyenPhong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChuyenPhongActionPerformed(evt);
+            }
+        });
 
         btnExit.setBackground(new java.awt.Color(255, 0, 51));
         btnExit.setBorder(null);
@@ -326,6 +331,13 @@ public class DL_PhongDangSuDung extends javax.swing.JDialog {
         themDV.setLocationRelativeTo(this);
         themDV.setVisible(true);
     }//GEN-LAST:event_btnThemDVActionPerformed
+
+    private void btnChuyenPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChuyenPhongActionPerformed
+       this.dispose();
+        DL_ChuyenPhong chuyenPhong = new DL_ChuyenPhong((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
+        chuyenPhong.setLocationRelativeTo(this);
+        chuyenPhong.setVisible(true);
+    }//GEN-LAST:event_btnChuyenPhongActionPerformed
 
     /**
      * @param args the command line arguments

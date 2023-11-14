@@ -53,6 +53,7 @@ public class Main extends javax.swing.JFrame {
         menu = new Menu();
         header = new Header();
         main = new MainForm();
+        main.showForm(new Form_Home());
 
         // Thêm sự kiện cho menu khi cần hiển thị menu con (pop-up menu).
         // Khi thu nhỏ menu thì gọi sự kiện này để hiển thị popupmenu
@@ -222,6 +223,10 @@ public class Main extends javax.swing.JFrame {
                         main.showForm(new Form_QuanLiHoaDon());
                     }
                 } else if (menuIndex == 6) {
+                    if (subMenuIndex == -1) {
+                        main.showForm(new Form_ThongKeDoanhThu());
+                    }
+                } else if (menuIndex == 7) {
                     if (subMenuIndex == -1) {
                         main.showForm(new Form_Setting());
                     }
