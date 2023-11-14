@@ -1,4 +1,3 @@
-
 package dao;
 
 import connectDB.ConnectDB;
@@ -12,8 +11,8 @@ import java.util.ArrayList;
  * @author HO MINH HAU
  */
 public class HoaDon_DAO {
-    public HoaDon_DAO() {
 
+    public HoaDon_DAO() {
     }
 
     public ArrayList<HoaDon> getalltbHoaDon() {
@@ -55,62 +54,35 @@ public class HoaDon_DAO {
             stmt.setString(4, hd.getNhanVien().getMaNV());
             stmt.setDouble(5, hd.getTongTien());
 
-            n = stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (stmt != null) {
-                    stmt.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return n > 0;
-    }
-
-    // Tìm hóa đơn theo mã hóa đơn
-    public HoaDon getHoaDonTheoMaHD(String maHD) {
-        HoaDon hoaDon = null;
-
-        try (Connection con = ConnectDB.getInstance().getConnection();
-             PreparedStatement stmt = con.prepareStatement("SELECT * FROM HoaDon WHERE maHD = ?")) {
-            stmt.setString(1, maHD);
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    String maHoaDon = rs.getString("maHD");
-                    LocalDate ngayLapHD = rs.getDate("ngayLapHD").toLocalDate();
-                    String maKH = rs.getString("maKH");
-                    String maNV = rs.getString("maNV");
-                    double tongTien = rs.getDouble("tongTien");
-                    hoaDon = new HoaDon(maHoaDon, ngayLapHD, new KhachHang(maKH), new NhanVien(maNV), tongTien);
-                }
+        n = stmt.executeUpdate();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (stmt != null) {
+                stmt.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return hoaDon;
     }
+    return n > 0;
+}
 
-    // update tongtien cua hoa don bằng maHD
-    public boolean updateTongTien(String maHD,Double tongTien){
 
-        Connection con = ConnectDB.getInstance().getConnection();
-        PreparedStatement stmt = null;
-        int n = 0;
-
-        try{
-            stmt = con.prepareStatement("UPDATE HoaDon SET tongTien = ? WHERE maHD = ?");
-            stmt.setDouble(1, tongTien);
-            stmt.setString(2, maHD);
-            n = stmt.executeUpdate();
-        }catch(Exception e){
+public int getSoLuongHoaDon() {
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        try {
+            String sql = "SELECT COUNT(*) AS SoLuongHoaDon FROM " + TABLE_NAME;
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            if (rs.next()) {
+                return rs.getInt(COLUMN_SO_LUONG_HOA_DON);
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return n > 0;
+        return 0;
     }
-
-
-
 }

@@ -15,8 +15,7 @@ GO
 
 INSERT INTO LoaiNhanVien (maLoai, tenLoai) VALUES ('NVQL', N'Nhân viên quản lý');
 INSERT INTO LoaiNhanVien (maLoai, tenLoai) VALUES ('NVTN', N'Nhân viên thu ngân');
-INSERT INTO LoaiNhanVien (maLoai, tenLoai) VALUES ('Khac', N'Nhân viên khác');
-
+GO
 -- Tạo bảng LoaiPhong
 CREATE TABLE LoaiPhong (
     maLoaiPhong VARCHAR(50) PRIMARY KEY,
@@ -48,8 +47,9 @@ INSERT INTO MatHang (maMH, tenMH, Gia, trangThai) VALUES ('MH007', N'Bia Sapporo
 INSERT INTO MatHang (maMH, tenMH, Gia, trangThai) VALUES ('MH008', N'Nước suối Aquafina', 10000, 1);
 INSERT INTO MatHang (maMH, tenMH, Gia, trangThai) VALUES ('MH009', N'Nước ngọt Cocacola', 12000, 1);
 INSERT INTO MatHang (maMH, tenMH, Gia, trangThai) VALUES ('MH010', N'Nước ngọt Pepsi', 12000, 1);
+INSERT INTO MatHang (maMH, tenMH, Gia, trangThai) VALUES ('MH011', N'Nước giải khát', 12000, 0);
 
-
+/**
 -- Tạo bảng DichVu
 CREATE TABLE DichVu (
     maDV VARCHAR(50) PRIMARY KEY,
@@ -58,8 +58,8 @@ CREATE TABLE DichVu (
 	FOREIGN KEY (maMH) REFERENCES MatHang(maMH)
 );
 GO
-
-<<<<<<< HEAD
+**/
+/*
 INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV001', N'Bia Heineken lon 330ml', 'MH001');
 INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV002', N'Bia Heineken chai 330ml', 'MH002');
 INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV003', N'Bia Tiger lon 330ml', 'MH003');
@@ -70,7 +70,7 @@ INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV007', N'Bia Sapporo lon 330ml'
 INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV008', N'Nước suối Aquafina', 'MH008');
 INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV009', N'Nước ngọt Cocacola', 'MH009');
 INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV010', N'Nước ngọt Pepsi', 'MH010');
-
+*/
 
 -- Tạo bảng KhachHang
 CREATE TABLE KhachHang (
@@ -178,37 +178,37 @@ GO
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P001', 'V001 ', 'LP001', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
-VALUES ('P002', 'V002 ', 'LP001', 'Cho');
+VALUES ('P002', 'V002 ', 'LP001', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
-VALUES ('P003', 'V003', 'LP001', 'Dang su dung');
+VALUES ('P003', 'V003', 'LP001', 'Trong');
 
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P004', 'T004 ', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
-VALUES ('P005', 'T005 ', 'LP002', 'Cho');
+VALUES ('P005', 'T005 ', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
-VALUES ('P006', 'T006', 'LP002', 'Dang su dung');
+VALUES ('P006', 'T006', 'LP002', 'Trong');
 
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P007', 'T007', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
-VALUES ('P008', 'T008', 'LP002', 'Cho');
+VALUES ('P008', 'T008', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
-VALUES ('P009', 'T009', 'LP002', 'Dang su dung');
+VALUES ('P009', 'T009', 'LP002', 'Trong');
 
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P010', 'T010', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
-VALUES ('P011', 'T011', 'LP002', 'Cho');
+VALUES ('P011', 'T011', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
-VALUES ('P012', 'T012', 'LP002', 'Dang su dung');
+VALUES ('P012', 'T012', 'LP002', 'Dang bao tri');
 
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P013', 'T013', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
-VALUES ('P014', 'T014', 'LP002', 'Cho');
+VALUES ('P014', 'T014', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
-VALUES ('P015', 'T015', 'LP002', 'Dang su dung');
+VALUES ('P015', 'T015', 'LP002', 'Dang bao tri');
 
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P016', 'T016', 'LP002', 'Trong');
@@ -233,43 +233,43 @@ INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P024', 'T024', 'LP002', 'Trong');
 
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
-VALUES ('P025', 'T025', 'LP002', 'Cho');
+VALUES ('P025', 'T025', 'LP002', 'Dang bao tri');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
-VALUES ('P026', 'T026', 'LP002', 'Cho');
+VALUES ('P026', 'T026', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
-VALUES ('P027', 'T027', 'LP002', 'Cho');
+VALUES ('P027', 'T027', 'LP002', 'Trong');
 
 
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
-VALUES ('P028', 'T028', 'LP001', 'Cho');
+VALUES ('P028', 'T028', 'LP001', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
-VALUES ('P029', 'T029', 'LP001', 'Cho');
+VALUES ('P029', 'T029', 'LP001', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
-VALUES ('P030', 'T030', 'LP001', 'Cho');
+VALUES ('P030', 'T030', 'LP001', 'Trong');
 
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
-VALUES ('P031', 'T031', 'LP002', 'Cho');
+VALUES ('P031', 'T031', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
-VALUES ('P032', 'T032', 'LP002', 'Cho');
+VALUES ('P032', 'T032', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
-VALUES ('P033', 'T033', 'LP002', 'Cho');
+VALUES ('P033', 'T033', 'LP002', 'Trong');
 
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
-VALUES ('P034', 'T034', 'LP001', 'Dang su dung');
+VALUES ('P034', 'T034', 'LP001', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
-VALUES ('P035', 'T035', 'LP001', 'Dang su dung');
+VALUES ('P035', 'T035', 'LP001', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
-VALUES ('P036', 'T036', 'LP001', 'Dang su dung');
+VALUES ('P036', 'T036', 'LP001', 'Trong');
 
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
-VALUES ('P037', 'T037', 'LP002', 'Dang su dung');
+VALUES ('P037', 'T037', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
-VALUES ('P038', 'T038', 'LP002', 'Dang su dung');
+VALUES ('P038', 'T038', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
-VALUES ('P039', 'T039', 'LP002', 'Dang su dung');
+VALUES ('P039', 'T039', 'LP002', 'Trong');
 
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
-VALUES ('P040', 'T040', 'LP002', 'Dang su dung');
+VALUES ('P040', 'T040', 'LP002', 'Dang bao tri');
 
 
 -- Tạo bảng TaiKhoan
@@ -283,7 +283,7 @@ GO
 
 INSERT INTO TaiKhoan (maNV, Password) VALUES ('NV001', '123A');
 INSERT INTO TaiKhoan (maNV, Password) VALUES ('NV002', '123A');
-INSERT INTO TaiKhoan (maNV, Password) VALUES ('NV003', '123A');
+INSERT INTO TaiKhoan (maNV, Password) VALUES ('NV003', '1');
 INSERT INTO TaiKhoan (maNV, Password) VALUES ('NV004', '123A');
 INSERT INTO TaiKhoan (maNV, Password) VALUES ('NV005', '123A');
 
@@ -299,7 +299,7 @@ CREATE TABLE DonDatPhong (
     FOREIGN KEY (maKH) REFERENCES KhachHang(maKH)
 );
 GO
-
+/*
 INSERT INTO DonDatPhong (maDonDatPhong, ngayDat, ngayNhan, maPhong, maKH)
 VALUES ('DDP001', '2023-10-31', '2023-11-01', 'P001', 'KH001');
 
@@ -323,60 +323,90 @@ VALUES ('DDP007', '2023-12-01', '2023-12-02', 'P007', 'KH007');
 
 INSERT INTO DonDatPhong (maDonDatPhong, ngayDat, ngayNhan, maPhong, maKH)
 VALUES ('DDP008', '2023-12-05', '2023-12-06', 'P008', 'KH008');
-
+<<<<<<< HEAD:src/main/resources/data/KaraokeAPLUS(verFinal).sql
+=======
+*/
+>>>>>>> 246ca9dec2a2b44337dcf8da60474f572b04d0aa:src/main/resources/data/KaraokeAPLUS.sql
 -- Tạo bảng HoaDon
 CREATE TABLE HoaDon (
     maHD VARCHAR(50) PRIMARY KEY,
     ngayLapHD DATE,
     maKH VARCHAR(50),
     maNV VARCHAR(50),
-    maDV VARCHAR(50),
-    maPhong VARCHAR(50),
+    tongTien MONEY,
     FOREIGN KEY (maKH) REFERENCES KhachHang(maKH),
-    FOREIGN KEY (maNV) REFERENCES NhanVien(maNV),
-   /* FOREIGN KEY (maDV) REFERENCES DichVu(maDV),
-    FOREIGN KEY (maPhong) REFERENCES PhongHat(maPhong)
-	*/
+    FOREIGN KEY (maNV) REFERENCES NhanVien(maNV)
 );
 GO
+/*
+-- Thêm dữ liệu vào bảng HoaDon
+INSERT INTO HoaDon (maHD, ngayLapHD, maKH, maNV, tongTien)
+VALUES ('HD001', '2023-10-30', 'KH001', 'NV001', 1000000.00);
 
-INSERT INTO HoaDon (maHD, ngayLapHD, maKH, maNV, maDV, maPhong)
-VALUES ('HD001', '2023-10-30', 'KH001', 'NV001', 'DV001', 'P001');
+<<<<<<< HEAD:src/main/resources/data/KaraokeAPLUS(verFinal).sql
+-- Thêm dữ liệu vào bảng HoaDon
+INSERT INTO HoaDon (maHD, ngayLapHD, maKH, maNV, tongTien)
+VALUES ('HD001', '2023-10-30', 'KH001', 'NV001', 1000000.00);
 
-INSERT INTO HoaDon (maHD, ngayLapHD, maKH, maNV, maDV, maPhong)
-VALUES ('HD002', '2023-10-31', 'KH002', 'NV002', 'DV002', 'P002');
+INSERT INTO HoaDon (maHD, ngayLapHD, maKH, maNV, tongTien)
+VALUES ('HD002', '2023-10-31', 'KH002', 'NV002', 1500000.00);
 
-INSERT INTO HoaDon (maHD, ngayLapHD, maKH, maNV, maDV, maPhong)
-VALUES ('HD003', '2023-11-01', 'KH003', 'NV003', 'DV003', 'P003');
+INSERT INTO HoaDon (maHD, ngayLapHD, maKH, maNV, tongTien)
+VALUES ('HD003', '2023-11-01', 'KH003', 'NV003', 800000.00);
 
-INSERT INTO HoaDon (maHD, ngayLapHD, maKH, maNV, maDV, maPhong)
-VALUES ('HD004', '2023-11-02', 'KH004', 'NV004', 'DV004', 'P004');
+INSERT INTO HoaDon (maHD, ngayLapHD, maKH, maNV, tongTien)
+VALUES ('HD004', '2023-11-02', 'KH004', 'NV004', 1200000.00);
+=======
+INSERT INTO HoaDon (maHD, ngayLapHD, maKH, maNV, tongTien)
+VALUES ('HD002', '2023-10-31', 'KH002', 'NV002', 1500000.00);
 
+INSERT INTO HoaDon (maHD, ngayLapHD, maKH, maNV, tongTien)
+VALUES ('HD003', '2023-11-01', 'KH003', 'NV003', 800000.00);
+>>>>>>> 246ca9dec2a2b44337dcf8da60474f572b04d0aa:src/main/resources/data/KaraokeAPLUS.sql
 
+INSERT INTO HoaDon (maHD, ngayLapHD, maKH, maNV, tongTien)
+VALUES ('HD004', '2023-11-02', 'KH004', 'NV004', 1200000.00);
+*/
 -- Tạo bảng ChiTietHoaDonDV
 CREATE TABLE ChiTietHoaDonDV (
     maHD VARCHAR(50),
-    maDV VARCHAR(50),
+    maMH VARCHAR(50),
     soLuong INT,
     gia FLOAT,
-    PRIMARY KEY (maHD, maDV),
+    PRIMARY KEY (maHD, maMH),
     FOREIGN KEY (maHD) REFERENCES HoaDon(maHD),
-    FOREIGN KEY (maDV) REFERENCES DichVu(maDV)
+    FOREIGN KEY (maMH) REFERENCES MatHang(maMH)
 );
 GO
+/*
+-- Thêm dữ liệu vào bảng ChiTietHoaDonDV
+INSERT INTO ChiTietHoaDonDV (maHD, maMH, soLuong, gia)
+VALUES ('HD001', 'MH001', 1, 100000);
 
-INSERT INTO ChiTietHoaDonDV (maHD, maDV, soLuong, gia)
-VALUES ('HD001', 'DV001', 1, 100000);
+<<<<<<< HEAD:src/main/resources/data/KaraokeAPLUS(verFinal).sql
+-- Thêm dữ liệu vào bảng ChiTietHoaDonDV
+INSERT INTO ChiTietHoaDonDV (maHD, maMH, soLuong, gia)
+VALUES ('HD001', 'MH001', 1, 100000);
 
-INSERT INTO ChiTietHoaDonDV (maHD, maDV, soLuong, gia)
-VALUES ('HD002', 'DV002', 1, 120000);
+INSERT INTO ChiTietHoaDonDV (maHD, maMH, soLuong, gia)
+VALUES ('HD002', 'MH002', 1, 120000);
 
-INSERT INTO ChiTietHoaDonDV (maHD, maDV, soLuong, gia)
-VALUES ('HD003', 'DV003', 1, 130000);
+INSERT INTO ChiTietHoaDonDV (maHD, maMH, soLuong, gia)
+VALUES ('HD003', 'MH003', 1, 130000);
 
-INSERT INTO ChiTietHoaDonDV (maHD, maDV, soLuong, gia)
-VALUES ('HD004', 'DV004', 1, 140000);
+INSERT INTO ChiTietHoaDonDV (maHD, maMH, soLuong, gia)
+VALUES ('HD004', 'MH004', 1, 140000);
+=======
+INSERT INTO ChiTietHoaDonDV (maHD, maMH, soLuong, gia)
+VALUES ('HD002', 'MH002', 1, 120000);
 
+INSERT INTO ChiTietHoaDonDV (maHD, maMH, soLuong, gia)
+VALUES ('HD003', 'MH003', 1, 130000);
+>>>>>>> 246ca9dec2a2b44337dcf8da60474f572b04d0aa:src/main/resources/data/KaraokeAPLUS.sql
+
+INSERT INTO ChiTietHoaDonDV (maHD, maMH, soLuong, gia)
+VALUES ('HD004', 'MH004', 1, 140000);
+*/
 -- Tạo bảng ChiTietHoaDonPhong
 CREATE TABLE ChiTietHoaDonPhong (
     maHD VARCHAR(50),
@@ -390,7 +420,12 @@ CREATE TABLE ChiTietHoaDonPhong (
     FOREIGN KEY (maPhong) REFERENCES PhongHat(maPhong)
 );
 GO
+<<<<<<< HEAD:src/main/resources/data/KaraokeAPLUS(verFinal).sql
 
+=======
+/*
+>>>>>>> 246ca9dec2a2b44337dcf8da60474f572b04d0aa:src/main/resources/data/KaraokeAPLUS.sql
+-- Thêm dữ liệu vào bảng ChiTietHoaDonPhong
 INSERT INTO ChiTietHoaDonPhong (maHD, maPhong, gia, gioVao, gioRa, maGiamGia)
 VALUES ('HD001', 'P001', 100000, '2023-10-30 13:00:00', '2023-10-30 15:00:00', 'VIP');
 
@@ -403,5 +438,7 @@ VALUES ('HD003', 'P003', 60000, '2023-10-30 12:00:00', '2023-10-30 15:00:00', 'V
 INSERT INTO ChiTietHoaDonPhong (maHD, maPhong, gia, gioVao, gioRa, maGiamGia)
 VALUES ('HD004', 'P004', 60000, '2023-10-30 11:00:00', '2023-10-30 13:00:00', 'VIP');
 
-INSERT INTO ChiTietHoaDonPhong (maHD, maPhong, gia, gioVao, gioRa, maGiamGia)
-VALUES ('HD005', 'P005', 60000, '2023-10-30 13:30:00', '2023-10-30 15:300:00', 'VIP');
+<<<<<<< HEAD:src/main/resources/data/KaraokeAPLUS(verFinal).sql
+=======
+*/
+>>>>>>> 246ca9dec2a2b44337dcf8da60474f572b04d0aa:src/main/resources/data/KaraokeAPLUS.sql

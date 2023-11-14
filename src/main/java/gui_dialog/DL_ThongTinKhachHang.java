@@ -5,6 +5,7 @@ import dao.KhachHang_DAO;
 import entity.KhachHang;
 import java.util.ArrayList;
 import gui.form.Form_QuanLyKhachHang;
+import gui.swing.CustomJOptionPane;
 import java.awt.Frame;
 import java.sql.SQLException;
 import java.util.List;
@@ -21,10 +22,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DL_ThongTinKhachHang extends javax.swing.JDialog {
 
-    private Form_QuanLyKhachHang qlkh;
-
     private KhachHang_DAO kh_dao;
-    private JTable tblDSKH;
+    private Form_QuanLyKhachHang qlkh;
     private DefaultTableModel dtmKhachHang;
 
     private Form_QuanLyKhachHang qlKH;
@@ -32,13 +31,21 @@ public class DL_ThongTinKhachHang extends javax.swing.JDialog {
     public DL_ThongTinKhachHang() {
         initComponents();
         setLocationRelativeTo(null);
+        kh_dao = new KhachHang_DAO();
     }
 
-    public String phatSinhMaKH() {
+//   public void DocDuLieu() {
+//        java.util.List<KhachHang> list = kh_dao.getalltbKhachHang();
+//        for (KhachHang kh : list) {
+//            dtmKhachHang.addRow(new Object[]{kh.getMaKH(), kh.getTenKH(), kh.getSdt(), kh.isGioitinh() ? "Nam" : "Nữ"});
+//        }
+//    }
+    
+    public String phatSinhMaKH(){
         List<KhachHang> khs = kh_dao.getalltbKhachHang();
         String temp = null;
 
-        for (KhachHang kh : khs) {
+        for(KhachHang kh : khs){
             temp = kh.getMaKH();
         }
         int count = laySoDuoi(temp);
@@ -48,10 +55,10 @@ public class DL_ThongTinKhachHang extends javax.swing.JDialog {
         return maKHang;
     }
 
-    public int laySoDuoi(String str) {
-        if (str == null) {
+    public int laySoDuoi(String str){
+        if(str == null){
             return 0;
-        } else {
+        }else{
             String numberStr = str.substring(2);//Loại bỏ kí tự "KH"
             int number = Integer.parseInt(numberStr);
             return number;
@@ -80,22 +87,6 @@ public class DL_ThongTinKhachHang extends javax.swing.JDialog {
 //            dtmKhachHang.addRow(new Object[]{kh.getMaKH(), kh.getTenKH(), kh.getSdt(), kh.isGioitinh() ? "Nam" : "Nữ"});
 //        }
 //    }
-    public void loadTable(ArrayList<KhachHang> ds) {
-        if (ds == null) {
-            clearJTable();
-            return;
-        }
-        clearJTable();
-        for (KhachHang khachHang : ds) {
-            dtmKhachHang.addRow(khachHang.getObject());
-        }
-    }
-
-    public void clearJTable() {
-        while (tblDSKH.getRowCount() > 0) {
-            dtmKhachHang.removeRow(0);
-        }
-    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -116,7 +107,6 @@ public class DL_ThongTinKhachHang extends javax.swing.JDialog {
         txtSDT = new javax.swing.JTextField();
         txtTenKH = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setUndecorated(true);
 
@@ -156,11 +146,6 @@ public class DL_ThongTinKhachHang extends javax.swing.JDialog {
         lblGioiTinh.setText("Giới tính:");
 
         radNam.setText("Nam");
-        radNam.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radNamActionPerformed(evt);
-            }
-        });
 
         radNu.setText("Nữ");
 
@@ -172,6 +157,8 @@ public class DL_ThongTinKhachHang extends javax.swing.JDialog {
                 btnThoatActionPerformed(evt);
             }
         });
+
+        txtMaKH.setEditable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -256,28 +243,27 @@ public class DL_ThongTinKhachHang extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void radNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radNamActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_radNamActionPerformed
-
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
 
         ConnectDB db = ConnectDB.getInstance();
         try {
-
             db.connect();
             String maKH = phatSinhMaKH();
             String tenKH = txtTenKH.getText();
             String Sdt = txtSDT.getText();
             Boolean gt = radNam.isSelected();
             KhachHang addKh = new KhachHang(maKH, tenKH, Sdt, gt);
-            kh_dao.addCustomer(addKh);
-            qlkh.DocDuLieu();
+            boolean isSuccess = kh_dao.addCustomer(addKh);
+            if(isSuccess){
+                CustomJOptionPane.showMessageDialog("Thêm khách hàng thành công !");
+            }
+            else{
+                CustomJOptionPane.showMessageDialog("Thêm khách hàng thất bại !!!");
+            }
+//            qlkh.DocDuLieu();
         } catch (SQLException ex) {
             Logger.getLogger(DL_ThongTinKhachHang.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-
     }//GEN-LAST:event_btnThemActionPerformed
 
 

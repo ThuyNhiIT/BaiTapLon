@@ -1,14 +1,19 @@
 package gui_dialog;
 
 import connectDB.ConnectDB;
+import dao.LoaiNV_DAO;
 import dao.NhanVien_DAO;
 import entity.LoaiNhanVien;
 import entity.NhanVien;
 import gui.form.Form_QuanLyNhanVien;
+import gui.swing.CustomJOptionPane;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -18,12 +23,18 @@ public class DL_ThemNV extends javax.swing.JFrame {
 
 
     private NhanVien_DAO nv_dao;
+    private LoaiNV_DAO loainv_dao;
     private Form_QuanLyNhanVien qlnv;
   
     public DL_ThemNV() {
         initComponents();
+//        loadLoaiNhanVien();
         setLocationRelativeTo(null);
         nv_dao = new NhanVien_DAO();
+        
+        DefaultComboBoxModel<LoaiNhanVien> dataModelLop = new DefaultComboBoxModel<LoaiNhanVien>();
+        cmbLoaiNV.setModel(dataModelLop);
+       
     }
 
    
@@ -50,6 +61,37 @@ public class DL_ThemNV extends javax.swing.JFrame {
         }
     }
     
+    public void loadLoaiNhanVien(){
+        ArrayList<LoaiNhanVien> ds = loainv_dao.getAllLoaiNhanVien();
+        if(ds == null){
+            return;
+        }
+        for(LoaiNhanVien loaiNhanVien : ds){
+            cmbLoaiNV.addItem(loaiNhanVien);
+        }
+    }
+    
+    public NhanVien revertNhanVien(){
+        String maNV = phatSinhMaNV();
+        String tenNV = txtTenNV.getText();
+        Boolean gioiTinh =  radNam.isSelected();
+        String CCCD = txtCCCD.getText();
+        String SDT = txtSDT.getText();
+        String diaChi = txtDiaChi.getText();
+        String caLam = "";
+        if(radCa1.isSelected()){
+           caLam = "Ca 1";
+        }
+        else if(radCa2.isSelected()){
+           caLam = "Ca 2";
+        }
+        else if(radCa3.isSelected()){
+           caLam = "Ca 3";
+        }
+        LoaiNhanVien loaiNV = (LoaiNhanVien) cmbLoaiNV.getSelectedItem();
+        
+        return new NhanVien(maNV, tenNV, gioiTinh, CCCD, SDT, diaChi, caLam, loaiNV);
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -76,7 +118,7 @@ public class DL_ThemNV extends javax.swing.JFrame {
         radCa3 = new javax.swing.JRadioButton();
         btnThem = new gui.swing.RadiusButton();
         btnThoat = new gui.swing.RadiusButton();
-        cboLoaiNV = new javax.swing.JComboBox<>();
+        cmbLoaiNV = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -133,8 +175,6 @@ public class DL_ThemNV extends javax.swing.JFrame {
             }
         });
 
-        cboLoaiNV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NVQL", "NVTN" }));
-
         javax.swing.GroupLayout pnThemNVLayout = new javax.swing.GroupLayout(pnThemNV);
         pnThemNV.setLayout(pnThemNVLayout);
         pnThemNVLayout.setHorizontalGroup(
@@ -177,7 +217,7 @@ public class DL_ThemNV extends javax.swing.JFrame {
                                 .addComponent(radCa3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(32, 32, 32))))
                     .addGroup(pnThemNVLayout.createSequentialGroup()
-                        .addComponent(cboLoaiNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbLoaiNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnThemNVLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -216,7 +256,7 @@ public class DL_ThemNV extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(pnThemNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLoaiNV)
-                    .addComponent(cboLoaiNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbLoaiNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnThemNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblGioiTinh)
@@ -259,20 +299,16 @@ public class DL_ThemNV extends javax.swing.JFrame {
         ConnectDB db = ConnectDB.getInstance();
         try {
             db.connect();
-            String maNV = phatSinhMaNV();
-            String tenNV = txtTenNV.getText();
-            Boolean gioiTinh = radNam.isSelected();
-            String CCCD = txtCCCD.getText();
-            String SDT = txtSDT.getText();
-            String diaChi = txtDiaChi.getText();
-            Boolean caLam = radCa1.isSelected();
-            String loainv = cboLoaiNV.getItemAt(0);
-            
-            NhanVien nvien = new NhanVien(maNV, tenNV, gioiTinh, CCCD, SDT, diaChi, CCCD, new LoaiNhanVien(maNV));
-            nv_dao.addStaff(nvien);
-//            qlnv.DocDuLieu();
-            
-            
+            NhanVien addNV = revertNhanVien();
+            Boolean isSuccess = nv_dao.addStaff(addNV);
+            if(isSuccess){
+                CustomJOptionPane.showMessageDialog("Thêm nhân viên thành công !");
+                this.dispose();
+            }
+            else{
+                CustomJOptionPane.showMessageDialog("Thêm nhân viên không thành công !");
+            }
+//       qlnv.DocDuLieu();
         } catch (SQLException ex) {
             Logger.getLogger(DL_ThemNV.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -291,7 +327,7 @@ public class DL_ThemNV extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.swing.RadiusButton btnThem;
     private gui.swing.RadiusButton btnThoat;
-    private javax.swing.JComboBox<String> cboLoaiNV;
+    private javax.swing.JComboBox<LoaiNhanVien> cmbLoaiNV;
     private javax.swing.JLabel lblCCCD;
     private javax.swing.JLabel lblCa;
     private javax.swing.JLabel lblDiaChi;

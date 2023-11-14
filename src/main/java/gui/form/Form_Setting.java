@@ -1,8 +1,7 @@
-
 package gui.form;
 
 import gui.main.Main;
-
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -10,12 +9,10 @@ import gui.main.Main;
  */
 public class Form_Setting extends javax.swing.JPanel {
 
-  
     public Form_Setting() {
         initComponents();
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -23,7 +20,7 @@ public class Form_Setting extends javax.swing.JPanel {
         pnlCaiDat = new javax.swing.JPanel();
         DoiMK = new javax.swing.JButton();
         HDSD = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnDangXuat = new javax.swing.JButton();
 
         pnlCaiDat.setBackground(new java.awt.Color(235, 249, 249));
 
@@ -42,8 +39,13 @@ public class Form_Setting extends javax.swing.JPanel {
         HDSD.setForeground(new java.awt.Color(255, 255, 255));
         HDSD.setText("Hướng dẫn sử dụng");
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        jButton1.setText("Đăng xuất");
+        btnDangXuat.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        btnDangXuat.setText("Đăng xuất");
+        btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDangXuatActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlCaiDatLayout = new javax.swing.GroupLayout(pnlCaiDat);
         pnlCaiDat.setLayout(pnlCaiDatLayout);
@@ -52,7 +54,7 @@ public class Form_Setting extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCaiDatLayout.createSequentialGroup()
                 .addGap(369, 369, 369)
                 .addGroup(pnlCaiDatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDangXuat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(HDSD, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
                     .addComponent(DoiMK, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(402, 402, 402))
@@ -65,7 +67,7 @@ public class Form_Setting extends javax.swing.JPanel {
                 .addGap(66, 66, 66)
                 .addComponent(HDSD, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(87, 87, 87)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(190, Short.MAX_VALUE))
         );
 
@@ -89,14 +91,28 @@ public class Form_Setting extends javax.swing.JPanel {
 
     private void DangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DangXuatActionPerformed
         // TODO add your handling code here:
-     
+
     }//GEN-LAST:event_DangXuatActionPerformed
+
+    private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
+        if (JOptionPane.showConfirmDialog(null, "Bạn có muốn đăng xuất không?") == 0) {
+            // Đóng chương trình
+            System.exit(0);
+
+            // Tạo phiên bản mới của màn hình đăng nhập và hiển thị nó
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new Form_Login().setVisible(true);
+                }
+            });
+        }
+    }//GEN-LAST:event_btnDangXuatActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DoiMK;
     private javax.swing.JButton HDSD;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnDangXuat;
     private javax.swing.JPanel pnlCaiDat;
     // End of variables declaration//GEN-END:variables
 }

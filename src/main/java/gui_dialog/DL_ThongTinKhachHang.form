@@ -203,9 +203,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Nam"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radNamActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="radNu">
           <Properties>
@@ -227,6 +224,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtMaKH">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtSDT">
         </Component>

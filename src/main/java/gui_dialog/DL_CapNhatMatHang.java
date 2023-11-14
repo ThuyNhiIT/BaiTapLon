@@ -171,7 +171,7 @@ public class DL_CapNhatMatHang extends javax.swing.JDialog {
             //            mh_dao.editMatHang(mh);
             JOptionPane.showMessageDialog(null, "Sửa mặt hàng thành công!");
         } catch (SQLException ex) {
-            Logger.getLogger(DL_CapNhatMatHangh.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DL_CapNhatMatHang.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Kiểm tra 2");
         }
     }//GEN-LAST:event_btnSuaActionPerformed
