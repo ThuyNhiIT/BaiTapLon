@@ -1,42 +1,34 @@
 gui\event\EventShowPopUpMenu.class
-<<<<<<< HEAD
 gui_dialog\DL_test$5.class
 gui_dialog\DL_CapNhatMatHang$2.class
 gui\model\ModelRoom.class
+gui_dialog\DL_ThemPhongHat$5.class
 gui\form\Form_QuanLyPhongHat.class
 gui\swing\scrollbar\ModernScrollBarUI.class
-=======
-gui_dialog\DL_ThemPhongHat$5.class
->>>>>>> 246ca9dec2a2b44337dcf8da60474f572b04d0aa
 gui_dialog\DL_PhongDangSuDung$3.class
 gui\form\MainForm.class
 gui_dialog\DL_ThongTinKhachHang$1.class
+gui\form\Form_QuanLyNhanVien$3.class
 gui_dialog\DL_ThanhToan.class
 entity\NhanVien.class
-<<<<<<< HEAD
+gui\form\Form_MatHang$5.class
 gui\swing\ActionButton$1.class
 gui\main\Main$6.class
-=======
-gui\form\Form_MatHang$5.class
->>>>>>> 246ca9dec2a2b44337dcf8da60474f572b04d0aa
 gui\event\EventMenu.class
+gui_dialog\DL_CapNhatMatHang.class
 gui_dialog\DL_ThemDichVu$1.class
 gui\component\PanelKiemTraThongTinvsAddKH.class
 gui_dialog\DL_KiemTravsAddKH$4.class
 gui\swing\PanelAction$1.class
 gui\swing\tabbed\MaterialTabbed.class
-<<<<<<< HEAD
 gui\event\EventCheckConnectDB.class
-gui\form\Form_QuenMatKhau$3.class
-gui_dialog\DL_ThongTinDatPhong$2.class
-=======
 gui\form\Form_QuanLyPhongHat$4.class
+gui\form\Form_QuenMatKhau$3.class
 dao\LoaiPhong_DAO.class
->>>>>>> 246ca9dec2a2b44337dcf8da60474f572b04d0aa
+gui_dialog\DL_ThongTinDatPhong$2.class
 gui\swing\PanelPopUp.class
 gui\swing\ButtonGradient.class
 gui_dialog\DL_DatPhong$1.class
-gui_dialog\DL_CapNhatMatHangh.class
 gui_dialog\DL_ThemNV$3.class
 dao\HoaDon_DAO.class
 gui_dialog\DL_ThuePhong$4.class
@@ -54,15 +46,13 @@ gui\swing\PopupMenu$3.class
 gui\component\Header.class
 gui\model\ModelMenu.class
 gui_dialog\DL_ThemNV$2.class
+gui_dialog\DL_test.class
 gui_dialog\DL_ThuePhong$3.class
 gui_dialog\DL_PhongDangSuDung$3$1.class
 gui\form\Form_QuanLyKhachHang$2.class
-<<<<<<< HEAD
 gui\form\ProcessesLoading.class
 gui\swing\CustomJTextField.class
 gui_dialog\DL_CapNhatMatHang$1.class
-=======
->>>>>>> 246ca9dec2a2b44337dcf8da60474f572b04d0aa
 gui\form\Form_QuanLyDatPhong$3.class
 gui\swing\CustomJOptionPane$RoundedGradientButton.class
 gui_dialog\DL_PhongDangSuDung$2.class
@@ -93,77 +83,58 @@ gui_dialog\DL_SuaPhong.class
 gui\component\PanelKiemTraThongTinvsAddKH$1.class
 gui\form\Form_Login$1.class
 entity\LoaiPhong.class
-<<<<<<< HEAD
 gui_dialog\DL_ThemMatHang.class
-=======
 gui_dialog\DL_ThemPhongHat$6.class
->>>>>>> 246ca9dec2a2b44337dcf8da60474f572b04d0aa
 entity\LoaiNhanVien.class
 gui_dialog\DL_test$1.class
 gui_dialog\DL_ThemMatHang$1.class
-gui_dialog\DL_ThemPhong$6.class
 gui\main\Main$4.class
 dao\TaiKhoan_DAO.class
 gui\swing\RoundedButtonUI_v3.class
-gui_dialog\DL_ThemPhong$3.class
 gui_dialog\DL_DoiMatKhau$4.class
 gui\swing\tabbed\MaterialTabbed$MaterialTabbedUI.class
 gui\swing\TableActionCellRender.class
-<<<<<<< HEAD
 connectDB\ConnectDB.class
 dao\ChiTietHoaDonDichVu_DAO.class
 gui_dialog\DL_SuaKhachHang.class
 gui\swing\ActionButton.class
-=======
 gui_dialog\DL_ThemPhongHat$3.class
->>>>>>> 246ca9dec2a2b44337dcf8da60474f572b04d0aa
 gui_dialog\DL_SuaNV$1.class
 gui_dialog\DL_test$4.class
 gui_dialog\DL_DoiMatKhau$1.class
 gui_dialog\DL_SuaKhachHang$1.class
 gui\swing\PanelAction.class
 gui\swing\MenuItem.class
-gui_dialog\DL_ThemPhong.class
 gui\form\Form_QuenMatKhau.class
 gui\Application$1$2.class
 dao\LoaiNV_DAO.class
 gui\swing\tabbed\MaterialTabbed$MaterialTabbedUI$1.class
+gui_dialog\DL_CapNhatMatHang$3.class
 gui_dialog\DL_test$3.class
 gui_dialog\DL_ThemDichVu$2.class
 gui\form\Form_QuanLyKhachHang$4.class
 gui_dialog\DL_SuaNV$2.class
-<<<<<<< HEAD
 gui_dialog\DL_ThuePhong.class
 gui\main\Main$1.class
 gui_dialog\DL_ThanhToan$1.class
+gui_dialog\DL_ThemPhongHat$6$1.class
 gui_dialog\DL_ThongTinDatPhong$1.class
 gui\form\Form_DichVu.class
-gui_dialog\DL_ThemPhong$4.class
 gui_dialog\DL_DoiMatKhau.class
 gui_dialog\DL_DatPhong.class
 gui\Application$1$1.class
 gui_dialog\DL_ThuePhong$5.class
 gui\component\Menu$1.class
-gui_dialog\DL_DoiMatKhau$3.class
-=======
-gui_dialog\DL_ThemPhongHat$6$1.class
-gui\Application$1$1.class
-gui_dialog\DL_ThuePhong$5.class
-gui\component\Menu$1.class
 gui_dialog\DL_ThemPhongHat$4.class
->>>>>>> 246ca9dec2a2b44337dcf8da60474f572b04d0aa
+gui_dialog\DL_DoiMatKhau$3.class
 gui_dialog\DL_SuaNV$3.class
 gui\swing\RoundedButtonUI_v2.class
 gui_dialog\DL_test$2.class
 gui_dialog\DL_KiemTravsAddKH$6.class
-<<<<<<< HEAD
 gui_dialog\DL_DichVu$1.class
 entity\ChiTietHoaDonDV.class
-gui_dialog\DL_ThemPhong$5.class
 gui_dialog\DL_CapNhatMatHang$4.class
-=======
 gui_dialog\DL_ThemPhongHat.class
->>>>>>> 246ca9dec2a2b44337dcf8da60474f572b04d0aa
 gui\main\Main.class
 gui\main\Main$2.class
 gui_dialog\DL_ThemDichVu$3.class
@@ -176,13 +147,10 @@ gui\form\Form_QuanLyNhanVien.class
 dao\NhanVien_DAO.class
 gui\form\Form_Login.class
 gui\form\Form_Setting.class
-<<<<<<< HEAD
 gui_dialog\DL_DichVu.class
-gui\component\Header$3.class
-=======
 gui\form\Form_Setting$2.class
+gui\component\Header$3.class
 gui_dialog\DL_ThemPhongHat$2.class
->>>>>>> 246ca9dec2a2b44337dcf8da60474f572b04d0aa
 entity\PhongHat.class
 dao\ChiTietHoaDonPhong_Dao.class
 gui_dialog\DL_ThongTinKhachHang$4.class
@@ -212,19 +180,20 @@ gui_dialog\DL_test$5$1.class
 gui\swing\TimKiem$1.class
 gui_dialog\DL_SuaPhong$2.class
 gui_dialog\DL_ThongTinKhachHang.class
-gui_dialog\DL_ThemPhong$1.class
 gui_dialog\DL_PhongDangSuDung.class
-<<<<<<< HEAD
 gui\component\Header$2.class
+gui_dialog\DL_ThemPhongHat$1.class
+gui\form\Form_QuanLyPhongHat$2.class
 gui_dialog\DL_SuaKhachHang$3.class
 gui_dialog\DL_ThemNV$1.class
 gui\swing\CustomJOptionPane.class
-gui_dialog\DL_ThongTinKhachHang$5.class
+gui\form\Form_Setting$3.class
 gui_dialog\DL_ThongTinDatPhong.class
-gui_dialog\DL_CapNhatMatHangh$1.class
 gui\form\Form_MatHang$1.class
 gui_dialog\DL_ThemMatHang$3.class
+gui_dialog\DL_ThemMatHang$7.class
 gui\swing\PopupMenu$1.class
+gui\form\Form_QuanLyPhongHat$3.class
 gui\swing\MenuItem$1.class
 gui_dialog\DL_SuaKhachHang$4.class
 gui\form\Form_Home.class
@@ -234,22 +203,12 @@ gui\form\Form_DichVu$1.class
 gui_dialog\DL_ThemMatHang$4.class
 gui_dialog\DL_ThanhToan$4.class
 gui_dialog\DL_SuaKhachHang$4$1.class
-=======
-gui_dialog\DL_ThemPhongHat$1.class
-gui_dialog\DL_ThemNV$1.class
-gui\swing\CustomJOptionPane.class
-gui_dialog\DL_ThongTinKhachHang$5.class
-gui\form\Form_Setting$3.class
-gui_dialog\DL_ThemMatHang$7.class
-gui\form\Form_QuanLyPhongHat$3.class
->>>>>>> 246ca9dec2a2b44337dcf8da60474f572b04d0aa
 gui_dialog\DL_KiemTravsAddKH$2.class
 gui\form\Form_QuenMatKhau$2.class
 gui\swing\PanelAction$3.class
 gui\swing\Button$2.class
 gui\Application.class
 gui\form\Form_ThongKeMatHang$1.class
-gui_dialog\DL_CapNhatMatHangh$2.class
 gui_dialog\DL_ThongTinKhachHang$3.class
 gui\component\PanelKiemTraThongTinvsAddKH$4.class
 gui\form\Form_QuanLyNhanVien$1.class
@@ -258,37 +217,30 @@ gui\form\Form_Setting$1.class
 gui\form\NewJFrame.class
 gui\form\Form_Login$4.class
 gui\component\Menu.class
-<<<<<<< HEAD
 gui\form\Form_QuanLiHoaDon$1.class
 gui\swing\Button.class
 gui\form\Form_MatHang.class
-=======
->>>>>>> 246ca9dec2a2b44337dcf8da60474f572b04d0aa
 gui_dialog\DL_ThemDichVu.class
 gui_dialog\DL_ThemNV.class
 dao\DichVu_DAO.class
 gui\form\Form_MatHang$3.class
 gui_dialog\DL_ThongTinKhachHang$2.class
+gui\form\Form_QuanLyNhanVien$2.class
 entity\TaiKhoan.class
 gui_dialog\DL_ThemMatHang$7$1.class
 gui_dialog\DL_SuaNV.class
 gui_dialog\DL_ThemMatHang$5.class
 gui\swing\CustomPanel.class
 gui_dialog\DL_KiemTravsAddKH.class
-<<<<<<< HEAD
-gui_dialog\DL_CapNhatMatHangh$3.class
 gui_dialog\DL_DatPhong$2.class
 gui\swing\MenuButton.class
 gui\swing\TableActionEvent.class
 gui\swing\RadiusButton$2.class
+gui\form\Form_QuanLiHoaDon$2.class
 gui_dialog\DL_ThemMatHang$6.class
 gui\form\Form_MatHang$4.class
 gui_dialog\DL_DatPhong$3.class
 gui_dialog\DL_CapNhatMatHang$4$1.class
-=======
-gui\swing\RadiusButton$2.class
-gui\form\Form_QuanLiHoaDon$2.class
->>>>>>> 246ca9dec2a2b44337dcf8da60474f572b04d0aa
 gui\form\Form_QuanLyKhachHang.class
 gui\swing\CustomJOptionPane$1.class
 entity\MatHang.class
@@ -297,7 +249,6 @@ entity\DichVu.class
 dao\PhongHat_DAO.class
 gui\form\Form_DichVu$2.class
 gui\form\Form_ThongKeDoanhThu$1.class
-gui_dialog\DL_CapNhatMatHangh$4.class
 gui\form\Form_Login$5.class
 gui\swing\RadiusButton$1.class
 gui\component\PanelKiemTraThongTinvsAddKH$5.class
