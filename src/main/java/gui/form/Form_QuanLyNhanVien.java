@@ -57,7 +57,7 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
         List<NhanVien> list = nv_dao.getalltbNhanVien();
         for (NhanVien nv : list) {
             dtmNhanVien.addRow(new Object[]{
-                nv.getMaNV(), nv.getTenNV(), nv.isGioiTinh() ? "Nam" : "Nữ", nv.getSDT(), nv.getCCCD(), nv.getSDT(),
+                nv.getMaNV(), nv.getTenNV(), nv.isGioiTinh() ? "Nam" : "Nữ", nv.getCCCD(), nv.getSDT(),
                 nv.getDiaChi(), nv.getCaLam(), nv.getLoaiNV().getMaLoai()
             });
         }
@@ -94,7 +94,7 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
         pnlHeader.setBackground(new java.awt.Color(255, 255, 255));
         pnlHeader.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        pnlTraCuu.setBackground(new java.awt.Color(235, 249, 249));
+        pnlTraCuu.setBackground(new java.awt.Color(255, 255, 255));
 
         lblTim.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTim.setText("Tìm kiếm");
@@ -140,6 +140,7 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
             }
         });
 
+        btnSua.setBackground(new java.awt.Color(235, 249, 249));
         btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/edit.png"))); // NOI18N
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
@@ -281,8 +282,9 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
                     tblDSNV.setValueAt(SDT, rowIndex, 4);
                     tblDSNV.setValueAt(diaChi, rowIndex, 5);
                     tblDSNV.setValueAt(caLam, rowIndex, 6);
-                    tblDSNV.setValueAt(loaiNV, rowIndex, 7);
+
                     NhanVien nv = new NhanVien(maNV, tenNV, gioiTinh, CCCD, SDT, diaChi, caLam, new LoaiNhanVien(loaiNV));
+
                     if (nv_dao.editStaff(nv)) {
                         System.out.println("Sửa thành công");
                         JOptionPane.showMessageDialog(this, "Sửa thành công");
