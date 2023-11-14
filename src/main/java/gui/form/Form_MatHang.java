@@ -4,10 +4,13 @@ import dao.MatHang_DAO;
 import entity.MatHang;
 import gui_dialog.DL_ThemMatHang;
 import java.awt.Component;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -16,17 +19,18 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author HO MINH HAU
  */
-public class Form_MatHang extends javax.swing.JPanel {
+public class Form_MatHang extends javax.swing.JPanel implements MouseListener {
 
     private MatHang_DAO mh_dao;
     private DefaultTableModel dtmMatHang;
+//    private JTable tblMatHang;
 
     public Form_MatHang() {
         initComponents();
         mh_dao = new MatHang_DAO();
         dtmMatHang = (DefaultTableModel) tblMatHang.getModel();
         DocDuLieu();
-        System.out.println("BBBB");
+//        tblMatHang.addMouseListener(this);
     }
 
     public void DocDuLieu() {
@@ -80,7 +84,7 @@ public class Form_MatHang extends javax.swing.JPanel {
         pnlHeader.setBackground(new java.awt.Color(235, 249, 249));
         pnlHeader.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        pnlTim.setBackground(new java.awt.Color(255, 255, 255));
+        pnlTim.setBackground(new java.awt.Color(235, 249, 249));
 
         lblTim.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTim.setText("Tìm kiếm");
@@ -182,6 +186,7 @@ public class Form_MatHang extends javax.swing.JPanel {
                 "Mã mặt hàng", "Tên mặt hàng", "Giá", "Trạng thái"
             }
         ));
+        tblMatHang.setRowHeight(40);
         scr.setViewportView(tblMatHang);
         tblMatHang.getAccessibleContext().setAccessibleName("");
 
@@ -227,35 +232,37 @@ public class Form_MatHang extends javax.swing.JPanel {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         mh_dao = new MatHang_DAO();
+
         if (tblMatHang.getSelectedRowCount() > 0) {
             if (JOptionPane.showConfirmDialog(this, "Xác nhận sửa mặt hàng đã chọn?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 int[] selectedRows = tblMatHang.getSelectedRows();
                 for (int i = 0; i < selectedRows.length; i++) {
                     int rowIndex = selectedRows[i];
-                    // Lấy dữ liệu từ bảng
                     String maHang = tblMatHang.getValueAt(rowIndex, 0).toString();
                     String tenHang = tblMatHang.getValueAt(rowIndex, 1).toString();
-                    Double gia = Double.parseDouble(tblMatHang.getValueAt(rowIndex, 2).toString()); // Ví dụ cột giá ở cột thứ 2
-                    Boolean trangThai = Boolean.parseBoolean(tblMatHang.getValueAt(rowIndex, 3).toString()); // Ví dụ cột trạng thái ở cột thứ 3
+                    Double gia = Double.parseDouble(tblMatHang.getValueAt(rowIndex, 2).toString());
+                    Boolean trangThai = Boolean.parseBoolean(tblMatHang.getValueAt(rowIndex, 3).toString());
+
                     // Tạo đối tượng MatHang từ dữ liệu đã lấy
+                    System.out.println(maHang);
+                    System.out.println(tenHang);
+                    System.out.println(gia);
                     MatHang mh = new MatHang(maHang, tenHang, gia, trangThai);
-                    // Thực hiện việc sửa mặt hàng trong cơ sở dữ liệu
+                    tblMatHang.setValueAt(tenHang, rowIndex, 1);
+                    tblMatHang.setValueAt(gia, rowIndex, 2);
+                    tblMatHang.setValueAt(trangThai, rowIndex, 3);
                     if (mh_dao.editMatHang(mh)) {
-
+                        System.out.println("Sửa thành công");
                         JOptionPane.showMessageDialog(this, "Sửa thành công");
-                        tblMatHang.setValueAt(tenHang, rowIndex, 1);
-                        tblMatHang.setValueAt(gia, rowIndex, 2);
-                        tblMatHang.setValueAt(trangThai, rowIndex, 3);
-                        clearJTable();
-                        DocDuLieu();
-
                     } else {
+                        System.out.println("Sửa thất bại");
                         JOptionPane.showMessageDialog(this, "Sửa thất bại");
                     }
                 }
-                // Xóa nội dung hiện tại của bảng  
-
             }
+
+            clearJTable();
+            DocDuLieu();
         } else {
             JOptionPane.showMessageDialog(this, "Chọn dòng cần sửa!");
         }
@@ -323,4 +330,49 @@ public class Form_MatHang extends javax.swing.JPanel {
     private javax.swing.JTable tblMatHang;
     private javax.swing.JTextField txtTim;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+//        if (tblMatHang.getSelectedRowCount() > 0) {
+//            if (JOptionPane.showConfirmDialog(this, "Xác nhận sửa mặt hàng đã chọn?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+//                int[] selectedRows = tblMatHang.getSelectedRows();
+//                for (int i = 0; i < selectedRows.length; i++) {
+//        int rowIndex = tblMatHang.getSelectedRow();
+//        int c = tblMatHang.getSelectedColumn();
+//        String maHang = tblMatHang.getValueAt(rowIndex, 0).toString();
+//        String tenHang = tblMatHang.getValueAt(rowIndex, 1).toString();
+//        Double gia = Double.parseDouble(tblMatHang.getValueAt(rowIndex, 2).toString()); // Ví dụ cột giá ở cột thứ 2
+//        Boolean trangThai = Boolean.parseBoolean(tblMatHang.getValueAt(rowIndex, 3).toString()); // 
+//        MatHang mh = new MatHang(maHang, tenHang, 0, trangThai);
+//         
+        //                    String tenHang = tblMatHang.getValueAt(rowIndex, 1).toString();
+        //                    Double gia = Double.parseDouble(tblMatHang.getValueAt(rowIndex, 2).toString()); // Ví dụ cột giá ở cột thứ 2
+        //                    Boolean trangThai = Boolean.parseBoolean(tblMatHang.getValueAt(rowIndex, 3).toString()); //
+//        tblMatHang.setValueAt(mh, rowIndex, c);
+//        mh_dao.editMatHang(mh);
+//        System.out.println(tenHang);
+//                }
+//            }
+//        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

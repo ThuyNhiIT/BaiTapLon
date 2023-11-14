@@ -40,7 +40,7 @@ public class DL_ThemPhongHat extends javax.swing.JDialog {
         int count = laySoDuoi(temp);
         count++;
 
-        String maPhong = String.format("PH%03d", count);
+        String maPhong = String.format("P%03d", count);
         return maPhong;
     }
 

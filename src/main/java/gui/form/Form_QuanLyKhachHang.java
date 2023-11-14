@@ -42,12 +42,7 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
 
     }
 
-//    public void DocDuLieu() {
-//        List<KhachHang> lists = kh_dao.getalltbKhachHang();
-//        for (KhachHang kh : lists) {
-//            dtmKhachHang.addRow(new Object[]{kh.getMaKH(), kh.getTenKH(), kh.getSdt(), kh.isGioitinh() ? "Nam" : "Nữ"});
-//        }
-//    }
+
     public void loadTable(ArrayList<KhachHang> ds) {
         dtmKhachHang.setRowCount(0);//reset nd trong bang ve 0
         if (ds == null) {
@@ -125,7 +120,7 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
         pnlHeader.setBackground(new java.awt.Color(235, 249, 249));
         pnlHeader.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        pnlTraCuu.setBackground(new java.awt.Color(255, 255, 255));
+        pnlTraCuu.setBackground(new java.awt.Color(235, 249, 249));
 
         lblTim.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTim.setText("Tìm kiếm");
@@ -171,9 +166,8 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
             }
         });
 
-        btnSua.setBackground(new java.awt.Color(41, 173, 86));
-        btnSua.setForeground(new java.awt.Color(255, 255, 255));
-        btnSua.setText("Sửa khách hàng");
+        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/edit.png"))); // NOI18N
+        btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSuaActionPerformed(evt);
@@ -187,23 +181,24 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
             .addGroup(pnlHeaderLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(pnlTraCuu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 402, Short.MAX_VALUE)
-                .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(112, 112, 112))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 322, Short.MAX_VALUE)
+                .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63)
+                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67))
         );
         pnlHeaderLayout.setVerticalGroup(
             pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHeaderLayout.createSequentialGroup()
                 .addContainerGap(21, Short.MAX_VALUE)
                 .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlHeaderLayout.createSequentialGroup()
-                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(pnlTraCuu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16))
+                    .addComponent(pnlTraCuu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHeaderLayout.createSequentialGroup()
+                        .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)))
+                .addGap(25, 25, 25))
         );
 
         tblDSKH.setModel(new javax.swing.table.DefaultTableModel(
@@ -211,9 +206,18 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã khách hàng", "Tên khách hàng", "Số điện thoại", "Giới tính", "Hành động"
+                "Mã khách hàng", "Tên khách hàng", "Số điện thoại", "Giới tính"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblDSKH.setRowHeight(40);
         tblDSKH.setSelectionForeground(new java.awt.Color(255, 255, 255));
         scr.setViewportView(tblDSKH);
 
@@ -307,12 +311,6 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnTimActionPerformed
 
-
-    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-
-
-    }//GEN-LAST:event_btnSuaActionPerformed
-
     private void updateTotalCustomer() {
         int totalCustomer = dtmKhachHang.getRowCount();
         txtTong.setText("" + totalCustomer);
@@ -322,6 +320,40 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
         // TODO add your handling code here:
         updateTotalCustomer();
     }//GEN-LAST:event_btnCapNhatTotalKHActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        kh_dao = new KhachHang_DAO();
+
+        if (tblDSKH.getSelectedRowCount() > 0) {
+            if (JOptionPane.showConfirmDialog(this, "Xác nhận sửa khách hàng đã chọn?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                int[] selectedRows = tblDSKH.getSelectedRows();
+                for (int i = 0; i < selectedRows.length; i++) {
+                    int rowIndex = selectedRows[i];
+                    String maKH = tblDSKH.getValueAt(rowIndex, 0).toString();
+                    String tenKH = tblDSKH.getValueAt(rowIndex, 1).toString();
+                    String sdt = tblDSKH.getValueAt(rowIndex, 2).toString();
+                    Boolean gioiTinh = Boolean.parseBoolean(tblDSKH.getValueAt(rowIndex, 3).toString());
+
+                    KhachHang kh = new KhachHang(maKH, tenKH, sdt, gioiTinh);
+                    tblDSKH.setValueAt(tenKH, rowIndex, 1);
+                    tblDSKH.setValueAt(sdt, rowIndex, 2);
+                    tblDSKH.setValueAt(gioiTinh, rowIndex, 3);
+                    if (kh_dao.editCustomer(kh)) {
+                        System.out.println("Sửa thành công");
+                        JOptionPane.showMessageDialog(this, "Sửa thành công");
+                    } else {
+                        System.out.println("Sửa thất bại");
+                        JOptionPane.showMessageDialog(this, "Sửa thất bại");
+                    }
+                }
+            }
+
+            clearJTable();
+            DocDuLieu();
+        } else {
+            JOptionPane.showMessageDialog(this, "Chọn dòng cần sửa!");
+        }
+    }//GEN-LAST:event_btnSuaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
