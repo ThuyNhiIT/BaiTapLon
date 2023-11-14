@@ -223,6 +223,10 @@ public class Main extends javax.swing.JFrame {
                     }
                 } else if (menuIndex == 6) {
                     if (subMenuIndex == -1) {
+                        main.showForm(new Form_ThongKeDoanhThu());
+                    }
+                } else if (menuIndex == 7) {
+                    if (subMenuIndex == -1) {
                         main.showForm(new Form_Setting());
                     }
                 }

@@ -112,7 +112,7 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
         pnlNhanVien.setBackground(new java.awt.Color(235, 249, 249));
         pnlNhanVien.setFocusCycleRoot(true);
 
-        pnlHeader.setBackground(new java.awt.Color(235, 249, 249));
+        pnlHeader.setBackground(new java.awt.Color(255, 255, 255));
         pnlHeader.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         pnlTraCuu.setBackground(new java.awt.Color(255, 255, 255));

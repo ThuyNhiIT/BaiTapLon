@@ -33,7 +33,7 @@ public class DL_ThemNV extends javax.swing.JFrame {
         nv_dao = new NhanVien_DAO();
         
         DefaultComboBoxModel<LoaiNhanVien> dataModelLop = new DefaultComboBoxModel<LoaiNhanVien>();
-        cmbLoaiNV.setModel(dataModelLop);
+        cmbLNV.setModel(dataModelLop);
        
     }
 
@@ -61,15 +61,15 @@ public class DL_ThemNV extends javax.swing.JFrame {
         }
     }
     
-    public void loadLoaiNhanVien(){
-        ArrayList<LoaiNhanVien> ds = loainv_dao.getAllLoaiNhanVien();
-        if(ds == null){
-            return;
-        }
-        for(LoaiNhanVien loaiNhanVien : ds){
-            cmbLoaiNV.addItem(loaiNhanVien);
-        }
-    }
+//    public void loadLoaiNhanVien(){
+//        ArrayList<LoaiNhanVien> ds = loainv_dao.getAllLoaiNhanVien();
+//        if(ds == null){
+//            return;
+//        }
+//        for(LoaiNhanVien loaiNhanVien : ds){
+//            cmbLNV.addItem(loaiNhanVien);
+//        }
+//    }
     
     public NhanVien revertNhanVien(){
         String maNV = phatSinhMaNV();
@@ -88,7 +88,7 @@ public class DL_ThemNV extends javax.swing.JFrame {
         else if(radCa3.isSelected()){
            caLam = "Ca 3";
         }
-        LoaiNhanVien loaiNV = (LoaiNhanVien) cmbLoaiNV.getSelectedItem();
+        LoaiNhanVien loaiNV = (LoaiNhanVien) cmbLNV.getSelectedItem();
         
         return new NhanVien(maNV, tenNV, gioiTinh, CCCD, SDT, diaChi, caLam, loaiNV);
     }
@@ -116,9 +116,7 @@ public class DL_ThemNV extends javax.swing.JFrame {
         radCa1 = new javax.swing.JRadioButton();
         radCa2 = new javax.swing.JRadioButton();
         radCa3 = new javax.swing.JRadioButton();
-        btnThem = new gui.swing.RadiusButton();
-        btnThoat = new gui.swing.RadiusButton();
-        cmbLoaiNV = new javax.swing.JComboBox<>();
+        cmbLNV = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -157,24 +155,6 @@ public class DL_ThemNV extends javax.swing.JFrame {
 
         radCa3.setText("Ca 3");
 
-        btnThem.setBackground(new java.awt.Color(41, 173, 86));
-        btnThem.setForeground(new java.awt.Color(255, 255, 255));
-        btnThem.setText("Thêm");
-        btnThem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemActionPerformed(evt);
-            }
-        });
-
-        btnThoat.setBackground(new java.awt.Color(205, 13, 13));
-        btnThoat.setForeground(new java.awt.Color(255, 255, 255));
-        btnThoat.setText("Thoát");
-        btnThoat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThoatActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout pnThemNVLayout = new javax.swing.GroupLayout(pnThemNV);
         pnThemNV.setLayout(pnThemNVLayout);
         pnThemNVLayout.setHorizontalGroup(
@@ -199,34 +179,25 @@ public class DL_ThemNV extends javax.swing.JFrame {
                             .addComponent(txtDiaChi)
                             .addComponent(txtCCCD)
                             .addComponent(txtSDT))
-                        .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnThemNVLayout.createSequentialGroup()
                         .addGroup(pnThemNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(radNam, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(radCa1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(44, 44, 44)
-                        .addGroup(pnThemNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnThemNVLayout.createSequentialGroup()
-                                .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(pnThemNVLayout.createSequentialGroup()
-                                .addGroup(pnThemNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(radNu, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(radCa2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                                .addComponent(radCa3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(32, 32, 32))))
+                        .addGroup(pnThemNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(radNu, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(radCa2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                        .addComponent(radCa3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32))
                     .addGroup(pnThemNVLayout.createSequentialGroup()
-                        .addComponent(cmbLoaiNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbLNV, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnThemNVLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblThemNV, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(187, 187, 187))
-            .addGroup(pnThemNVLayout.createSequentialGroup()
-                .addGap(146, 146, 146)
-                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnThemNVLayout.setVerticalGroup(
             pnThemNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,7 +227,7 @@ public class DL_ThemNV extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(pnThemNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLoaiNV)
-                    .addComponent(cmbLoaiNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbLNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnThemNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblGioiTinh)
@@ -268,11 +239,7 @@ public class DL_ThemNV extends javax.swing.JFrame {
                     .addComponent(radCa1)
                     .addComponent(radCa2)
                     .addComponent(radCa3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnThemNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -300,6 +267,7 @@ public class DL_ThemNV extends javax.swing.JFrame {
         try {
             db.connect();
             NhanVien addNV = revertNhanVien();
+            System.err.println(addNV);
             Boolean isSuccess = nv_dao.addStaff(addNV);
             if(isSuccess){
                 CustomJOptionPane.showMessageDialog("Thêm nhân viên thành công !");
@@ -314,6 +282,11 @@ public class DL_ThemNV extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnThemActionPerformed
 
+    private void cmbLNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLoaiNVActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_cmbLoaiNVActionPerformed
+
  
     public static void main(String args[]) {
      
@@ -325,9 +298,7 @@ public class DL_ThemNV extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private gui.swing.RadiusButton btnThem;
-    private gui.swing.RadiusButton btnThoat;
-    private javax.swing.JComboBox<LoaiNhanVien> cmbLoaiNV;
+    private javax.swing.JComboBox<LoaiNhanVien> cmbLNV;
     private javax.swing.JLabel lblCCCD;
     private javax.swing.JLabel lblCa;
     private javax.swing.JLabel lblDiaChi;

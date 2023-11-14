@@ -110,6 +110,7 @@ public class Menu extends javax.swing.JPanel {
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/service.png")), "Quản Lí Khách Hàng"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/dairy-products.png")), "Quản Lí Mặt Hàng", "     Mặt Hàng", "     Dịch Vụ"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/bill.png")), "Quản Lí Hóa Đơn"));
+         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/bar-chart.png")), "Thống Kê"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/setting.png")), "Cài Đặt"));
     }
 
