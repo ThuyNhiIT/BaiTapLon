@@ -190,7 +190,6 @@ gui\swing\MenuItem$1.class
 gui_dialog\DL_SuaKhachHang$4.class
 gui\form\Form_Home.class
 gui\swing\TimKiem$3.class
-gui\form\Form_DichVu$4.class
 gui\form\Form_DichVu$1.class
 gui_dialog\DL_ThemMatHang$4.class
 gui_dialog\DL_TraPhongVsThanhToan$3.class
