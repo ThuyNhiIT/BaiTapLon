@@ -333,27 +333,6 @@ public class Form_MatHang extends javax.swing.JPanel implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-//        if (tblMatHang.getSelectedRowCount() > 0) {
-//            if (JOptionPane.showConfirmDialog(this, "Xác nhận sửa mặt hàng đã chọn?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-//                int[] selectedRows = tblMatHang.getSelectedRows();
-//                for (int i = 0; i < selectedRows.length; i++) {
-//        int rowIndex = tblMatHang.getSelectedRow();
-//        int c = tblMatHang.getSelectedColumn();
-//        String maHang = tblMatHang.getValueAt(rowIndex, 0).toString();
-//        String tenHang = tblMatHang.getValueAt(rowIndex, 1).toString();
-//        Double gia = Double.parseDouble(tblMatHang.getValueAt(rowIndex, 2).toString()); // Ví dụ cột giá ở cột thứ 2
-//        Boolean trangThai = Boolean.parseBoolean(tblMatHang.getValueAt(rowIndex, 3).toString()); // 
-//        MatHang mh = new MatHang(maHang, tenHang, 0, trangThai);
-//         
-        //                    String tenHang = tblMatHang.getValueAt(rowIndex, 1).toString();
-        //                    Double gia = Double.parseDouble(tblMatHang.getValueAt(rowIndex, 2).toString()); // Ví dụ cột giá ở cột thứ 2
-        //                    Boolean trangThai = Boolean.parseBoolean(tblMatHang.getValueAt(rowIndex, 3).toString()); //
-//        tblMatHang.setValueAt(mh, rowIndex, c);
-//        mh_dao.editMatHang(mh);
-//        System.out.println(tenHang);
-//                }
-//            }
-//        }
     }
 
     @Override
