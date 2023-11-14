@@ -91,7 +91,7 @@
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="cboLoaiNV" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbLoaiNV" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -141,7 +141,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblLoaiNV" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cboLoaiNV" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cmbLoaiNV" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -284,17 +284,14 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThoatActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cboLoaiNV">
+        <Component class="javax.swing.JComboBox" name="cmbLoaiNV">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
-                <StringItem index="0" value="NVQL"/>
-                <StringItem index="1" value="NVTN"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;LoaiNhanVien&gt;"/>
           </AuxValues>
         </Component>
       </SubComponents>

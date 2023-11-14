@@ -33,11 +33,11 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
         nv_dao = new NhanVien_DAO();
         dtmNhanVien = (DefaultTableModel) tblDSNV.getModel();
 
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-        for (int i = 0; i < tblDSNV.getColumnCount(); i++) {
-            tblDSNV.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-        }
+//        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+//        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+//        for (int i = 0; i < tblDSNV.getColumnCount(); i++) {
+//            tblDSNV.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+//        }
 
 //        DefaultComboBoxModel<LoaiNhanVien> dataModelLop = new DefaultComboBoxModel<LoaiNhanVien>();
 //        cmbLoaiNhanVien.setModel(dataModelLop);
@@ -97,12 +97,17 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
 
         pnlNhanVien = new javax.swing.JPanel();
         pnlHeader = new javax.swing.JPanel();
+        pnlTraCuu = new javax.swing.JPanel();
+        lblTim = new javax.swing.JLabel();
         txtTim = new javax.swing.JTextField();
+        btnTim = new gui.swing.RadiusButton();
+        btnThem = new gui.swing.RadiusButton();
         lblDSNV = new javax.swing.JLabel();
         scr = new javax.swing.JScrollPane();
         tblDSNV = new javax.swing.JTable();
         lblTong = new javax.swing.JLabel();
         txtTong = new javax.swing.JTextField();
+        btnCapNhatTotalNV = new gui.swing.RadiusButton();
 
         pnlNhanVien.setBackground(new java.awt.Color(235, 249, 249));
         pnlNhanVien.setFocusCycleRoot(true);
@@ -110,21 +115,73 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
         pnlHeader.setBackground(new java.awt.Color(235, 249, 249));
         pnlHeader.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        pnlTraCuu.setBackground(new java.awt.Color(255, 255, 255));
+
+        lblTim.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblTim.setText("Tìm kiếm");
+
+        btnTim.setBackground(new java.awt.Color(166, 208, 238));
+        btnTim.setText("Tìm");
+        btnTim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlTraCuuLayout = new javax.swing.GroupLayout(pnlTraCuu);
+        pnlTraCuu.setLayout(pnlTraCuuLayout);
+        pnlTraCuuLayout.setHorizontalGroup(
+            pnlTraCuuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTraCuuLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTim)
+                .addGap(28, 28, 28)
+                .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
+        );
+        pnlTraCuuLayout.setVerticalGroup(
+            pnlTraCuuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTraCuuLayout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addGroup(pnlTraCuuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTim)
+                    .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10))
+        );
+
+        btnThem.setBackground(new java.awt.Color(41, 173, 86));
+        btnThem.setForeground(new java.awt.Color(255, 255, 255));
+        btnThem.setText("Thêm nhân viên");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlHeaderLayout = new javax.swing.GroupLayout(pnlHeader);
         pnlHeader.setLayout(pnlHeaderLayout);
         pnlHeaderLayout.setHorizontalGroup(
             pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlHeaderLayout.createSequentialGroup()
-                .addGap(194, 194, 194)
-                .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
+                .addComponent(pnlTraCuu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75))
         );
         pnlHeaderLayout.setVerticalGroup(
             pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlHeaderLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(pnlTraCuu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHeaderLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
         );
 
         lblDSNV.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -132,49 +189,10 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
 
         tblDSNV.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Mã nhân viên", "Tên nhân viên", "Địa chỉ", "CCCD", "Số điện thoại", "Loại nhân viên", "Ca", "Giới tính"
+                "Mã nhân viên", "Tên nhân viên", "Giới tính", "CCCD", "Số điện thoại", "Địa chỉ", "Ca", "Loại nhân viên"
             }
         ));
         scr.setViewportView(tblDSNV);
@@ -183,9 +201,12 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
         lblTong.setText("Tổng số nhân viên:");
 
         txtTong.setEditable(false);
-        txtTong.addActionListener(new java.awt.event.ActionListener() {
+
+        btnCapNhatTotalNV.setBackground(new java.awt.Color(166, 208, 238));
+        btnCapNhatTotalNV.setText("Cập nhật");
+        btnCapNhatTotalNV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTongActionPerformed(evt);
+                btnCapNhatTotalNVActionPerformed(evt);
             }
         });
 
@@ -201,7 +222,9 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
                         .addGap(116, 116, 116)
                         .addComponent(lblTong)
                         .addGap(18, 18, 18)
-                        .addComponent(txtTong, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtTong, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCapNhatTotalNV, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlNhanVienLayout.createSequentialGroup()
                         .addGap(416, 416, 416)
                         .addComponent(lblDSNV, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -215,11 +238,12 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
                 .addComponent(lblDSNV, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(scr, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
-                .addGap(27, 27, 27)
+                .addGap(25, 25, 25)
                 .addGroup(pnlNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTong)
-                    .addComponent(txtTong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29))
+                    .addComponent(txtTong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCapNhatTotalNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -238,43 +262,40 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
         new DL_SuaNV().setVisible(true);
     }//GEN-LAST:event_btnSuaActionPerformed
 
-    private void txtTongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTongActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTongActionPerformed
-
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         new DL_ThemNV().setVisible(true);
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
         // TODO add your handling code here:
-        String maNhanVien =  txtTim.getText().trim();
-        if(!(maNhanVien.length() > 0 && maNhanVien.matches("(NV)\\d{3}"))){
-            CustomJOptionPane.showMessageDialog("Mã nhân viên không hợp lệ !!!");
-        }
-        else{
+        String sdtNV = txtTim.getText().trim();
+        if(!(sdtNV.length() > 0 && sdtNV.matches("\\d{10}"))){
+            CustomJOptionPane.showMessageDialog("Số điện thoại phải gồm 10 số !!!");
+        }else{
             String maTim = txtTim.getText();
-            ArrayList<NhanVien> dsNVtim = null;
+            ArrayList<NhanVien> dsNVTim = null;
             
             for(NhanVien nv : nv_dao.getalltbNhanVien()){
-                if(nv.getMaNV().equals(maTim)){
-                    dsNVtim = new ArrayList<NhanVien>();
-                    dsNVtim.add(nv);
+                if(nv.getSDT().equals(maTim)){
+                    dsNVTim = new ArrayList<NhanVien>();
+                    dsNVTim.add(nv);
                 }
             }
-            if(dsNVtim != null){
+            if(dsNVTim != null){
                 clearDataOnModel();
-                for(NhanVien nv : dsNVtim){
+                for(NhanVien nv : dsNVTim){
                     dtmNhanVien.addRow(new Object[]{
-                      nv.getMaNV(), nv.getTenNV(), nv.isGioiTinh() ? "Nam" : "Nữ", nv.getSDT(), nv.getCCCD(), nv.getSDT(),
-                      nv.getDiaChi(), nv.getCaLam(), nv.getLoaiNV().getMaLoai()
+                        nv.getMaNV(), nv.getTenNV(), nv.isGioiTinh() ? "Nam" : "Nữ", nv.getCCCD(), nv.getSDT(), 
+                        nv.getDiaChi(), nv.getCaLam(), nv.getLoaiNV().getMaLoai()
                     });
                 }
             }
-            else if(dsNVtim == null){
-                CustomJOptionPane.showMessageDialog("Không tìm thấy nhân viên !!!");
+            else if(dsNVTim == null){
+                CustomJOptionPane.showMessageDialog("Không tìm thấy !!!");
             }
         }
+        
+        
     }//GEN-LAST:event_btnTimActionPerformed
 
     private void btnLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocActionPerformed
@@ -295,12 +316,27 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
 
     }//GEN-LAST:event_formMouseClicked
 
+    private void updateTotalEmployees(){
+        int totalEmployees = dtmNhanVien.getRowCount();
+        txtTong.setText("" +totalEmployees);
+    }
+    
+    private void btnCapNhatTotalNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatTotalNVActionPerformed
+        // TODO add your handling code here:
+        updateTotalEmployees();
+    }//GEN-LAST:event_btnCapNhatTotalNVActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private gui.swing.RadiusButton btnCapNhatTotalNV;
+    private gui.swing.RadiusButton btnThem;
+    private gui.swing.RadiusButton btnTim;
     private javax.swing.JLabel lblDSNV;
+    private javax.swing.JLabel lblTim;
     private javax.swing.JLabel lblTong;
     private javax.swing.JPanel pnlHeader;
     private javax.swing.JPanel pnlNhanVien;
+    private javax.swing.JPanel pnlTraCuu;
     private javax.swing.JScrollPane scr;
     private javax.swing.JTable tblDSNV;
     private javax.swing.JTextField txtTim;

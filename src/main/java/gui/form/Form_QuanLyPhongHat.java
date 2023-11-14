@@ -1,6 +1,10 @@
 package gui.form;
 
+import dao.PhongHat_DAO;
+import entity.PhongHat;
 import gui_dialog.DL_ThemPhong;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -8,11 +12,42 @@ import gui_dialog.DL_ThemPhong;
  */
 public class Form_QuanLyPhongHat extends javax.swing.JPanel {
 
+    private PhongHat_DAO ph_dao;
+    private DefaultTableModel dtmPhongHat;
+    
   
     public Form_QuanLyPhongHat() {
         initComponents();
+        ph_dao = new PhongHat_DAO();
+        dtmPhongHat = (DefaultTableModel) tblDSPH.getModel();
+        loadTable(ph_dao.getAllPhongHat());
+        
     }
 
+     public void loadTable(ArrayList<PhongHat> ds) {
+        dtmPhongHat.setRowCount(0);//reset nd trong bang ve 0
+        if (ds == null) {
+            clearJTable();
+            return;
+        }
+        clearJTable();
+        for (PhongHat ph : ds) {
+            dtmPhongHat.addRow(new Object[]{
+                ph.getMaPhong(), ph.getTenPhong(), ph.getLoaiPhong().getMaLoaiPhong(), ph.getTinhTrangPhong()
+            });
+        }
+    }
+    
+    public void clearJTable() {
+        while (tblDSPH.getRowCount() > 0) {
+            dtmPhongHat.removeRow(0);
+        }
+    }
+    
+    public void clearDataOnModel() {
+        DefaultTableModel dtm = (DefaultTableModel) tblDSPH.getModel();
+        dtm.getDataVector().removeAllElements();
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -110,49 +145,10 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
 
         tblDSPH.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
-                "Mã phòng", "Tên phòng", "Mã loại phòng", "Giá", "Trạng thái", "Hành động"
+                "Mã phòng", "Tên phòng", "Mã loại phòng", "Trạng thái", "Giá", "Hành động"
             }
         ));
         scr.setViewportView(tblDSPH);
@@ -246,7 +242,7 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-   new DL_ThemPhong().setVisible(true);
+        new DL_ThemPhong().setVisible(true);
     }//GEN-LAST:event_btnThemActionPerformed
 
 

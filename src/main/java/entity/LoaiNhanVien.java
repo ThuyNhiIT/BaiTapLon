@@ -43,8 +43,7 @@ public class LoaiNhanVien {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        return hash;
+        return Objects.hash(maLoai);
     }
 
     @Override
@@ -58,13 +57,16 @@ public class LoaiNhanVien {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final LoaiNhanVien other = (LoaiNhanVien) obj;
-        return Objects.equals(this.maLoai, other.maLoai);
+        LoaiNhanVien other = (LoaiNhanVien) obj;
+        return Objects.equals(maLoai, other.maLoai);
     }
 
     @Override
     public String toString() {
-        return "LoaiNhanVien [maLoai=" + maLoai + ", tenLoai=" + tenLoai + "]";
+        return maLoai;
     }
+    
+    
 
+    
 }
