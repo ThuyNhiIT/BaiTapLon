@@ -44,31 +44,9 @@
                           <Component id="scr" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                                  <Component id="lblTong" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="txtTong" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
-                                  <Component id="lblTrong" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="txtTrong" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="155" max="-2" attributes="0"/>
-                                  <Component id="lblSuDung" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                                  <Component id="txtSuDung" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
-                                  <Component id="lblCho" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="txtCho" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="474" max="-2" attributes="0"/>
-                                  <Component id="lblDSPH" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="474" max="-2" attributes="0"/>
+                          <Component id="lblDSPH" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="505" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -83,18 +61,7 @@
                   <Component id="lblDSPH" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="scr" min="-2" pref="453" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblTong" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblTrong" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtTrong" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblSuDung" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtSuDung" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblCho" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtCho" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtTong" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                  <EmptySpace pref="63" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -281,58 +248,6 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="lblTong">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="12" style="1"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="T&#x1ed5;ng ph&#xf2;ng h&#xe1;t"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblTrong">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="12" style="1"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Ph&#xf2;ng tr&#x1ed1;ng"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtTrong">
-          <Properties>
-            <Property name="editable" type="boolean" value="false"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblSuDung">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="12" style="1"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Ph&#xf2;ng &#x111;ang s&#x1eed; d&#x1ee5;ng"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtSuDung">
-          <Properties>
-            <Property name="editable" type="boolean" value="false"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblCho">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="12" style="1"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Ph&#xf2;ng ch&#x1edd;"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtCho">
-          <Properties>
-            <Property name="editable" type="boolean" value="false"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtTong">
-          <Properties>
-            <Property name="editable" type="boolean" value="false"/>
-          </Properties>
-        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

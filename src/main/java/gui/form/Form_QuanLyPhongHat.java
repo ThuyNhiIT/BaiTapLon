@@ -89,14 +89,6 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
         lblDSPH = new javax.swing.JLabel();
         scr = new javax.swing.JScrollPane();
         tblDSPH = new javax.swing.JTable();
-        lblTong = new javax.swing.JLabel();
-        lblTrong = new javax.swing.JLabel();
-        txtTrong = new javax.swing.JTextField();
-        lblSuDung = new javax.swing.JLabel();
-        txtSuDung = new javax.swing.JTextField();
-        lblCho = new javax.swing.JLabel();
-        txtCho = new javax.swing.JTextField();
-        txtTong = new javax.swing.JTextField();
 
         pnlPhongHat.setBackground(new java.awt.Color(235, 249, 249));
 
@@ -209,26 +201,6 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
         ));
         scr.setViewportView(tblDSPH);
 
-        lblTong.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblTong.setText("Tổng phòng hát");
-
-        lblTrong.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblTrong.setText("Phòng trống");
-
-        txtTrong.setEditable(false);
-
-        lblSuDung.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblSuDung.setText("Phòng đang sử dụng");
-
-        txtSuDung.setEditable(false);
-
-        lblCho.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblCho.setText("Phòng chờ");
-
-        txtCho.setEditable(false);
-
-        txtTong.setEditable(false);
-
         javax.swing.GroupLayout pnlPhongHatLayout = new javax.swing.GroupLayout(pnlPhongHat);
         pnlPhongHat.setLayout(pnlPhongHatLayout);
         pnlPhongHatLayout.setHorizontalGroup(
@@ -240,28 +212,9 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
                         .addContainerGap()
                         .addComponent(scr))
                     .addGroup(pnlPhongHatLayout.createSequentialGroup()
-                        .addGroup(pnlPhongHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlPhongHatLayout.createSequentialGroup()
-                                .addGap(47, 47, 47)
-                                .addComponent(lblTong)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtTong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(120, 120, 120)
-                                .addComponent(lblTrong)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtTrong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(155, 155, 155)
-                                .addComponent(lblSuDung)
-                                .addGap(54, 54, 54)
-                                .addComponent(txtSuDung, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(152, 152, 152)
-                                .addComponent(lblCho)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtCho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlPhongHatLayout.createSequentialGroup()
-                                .addGap(474, 474, 474)
-                                .addComponent(lblDSPH)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(474, 474, 474)
+                        .addComponent(lblDSPH)
+                        .addGap(0, 505, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlPhongHatLayout.setVerticalGroup(
@@ -272,17 +225,7 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
                 .addComponent(lblDSPH)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scr, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnlPhongHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTong)
-                    .addComponent(lblTrong)
-                    .addComponent(txtTrong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSuDung)
-                    .addComponent(txtSuDung, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCho)
-                    .addComponent(txtCho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -399,21 +342,13 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
     private gui.swing.RadiusButton btnThem;
     private gui.swing.RadiusButton btnTim;
     private gui.swing.RadiusButton btnXoa;
-    private javax.swing.JLabel lblCho;
     private javax.swing.JLabel lblDSPH;
-    private javax.swing.JLabel lblSuDung;
     private javax.swing.JLabel lblTim;
-    private javax.swing.JLabel lblTong;
-    private javax.swing.JLabel lblTrong;
     private javax.swing.JPanel pnlHeader;
     private javax.swing.JPanel pnlPhongHat;
     private javax.swing.JPanel pnlTim;
     private javax.swing.JScrollPane scr;
     private javax.swing.JTable tblDSPH;
-    private javax.swing.JTextField txtCho;
-    private javax.swing.JTextField txtSuDung;
     private javax.swing.JTextField txtTim;
-    private javax.swing.JTextField txtTong;
-    private javax.swing.JTextField txtTrong;
     // End of variables declaration//GEN-END:variables
 }
