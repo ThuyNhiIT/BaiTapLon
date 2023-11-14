@@ -73,5 +73,23 @@ public class HoaDon_DAO {
         }
         return n > 0;
     }
+    public static final String TABLE_NAME = "HoaDon";
+    public static final String COLUMN_SO_LUONG = "SoLuong";
+    public static final String COLUMN_SO_LUONG_HOA_DON = "SoLuongHoaDon";
 
+    public int getSoLuongHoaDon() {
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        try {
+            String sql = "SELECT COUNT(*) AS SoLuongHoaDon FROM " + TABLE_NAME;
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            if (rs.next()) {
+                return rs.getInt(COLUMN_SO_LUONG_HOA_DON);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

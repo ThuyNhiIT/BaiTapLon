@@ -7,7 +7,9 @@ package dao;
 import connectDB.ConnectDB;
 import entity.LoaiPhong;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -47,5 +49,30 @@ public class LoaiPhong_DAO {
             e.printStackTrace();
         }
         return dslp;
+    }
+
+    public ArrayList<LoaiPhong> getLoaiPhongTheoMaLoai(String id) {
+        ArrayList<LoaiPhong> dsLP = new ArrayList<>();
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement statement = null;
+
+        try {
+            String sql = "SELECT *FROM LoaiPhong WHERE maLoaiPhong=?";
+            statement = con.prepareStatement(sql);
+            statement.setString(1, id);
+
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                String maPhong = rs.getString(1);
+                String tenLoai = rs.getString(2);
+                Double gia = rs.getDouble(3);
+                LoaiPhong lp = new LoaiPhong(maPhong, tenLoai, gia);
+                dsLP.add(lp);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dsLP;
     }
 }

@@ -36,7 +36,7 @@ public class PhongHat_DAO {
                 String loaiPhong = rs.getString(3);
                 String tinhTrang = rs.getString(4);
                 PhongHat ph = new PhongHat(maPhong, tenPhong, new LoaiPhong(loaiPhong), tinhTrang);
-                dsPH.add(ph); 
+                dsPH.add(ph);
             }
 
         } catch (SQLException e) {
@@ -104,7 +104,8 @@ public class PhongHat_DAO {
         }
         return n > 0;
     }
-       public boolean DeletePhongHat(String maPH) {
+
+    public boolean DeletePhongHat(String maPH) {
         Connection con = ConnectDB.getInstance().getConnection();
         PreparedStatement stmt = null;
         int n = 0;
@@ -116,5 +117,50 @@ public class PhongHat_DAO {
             e.printStackTrace();
         }
         return n > 0;
+    }
+
+    public ArrayList<PhongHat> FindTheoMaLoai(String id) {
+        ArrayList<PhongHat> dsPH = new ArrayList<>();
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement statement = null;
+
+        try {
+            String sql = "SELECT *FROM PhongHat WHERE maLoaiPhong = ?";
+            statement = con.prepareStatement(sql);
+            statement.setString(1, id);
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                String maPhong = rs.getString(1);
+                String tenPhong = rs.getString(2);
+                String loaiPhong = rs.getString(3);
+                String trangThai = rs.getString(4);
+                PhongHat ph = new PhongHat(maPhong, tenPhong, new LoaiPhong(loaiPhong), trangThai);
+                dsPH.add(ph);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dsPH;
+    }
+
+    public static final String TABLE_NAME = "PhongHat";
+    public static final String COLUMN_TINH_TRANG_PHONG = "tinhTrangPhong";
+    public static final String COLUMN_SO_PHONG_TRONG = "SoPhongTrong";
+
+    public int getSoPhongTrong() {
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        try {
+            String sql = "SELECT COUNT(*) AS SoPhongTrong FROM " + TABLE_NAME + " WHERE " + COLUMN_TINH_TRANG_PHONG + " = 'Trong'";
+           Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            if (rs.next()) {
+                return rs.getInt(COLUMN_SO_PHONG_TRONG);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

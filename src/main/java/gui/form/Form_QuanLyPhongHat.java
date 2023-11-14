@@ -53,13 +53,24 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
     }
 
     public void DocDuLieu() {
-        List<PhongHat> list = ph_dao.getAllPhongHat();
-//        List<LoaiPhong> ls = lp_dao.getalltbLoaiPhong();
-        for (PhongHat ph : list) {
-//                gia = ph.getLoaiPhong().getGia();
-            dtmPhongHat.addRow(new Object[]{ph.getMaPhong(), ph.getTenPhong(), ph.getLoaiPhong().getMaLoaiPhong(), ph.getLoaiPhong().getGia(), ph.getTinhTrangPhong()});
-        }
 
+        List<LoaiPhong> ls = lp_dao.getalltbLoaiPhong();
+        // Duyệt qua danh sách dữ liệu loại phòng
+        for (LoaiPhong lp : ls) {
+            // Lấy mã và giá của loại phòng
+//            String maLoaiPhong = lp.getMaLoaiPhong();
+            Double gia = lp.getGia();
+
+            // Thực hiện các thao tác cần thiết với dữ liệu
+            // Ví dụ: hiển thị dữ liệu lên màn hình
+            List<PhongHat> list = ph_dao.getAllPhongHat();
+
+            for (PhongHat ph : list) {
+                if (ph.getLoaiPhong().getMaLoaiPhong().equals(lp.getMaLoaiPhong())) {
+                    dtmPhongHat.addRow(new Object[]{ph.getMaPhong(), ph.getTenPhong(), ph.getLoaiPhong().getMaLoaiPhong(), gia, ph.getTinhTrangPhong()});
+                }
+            }
+        }
     }
 
     public void clearDataOnModel() {
@@ -331,30 +342,20 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
                     dsPhongTim.add(ph);
                 }
             }
+            for (PhongHat ph : ph_dao.FindTheoMaLoai(maTim)) {
+                dsPhongTim = new ArrayList<PhongHat>();
+                dsPhongTim.add(ph);
+            }
             if (dsPhongTim != null) {
                 clearDataOnModel();
                 for (PhongHat ph : dsPhongTim) {
                     dtmPhongHat.addRow(new Object[]{
                         ph.getMaPhong(), ph.getTenPhong(), ph.getLoaiPhong().getMaLoaiPhong(), ph.getLoaiPhong().getGia(), ph.getTinhTrangPhong()
                     });
+
                 }
             } else if (dsPhongTim == null) {
                 JOptionPane.showMessageDialog(this, "Không tìm thấy");
-//            }
-//
-//            for (LoaiPhong lp : lp_dao.getalltbLoaiPhong()) {
-//                if (lp.getMaLoaiPhong().equals(maTim)) {
-//                    dsLPhongTim = new ArrayList<LoaiPhong>();
-//                    dsLPhongTim.add(lp);
-//                }
-//            }
-//            if (dsLPhongTim != null) {
-//                clearDataOnModel();
-//                for (PhongHat ph : dsPhongTim) {
-//                    dtmPhongHat.addRow(new Object[]{
-//                        ph.getMaPhong(), ph.getTenPhong(), ph.getLoaiPhong().getMaLoaiPhong(), ph.getLoaiPhong().getGia(), ph.getTinhTrangPhong()
-//                    });
-//                }
             } else if (dsPhongTim == null) {
                 JOptionPane.showMessageDialog(this, "Không tìm thấy");
             }
