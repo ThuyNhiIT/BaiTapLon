@@ -67,7 +67,7 @@ public class Form_Home extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Georgia", 3, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/teamwork.png"))); // NOI18N
-        jLabel3.setText("new costomer");
+        jLabel3.setText("Customer");
 
         lblKH.setFont(new java.awt.Font("Segoe UI Black", 1, 48)); // NOI18N
         lblKH.setForeground(new java.awt.Color(255, 255, 255));

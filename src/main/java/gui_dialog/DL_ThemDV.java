@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package gui_dialog;
 
 import connectDB.ConnectDB;
@@ -13,8 +9,11 @@ import entity.ChiTietHoaDonPhong;
 import entity.HoaDon;
 import entity.MatHang;
 import gui.form.Form_QuanLyDatPhong;
+import gui.swing.scrollbar.ScrollBarCustom;
 import gui.swing.table.PanelAction;
+import gui.swing.table.TableActionCellEditor;
 import gui.swing.table.TableActionCellRender;
+import gui.swing.table.TableActionEvent;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -35,11 +34,17 @@ public class DL_ThemDV extends javax.swing.JDialog {
     private int selectedRowIndex = -1;
     private PanelAction panelAction;
     private ChiTietHoaDonPhong_Dao cthdp_dao;
+    private int currentSL;
+    private double gia;
 
     public DL_ThemDV(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        tblDVThem.getColumnModel().getColumn(4).setCellRenderer(new TableActionCellRender());
+        jScrollPane1.getViewport().setOpaque(false);
+        jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
+        jScrollPane2.getViewport().setOpaque(false);
+        jScrollPane2.setVerticalScrollBar(new ScrollBarCustom());
+
         mh_dao = new MatHang_DAO();
         dtmMatHang = (DefaultTableModel) tblDSDV.getModel();
         dtmDVThem = (DefaultTableModel) tblDVThem.getModel();
@@ -55,6 +60,31 @@ public class DL_ThemDV extends javax.swing.JDialog {
                 }
             }
         });
+        TableActionEvent event = new TableActionEvent() {
+            @Override
+            public void tangSoLuong(int row) {
+                currentSL = (int) dtmDVThem.getValueAt(row, 2);
+                gia = (double) dtmDVThem.getValueAt(row, 3);
+                dtmDVThem.setValueAt(currentSL + 1, row, 2);
+                double newTotalPrice = (currentSL + 1) * gia;
+                dtmDVThem.setValueAt(newTotalPrice, row, 3);
+            }
+
+            @Override
+            public void giamSoLuong(int row) {
+                currentSL = (int) dtmDVThem.getValueAt(row, 2);
+                gia = (double) dtmDVThem.getValueAt(row, 3);
+                if (currentSL > 1) {
+                    dtmDVThem.setValueAt(currentSL - 1, row, 2);
+                    double newTotalPrice = (currentSL - 1) * gia;
+                    dtmDVThem.setValueAt(newTotalPrice, row, 3);
+                } else { // currentSL == 1
+                    dtmDVThem.removeRow(row);
+                }
+            }
+        };
+        tblDVThem.getColumnModel().getColumn(4).setCellRenderer(new TableActionCellRender());
+        tblDVThem.getColumnModel().getColumn(4).setCellEditor(new TableActionCellEditor(event));
     }
 
     private MatHang getSelectedMatHang(int row) {
@@ -63,46 +93,39 @@ public class DL_ThemDV extends javax.swing.JDialog {
     }
 // load cthddv đã có lên tblDVThem
 
-    private void addToDVThemTable(MatHang selectedMatHang) {
+private void addToDVThemTable(MatHang selectedMatHang) {
+    String selectedCode = selectedMatHang.getMaMH();
+    int rowIndex = findRowIndexByCode(selectedCode);
 
-        boolean codeExists = false;
-        int rowIndex = -1;
+    if (rowIndex != -1) {
+        // Row already exists, update quantity and total price
+         currentSL = (int) dtmDVThem.getValueAt(rowIndex, 2);
+         gia = (double) dtmDVThem.getValueAt(rowIndex, 3);
 
+
+        dtmDVThem.setValueAt(currentSL + 1, rowIndex, 2);
+
+        // Calculate the new total price based on the updated quantity
+        double newTotalPrice = (currentSL +1 ) * gia;
+
+        // Set the new total price in the table
+        dtmDVThem.setValueAt(newTotalPrice, rowIndex, 3);
+    } else {
+        // Row does not exist, add a new row
+        dtmDVThem.addRow(new Object[]{selectedMatHang.getMaMH(), selectedMatHang.getTenMH(), 1, selectedMatHang.getGia()});
+    }
+}
+
+    private int findRowIndexByCode(String code) {
         for (int i = 0; i < dtmDVThem.getRowCount(); i++) {
-
-
-            String codeInDVThem = (String) dtmDVThem.getValueAt(i, 0);
-
-            if (Objects.equals(codeInDVThem, selectedMatHang.getMaMH())) {
-                codeExists = true;
-                rowIndex = i;
-                break;
+            String codeInDVThem = String.valueOf(dtmDVThem.getValueAt(i, 0));
+            if (Objects.equals(codeInDVThem, code)) {
+                return i;
             }
         }
-
-
-        if (codeExists) {
-//            int currentSL = Integer.parseInt((String) dtmDVThem.getValueAt(rowIndex, 1));
-            int currentSL = (int) dtmDVThem.getValueAt(rowIndex, 1);
-
-//                int gia = Integer.parseInt((String) dtmDVThem.getValueAt(rowIndex, 2));
-            int gia = (int) dtmDVThem.getValueAt(rowIndex, 2);
-
-            dtmDVThem.setValueAt(currentSL + 1, rowIndex, 1);
-
-            // Calculate the new total price based on the updated quantity
-            int newTotalPrice = (currentSL + 1) * gia;
-
-            // Set the new total price in the table
-            dtmDVThem.setValueAt(newTotalPrice, rowIndex, 2);
-
-        } else {
-
-
-            dtmDVThem.addRow(new Object[]{selectedMatHang.getMaMH(), selectedMatHang.getTenMH(), 1, selectedMatHang.getGia()});
-
-        }
+        return -1; // Code not found in the table
     }
+
 
     public List<MatHangModel> getDVThemData() {
         List<MatHangModel> dvThemData = new ArrayList<>();
@@ -125,7 +148,6 @@ public class DL_ThemDV extends javax.swing.JDialog {
 
         return dvThemData;
     }
-
 
     public void DocDuLieu() {
         dtmMatHang.setRowCount(0);
@@ -162,6 +184,7 @@ public class DL_ThemDV extends javax.swing.JDialog {
     }
 
     public class MatHangModel {
+
         private String maMH;
         private String tenMH;
         private int SL;
@@ -212,7 +235,6 @@ public class DL_ThemDV extends javax.swing.JDialog {
         }
     }
 
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -243,22 +265,22 @@ public class DL_ThemDV extends javax.swing.JDialog {
         pnDSDV.setBackground(new java.awt.Color(255, 255, 255));
 
         tblDSDV.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{
-                        {null, null},
-                        {null, null},
-                        {null, null},
-                        {null, null}
-                },
-                new String[]{
-                        "Mã mặt hàng", "Tên mặt hàng"
-                }
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Mã mặt hàng", "Tên mặt hàng"
+            }
         ) {
-            boolean[] canEdit = new boolean[]{
-                    false, false
+            boolean[] canEdit = new boolean [] {
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(tblDSDV);
@@ -269,24 +291,24 @@ public class DL_ThemDV extends javax.swing.JDialog {
         javax.swing.GroupLayout pnDSDVLayout = new javax.swing.GroupLayout(pnDSDV);
         pnDSDV.setLayout(pnDSDVLayout);
         pnDSDVLayout.setHorizontalGroup(
-                pnDSDVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDSDVLayout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblDSDV, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(56, 56, 56))
-                        .addGroup(pnDSDVLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            pnDSDVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDSDVLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblDSDV, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56))
+            .addGroup(pnDSDVLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnDSDVLayout.setVerticalGroup(
-                pnDSDVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnDSDVLayout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(lblDSDV)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(51, Short.MAX_VALUE))
+            pnDSDVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnDSDVLayout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addComponent(lblDSDV)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         pnDSDVThem.setBackground(new java.awt.Color(255, 255, 255));
@@ -295,45 +317,45 @@ public class DL_ThemDV extends javax.swing.JDialog {
         lblDVThem.setText("Dịch vụ đã thêm");
 
         tblDVThem.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{
+            new Object [][] {
 
-                },
-                new String[]{
-                        "Mã", "Tên", "SL", "Thành tiền", "Hành động"
-                }
+            },
+            new String [] {
+                "Mã", "Tên", "SL", "Thành tiền", "Hành động"
+            }
         ) {
-            boolean[] canEdit = new boolean[]{
-                    false, false, false, false, false
+            boolean[] canEdit = new boolean [] {
+                false, false, true, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         tblDVThem.setRowHeight(30);
-        tblDVThem.setSelectionBackground(new java.awt.Color(255, 255, 255));
+        tblDVThem.setSelectionBackground(new java.awt.Color(0, 153, 153));
         jScrollPane2.setViewportView(tblDVThem);
 
         javax.swing.GroupLayout pnDSDVThemLayout = new javax.swing.GroupLayout(pnDSDVThem);
         pnDSDVThem.setLayout(pnDSDVThemLayout);
         pnDSDVThemLayout.setHorizontalGroup(
-                pnDSDVThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnDSDVThemLayout.createSequentialGroup()
-                                .addGap(139, 139, 139)
-                                .addComponent(lblDVThem, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDSDVThemLayout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+            pnDSDVThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnDSDVThemLayout.createSequentialGroup()
+                .addGap(139, 139, 139)
+                .addComponent(lblDVThem, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDSDVThemLayout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         pnDSDVThemLayout.setVerticalGroup(
-                pnDSDVThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnDSDVThemLayout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblDVThem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12))
+            pnDSDVThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnDSDVThemLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblDVThem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
         );
 
         btnXong.setBackground(new java.awt.Color(65, 194, 33));
@@ -361,53 +383,53 @@ public class DL_ThemDV extends javax.swing.JDialog {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(270, 270, 270)
-                                .addComponent(lblDV1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnExit2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(pnDSDV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(btnXong, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(pnDSDVThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 12, Short.MAX_VALUE))
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(270, 270, 270)
+                .addComponent(lblDV1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnExit2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnDSDV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnXong, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnDSDVThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblDV1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnExit2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(pnDSDVThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(btnXong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(pnDSDV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(39, 39, 39))
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblDV1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExit2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(pnDSDVThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnXong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnDSDV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnXongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXongActionPerformed
-       ConnectDB db = ConnectDB.getInstance();
+        ConnectDB db = ConnectDB.getInstance();
         try {
             db.connect();
             Form_QuanLyDatPhong frmPH = new Form_QuanLyDatPhong();

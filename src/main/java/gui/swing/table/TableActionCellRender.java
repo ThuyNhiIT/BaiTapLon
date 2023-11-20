@@ -19,6 +19,7 @@ public class TableActionCellRender extends DefaultTableCellRenderer {
             action.setBackground(Color.WHITE);
         } else {
             action.setBackground(com.getBackground());
+
         }
         return action;
     }

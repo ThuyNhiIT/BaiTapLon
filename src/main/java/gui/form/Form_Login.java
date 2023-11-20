@@ -41,6 +41,8 @@ public class Form_Login extends javax.swing.JFrame{
         setLocationRelativeTo(null);
 //        btnThoat.addActionListener(this);
 //        btnQuenMatKhau.addActionListener(this);
+           txtTenDangNhap.setText("NV003");
+           txtPassword.setText("1");
 
     }
 
