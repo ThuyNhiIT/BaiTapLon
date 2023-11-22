@@ -4,6 +4,9 @@ import connectDB.ConnectDB;
 import dao.KhachHang_DAO;
 import entity.KhachHang;
 import gui.swing.CustomJOptionPane;
+import gui.swing.table.TableActionCellEditor;
+import gui.swing.table.TableActionCellRender;
+import gui.swing.table.TableActionCellRenderKH;
 import gui_dialog.DL_ThongTinKhachHang;
 import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
@@ -39,9 +42,10 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
         txtTong.setText(String.valueOf(tongKH));
         DocDuLieu();
 //        loadTable(kh_dao.getalltbKhachHang());
+        tblDSKH.getColumnModel().getColumn(4).setCellRenderer(new TableActionCellRenderKH());
+//        tblDSKH.getColumnModel().getColumn(4).setCellEditor(new TableActionCellEditor(event));
 
     }
-
 
     public void loadTable(ArrayList<KhachHang> ds) {
         dtmKhachHang.setRowCount(0);//reset nd trong bang ve 0
@@ -206,20 +210,23 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã khách hàng", "Tên khách hàng", "Số điện thoại", "Giới tính"
+                "Mã khách hàng", "Tên khách hàng", "Số điện thoại", "Giới tính", "Hành động"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true, true
+                false, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tblDSKH.setRowHeight(40);
+        tblDSKH.setRowHeight(30);
         tblDSKH.setSelectionForeground(new java.awt.Color(255, 255, 255));
         scr.setViewportView(tblDSKH);
+        if (tblDSKH.getColumnModel().getColumnCount() > 0) {
+            tblDSKH.getColumnModel().getColumn(4).setPreferredWidth(5);
+        }
 
         lblTong.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTong.setText("Tổng số khách hàng");
