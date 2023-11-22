@@ -8,6 +8,10 @@ import dao.LoaiPhong_DAO;
 import dao.PhongHat_DAO;
 import entity.LoaiPhong;
 import entity.PhongHat;
+import gui.swing.scrollbar.ScrollBarCustom;
+import gui.swing.table.TableActionCellEditorPhongHat;
+import gui.swing.table.TableActionCellRenderPhongHat;
+import gui.swing.table.TableActionEventPhongHat;
 import gui_dialog.DL_ThemPhongHat;
 import java.awt.Component;
 import java.util.ArrayList;
@@ -30,6 +34,9 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
 
     public Form_QuanLyPhongHat() {
         initComponents();
+        scr.getViewport().setOpaque(false);
+        scr.setVerticalScrollBar(new ScrollBarCustom());
+
         ph_dao = new PhongHat_DAO();
         lp_dao = new LoaiPhong_DAO();
         dtmPhongHat = (DefaultTableModel) tblDSPH.getModel();
@@ -37,6 +44,68 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
         int tongPH = KH.getTongSoPhong();
         txtTong.setText(String.valueOf(tongPH));
         DocDuLieu();
+        TableActionEventPhongHat event = new TableActionEventPhongHat() {
+            @Override
+            public void sua(int row) {
+
+                if (tblDSPH.getSelectedRowCount() > 0) {
+                    if (JOptionPane.showConfirmDialog(null, "Xác nhận sửa mặt hàng đã chọn?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                        int[] selectedRows = tblDSPH.getSelectedRows();
+                        for (int i = 0; i < selectedRows.length; i++) {
+                            int rowIndex = selectedRows[i];
+                            String maPhong = tblDSPH.getValueAt(rowIndex, 0).toString();
+                            String tenPhong = tblDSPH.getValueAt(rowIndex, 1).toString();
+                            String maLoai = tblDSPH.getValueAt(rowIndex, 2).toString();
+                            Double gia = Double.parseDouble(tblDSPH.getValueAt(rowIndex, 3).toString());
+                            String trangThai = tblDSPH.getValueAt(rowIndex, 4).toString();
+                            PhongHat ph = new PhongHat(maPhong, tenPhong, new LoaiPhong(maLoai), trangThai);
+
+                            tblDSPH.setValueAt(tenPhong, rowIndex, 1);
+                            tblDSPH.setValueAt(maLoai, rowIndex, 2);
+                            tblDSPH.setValueAt(gia, rowIndex, 3);
+                            tblDSPH.setValueAt(trangThai, rowIndex, 4);
+
+                            if (ph_dao.editPhongHat(ph)) {
+                                System.out.println("Sửa thành công");
+                                JOptionPane.showMessageDialog(null, "Sửa thành công");
+                            } else {
+                                System.out.println("Sửa thất bại");
+                                JOptionPane.showMessageDialog(null, "Sửa thất bại");
+                            }
+                        }
+                    }
+
+                    clearJTable();
+                    DocDuLieu();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Chọn dòng cần sửa!");
+                }
+            }
+
+            @Override
+            public void xoa(int row) {
+                ph_dao = new PhongHat_DAO();
+                if (tblDSPH.getSelectedRowCount() > 0) {
+                    if (JOptionPane.showConfirmDialog(null, "Xác nhận xóa phòng hát đã chọn?", "Warring", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
+                        int[] selectedRows = tblDSPH.getSelectedRows();
+                        for (int i = selectedRows.length - 1; i >= 0; i--) {
+                            List<PhongHat> phs = ph_dao.getAllPhongHat();
+                            PhongHat ph = phs.get(selectedRows[i]);
+                            String maPH = ph.getMaPhong();
+                            ph_dao.DeletePhongHat(maPH);
+                            clearJTable();
+                            DocDuLieu();
+                        }
+                        JOptionPane.showMessageDialog(null, "Xóa thành công");
+
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Chọn dòng cần xóa!");
+                }
+            }
+        };
+        tblDSPH.getColumnModel().getColumn(5).setCellRenderer(new TableActionCellRenderPhongHat());
+        tblDSPH.getColumnModel().getColumn(5).setCellEditor(new TableActionCellEditorPhongHat(event));
     }
 
     public void clearJTable() {
@@ -50,12 +119,9 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
         List<LoaiPhong> ls = lp_dao.getalltbLoaiPhong();
         // Duyệt qua danh sách dữ liệu loại phòng
         for (LoaiPhong lp : ls) {
-            // Lấy mã và giá của loại phòng
-//            String maLoaiPhong = lp.getMaLoaiPhong();
+
             Double gia = lp.getGia();
 
-            // Thực hiện các thao tác cần thiết với dữ liệu
-            // Ví dụ: hiển thị dữ liệu lên màn hình
             List<PhongHat> list = ph_dao.getAllPhongHat();
 
             for (PhongHat ph : list) {
@@ -87,8 +153,6 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
         txtTim = new javax.swing.JTextField();
         btnTim = new gui.swing.RadiusButton();
         btnThem = new gui.swing.RadiusButton();
-        btnXoa = new gui.swing.RadiusButton();
-        btnSua = new gui.swing.RadiusButton();
         lblDSPH = new javax.swing.JLabel();
         scr = new javax.swing.JScrollPane();
         tblDSPH = new javax.swing.JTable();
@@ -146,22 +210,6 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
             }
         });
 
-        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/delete.png"))); // NOI18N
-        btnXoa.setText("Xóa");
-        btnXoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaActionPerformed(evt);
-            }
-        });
-
-        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/edit.png"))); // NOI18N
-        btnSua.setText("Sửa");
-        btnSua.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSuaActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout pnlHeaderLayout = new javax.swing.GroupLayout(pnlHeader);
         pnlHeader.setLayout(pnlHeaderLayout);
         pnlHeaderLayout.setHorizontalGroup(
@@ -169,11 +217,7 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
             .addGroup(pnlHeaderLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(pnlTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
-                .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 402, Short.MAX_VALUE)
                 .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(70, 70, 70))
         );
@@ -182,15 +226,12 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
             .addGroup(pnlHeaderLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHeaderLayout.createSequentialGroup()
-                        .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(12, 12, 12)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(54, Short.MAX_VALUE))
+                    .addGroup(pnlHeaderLayout.createSequentialGroup()
+                        .addComponent(pnlTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(25, Short.MAX_VALUE))))
         );
 
         lblDSPH.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -201,10 +242,11 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã phòng", "Tên phòng", "Mã loại phòng", "Giá", "Trạng thái"
+                "Mã phòng", "Tên phòng", "Mã loại phòng", "Giá", "Trạng thái", "Hành động"
             }
         ));
         tblDSPH.setRowHeight(40);
+        tblDSPH.setSelectionBackground(new java.awt.Color(0, 169, 183));
         scr.setViewportView(tblDSPH);
 
         lblTong.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -305,69 +347,10 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
         DocDuLieu();
     }//GEN-LAST:event_btnThemActionPerformed
 
-    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        ph_dao = new PhongHat_DAO();
-        if (tblDSPH.getSelectedRowCount() > 0) {
-            if (JOptionPane.showConfirmDialog(this, "Xác nhận xóa phòng hát đã chọn?", "Warring", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
-                int[] selectedRows = tblDSPH.getSelectedRows();
-                for (int i = selectedRows.length - 1; i >= 0; i--) {
-                    List<PhongHat> phs = ph_dao.getAllPhongHat();
-                    PhongHat ph = phs.get(selectedRows[i]);
-                    String maPH = ph.getMaPhong();
-                    ph_dao.DeletePhongHat(maPH);
-                }
-                clearJTable();
-                DocDuLieu();
-                JOptionPane.showMessageDialog(this, "Xóa thành công");
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Chọn dòng cần xóa!");
-        }
-    }//GEN-LAST:event_btnXoaActionPerformed
-
-    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        ph_dao = new PhongHat_DAO();
-
-        if (tblDSPH.getSelectedRowCount() > 0) {
-            if (JOptionPane.showConfirmDialog(this, "Xác nhận sửa mặt hàng đã chọn?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                int[] selectedRows = tblDSPH.getSelectedRows();
-                for (int i = 0; i < selectedRows.length; i++) {
-                    int rowIndex = selectedRows[i];
-                    String maPhong = tblDSPH.getValueAt(rowIndex, 0).toString();
-                    String tenPhong = tblDSPH.getValueAt(rowIndex, 1).toString();
-                    String maLoai = tblDSPH.getValueAt(rowIndex, 2).toString();
-                    Double gia = Double.parseDouble(tblDSPH.getValueAt(rowIndex, 3).toString());
-                    String trangThai = tblDSPH.getValueAt(rowIndex, 4).toString();
-                    PhongHat ph = new PhongHat(maPhong, tenPhong, new LoaiPhong(maLoai), trangThai);
-
-                    tblDSPH.setValueAt(tenPhong, rowIndex, 1);
-                    tblDSPH.setValueAt(maLoai, rowIndex, 2);
-                    tblDSPH.setValueAt(gia, rowIndex, 3);
-                    tblDSPH.setValueAt(trangThai, rowIndex, 4);
-
-                    if (ph_dao.editPhongHat(ph)) {
-                        System.out.println("Sửa thành công");
-                        JOptionPane.showMessageDialog(this, "Sửa thành công");
-                    } else {
-                        System.out.println("Sửa thất bại");
-                        JOptionPane.showMessageDialog(this, "Sửa thất bại");
-                    }
-                }
-            }
-
-            clearJTable();
-            DocDuLieu();
-        } else {
-            JOptionPane.showMessageDialog(this, "Chọn dòng cần sửa!");
-        }
-    }//GEN-LAST:event_btnSuaActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private gui.swing.RadiusButton btnSua;
     private gui.swing.RadiusButton btnThem;
     private gui.swing.RadiusButton btnTim;
-    private gui.swing.RadiusButton btnXoa;
     private javax.swing.JLabel lblDSPH;
     private javax.swing.JLabel lblTim;
     private javax.swing.JLabel lblTong;
