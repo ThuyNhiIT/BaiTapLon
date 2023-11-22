@@ -4,9 +4,15 @@ import connectDB.ConnectDB;
 import dao.KhachHang_DAO;
 import entity.KhachHang;
 import gui.swing.CustomJOptionPane;
+<<<<<<< HEAD
 import gui.swing.table.TableActionCellEditor;
 import gui.swing.table.TableActionCellRender;
 import gui.swing.table.TableActionCellRenderKH;
+=======
+import gui.swing.table.PanelActionCellEditor_KhachHang;
+import gui.swing.table.PanelActionCellRender_KhachHang;
+import gui.swing.table.TableActionEvent_KhachHang;
+>>>>>>> da1f67e24a122725545d541a3c6e88601dfd22de
 import gui_dialog.DL_ThongTinKhachHang;
 import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
@@ -35,6 +41,15 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
 
     public Form_QuanLyKhachHang() {
         initComponents();
+        TableActionEvent_KhachHang event = new TableActionEvent_KhachHang() {
+            @Override
+            public void Sua(int row) {
+                System.out.println("sua" +row);
+                //Viết sự kiên dô đây 
+            }
+        };
+        tblDSKH.getColumnModel().getColumn(4).setCellRenderer(new PanelActionCellRender_KhachHang());
+        tblDSKH.getColumnModel().getColumn(4).setCellEditor(new PanelActionCellEditor_KhachHang(event));
         kh_dao = new KhachHang_DAO();
         dtmKhachHang = (DefaultTableModel) tblDSKH.getModel();
         KhachHang_DAO KH = new KhachHang_DAO();
@@ -221,7 +236,12 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+<<<<<<< HEAD
         tblDSKH.setRowHeight(30);
+=======
+        tblDSKH.setRowHeight(40);
+        tblDSKH.setSelectionBackground(new java.awt.Color(0, 169, 183));
+>>>>>>> da1f67e24a122725545d541a3c6e88601dfd22de
         tblDSKH.setSelectionForeground(new java.awt.Color(255, 255, 255));
         scr.setViewportView(tblDSKH);
         if (tblDSKH.getColumnModel().getColumnCount() > 0) {
