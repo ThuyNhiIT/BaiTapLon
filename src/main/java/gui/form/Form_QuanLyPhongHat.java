@@ -37,13 +37,6 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
         scr.getViewport().setOpaque(false);
         scr.setVerticalScrollBar(new ScrollBarCustom());
 
-        ph_dao = new PhongHat_DAO();
-        lp_dao = new LoaiPhong_DAO();
-        dtmPhongHat = (DefaultTableModel) tblDSPH.getModel();
-        PhongHat_DAO KH = new PhongHat_DAO();
-        int tongPH = KH.getTongSoPhong();
-        txtTong.setText(String.valueOf(tongPH));
-        DocDuLieu();
         TableActionEventPhongHat event = new TableActionEventPhongHat() {
             @Override
             public void sua(int row) {
@@ -106,6 +99,13 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
         };
         tblDSPH.getColumnModel().getColumn(5).setCellRenderer(new TableActionCellRenderPhongHat());
         tblDSPH.getColumnModel().getColumn(5).setCellEditor(new TableActionCellEditorPhongHat(event));
+        ph_dao = new PhongHat_DAO();
+        lp_dao = new LoaiPhong_DAO();
+        dtmPhongHat = (DefaultTableModel) tblDSPH.getModel();
+        PhongHat_DAO KH = new PhongHat_DAO();
+        int tongPH = KH.getTongSoPhong();
+        txtTong.setText(String.valueOf(tongPH));
+        DocDuLieu();
     }
 
     public void clearJTable() {
@@ -217,21 +217,20 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
             .addGroup(pnlHeaderLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(pnlTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 402, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 401, Short.MAX_VALUE)
                 .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70))
+                .addGap(71, 71, 71))
         );
         pnlHeaderLayout.setVerticalGroup(
             pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlHeaderLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHeaderLayout.createSequentialGroup()
-                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(54, Short.MAX_VALUE))
+                    .addComponent(pnlTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlHeaderLayout.createSequentialGroup()
-                        .addComponent(pnlTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(25, Short.MAX_VALUE))))
+                        .addGap(14, 14, 14)
+                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         lblDSPH.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
