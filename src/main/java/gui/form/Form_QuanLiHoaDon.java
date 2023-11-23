@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Form_QuanLiHoaDon extends javax.swing.JPanel {
 
-      private HoaDon_DAO hd_dao;
+    private HoaDon_DAO hd_dao;
     private DefaultTableModel dtmhd;
     public Form_QuanLiHoaDon() {
         initComponents();

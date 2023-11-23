@@ -1,14 +1,34 @@
 package gui.form;
 
+import dao.HoaDon_DAO;
+import entity.HoaDon;
 import gui.swing.scrollbar.ScrollBarCustom;
-
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 public class Form_ThongKeDoanhThu extends javax.swing.JPanel {
+
+    private HoaDon_DAO hd_dao;
+    private DefaultTableModel dtmhd;
 
     public Form_ThongKeDoanhThu() {
         initComponents();
         scr.getViewport().setOpaque(false);
         scr.setVerticalScrollBar(new ScrollBarCustom());
+
+        hd_dao = new HoaDon_DAO();
+        dtmhd = (DefaultTableModel) tblTKDT.getModel();
+
+        DocDuLieu();
+        System.out.println("gui.form.Form_ThongKeDoanhThu.<init>()");
+    }
+
+    public void DocDuLieu() {
+        List<HoaDon> list = hd_dao.getalltbHoaDon();
+        int stt = 1;
+        for (HoaDon hd : list) {
+            dtmhd.addRow(new Object[]{stt++ + "", hd.getMaHD(), hd.getNgayLapHD(), hd.getKhachHang().getMaKH(), hd.getNhanVien().getMaNV(), hd.getTongTien()});
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -115,47 +135,7 @@ public class Form_ThongKeDoanhThu extends javax.swing.JPanel {
 
         tblTKDT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "STT", "Mã hóa đơn", "Ngày lập hóa đơn", "Nhân viên", "Khách hàng", "Tổng hóa đơn"
