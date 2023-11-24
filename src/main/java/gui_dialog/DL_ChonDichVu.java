@@ -1,6 +1,7 @@
 package gui_dialog;
 
 import dao.ChiTietHoaDonDichVu_DAO;
+import dao.ChiTietHoaDonPhong_Dao;
 import dao.MatHang_DAO;
 import entity.ChiTietHoaDonDV;
 import entity.HoaDon;
@@ -8,6 +9,7 @@ import entity.MatHang;
 import gui.form.Form_QuanLyDatPhong;
 import gui.form.MainForm;
 import gui.main.Main;
+import gui.swing.scrollbar.ScrollBarCustom;
 import gui.swing.table.PanelAction;
 //import gui.swing.table.TableActionCellEditor;
 import gui.swing.table.TableActionCellEditor;
@@ -28,10 +30,18 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
     private ChiTietHoaDonDichVu_DAO cthddv_dao;
     private int selectedRowIndex = -1;
     private PanelAction panelAction;
+       private ChiTietHoaDonPhong_Dao cthdp_dao;
+    private int currentSL;
+    private double gia;
+
 
     public DL_ChonDichVu(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+         jScrollPane1.getViewport().setOpaque(false);
+        jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
+        jScrollPane2.getViewport().setOpaque(false);
+        jScrollPane2.setVerticalScrollBar(new ScrollBarCustom());
         mh_dao = new MatHang_DAO();
         dtmMatHang = (DefaultTableModel) tblDSDV.getModel();
         dtmDVThem = (DefaultTableModel) tblDVThem.getModel();
@@ -51,16 +61,30 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
          TableActionEvent event = new TableActionEvent() {
             @Override
             public void tangSoLuong(int row) {
-                System.out.println("tăng");
+                currentSL = (int) dtmDVThem.getValueAt(row, 2);
+                gia = (double) dtmDVThem.getValueAt(row, 3);
+                dtmDVThem.setValueAt(currentSL + 1, row, 2);
+                double newTotalPrice = (currentSL + 1) * gia;
+                dtmDVThem.setValueAt(newTotalPrice, row, 3);
             }
 
             @Override
             public void giamSoLuong(int row) {
-                System.out.println(".giamSoLuong()");
+                currentSL = (int) dtmDVThem.getValueAt(row, 2);
+                gia = (double) dtmDVThem.getValueAt(row, 3);
+                if (currentSL > 1) {
+                    dtmDVThem.setValueAt(currentSL - 1, row, 2);
+                    double newTotalPrice = (currentSL - 1) * gia;
+                    dtmDVThem.setValueAt(newTotalPrice, row, 3);
+                } else { // currentSL == 1
+                    dtmDVThem.removeRow(row);
+                }
             }
         };
-         tblDVThem.getColumnModel().getColumn(4).setCellRenderer(new TableActionCellRender());
-       tblDVThem.getColumnModel().getColumn(4).setCellEditor(new TableActionCellEditor(event));
+        tblDVThem.getColumnModel().getColumn(4).setCellRenderer(new TableActionCellRender());
+        tblDVThem.getColumnModel().getColumn(4).setCellEditor(new TableActionCellEditor(event));
+
+
     }
 
     private MatHang getSelectedMatHang(int row) {
@@ -68,42 +92,39 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
         return mh_dao.findMatHang(maMH);
     }
 
-    private void addToDVThemTable(MatHang selectedMatHang) {
-        boolean codeExists = false;
-        int rowIndex = -1;
+  private void addToDVThemTable(MatHang selectedMatHang) {
+    String selectedCode = selectedMatHang.getMaMH();
+    int rowIndex = findRowIndexByCode(selectedCode);
 
+    if (rowIndex != -1) {
+        // Row already exists, update quantity and total price
+         currentSL = (int) dtmDVThem.getValueAt(rowIndex, 2);
+         gia = (double) dtmDVThem.getValueAt(rowIndex, 3);
+
+
+        dtmDVThem.setValueAt(currentSL + 1, rowIndex, 2);
+
+        // Calculate the new total price based on the updated quantity
+        double newTotalPrice = (currentSL +1 ) * gia;
+
+        // Set the new total price in the table
+        dtmDVThem.setValueAt(newTotalPrice, rowIndex, 3);
+    } else {
+        // Row does not exist, add a new row
+        dtmDVThem.addRow(new Object[]{selectedMatHang.getMaMH(), selectedMatHang.getTenMH(), 1, selectedMatHang.getGia()});
+    }
+}
+
+    private int findRowIndexByCode(String code) {
         for (int i = 0; i < dtmDVThem.getRowCount(); i++) {
-            String codeInDVThem = (String) dtmDVThem.getValueAt(i, 0);
-
-            if (Objects.equals(codeInDVThem, selectedMatHang.getMaMH())) {
-                codeExists = true;
-                rowIndex = i;
-                break;
+            String codeInDVThem = String.valueOf(dtmDVThem.getValueAt(i, 0));
+            if (Objects.equals(codeInDVThem, code)) {
+                return i;
             }
         }
-
-        if (codeExists) {
-//            int currentSL = Integer.parseInt((String) dtmDVThem.getValueAt(rowIndex, 1));
-            int currentSL = (int) dtmDVThem.getValueAt(rowIndex, 1);
-
-//                int gia = Integer.parseInt((String) dtmDVThem.getValueAt(rowIndex, 2));
-            int gia = (int) dtmDVThem.getValueAt(rowIndex, 2);
-
-            dtmDVThem.setValueAt(currentSL + 1, rowIndex, 1);
-
-            // Calculate the new total price based on the updated quantity
-            int newTotalPrice = (currentSL + 1) * gia;
-
-            // Set the new total price in the table
-            dtmDVThem.setValueAt(newTotalPrice, rowIndex, 2);
-
-        } else {
-
-
-            dtmDVThem.addRow(new Object[]{selectedMatHang.getMaMH(),selectedMatHang.getTenMH(), 1, selectedMatHang.getGia()});
-
-        }
+        return -1; // Code not found in the table
     }
+
 
     public List<MatHangModel> getDVThemData() {
         List<MatHangModel> dvThemData = new ArrayList<>();
@@ -319,7 +340,7 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
             }
         });
         tblDVThem.setRowHeight(30);
-        tblDVThem.setSelectionBackground(new java.awt.Color(255, 255, 255));
+        tblDVThem.setSelectionBackground(new java.awt.Color(0, 153, 153));
         jScrollPane2.setViewportView(tblDVThem);
         if (tblDVThem.getColumnModel().getColumnCount() > 0) {
             tblDVThem.getColumnModel().getColumn(0).setPreferredWidth(5);

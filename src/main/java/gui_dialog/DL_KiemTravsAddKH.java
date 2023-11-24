@@ -4,9 +4,9 @@ import connectDB.ConnectDB;
 import dao.*;
 import entity.*;
 
+import gui.event.EventRefreshRoom;
 import gui.form.Form_Login;
 import gui.form.Form_QuanLyDatPhong;
-import java.awt.Component;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,11 +14,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.time.LocalDateTime;
-import javax.swing.SwingUtilities;
 
 
 /**
@@ -34,6 +30,7 @@ public class DL_KiemTravsAddKH extends javax.swing.JDialog {
     private static String makhAuto;
     private static String mahdAuto;
 
+
     /**
      * Creates new form DL_KiemTravsAddKH
      */
@@ -47,7 +44,11 @@ public class DL_KiemTravsAddKH extends javax.swing.JDialog {
         } catch (SQLException ex) {
 
         }
+
+
     }
+
+
 
     public static void setMaKHPublic(String makh) {
         makhAuto = makh;
@@ -376,10 +377,17 @@ public class DL_KiemTravsAddKH extends javax.swing.JDialog {
         hd_dao.createHoaDon(revertHoaDonFromTextfields());
         cthdp_dao = new ChiTietHoaDonPhong_Dao();
         cthdp_dao.createChiTietHoaDonPhong(revertChiTietHoaDonPhongText());
-
-            ph.refreshRooms();
-
         this.dispose();
+
+        //event refreshroom
+//        EventRefreshRoom eventRefreshRoom = new EventRefreshRoom() {
+//            @Override
+//            public void refreshRoom() {
+//                btnThuePhong.doClick();
+//
+//            }
+//        };
+
 
         ph.openDL_ChonDichVu();
     }//GEN-LAST:event_btnThuePhongActionPerformed

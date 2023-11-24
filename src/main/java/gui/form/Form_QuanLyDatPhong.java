@@ -1,22 +1,21 @@
 package gui.form;
 
 import connectDB.ConnectDB;
-import dao.KhachHang_DAO;
 import dao.PhongHat_DAO;
-import entity.KhachHang;
 import entity.PhongHat;
 import gui.component.Room;
+import gui.event.EventRefreshRoom;
 import gui.model.ModelRoom;
 import gui.swing.scrollbar.ScrollBarCustom;
 import gui_dialog.DL_ChonDichVu;
 import gui_dialog.DL_KiemTravsAddKH;
 import gui_dialog.DL_PhongDangSuDung;
+
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowFocusListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -24,10 +23,10 @@ import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
+
 import net.miginfocom.swing.MigLayout;
 
 /**
- *
  * @author HO MINH HAU
  */
 public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
@@ -36,6 +35,7 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
 
     private static String selectedRoom;
     private static String selectedRoomName;
+
 
     public Form_QuanLyDatPhong() {
 
@@ -50,7 +50,21 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         phongTrong();
         phongDangSuDung();
         phongCho();
-        refreshRooms();
+
+        // Add a WindowListener to refresh rooms when the frame is activated
+        EventRefreshRoom eventRefreshRoom = new EventRefreshRoom() {
+            @Override
+            public void refreshRoom() {
+                refreshRooms();
+            }
+        };
+//        // Add a WindowListener to refresh rooms when the frame is activated
+//        EventRefreshRoom eventRefreshRoom = new EventRefreshRoom() {
+//            @Override
+//            public void refreshRoom() {
+//                refreshRooms();
+//            }
+//        };
     }
 
     public static void setRoomSelected(String roomID) {
@@ -80,16 +94,16 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     kiemTraVsAddKH.setLocationRelativeTo(Form_QuanLyDatPhong.this);
                     kiemTraVsAddKH.setVisible(true);
-                }
-                DL_ChonDichVu cDV = new DL_ChonDichVu((java.awt.Frame) SwingUtilities.getWindowAncestor((Component) e.getSource()), true);
-                cDV.addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowClosed(WindowEvent e) {
 
+                    // Add a WindowListener to refresh rooms when the frame is activated
+                    if(kiemTraVsAddKH.isVisible() == false){
                         refreshRooms();
                     }
+                }
 
-                });
+
+
+
             }
         });
         MigLayout migLayout = new MigLayout("wrap 4, gapx 100, gapy 80", "[grow, fill]");
@@ -149,20 +163,11 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     pdsd.setLocationRelativeTo(Form_QuanLyDatPhong.this);
                     pdsd.setVisible(true);
+                    if(pdsd.isVisible() == false){
+                        refreshRooms();
+                    }
                 }
-//                pdsd.addWindowListener(new WindowAdapter() {
-//                    @Override
-//                    public void windowClosed(WindowEvent e) {
-//                        // khi đống thì tao cho nó refresh lại mấy cái room
-//                        System.out.println("DL_KiemTravsAddKH closed");
-//                        SwingUtilities.invokeLater(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                refreshRooms();
-//                            }
-//                        });
-//                    }
-//                });
+
             }
         });
         MigLayout migLayout = new MigLayout("wrap 4, gapx 80, gapy 80, inset 20", "[grow, fill]");
@@ -211,7 +216,7 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
             @Override
             public void mousePressed(MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
-                    // Handle mouse click here if necessary
+
                 }
             }
         });
@@ -251,18 +256,10 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
     }
 
     //Open DL_ChonDichVu in frame Form_QuanLyDatPhong
-      public void openDL_ChonDichVu() {
+    public void openDL_ChonDichVu() {
         DL_ChonDichVu chonDV = new DL_ChonDichVu((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
         chonDV.setLocationRelativeTo(Form_QuanLyDatPhong.this);
         chonDV.setVisible(true);
-        chonDV.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                System.out.println(".windowClosed()");
-                refreshRooms();
-
-            }
-        });
     }
 
     @SuppressWarnings("unchecked")
@@ -273,11 +270,11 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         tabbed = new gui.swing.tabbed.MaterialTabbed();
         jScrollPane1 = new javax.swing.JScrollPane();
         pnlPhongTrong = new javax.swing.JPanel();
+        btnThueNhieuPhong = new gui.swing.RadiusButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         pnlPhongDangSuDung = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         pnlPhongCho = new javax.swing.JPanel();
-        radiusButton1 = new gui.swing.RadiusButton();
 
         pnlCover.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -285,15 +282,30 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
 
         pnlPhongTrong.setBackground(new java.awt.Color(255, 255, 255));
 
+        btnThueNhieuPhong.setBackground(new java.awt.Color(0, 204, 204));
+        btnThueNhieuPhong.setForeground(new java.awt.Color(255, 255, 255));
+        btnThueNhieuPhong.setText("Thuê nhiều phòng");
+        btnThueNhieuPhong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThueNhieuPhongActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlPhongTrongLayout = new javax.swing.GroupLayout(pnlPhongTrong);
         pnlPhongTrong.setLayout(pnlPhongTrongLayout);
         pnlPhongTrongLayout.setHorizontalGroup(
-            pnlPhongTrongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1043, Short.MAX_VALUE)
+                pnlPhongTrongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPhongTrongLayout.createSequentialGroup()
+                                .addContainerGap(924, Short.MAX_VALUE)
+                                .addComponent(btnThueNhieuPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(14, 14, 14))
         );
         pnlPhongTrongLayout.setVerticalGroup(
-            pnlPhongTrongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 697, Short.MAX_VALUE)
+                pnlPhongTrongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlPhongTrongLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnThueNhieuPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(665, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(pnlPhongTrong);
@@ -307,12 +319,12 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         javax.swing.GroupLayout pnlPhongDangSuDungLayout = new javax.swing.GroupLayout(pnlPhongDangSuDung);
         pnlPhongDangSuDung.setLayout(pnlPhongDangSuDungLayout);
         pnlPhongDangSuDungLayout.setHorizontalGroup(
-            pnlPhongDangSuDungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1041, Short.MAX_VALUE)
+                pnlPhongDangSuDungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 1041, Short.MAX_VALUE)
         );
         pnlPhongDangSuDungLayout.setVerticalGroup(
-            pnlPhongDangSuDungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 695, Short.MAX_VALUE)
+                pnlPhongDangSuDungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 695, Short.MAX_VALUE)
         );
 
         jScrollPane2.setViewportView(pnlPhongDangSuDung);
@@ -326,68 +338,54 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         javax.swing.GroupLayout pnlPhongChoLayout = new javax.swing.GroupLayout(pnlPhongCho);
         pnlPhongCho.setLayout(pnlPhongChoLayout);
         pnlPhongChoLayout.setHorizontalGroup(
-            pnlPhongChoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1041, Short.MAX_VALUE)
+                pnlPhongChoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 1041, Short.MAX_VALUE)
         );
         pnlPhongChoLayout.setVerticalGroup(
-            pnlPhongChoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 695, Short.MAX_VALUE)
+                pnlPhongChoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 695, Short.MAX_VALUE)
         );
 
         jScrollPane3.setViewportView(pnlPhongCho);
 
         tabbed.addTab("Phòng chờ", jScrollPane3);
 
-        radiusButton1.setBackground(new java.awt.Color(0, 204, 204));
-        radiusButton1.setForeground(new java.awt.Color(255, 255, 255));
-        radiusButton1.setText("Thuê nhiều phòng");
-        radiusButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radiusButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout pnlCoverLayout = new javax.swing.GroupLayout(pnlCover);
         pnlCover.setLayout(pnlCoverLayout);
         pnlCoverLayout.setHorizontalGroup(
-            pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlCoverLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tabbed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCoverLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(radiusButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlCoverLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(tabbed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())
         );
         pnlCoverLayout.setVerticalGroup(
-            pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlCoverLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(radiusButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tabbed, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+                pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlCoverLayout.createSequentialGroup()
+                                .addGap(62, 62, 62)
+                                .addComponent(tabbed, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
+                                .addGap(0, 0, 0))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlCover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(pnlCover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlCover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(pnlCover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void radiusButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radiusButton1ActionPerformed
+    private void btnThueNhieuPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThueNhieuPhongActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_radiusButton1ActionPerformed
+    }//GEN-LAST:event_btnThueNhieuPhongActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private gui.swing.RadiusButton btnThueNhieuPhong;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -395,7 +393,6 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
     private javax.swing.JPanel pnlPhongCho;
     private javax.swing.JPanel pnlPhongDangSuDung;
     private javax.swing.JPanel pnlPhongTrong;
-    private gui.swing.RadiusButton radiusButton1;
     private gui.swing.tabbed.MaterialTabbed tabbed;
     // End of variables declaration//GEN-END:variables
 }

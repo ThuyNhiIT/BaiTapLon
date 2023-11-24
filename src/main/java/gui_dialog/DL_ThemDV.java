@@ -283,6 +283,7 @@ private void addToDVThemTable(MatHang selectedMatHang) {
                 return canEdit [columnIndex];
             }
         });
+        tblDSDV.setRowHeight(30);
         jScrollPane1.setViewportView(tblDSDV);
 
         lblDSDV.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -500,7 +501,6 @@ private void addToDVThemTable(MatHang selectedMatHang) {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.swing.Button btnExit2;
     private gui.swing.RadiusButton btnXong;
