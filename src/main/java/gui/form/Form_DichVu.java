@@ -4,6 +4,7 @@ import dao.DichVu_DAO;
 import dao.MatHang_DAO;
 import entity.DichVu;
 import entity.MatHang;
+import gui.swing.scrollbar.ScrollBarCustom;
 import gui_dialog.DL_ThemDV;
 
 import java.util.ArrayList;
@@ -24,8 +25,8 @@ public class Form_DichVu extends javax.swing.JPanel {
 
     public Form_DichVu() {
         initComponents();
-//        dv_dao = new DichVu_DAO();
-//        dtmDichVu = (DefaultTableModel) tblDichVu.getModel();
+        scr.getViewport().setOpaque(false);
+        scr.setVerticalScrollBar(new ScrollBarCustom());
         mh_dao = new MatHang_DAO();
         dtmMatHang = (DefaultTableModel) tblDichVu.getModel();
 
@@ -216,7 +217,6 @@ public class Form_DichVu extends javax.swing.JPanel {
                 int stt = 1;
                 for (MatHang mh : dsMHTim) {
                     dtmMatHang.addRow(new Object[]{stt++ + "", mh.getMaMH(), mh.getTenMH(), mh.getGia()});
-//                    int index = mh_dao.traVeViTri(mh);
                 }
             } else if (dsMHTim == null) {
                 JOptionPane.showMessageDialog(this, "Không tìm thấy");

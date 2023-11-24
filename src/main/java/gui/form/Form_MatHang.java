@@ -2,6 +2,11 @@ package gui.form;
 
 import dao.MatHang_DAO;
 import entity.MatHang;
+import gui.swing.scrollbar.ScrollBarCustom;
+import gui.swing.table.PanelActionCellEditor_KhachHang;
+import gui.swing.table.TableActionCellEditorMatHang;
+import gui.swing.table.TableActionCellRenderMatHang;
+import gui.swing.table.TableActionEventMatHang;
 import gui_dialog.DL_ThemMatHang;
 import java.awt.Component;
 import java.awt.event.MouseEvent;
@@ -23,14 +28,78 @@ public class Form_MatHang extends javax.swing.JPanel implements MouseListener {
 
     private MatHang_DAO mh_dao;
     private DefaultTableModel dtmMatHang;
-//    private JTable tblMatHang;
-
     public Form_MatHang() {
         initComponents();
+        scr.getViewport().setOpaque(false);
+        scr.setVerticalScrollBar(new ScrollBarCustom());
         mh_dao = new MatHang_DAO();
         dtmMatHang = (DefaultTableModel) tblMatHang.getModel();
         DocDuLieu();
-//        tblMatHang.addMouseListener(this);
+        TableActionEventMatHang event = new TableActionEventMatHang() {
+            @Override
+            public void sua(int row) {
+                mh_dao = new MatHang_DAO();
+
+                if (tblMatHang.getSelectedRowCount() > 0) {
+                    if (JOptionPane.showConfirmDialog(null, "Xác nhận sửa mặt hàng đã chọn?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                        int[] selectedRows = tblMatHang.getSelectedRows();
+                        for (int i = 0; i < selectedRows.length; i++) {
+                            int rowIndex = selectedRows[i];
+                            String maHang = tblMatHang.getValueAt(rowIndex, 0).toString();
+                            String tenHang = tblMatHang.getValueAt(rowIndex, 1).toString();
+                            Double gia = Double.parseDouble(tblMatHang.getValueAt(rowIndex, 2).toString());
+                            Boolean trangThai = Boolean.parseBoolean(tblMatHang.getValueAt(rowIndex, 3).toString());
+
+                            // Tạo đối tượng MatHang từ dữ liệu đã lấy
+                            System.out.println(maHang);
+                            System.out.println(tenHang);
+                            System.out.println(gia);
+                            MatHang mh = new MatHang(maHang, tenHang, gia, trangThai);
+                            tblMatHang.setValueAt(tenHang, rowIndex, 1);
+                            tblMatHang.setValueAt(gia, rowIndex, 2);
+                            tblMatHang.setValueAt(trangThai, rowIndex, 3);
+                            if (mh_dao.editMatHang(mh)) {
+                                System.out.println("Sửa thành công");
+                                JOptionPane.showMessageDialog(null, "Sửa thành công");
+                            } else {
+                                System.out.println("Sửa thất bại");
+                                JOptionPane.showMessageDialog(null, "Sửa thất bại");
+                            }
+                        }
+                    }
+
+                    clearJTable();
+                    DocDuLieu();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Chọn dòng cần sửa!");
+                }
+            }
+
+            @Override
+            public void xoa(int row) {
+                mh_dao = new MatHang_DAO();
+                if (tblMatHang.getSelectedRowCount() > 0) {
+                    if (JOptionPane.showConfirmDialog(null, "Xác nhận xóa mặt hàng đã chọn?", "Warring", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
+                        int[] selectedRows = tblMatHang.getSelectedRows();
+                        for (int i = selectedRows.length - 1; i >= 0; i--) {
+                            List<MatHang> mhs = mh_dao.getalltbMatHang();
+                            MatHang mh = mhs.get(selectedRows[i]);
+                            String maMH = mh.getMaMH();
+                            mh_dao.DeleteMatHang(maMH);
+                            clearJTable();
+                            DocDuLieu();
+                        }
+
+                        JOptionPane.showMessageDialog(null, "Xóa thành công");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Chọn dòng cần xóa!");
+                }
+            }
+
+        };
+        tblMatHang.getColumnModel().getColumn(4).setCellRenderer(new TableActionCellRenderMatHang());
+        tblMatHang.getColumnModel().getColumn(4).setCellEditor(new TableActionCellEditorMatHang(event));
     }
 
     public void DocDuLieu() {
@@ -74,8 +143,6 @@ public class Form_MatHang extends javax.swing.JPanel implements MouseListener {
         btnTim = new gui.swing.RadiusButton();
         txtTim = new javax.swing.JTextField();
         btnThem = new gui.swing.RadiusButton();
-        btnSua = new gui.swing.RadiusButton();
-        btnXoa = new gui.swing.RadiusButton();
         scr = new javax.swing.JScrollPane();
         tblMatHang = new javax.swing.JTable();
 
@@ -131,22 +198,6 @@ public class Form_MatHang extends javax.swing.JPanel implements MouseListener {
             }
         });
 
-        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/edit.png"))); // NOI18N
-        btnSua.setText("Sửa");
-        btnSua.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSuaActionPerformed(evt);
-            }
-        });
-
-        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/delete.png"))); // NOI18N
-        btnXoa.setText("Xóa");
-        btnXoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout pnlHeaderLayout = new javax.swing.GroupLayout(pnlHeader);
         pnlHeader.setLayout(pnlHeaderLayout);
         pnlHeaderLayout.setHorizontalGroup(
@@ -154,11 +205,7 @@ public class Form_MatHang extends javax.swing.JPanel implements MouseListener {
             .addGroup(pnlHeaderLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(pnlTim, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 250, Short.MAX_VALUE)
-                .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 459, Short.MAX_VALUE)
                 .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(70, 70, 70))
         );
@@ -170,12 +217,9 @@ public class Form_MatHang extends javax.swing.JPanel implements MouseListener {
                         .addGap(13, 13, 13)
                         .addComponent(pnlTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlHeaderLayout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(25, Short.MAX_VALUE))
+                        .addGap(38, 38, 38)
+                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         tblMatHang.setModel(new javax.swing.table.DefaultTableModel(
@@ -183,10 +227,11 @@ public class Form_MatHang extends javax.swing.JPanel implements MouseListener {
 
             },
             new String [] {
-                "Mã mặt hàng", "Tên mặt hàng", "Giá", "Trạng thái"
+                "Mã mặt hàng", "Tên mặt hàng", "Giá", "Trạng thái", "Hành động"
             }
         ));
         tblMatHang.setRowHeight(40);
+        tblMatHang.setSelectionBackground(new java.awt.Color(0, 169, 183));
         scr.setViewportView(tblMatHang);
         tblMatHang.getAccessibleContext().setAccessibleName("");
 
@@ -230,66 +275,6 @@ public class Form_MatHang extends javax.swing.JPanel implements MouseListener {
         DocDuLieu();
     }//GEN-LAST:event_btnThemActionPerformed
 
-    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        mh_dao = new MatHang_DAO();
-
-        if (tblMatHang.getSelectedRowCount() > 0) {
-            if (JOptionPane.showConfirmDialog(this, "Xác nhận sửa mặt hàng đã chọn?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                int[] selectedRows = tblMatHang.getSelectedRows();
-                for (int i = 0; i < selectedRows.length; i++) {
-                    int rowIndex = selectedRows[i];
-                    String maHang = tblMatHang.getValueAt(rowIndex, 0).toString();
-                    String tenHang = tblMatHang.getValueAt(rowIndex, 1).toString();
-                    Double gia = Double.parseDouble(tblMatHang.getValueAt(rowIndex, 2).toString());
-                    Boolean trangThai = Boolean.parseBoolean(tblMatHang.getValueAt(rowIndex, 3).toString());
-
-                    // Tạo đối tượng MatHang từ dữ liệu đã lấy
-                    System.out.println(maHang);
-                    System.out.println(tenHang);
-                    System.out.println(gia);
-                    MatHang mh = new MatHang(maHang, tenHang, gia, trangThai);
-                    tblMatHang.setValueAt(tenHang, rowIndex, 1);
-                    tblMatHang.setValueAt(gia, rowIndex, 2);
-                    tblMatHang.setValueAt(trangThai, rowIndex, 3);
-                    if (mh_dao.editMatHang(mh)) {
-                        System.out.println("Sửa thành công");
-                        JOptionPane.showMessageDialog(this, "Sửa thành công");
-                    } else {
-                        System.out.println("Sửa thất bại");
-                        JOptionPane.showMessageDialog(this, "Sửa thất bại");
-                    }
-                }
-            }
-
-            clearJTable();
-            DocDuLieu();
-        } else {
-            JOptionPane.showMessageDialog(this, "Chọn dòng cần sửa!");
-        }
-    }//GEN-LAST:event_btnSuaActionPerformed
-
-    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        mh_dao = new MatHang_DAO();
-        if (tblMatHang.getSelectedRowCount() > 0) {
-            if (JOptionPane.showConfirmDialog(this, "Xác nhận xóa mặt hàng đã chọn?", "Warring", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION) {
-                int[] selectedRows = tblMatHang.getSelectedRows();
-                for (int i = selectedRows.length - 1; i >= 0; i--) {
-                    List<MatHang> mhs = mh_dao.getalltbMatHang();
-                    MatHang mh = mhs.get(selectedRows[i]);
-                    String maMH = mh.getMaMH();
-                    mh_dao.DeleteMatHang(maMH);
-                    clearJTable();
-                    DocDuLieu();
-                }
-
-                JOptionPane.showMessageDialog(this, "Xóa thành công");
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Chọn dòng cần xóa!");
-        }
-
-    }//GEN-LAST:event_btnXoaActionPerformed
-
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
         String maMH = txtTim.getText().trim();
         if (!(maMH.length() > 0)) {
@@ -318,10 +303,8 @@ public class Form_MatHang extends javax.swing.JPanel implements MouseListener {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private gui.swing.RadiusButton btnSua;
     private gui.swing.RadiusButton btnThem;
     private gui.swing.RadiusButton btnTim;
-    private gui.swing.RadiusButton btnXoa;
     private javax.swing.JLabel lblTim;
     private javax.swing.JPanel pnlHeader;
     private javax.swing.JPanel pnlMatHang;
