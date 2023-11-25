@@ -277,6 +277,7 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         pnlPhongDangSuDung = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         pnlPhongCho = new javax.swing.JPanel();
+        radiusButton1 = new gui.swing.RadiusButton();
 
         pnlCover.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -337,19 +338,34 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
 
         tabbed.addTab("Phòng chờ", jScrollPane3);
 
+        radiusButton1.setBackground(new java.awt.Color(0, 204, 204));
+        radiusButton1.setForeground(new java.awt.Color(255, 255, 255));
+        radiusButton1.setText("Thuê nhiều phòng");
+        radiusButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radiusButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlCoverLayout = new javax.swing.GroupLayout(pnlCover);
         pnlCover.setLayout(pnlCoverLayout);
         pnlCoverLayout.setHorizontalGroup(
             pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCoverLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tabbed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tabbed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCoverLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(radiusButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         pnlCoverLayout.setVerticalGroup(
             pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCoverLayout.createSequentialGroup()
-                .addGap(62, 62, 62)
+                .addGap(30, 30, 30)
+                .addComponent(radiusButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tabbed, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
@@ -366,6 +382,10 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void radiusButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radiusButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_radiusButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
@@ -375,6 +395,7 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
     private javax.swing.JPanel pnlPhongCho;
     private javax.swing.JPanel pnlPhongDangSuDung;
     private javax.swing.JPanel pnlPhongTrong;
+    private gui.swing.RadiusButton radiusButton1;
     private gui.swing.tabbed.MaterialTabbed tabbed;
     // End of variables declaration//GEN-END:variables
 }

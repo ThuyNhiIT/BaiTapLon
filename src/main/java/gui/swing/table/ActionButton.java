@@ -20,7 +20,7 @@ public class ActionButton extends JButton {
 
     public ActionButton() {
         setContentAreaFilled(false);
-        setBorder(new EmptyBorder(3, 3, 3, 3));
+        setBorder(new EmptyBorder(0, 0, 0, 0));
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent me) {
@@ -46,7 +46,7 @@ public class ActionButton extends JButton {
         if (mousePress) {
             g2.setColor(new Color(158, 158, 158));
         } else {
-            g2.setColor(new Color(199, 199, 199));
+            g2.setColor(new Color(235, 235, 235));
         }
         g2.fill(new Ellipse2D.Double(x, y, size, size));
         g2.dispose();

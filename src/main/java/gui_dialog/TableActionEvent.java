@@ -1,4 +1,5 @@
-package gui.swing.table;
+package gui_dialog;
+
 
 /**
  *

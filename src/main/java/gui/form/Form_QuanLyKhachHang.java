@@ -4,7 +4,10 @@ import connectDB.ConnectDB;
 import dao.KhachHang_DAO;
 import entity.KhachHang;
 import gui.swing.CustomJOptionPane;
+<<<<<<< HEAD
 import gui.swing.scrollbar.ScrollBarCustom;
+=======
+>>>>>>> 096ec8f849aa301ee23bc53a314caf6e192a9abc
 import gui.swing.table.PanelActionCellEditor_KhachHang;
 import gui.swing.table.PanelActionCellRender_KhachHang;
 import gui.swing.table.TableActionEvent_KhachHang;
@@ -24,10 +27,6 @@ import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author HO MINH HAU
- */
 public class Form_QuanLyKhachHang extends javax.swing.JPanel {
 
     private KhachHang_DAO kh_dao;
@@ -39,6 +38,7 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
         TableActionEvent_KhachHang event = new TableActionEvent_KhachHang() {
             @Override
             public void Sua(int row) {
+<<<<<<< HEAD
                 //System.out.println("sua" +row);
                 //Viết sự kiên dô đây 
                 kh_dao = new KhachHang_DAO();
@@ -69,79 +69,35 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
             DocDuLieu();
                 
                 
+=======
+                System.out.println("sua" +row);
+                //Viết sự kiên dô đây 
+>>>>>>> 096ec8f849aa301ee23bc53a314caf6e192a9abc
             }
         };
         tblDSKH.getColumnModel().getColumn(4).setCellRenderer(new PanelActionCellRender_KhachHang());
         tblDSKH.getColumnModel().getColumn(4).setCellEditor(new PanelActionCellEditor_KhachHang(event));
+<<<<<<< HEAD
         
         
         scr.getViewport().setOpaque(false);
         scr.setVerticalScrollBar(new ScrollBarCustom());
+=======
+>>>>>>> 096ec8f849aa301ee23bc53a314caf6e192a9abc
         kh_dao = new KhachHang_DAO();
         dtmKhachHang = (DefaultTableModel) tblDSKH.getModel();
         KhachHang_DAO KH = new KhachHang_DAO();
         int tongKH = KH.getSoLuongKhachHang();
         txtTong.setText(String.valueOf(tongKH));
         DocDuLieu();
+<<<<<<< HEAD
 //        loadTable(kh_dao.getalltbKhachHang());
         updateTotalCustomer();
+=======
+>>>>>>> 096ec8f849aa301ee23bc53a314caf6e192a9abc
 
     }
 
-
-    public void loadTable(ArrayList<KhachHang> ds) {
-        dtmKhachHang.setRowCount(0);//reset nd trong bang ve 0
-        if (ds == null) {
-            clearJTable();
-            return;
-        }
-        clearJTable();
-        for (KhachHang kh : ds) {
-            dtmKhachHang.addRow(new Object[]{kh.getMaKH(), kh.getTenKH(), kh.getSdt(), kh.isGioitinh() ? "Nam" : "Nữ"});
-        }
-    }
-
-    public void clearJTable() {
-        while (tblDSKH.getRowCount() > 0) {
-            dtmKhachHang.removeRow(0);
-        }
-    }
-
-    public void clearDataOnModel() {
-        DefaultTableModel dtm = (DefaultTableModel) tblDSKH.getModel();
-        dtm.getDataVector().removeAllElements();
-    }
-
-    public void DocDuLieu() {
-        List<KhachHang> list = kh_dao.getalltbKhachHang();
-        for (KhachHang kh : list) {
-            dtmKhachHang.addRow(new Object[]{kh.getMaKH(), kh.getTenKH(), kh.getSdt(), kh.isGioitinh() ? "Nam" : "Nữ"});
-        }
-    }
-
-    public String phatSinhMaKH() {
-        List<KhachHang> khs = kh_dao.getalltbKhachHang();
-        String temp = null;
-
-        for (KhachHang kh : khs) {
-            temp = kh.getMaKH();
-        }
-        int count = laySoDuoi(temp);
-        count++;
-
-        String maKHang = String.format("KH%03d", count);
-        return maKHang;
-    }
-
-    public int laySoDuoi(String str) {
-        if (str == null) {
-            return 0;
-        } else {
-            String numberStr = str.substring(2);//Loại bỏ kí tự "KH"
-            int number = Integer.parseInt(numberStr);
-            return number;
-        }
-    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -154,11 +110,14 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
         txtTim = new javax.swing.JTextField();
         btnTim = new gui.swing.RadiusButton();
         btnThem = new gui.swing.RadiusButton();
+<<<<<<< HEAD
         btnSua = new gui.swing.RadiusButton();
         btnRefesh = new gui.swing.RadiusButton();
+=======
+>>>>>>> 096ec8f849aa301ee23bc53a314caf6e192a9abc
         scr = new javax.swing.JScrollPane();
         tblDSKH = new javax.swing.JTable();
-        lblTong = new javax.swing.JLabel();
+        lblTongKH = new javax.swing.JLabel();
         txtTong = new javax.swing.JTextField();
 
         pnlKhachHang.setBackground(new java.awt.Color(235, 249, 249));
@@ -211,6 +170,7 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
             }
         });
 
+<<<<<<< HEAD
         btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/edit.png"))); // NOI18N
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
@@ -226,6 +186,8 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
             }
         });
 
+=======
+>>>>>>> 096ec8f849aa301ee23bc53a314caf6e192a9abc
         javax.swing.GroupLayout pnlHeaderLayout = new javax.swing.GroupLayout(pnlHeader);
         pnlHeader.setLayout(pnlHeaderLayout);
         pnlHeaderLayout.setHorizontalGroup(
@@ -233,6 +195,7 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
             .addGroup(pnlHeaderLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(pnlTraCuu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+<<<<<<< HEAD
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 418, Short.MAX_VALUE)
                 .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60)
@@ -254,6 +217,23 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
                     .addComponent(pnlTraCuu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+=======
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70))
+        );
+        pnlHeaderLayout.setVerticalGroup(
+            pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlHeaderLayout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHeaderLayout.createSequentialGroup()
+                        .addComponent(pnlTraCuu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHeaderLayout.createSequentialGroup()
+                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37))))
+>>>>>>> 096ec8f849aa301ee23bc53a314caf6e192a9abc
         );
 
         tblDSKH.setModel(new javax.swing.table.DefaultTableModel(
@@ -265,7 +245,11 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
             }
         ) {
             boolean[] canEdit = new boolean [] {
+<<<<<<< HEAD
                 false, true, true, true, true
+=======
+                true, true, true, true, false
+>>>>>>> 096ec8f849aa301ee23bc53a314caf6e192a9abc
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -280,8 +264,8 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
             tblDSKH.getColumnModel().getColumn(4).setPreferredWidth(5);
         }
 
-        lblTong.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblTong.setText("Tổng số khách hàng");
+        lblTongKH.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblTongKH.setText("Tổng khách hàng");
 
         txtTong.setEditable(false);
 
@@ -295,15 +279,23 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
                 .addComponent(scr)
                 .addContainerGap())
             .addGroup(pnlKhachHangLayout.createSequentialGroup()
+<<<<<<< HEAD
                 .addGap(64, 64, 64)
                 .addComponent(lblTong)
                 .addGap(18, 18, 18)
                 .addComponent(txtTong, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+=======
+                .addGap(59, 59, 59)
+                .addComponent(lblTongKH, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtTong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+>>>>>>> 096ec8f849aa301ee23bc53a314caf6e192a9abc
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlKhachHangLayout.setVerticalGroup(
             pnlKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlKhachHangLayout.createSequentialGroup()
+<<<<<<< HEAD
                 .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scr, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
@@ -312,6 +304,16 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
                     .addComponent(lblTong)
                     .addComponent(txtTong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26))
+=======
+                .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(scr, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(pnlKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTongKH)
+                    .addComponent(txtTong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(14, Short.MAX_VALUE))
+>>>>>>> 096ec8f849aa301ee23bc53a314caf6e192a9abc
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -325,7 +327,19 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
             .addComponent(pnlKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+ public void loadTable(ArrayList<KhachHang> ds) {
+        dtmKhachHang.setRowCount(0);//reset nd trong bang ve 0
+        if (ds == null) {
+            clearJTable();
+            return;
+        }
+        clearJTable();
+        for (KhachHang kh : ds) {
+            dtmKhachHang.addRow(new Object[]{kh.getMaKH(), kh.getTenKH(), kh.getSdt(), kh.isGioitinh() ? "Nam" : "Nữ"});
+        }
+    }
 
+<<<<<<< HEAD
     private void updateTotalCustomer() {
         int totalCustomer = dtmKhachHang.getRowCount();
         txtTong.setText("" + totalCustomer);
@@ -364,6 +378,56 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Chọn dòng cần sửa!");
         }
     }//GEN-LAST:event_btnSuaActionPerformed
+=======
+    public void clearJTable() {
+        while (tblDSKH.getRowCount() > 0) {
+            dtmKhachHang.removeRow(0);
+        }
+    }
+
+    public void clearDataOnModel() {
+        DefaultTableModel dtm = (DefaultTableModel) tblDSKH.getModel();
+        dtm.getDataVector().removeAllElements();
+    }
+
+    public void DocDuLieu() {
+        List<KhachHang> list = kh_dao.getalltbKhachHang();
+        for (KhachHang kh : list) {
+            dtmKhachHang.addRow(new Object[]{kh.getMaKH(), kh.getTenKH(), kh.getSdt(), kh.isGioitinh() ? "Nam" : "Nữ"});
+        }
+    }
+    private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
+        // TODO add your handling code here:
+        String sdtKH = txtTim.getText().trim();
+        if (!(sdtKH.length() > 0 && sdtKH.matches("\\d{10}"))) {
+            //            CustomJOptionPane.showMessageDialog("Số điện thoại phải gồm 10 số !!!");
+        } else {
+            String maTim = txtTim.getText();
+            ArrayList<KhachHang> dsKHtim = null;
+
+            for (KhachHang kh : kh_dao.getalltbKhachHang()) {
+                if (kh.getSdt().equals(maTim)) {
+                    dsKHtim = new ArrayList<KhachHang>();
+                    dsKHtim.add(kh);
+                }
+            }
+
+            if (dsKHtim != null) {
+                clearDataOnModel();
+                for (KhachHang kh : dsKHtim) {
+                    dtmKhachHang.addRow(new Object[]{kh.getMaKH(), kh.getTenKH(), kh.getSdt(), kh.isGioitinh() ? "Nam" : "Nữ"});
+                }
+            } else if (dsKHtim == null) {
+                //                CustomJOptionPane.showMessageDialog("Không tìm thấy !!!");
+            }
+        }
+    }//GEN-LAST:event_btnTimActionPerformed
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+
+        new DL_ThongTinKhachHang().setVisible(true);
+    }//GEN-LAST:event_btnThemActionPerformed
+>>>>>>> 096ec8f849aa301ee23bc53a314caf6e192a9abc
 
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
          String sdtKH = txtTim.getText().trim();
@@ -406,12 +470,15 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+<<<<<<< HEAD
     private gui.swing.RadiusButton btnRefesh;
     private gui.swing.RadiusButton btnSua;
+=======
+>>>>>>> 096ec8f849aa301ee23bc53a314caf6e192a9abc
     private gui.swing.RadiusButton btnThem;
     private gui.swing.RadiusButton btnTim;
     private javax.swing.JLabel lblTim;
-    private javax.swing.JLabel lblTong;
+    private javax.swing.JLabel lblTongKH;
     private javax.swing.JPanel pnlHeader;
     private javax.swing.JPanel pnlKhachHang;
     private javax.swing.JPanel pnlTraCuu;

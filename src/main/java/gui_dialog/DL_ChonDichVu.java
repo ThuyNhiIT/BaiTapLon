@@ -32,7 +32,6 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
     public DL_ChonDichVu(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        tblDVThem.getColumnModel().getColumn(4).setCellRenderer(new TableActionCellRender());
         mh_dao = new MatHang_DAO();
         dtmMatHang = (DefaultTableModel) tblDSDV.getModel();
         dtmDVThem = (DefaultTableModel) tblDVThem.getModel();
@@ -48,6 +47,20 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
                 }
             }
         });
+        
+         TableActionEvent event = new TableActionEvent() {
+            @Override
+            public void tangSoLuong(int row) {
+                System.out.println("tăng");
+            }
+
+            @Override
+            public void giamSoLuong(int row) {
+                System.out.println(".giamSoLuong()");
+            }
+        };
+         tblDVThem.getColumnModel().getColumn(4).setCellRenderer(new TableActionCellRender());
+       tblDVThem.getColumnModel().getColumn(4).setCellEditor(new TableActionCellEditor(event));
     }
 
     private MatHang getSelectedMatHang(int row) {
@@ -249,12 +262,13 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        tblDSDV.setRowHeight(30);
         jScrollPane1.setViewportView(tblDSDV);
         if (tblDSDV.getColumnModel().getColumnCount() > 0) {
             tblDSDV.getColumnModel().getColumn(0).setResizable(false);
-            tblDSDV.getColumnModel().getColumn(0).setPreferredWidth(20);
+            tblDSDV.getColumnModel().getColumn(0).setPreferredWidth(10);
             tblDSDV.getColumnModel().getColumn(1).setResizable(false);
-            tblDSDV.getColumnModel().getColumn(1).setPreferredWidth(40);
+            tblDSDV.getColumnModel().getColumn(1).setPreferredWidth(100);
         }
 
         lblDSDV.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -270,8 +284,8 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
                 .addGap(56, 56, 56))
             .addGroup(pnDSDVLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
         );
         pnDSDVLayout.setVerticalGroup(
             pnDSDVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -297,7 +311,7 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, true, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -308,33 +322,12 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
         tblDVThem.setSelectionBackground(new java.awt.Color(255, 255, 255));
         jScrollPane2.setViewportView(tblDVThem);
         if (tblDVThem.getColumnModel().getColumnCount() > 0) {
-            tblDVThem.getColumnModel().getColumn(1).setResizable(false);
-            tblDVThem.getColumnModel().getColumn(2).setResizable(false);
-            tblDVThem.getColumnModel().getColumn(3).setResizable(false);
-            tblDVThem.getColumnModel().getColumn(4).setResizable(false);
+            tblDVThem.getColumnModel().getColumn(0).setPreferredWidth(5);
+            tblDVThem.getColumnModel().getColumn(1).setPreferredWidth(110);
+            tblDVThem.getColumnModel().getColumn(2).setPreferredWidth(2);
+            tblDVThem.getColumnModel().getColumn(3).setPreferredWidth(30);
+            tblDVThem.getColumnModel().getColumn(4).setPreferredWidth(30);
         }
-
-        javax.swing.GroupLayout pnDSDVThemLayout = new javax.swing.GroupLayout(pnDSDVThem);
-        pnDSDVThem.setLayout(pnDSDVThemLayout);
-        pnDSDVThemLayout.setHorizontalGroup(
-            pnDSDVThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnDSDVThemLayout.createSequentialGroup()
-                .addGap(139, 139, 139)
-                .addComponent(lblDVThem, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDSDVThemLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        pnDSDVThemLayout.setVerticalGroup(
-            pnDSDVThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnDSDVThemLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblDVThem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12))
-        );
 
         btnXong.setBackground(new java.awt.Color(65, 194, 33));
         btnXong.setForeground(new java.awt.Color(255, 255, 255));
@@ -344,6 +337,34 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
                 btnXongActionPerformed(evt);
             }
         });
+
+        javax.swing.GroupLayout pnDSDVThemLayout = new javax.swing.GroupLayout(pnDSDVThem);
+        pnDSDVThem.setLayout(pnDSDVThemLayout);
+        pnDSDVThemLayout.setHorizontalGroup(
+            pnDSDVThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnDSDVThemLayout.createSequentialGroup()
+                .addGap(139, 139, 139)
+                .addComponent(lblDVThem, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(126, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDSDVThemLayout.createSequentialGroup()
+                .addGroup(pnDSDVThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDSDVThemLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnXong, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        pnDSDVThemLayout.setVerticalGroup(
+            pnDSDVThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnDSDVThemLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblDVThem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnXong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         btnExit2.setBackground(new java.awt.Color(255, 0, 51));
         btnExit2.setBorder(null);
@@ -361,20 +382,17 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(270, 270, 270)
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblDV1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(270, 270, 270)
                 .addComponent(btnExit2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(pnDSDV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnXong, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnDSDVThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 20, Short.MAX_VALUE))
+                .addGap(4, 4, 4)
+                .addComponent(pnDSDVThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,14 +400,11 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDV1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnExit2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(pnDSDVThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnXong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnDSDVThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pnDSDV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39))
+                .addGap(0, 0, 0))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -400,7 +415,7 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
