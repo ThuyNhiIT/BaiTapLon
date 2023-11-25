@@ -349,11 +349,8 @@ public class Form_ThongKeMatHang extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cmbChon;
     private javax.swing.JComboBox<String> cmbChon1;
-    private javax.swing.JComboBox<String> cmbLoai;
     private javax.swing.JComboBox<String> cmbLoai1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -362,19 +359,14 @@ public class Form_ThongKeMatHang extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JLabel lblChon;
     private javax.swing.JLabel lblChon1;
-    private javax.swing.JLabel lblLoaiTK;
     private javax.swing.JLabel lblLoaiTK1;
-    private javax.swing.JLabel lblNgay;
     private javax.swing.JLabel lblNgay1;
-    private javax.swing.JLabel lblTKMH;
     private javax.swing.JLabel lblTKMH1;
     private javax.swing.JLabel lblTong;
     private gui.swing.tabbed.MaterialTabbed materialTabbed1;
     private gui.swing.tabbed.MaterialTabbed materialTabbed2;
     private gui.swing.tabbed.MaterialTabbed materialTabbed3;
-    private javax.swing.JPanel pnlHeader;
     private javax.swing.JPanel pnlHeader1;
     private javax.swing.JScrollPane scr1;
     private javax.swing.JScrollPane scr2;
