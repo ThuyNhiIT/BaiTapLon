@@ -81,6 +81,7 @@ entity\PhongHat.class
 gui\swing\table\PanelActionKhachHang.class
 gui\swing\table\PanelAction$1.class
 gui_dialog\DL_ThemDV$1.class
+gui\form\Form_ThongKeDoanhThu$3.class
 gui\swing\table\PanelActionPhongHat$2.class
 gui_dialog\DL_ThanhToan$5.class
 gui\swing\TimKiem$2.class
@@ -106,6 +107,7 @@ gui\form\Form_Setting$3.class
 gui_dialog\DL_ThemDV$2.class
 gui_dialog\DL_ThongTinDatPhong.class
 gui\swing\table\PanelActionMatHang.class
+gui\form\Form_ThongKeDoanhThu$2.class
 gui\form\Form_QuanLyPhongHat$3.class
 gui_dialog\DL_SuaKhachHang$4.class
 gui\swing\TimKiem$3.class
@@ -156,7 +158,6 @@ gui_dialog\DL_ChuyenPhong$1.class
 gui_dialog\DL_KiemTravsAddKH$3.class
 gui\swing\table\PanelActionCellEditor_KhachHang.class
 gui\swing\table\TableActionCellEditor.class
-gui\form\Form_ThongKeMatHang.class
 gui\swing\PopupMenu$3.class
 gui_dialog\DL_PhongDangSuDung$6$1.class
 gui\component\Header.class
