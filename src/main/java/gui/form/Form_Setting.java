@@ -1,6 +1,9 @@
 package gui.form;
 
 import gui.main.Main;
+import gui_dialog.DL_DoiMatKhau;
+import java.awt.Desktop;
+import java.net.URL;
 import javax.swing.JOptionPane;
 
 /**
@@ -38,6 +41,11 @@ public class Form_Setting extends javax.swing.JPanel {
         HDSD.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         HDSD.setForeground(new java.awt.Color(255, 255, 255));
         HDSD.setText("Hướng dẫn sử dụng");
+        HDSD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HDSDActionPerformed(evt);
+            }
+        });
 
         btnDangXuat.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         btnDangXuat.setText("Đăng xuất");
@@ -84,8 +92,7 @@ public class Form_Setting extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DoiMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DoiMKActionPerformed
-        // TODO add your handling code here:
-//        new Form_DoiMatKhau().setVisible(true);
+        new DL_DoiMatKhau().setVisible(true);
     }//GEN-LAST:event_DoiMKActionPerformed
 
 
@@ -107,6 +114,14 @@ public class Form_Setting extends javax.swing.JPanel {
             });
         }
     }//GEN-LAST:event_btnDangXuatActionPerformed
+
+    private void HDSDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HDSDActionPerformed
+       try{
+            Desktop.getDesktop().browse(new URL("https://wordpress.com/home/nguyenthiquynhgiang.wordpress.com?source=pwa").toURI());
+        }catch(Exception e){
+            
+        }
+    }//GEN-LAST:event_HDSDActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

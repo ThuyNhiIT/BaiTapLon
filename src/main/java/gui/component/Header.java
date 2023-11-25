@@ -14,6 +14,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.ImageIcon;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.Timer;
 
 /**
@@ -152,10 +155,8 @@ public class Header extends javax.swing.JPanel {
     }//GEN-LAST:event_btnMenuActionPerformed
 
     private void btnChiTietNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietNhanVienActionPerformed
-
-
+      
     }//GEN-LAST:event_btnChiTietNhanVienActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.swing.ButtonGradient btnChiTietNhanVien;

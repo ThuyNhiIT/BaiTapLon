@@ -1,6 +1,7 @@
 package dao;
 
 import connectDB.ConnectDB;
+import static connectDB.ConnectDB.con;
 import entity.LoaiNhanVien;
 import entity.NhanVien;
 
@@ -93,7 +94,8 @@ public class NhanVien_DAO {
 
         try {
             Connection con = ConnectDB.getInstance().getConnection();
-            String sql = "SELECT *FROM NhanVien nv join LoaiNhanVien lnv on nv.maLoai = lnv.maLoai where lnv.maLoai=?";
+//            String sql = "SELECT *FROM NhanVien nv join LoaiNhanVien lnv on nv.maLoai = lnv.maLoai where lnv.maLoai=?";
+            String sql = "SELECT *FROM NhanVien WHERE loaiNV=?";
             sta = con.prepareStatement(sql);
             sta.setString(1, lnv.getMaLoai());
 
@@ -116,6 +118,39 @@ public class NhanVien_DAO {
         }
         return ds;
     }
+    
+//     public ArrayList<NhanVien> getEmployeesByLoaiNhanVien(LoaiNhanVien loaiNhanVien) {
+//        ArrayList<NhanVien> employees = new ArrayList<>();
+//
+//        // SQL query to retrieve employees based on LoaiNhanVien
+//        String sql = "SELECT * FROM nhanvien WHERE maLoai = ?";
+// 
+//        Connection con = ConnectDB.getInstance().getConnection();
+//        try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
+//            preparedStatement.setString(1, loaiNhanVien.getMaLoai());
+//
+//            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+//                while (resultSet.next()) {
+//                    String maNV = resultSet.getString("maNV");
+//                    String tenNV = resultSet.getString("tenNV");
+//                    boolean gioiTinh = resultSet.getBoolean("gioiTinh");
+//                    String CCCD = resultSet.getString("CCCD");
+//                    String SDT = resultSet.getString("SDT");
+//                    String diaChi = resultSet.getString("diaChi");
+//                    String caLam = resultSet.getString("caLam");
+//
+//                    // Assuming LoaiNhanVien has a constructor that takes the type as a parameter
+//                    NhanVien nhanVien = new NhanVien(maNV, tenNV, gioiTinh, CCCD, SDT, diaChi, caLam, loaiNhanVien);
+//
+//                    employees.add(nhanVien);
+//                }
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace(); // Handle the exception according to your application's needs
+//        }
+//
+//        return employees;
+//    }
 
     public boolean addStaff(NhanVien nv) {
         ConnectDB.getInstance();
@@ -124,7 +159,10 @@ public class NhanVien_DAO {
         int n = 0;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO NhanVien VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+//            stmt = con.prepareStatement("INSERT INTO NhanVien VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+            stmt = con.prepareStatement("INSERT INTO nhanvien (maNV, tenNV, gioiTinh, CCCD, SDT, diaChi, caLam, loaiNV) " +
+                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            System.out.println("Xong lần 1");
             stmt.setString(1, nv.getMaNV());
             stmt.setString(2, nv.getTenNV());
             stmt.setBoolean(3, nv.isGioiTinh());
@@ -133,18 +171,20 @@ public class NhanVien_DAO {
             stmt.setString(6, nv.getDiaChi());
             stmt.setString(7, nv.getCaLam());
             stmt.setString(8, nv.getLoaiNV().getMaLoai());
+            System.out.println("Xong lần 2");
+            n = stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                stmt.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+//        } finally {
+//            try {
+//                stmt.close();
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
         }
         return n > 0;
     }
-
+    
     public boolean editStaff(NhanVien nv) {
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();

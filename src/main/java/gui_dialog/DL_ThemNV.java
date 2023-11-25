@@ -3,8 +3,10 @@ package gui_dialog;
 import connectDB.ConnectDB;
 import dao.LoaiNV_DAO;
 import dao.NhanVien_DAO;
+import dao.TaiKhoan_DAO;
 import entity.LoaiNhanVien;
 import entity.NhanVien;
+import entity.TaiKhoan;
 import gui.form.Form_QuanLyNhanVien;
 import gui.swing.CustomJOptionPane;
 import java.sql.SQLException;
@@ -14,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,22 +25,32 @@ import javax.swing.JComboBox;
 public class DL_ThemNV extends javax.swing.JFrame {
 
 
+
     private NhanVien_DAO nv_dao;
     private LoaiNV_DAO loainv_dao;
     private Form_QuanLyNhanVien qlnv;
   
     public DL_ThemNV() {
         initComponents();
-//        loadLoaiNhanVien();
         setLocationRelativeTo(null);
         nv_dao = new NhanVien_DAO();
+        loadLoaiNhanVien();
         
-        DefaultComboBoxModel<LoaiNhanVien> dataModelLop = new DefaultComboBoxModel<LoaiNhanVien>();
-        cmbLNV.setModel(dataModelLop);
-       
     }
 
-   
+    /**
+     * Load data lên combobox
+     * @return 
+     */
+    private void loadLoaiNhanVien() {
+        LoaiNV_DAO loainv_dao = new LoaiNV_DAO();
+
+        List<LoaiNhanVien> loaiNhanViens = loainv_dao.getAllLoaiNhanVien();
+        DefaultComboBoxModel<LoaiNhanVien> dataModel = new DefaultComboBoxModel<>(loaiNhanViens.toArray(new LoaiNhanVien[0]));
+        cmbLNV.setModel(dataModel);
+    }
+            
+            
     public String phatSinhMaNV(){
         List<NhanVien> nvs = nv_dao.getalltbNhanVien();
         String temp = null;
@@ -60,16 +73,42 @@ public class DL_ThemNV extends javax.swing.JFrame {
             return number;
         }
     }
-    
-//    public void loadLoaiNhanVien(){
-//        ArrayList<LoaiNhanVien> ds = loainv_dao.getAllLoaiNhanVien();
-//        if(ds == null){
-//            return;
-//        }
-//        for(LoaiNhanVien loaiNhanVien : ds){
-//            cmbLNV.addItem(loaiNhanVien);
-//        }
-//    }
+   
+    public boolean validData(){
+        String maNV = phatSinhMaNV();
+        String tenNV = txtTenNV.getText();
+        Boolean gioiTinh =  radNam.isSelected();
+        String CCCD = txtCCCD.getText();
+        String SDT = txtSDT.getText();
+        String diaChi = txtDiaChi.getText();
+        String caLam = "";
+        
+        
+        /**
+         * Số điện thoại gồm 10 số
+         */
+        if(!(SDT.length() > 0 && SDT.matches("^0\\d{9}$"))){
+            JOptionPane.showMessageDialog(this, "Số điện thoại gồm 10 chữ số và phải bắt đầu bằng số 0 !!!");
+            return false;
+        }
+        
+        /**
+         * Địa chỉ
+         */
+        if(!(diaChi.length() > 0 && diaChi.matches("^[a-zA-Z0-9\\s,]+"))){
+            JOptionPane.showMessageDialog(this, "Địa chỉ không được để trống !!!");
+            return false;
+        }
+       
+        /**
+         * CCCD
+         */
+        if(!(CCCD.length() > 0 && CCCD.matches("\\d{12}"))){
+            JOptionPane.showMessageDialog(this, "Căn cước công dân phải gồm 12 số !!!");
+            return false;
+        }
+        return true;
+    }
     
     public NhanVien revertNhanVien(){
         String maNV = phatSinhMaNV();
@@ -89,7 +128,7 @@ public class DL_ThemNV extends javax.swing.JFrame {
            caLam = "Ca 3";
         }
         LoaiNhanVien loaiNV = (LoaiNhanVien) cmbLNV.getSelectedItem();
-        
+    
         return new NhanVien(maNV, tenNV, gioiTinh, CCCD, SDT, diaChi, caLam, loaiNV);
     }
     @SuppressWarnings("unchecked")
@@ -98,7 +137,6 @@ public class DL_ThemNV extends javax.swing.JFrame {
 
         pnThemNV = new javax.swing.JPanel();
         lblThemNV = new javax.swing.JLabel();
-        lblMaNV = new javax.swing.JLabel();
         lblTenNV = new javax.swing.JLabel();
         lblDiaChi = new javax.swing.JLabel();
         lblCCCD = new javax.swing.JLabel();
@@ -106,7 +144,6 @@ public class DL_ThemNV extends javax.swing.JFrame {
         lblLoaiNV = new javax.swing.JLabel();
         lblGioiTinh = new javax.swing.JLabel();
         lblCa = new javax.swing.JLabel();
-        txtMaNV = new javax.swing.JTextField();
         txtTenNV = new javax.swing.JTextField();
         txtDiaChi = new javax.swing.JTextField();
         txtCCCD = new javax.swing.JTextField();
@@ -117,6 +154,8 @@ public class DL_ThemNV extends javax.swing.JFrame {
         radCa2 = new javax.swing.JRadioButton();
         radCa3 = new javax.swing.JRadioButton();
         cmbLNV = new javax.swing.JComboBox<>();
+        btnThoat = new gui.swing.RadiusButton();
+        btnThem = new gui.swing.RadiusButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -126,8 +165,6 @@ public class DL_ThemNV extends javax.swing.JFrame {
         lblThemNV.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         lblThemNV.setForeground(new java.awt.Color(41, 173, 86));
         lblThemNV.setText("THÊM NHÂN VIÊN");
-
-        lblMaNV.setText("Mã nhân viên:");
 
         lblTenNV.setText("Tên nhân viên:");
 
@@ -143,8 +180,6 @@ public class DL_ThemNV extends javax.swing.JFrame {
 
         lblCa.setText("Ca làm:");
 
-        txtMaNV.setEditable(false);
-
         radNam.setText("Nam");
 
         radNu.setText("Nữ");
@@ -155,6 +190,24 @@ public class DL_ThemNV extends javax.swing.JFrame {
 
         radCa3.setText("Ca 3");
 
+        btnThoat.setBackground(new java.awt.Color(255, 51, 51));
+        btnThoat.setForeground(new java.awt.Color(255, 255, 255));
+        btnThoat.setText("Thoát");
+        btnThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThoatActionPerformed(evt);
+            }
+        });
+
+        btnThem.setBackground(new java.awt.Color(41, 173, 86));
+        btnThem.setForeground(new java.awt.Color(255, 255, 255));
+        btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnThemNVLayout = new javax.swing.GroupLayout(pnThemNV);
         pnThemNV.setLayout(pnThemNVLayout);
         pnThemNVLayout.setHorizontalGroup(
@@ -163,7 +216,6 @@ public class DL_ThemNV extends javax.swing.JFrame {
                 .addGap(70, 70, 70)
                 .addGroup(pnThemNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblTenNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblMaNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblDiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblCCCD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblSDT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -173,13 +225,10 @@ public class DL_ThemNV extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(pnThemNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnThemNVLayout.createSequentialGroup()
-                        .addGroup(pnThemNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtMaNV, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
-                            .addComponent(txtTenNV)
-                            .addComponent(txtDiaChi)
-                            .addComponent(txtCCCD)
-                            .addComponent(txtSDT))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(160, 160, 160))
                     .addGroup(pnThemNVLayout.createSequentialGroup()
                         .addGroup(pnThemNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(radNam, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -192,23 +241,25 @@ public class DL_ThemNV extends javax.swing.JFrame {
                         .addComponent(radCa3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32))
                     .addGroup(pnThemNVLayout.createSequentialGroup()
-                        .addComponent(cmbLNV, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGroup(pnThemNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnThemNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtTenNV, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                                .addComponent(txtDiaChi)
+                                .addComponent(txtCCCD)
+                                .addComponent(txtSDT))
+                            .addComponent(cmbLNV, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnThemNVLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblThemNV, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(187, 187, 187))
+                .addGap(194, 194, 194))
         );
         pnThemNVLayout.setVerticalGroup(
             pnThemNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnThemNVLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(31, 31, 31)
                 .addComponent(lblThemNV, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(pnThemNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMaNV)
-                    .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addGroup(pnThemNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTenNV, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTenNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -239,7 +290,11 @@ public class DL_ThemNV extends javax.swing.JFrame {
                     .addComponent(radCa1)
                     .addComponent(radCa2)
                     .addComponent(radCa3))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(pnThemNVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -261,31 +316,53 @@ public class DL_ThemNV extends javax.swing.JFrame {
         return;
     }//GEN-LAST:event_btnThoatActionPerformed
 
+    private void cmbLNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLoaiNVActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_cmbLoaiNVActionPerformed
+
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
+         System.out.println("Xonggg");
         ConnectDB db = ConnectDB.getInstance();
         try {
             db.connect();
-            NhanVien addNV = revertNhanVien();
-            System.err.println(addNV);
+            String maNV = phatSinhMaNV();
+            String tenNV = txtTenNV.getText();
+            Boolean gioiTinh =  radNam.isSelected();
+            String CCCD = txtCCCD.getText();
+            String SDT = txtSDT.getText();
+            String diaChi = txtDiaChi.getText();
+            String caLam = "";
+        if(radCa1.isSelected()){
+           caLam = "Ca 1";
+        }
+        else if(radCa2.isSelected()){
+           caLam = "Ca 2";
+        }
+        else if(radCa3.isSelected()){
+           caLam = "Ca 3";
+        }
+        LoaiNhanVien loaiNV = (LoaiNhanVien) cmbLNV.getSelectedItem();
+        
+            NhanVien addNV = new NhanVien(maNV, tenNV, gioiTinh, CCCD, SDT, diaChi, caLam, loaiNV);
+            System.out.println("Xong" +addNV);
             Boolean isSuccess = nv_dao.addStaff(addNV);
+//            qlnv.loadTable(nv_dao.getalltbNhanVien());
+            
             if(isSuccess){
+                TaiKhoan tk = new TaiKhoan();
+                tk.setUsername(maNV);
                 CustomJOptionPane.showMessageDialog("Thêm nhân viên thành công !");
                 this.dispose();
             }
             else{
                 CustomJOptionPane.showMessageDialog("Thêm nhân viên không thành công !");
             }
-//       qlnv.DocDuLieu();
         } catch (SQLException ex) {
             Logger.getLogger(DL_ThemNV.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnThemActionPerformed
-
-    private void cmbLNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLoaiNVActionPerformed
-        // TODO add your handling code here:
-       
-    }//GEN-LAST:event_cmbLoaiNVActionPerformed
 
  
     public static void main(String args[]) {
@@ -298,13 +375,14 @@ public class DL_ThemNV extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private gui.swing.RadiusButton btnThem;
+    private gui.swing.RadiusButton btnThoat;
     private javax.swing.JComboBox<LoaiNhanVien> cmbLNV;
     private javax.swing.JLabel lblCCCD;
     private javax.swing.JLabel lblCa;
     private javax.swing.JLabel lblDiaChi;
     private javax.swing.JLabel lblGioiTinh;
     private javax.swing.JLabel lblLoaiNV;
-    private javax.swing.JLabel lblMaNV;
     private javax.swing.JLabel lblSDT;
     private javax.swing.JLabel lblTenNV;
     private javax.swing.JLabel lblThemNV;
@@ -316,7 +394,6 @@ public class DL_ThemNV extends javax.swing.JFrame {
     private javax.swing.JRadioButton radNu;
     private javax.swing.JTextField txtCCCD;
     private javax.swing.JTextField txtDiaChi;
-    private javax.swing.JTextField txtMaNV;
     private javax.swing.JTextField txtSDT;
     private javax.swing.JTextField txtTenNV;
     // End of variables declaration//GEN-END:variables
