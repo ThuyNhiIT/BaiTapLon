@@ -43,21 +43,19 @@ public class PanelActionKhachHang extends javax.swing.JPanel {
         cmdSua = new gui.swing.table.ActionButton();
 
         cmdSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-edit-24.png"))); // NOI18N
-<<<<<<< HEAD
         cmdSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdSuaActionPerformed(evt);
             }
         });
-=======
->>>>>>> 096ec8f849aa301ee23bc53a314caf6e192a9abc
+
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-<<<<<<< HEAD
+
                 .addGap(68, 68, 68)
                 .addComponent(cmdSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(79, Short.MAX_VALUE))
@@ -75,7 +73,7 @@ public class PanelActionKhachHang extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmdSuaActionPerformed
 
-=======
+
                 .addGap(30, 30, 30)
                 .addComponent(cmdSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(31, Short.MAX_VALUE))
@@ -86,7 +84,7 @@ public class PanelActionKhachHang extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
->>>>>>> 096ec8f849aa301ee23bc53a314caf6e192a9abc
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.swing.table.ActionButton cmdSua;

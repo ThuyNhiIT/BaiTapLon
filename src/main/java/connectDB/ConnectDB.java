@@ -15,12 +15,7 @@ public class ConnectDB {
     public void connect() throws SQLException {
         String url = "jdbc:sqlserver://localhost:1433;databaseName=KaraokeAPLUS"; 
         String user = "sa";
-<<<<<<< HEAD
         String password = "0934119430";
-
-=======
-        String password = "sa031103";
->>>>>>> 096ec8f849aa301ee23bc53a314caf6e192a9abc
         con = DriverManager.getConnection(url, user, password);
     }
 

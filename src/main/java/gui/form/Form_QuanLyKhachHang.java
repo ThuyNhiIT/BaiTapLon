@@ -4,10 +4,7 @@ import connectDB.ConnectDB;
 import dao.KhachHang_DAO;
 import entity.KhachHang;
 import gui.swing.CustomJOptionPane;
-<<<<<<< HEAD
 import gui.swing.scrollbar.ScrollBarCustom;
-=======
->>>>>>> 096ec8f849aa301ee23bc53a314caf6e192a9abc
 import gui.swing.table.PanelActionCellEditor_KhachHang;
 import gui.swing.table.PanelActionCellRender_KhachHang;
 import gui.swing.table.TableActionEvent_KhachHang;
@@ -38,7 +35,6 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
         TableActionEvent_KhachHang event = new TableActionEvent_KhachHang() {
             @Override
             public void Sua(int row) {
-<<<<<<< HEAD
                 //System.out.println("sua" +row);
                 //Viết sự kiên dô đây 
                 kh_dao = new KhachHang_DAO();
@@ -68,33 +64,26 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
             clearJTable();
             DocDuLieu();
                 
-                
-=======
-                System.out.println("sua" +row);
-                //Viết sự kiên dô đây 
->>>>>>> 096ec8f849aa301ee23bc53a314caf6e192a9abc
+
+//                System.out.println("sua" +row);
+//                //Viết sự kiên dô đây
             }
         };
         tblDSKH.getColumnModel().getColumn(4).setCellRenderer(new PanelActionCellRender_KhachHang());
         tblDSKH.getColumnModel().getColumn(4).setCellEditor(new PanelActionCellEditor_KhachHang(event));
-<<<<<<< HEAD
-        
-        
+
         scr.getViewport().setOpaque(false);
         scr.setVerticalScrollBar(new ScrollBarCustom());
-=======
->>>>>>> 096ec8f849aa301ee23bc53a314caf6e192a9abc
+
         kh_dao = new KhachHang_DAO();
         dtmKhachHang = (DefaultTableModel) tblDSKH.getModel();
         KhachHang_DAO KH = new KhachHang_DAO();
         int tongKH = KH.getSoLuongKhachHang();
         txtTong.setText(String.valueOf(tongKH));
         DocDuLieu();
-<<<<<<< HEAD
+
 //        loadTable(kh_dao.getalltbKhachHang());
         updateTotalCustomer();
-=======
->>>>>>> 096ec8f849aa301ee23bc53a314caf6e192a9abc
 
     }
 
@@ -110,11 +99,9 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
         txtTim = new javax.swing.JTextField();
         btnTim = new gui.swing.RadiusButton();
         btnThem = new gui.swing.RadiusButton();
-<<<<<<< HEAD
         btnSua = new gui.swing.RadiusButton();
         btnRefesh = new gui.swing.RadiusButton();
-=======
->>>>>>> 096ec8f849aa301ee23bc53a314caf6e192a9abc
+
         scr = new javax.swing.JScrollPane();
         tblDSKH = new javax.swing.JTable();
         lblTongKH = new javax.swing.JLabel();
@@ -170,7 +157,7 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
             }
         });
 
-<<<<<<< HEAD
+
         btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/edit.png"))); // NOI18N
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
@@ -186,8 +173,7 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
             }
         });
 
-=======
->>>>>>> 096ec8f849aa301ee23bc53a314caf6e192a9abc
+
         javax.swing.GroupLayout pnlHeaderLayout = new javax.swing.GroupLayout(pnlHeader);
         pnlHeader.setLayout(pnlHeaderLayout);
         pnlHeaderLayout.setHorizontalGroup(
@@ -195,7 +181,7 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
             .addGroup(pnlHeaderLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(pnlTraCuu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-<<<<<<< HEAD
+
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 418, Short.MAX_VALUE)
                 .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60)
@@ -217,11 +203,11 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
                     .addComponent(pnlTraCuu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-=======
+
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70))
-        );
+                .addGap(70, 70, 70));
+
         pnlHeaderLayout.setVerticalGroup(
             pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlHeaderLayout.createSequentialGroup()
@@ -233,7 +219,7 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHeaderLayout.createSequentialGroup()
                         .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37))))
->>>>>>> 096ec8f849aa301ee23bc53a314caf6e192a9abc
+
         );
 
         tblDSKH.setModel(new javax.swing.table.DefaultTableModel(
@@ -245,11 +231,11 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-<<<<<<< HEAD
+
                 false, true, true, true, true
-=======
-                true, true, true, true, false
->>>>>>> 096ec8f849aa301ee23bc53a314caf6e192a9abc
+
+//                true, true, true, true, false
+
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -279,23 +265,17 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
                 .addComponent(scr)
                 .addContainerGap())
             .addGroup(pnlKhachHangLayout.createSequentialGroup()
-<<<<<<< HEAD
+
                 .addGap(64, 64, 64)
                 .addComponent(lblTong)
                 .addGap(18, 18, 18)
                 .addComponent(txtTong, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-=======
-                .addGap(59, 59, 59)
-                .addComponent(lblTongKH, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtTong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
->>>>>>> 096ec8f849aa301ee23bc53a314caf6e192a9abc
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlKhachHangLayout.setVerticalGroup(
             pnlKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlKhachHangLayout.createSequentialGroup()
-<<<<<<< HEAD
+
                 .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scr, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
@@ -304,16 +284,7 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
                     .addComponent(lblTong)
                     .addComponent(txtTong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26))
-=======
-                .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(scr, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(pnlKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTongKH)
-                    .addComponent(txtTong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
->>>>>>> 096ec8f849aa301ee23bc53a314caf6e192a9abc
+
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -339,7 +310,6 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
         }
     }
 
-<<<<<<< HEAD
     private void updateTotalCustomer() {
         int totalCustomer = dtmKhachHang.getRowCount();
         txtTong.setText("" + totalCustomer);
@@ -378,7 +348,7 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Chọn dòng cần sửa!");
         }
     }//GEN-LAST:event_btnSuaActionPerformed
-=======
+
     public void clearJTable() {
         while (tblDSKH.getRowCount() > 0) {
             dtmKhachHang.removeRow(0);
@@ -427,7 +397,7 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
 
         new DL_ThongTinKhachHang().setVisible(true);
     }//GEN-LAST:event_btnThemActionPerformed
->>>>>>> 096ec8f849aa301ee23bc53a314caf6e192a9abc
+
 
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
          String sdtKH = txtTim.getText().trim();
@@ -470,11 +440,8 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-<<<<<<< HEAD
     private gui.swing.RadiusButton btnRefesh;
     private gui.swing.RadiusButton btnSua;
-=======
->>>>>>> 096ec8f849aa301ee23bc53a314caf6e192a9abc
     private gui.swing.RadiusButton btnThem;
     private gui.swing.RadiusButton btnTim;
     private javax.swing.JLabel lblTim;
