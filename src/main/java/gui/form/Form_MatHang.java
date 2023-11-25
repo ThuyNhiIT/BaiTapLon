@@ -3,7 +3,6 @@ package gui.form;
 import dao.MatHang_DAO;
 import entity.MatHang;
 import gui.swing.scrollbar.ScrollBarCustom;
-import gui.swing.table.PanelActionCellEditor_KhachHang;
 import gui.swing.table.TableActionCellEditorMatHang;
 import gui.swing.table.TableActionCellRenderMatHang;
 import gui.swing.table.TableActionEventMatHang;
