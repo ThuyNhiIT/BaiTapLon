@@ -80,7 +80,6 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
         int tongKH = KH.getSoLuongKhachHang();
         lblTong.setText(String.valueOf(tongKH));
         DocDuLieu();
-//        loadTable(kh_dao.getalltbKhachHang());
         updateTotalCustomer();
     }
 

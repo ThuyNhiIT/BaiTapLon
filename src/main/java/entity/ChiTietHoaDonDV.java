@@ -5,9 +5,6 @@ import java.util.Objects;
 public class ChiTietHoaDonDV {
 
     private HoaDon hoaDon;
-
-
-
     private MatHang matHang;
     private int soLuong;
     private Double gia;
@@ -21,7 +18,7 @@ public class ChiTietHoaDonDV {
         this.hoaDon = hoaDon;
     }
 
-    public ChiTietHoaDonDV(HoaDon hoaDon,MatHang matHang, int soLuong, Double gia) {
+    public ChiTietHoaDonDV(HoaDon hoaDon, MatHang matHang, int soLuong, Double gia) {
         super();
         this.hoaDon = hoaDon;
         this.matHang = matHang;
@@ -37,6 +34,7 @@ public class ChiTietHoaDonDV {
     public void setHoaDon(HoaDon hoaDon) {
         this.hoaDon = hoaDon;
     }
+
     public MatHang getMatHang() {
         return matHang;
     }
@@ -44,7 +42,6 @@ public class ChiTietHoaDonDV {
     public void setMatHang(MatHang matHang) {
         this.matHang = matHang;
     }
-
 
     public int getSoLuong() {
         return soLuong;

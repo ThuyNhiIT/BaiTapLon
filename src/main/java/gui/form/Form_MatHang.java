@@ -27,13 +27,14 @@ public class Form_MatHang extends javax.swing.JPanel implements MouseListener {
 
     private MatHang_DAO mh_dao;
     private DefaultTableModel dtmMatHang;
+
     public Form_MatHang() {
         initComponents();
         scr.getViewport().setOpaque(false);
         scr.setVerticalScrollBar(new ScrollBarCustom());
         mh_dao = new MatHang_DAO();
         dtmMatHang = (DefaultTableModel) tblMatHang.getModel();
-        DocDuLieu();
+
         TableActionEventMatHang event = new TableActionEventMatHang() {
             @Override
             public void sua(int row) {
@@ -99,6 +100,11 @@ public class Form_MatHang extends javax.swing.JPanel implements MouseListener {
         };
         tblMatHang.getColumnModel().getColumn(4).setCellRenderer(new TableActionCellRenderMatHang());
         tblMatHang.getColumnModel().getColumn(4).setCellEditor(new TableActionCellEditorMatHang(event));
+
+        MatHang_DAO MH = new MatHang_DAO();
+        int tongPH = MH.getTongSoMH();
+        lblTong.setText(String.valueOf(tongPH));
+        DocDuLieu();
     }
 
     public void DocDuLieu() {
@@ -142,8 +148,11 @@ public class Form_MatHang extends javax.swing.JPanel implements MouseListener {
         btnTim = new gui.swing.RadiusButton();
         txtTim = new javax.swing.JTextField();
         btnThem = new gui.swing.RadiusButton();
+        btnRefesh = new gui.swing.RadiusButton();
         scr = new javax.swing.JScrollPane();
         tblMatHang = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        lblTong = new javax.swing.JLabel();
 
         pnlMatHang.setBackground(new java.awt.Color(235, 249, 249));
 
@@ -155,9 +164,8 @@ public class Form_MatHang extends javax.swing.JPanel implements MouseListener {
         lblTim.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTim.setText("Tìm kiếm");
 
-        btnTim.setBackground(new java.awt.Color(166, 208, 238));
         btnTim.setBorder(null);
-        btnTim.setText("Tìm");
+        btnTim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-find-24.png"))); // NOI18N
         btnTim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTimActionPerformed(evt);
@@ -173,27 +181,39 @@ public class Form_MatHang extends javax.swing.JPanel implements MouseListener {
                 .addComponent(lblTim)
                 .addGap(27, 27, 27)
                 .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81))
+                .addGap(18, 18, 18)
+                .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(145, 145, 145))
         );
         pnlTimLayout.setVerticalGroup(
             pnlTimLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTimLayout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
-                .addGroup(pnlTimLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTim)
-                    .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10))
+            .addGroup(pnlTimLayout.createSequentialGroup()
+                .addContainerGap(10, Short.MAX_VALUE)
+                .addGroup(pnlTimLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTimLayout.createSequentialGroup()
+                        .addGroup(pnlTimLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTim)
+                            .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTimLayout.createSequentialGroup()
+                        .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
-        btnThem.setBackground(new java.awt.Color(41, 173, 86));
+        btnThem.setBackground(new java.awt.Color(235, 249, 249));
         btnThem.setForeground(new java.awt.Color(255, 255, 255));
-        btnThem.setText("Thêm mặt hàng");
+        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add-to-basket.png"))); // NOI18N
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemActionPerformed(evt);
+            }
+        });
+
+        btnRefesh.setBackground(new java.awt.Color(235, 249, 249));
+        btnRefesh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-refresh-48.png"))); // NOI18N
+        btnRefesh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefeshActionPerformed(evt);
             }
         });
 
@@ -204,21 +224,24 @@ public class Form_MatHang extends javax.swing.JPanel implements MouseListener {
             .addGroup(pnlHeaderLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(pnlTim, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 459, Short.MAX_VALUE)
-                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 473, Short.MAX_VALUE)
+                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(61, 61, 61)
+                .addComponent(btnRefesh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
         );
         pnlHeaderLayout.setVerticalGroup(
             pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlHeaderLayout.createSequentialGroup()
-                .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlHeaderLayout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(pnlTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlHeaderLayout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGap(13, 13, 13)
+                .addComponent(pnlTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHeaderLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnRefesh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(24, 24, 24))
         );
 
         tblMatHang.setModel(new javax.swing.table.DefaultTableModel(
@@ -234,6 +257,11 @@ public class Form_MatHang extends javax.swing.JPanel implements MouseListener {
         scr.setViewportView(tblMatHang);
         tblMatHang.getAccessibleContext().setAccessibleName("");
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setText("Tổng mặt hàng");
+
+        lblTong.setText("jLabel2");
+
         javax.swing.GroupLayout pnlMatHangLayout = new javax.swing.GroupLayout(pnlMatHang);
         pnlMatHang.setLayout(pnlMatHangLayout);
         pnlMatHangLayout.setHorizontalGroup(
@@ -243,14 +271,24 @@ public class Form_MatHang extends javax.swing.JPanel implements MouseListener {
                 .addContainerGap()
                 .addComponent(scr)
                 .addContainerGap())
+            .addGroup(pnlMatHangLayout.createSequentialGroup()
+                .addGap(64, 64, 64)
+                .addComponent(jLabel1)
+                .addGap(34, 34, 34)
+                .addComponent(lblTong)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlMatHangLayout.setVerticalGroup(
             pnlMatHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlMatHangLayout.createSequentialGroup()
                 .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
-                .addComponent(scr, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
-                .addGap(110, 110, 110))
+                .addComponent(scr, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
+                .addGroup(pnlMatHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTong)
+                    .addComponent(jLabel1))
+                .addGap(32, 32, 32))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -296,15 +334,23 @@ public class Form_MatHang extends javax.swing.JPanel implements MouseListener {
             } else if (dsMHTim == null) {
                 JOptionPane.showMessageDialog(this, "Không tìm thấy");
             }
-
+        }
 
     }//GEN-LAST:event_btnTimActionPerformed
-    }
+
+    private void btnRefeshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefeshActionPerformed
+        clearDataOnModel();
+        DocDuLieu();
+    }//GEN-LAST:event_btnRefeshActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private gui.swing.RadiusButton btnRefesh;
     private gui.swing.RadiusButton btnThem;
     private gui.swing.RadiusButton btnTim;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblTim;
+    private javax.swing.JLabel lblTong;
     private javax.swing.JPanel pnlHeader;
     private javax.swing.JPanel pnlMatHang;
     private javax.swing.JPanel pnlTim;
