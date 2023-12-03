@@ -9,6 +9,7 @@ import dao.ChiTietHoaDonPhong_Dao;
 import dao.PhongHat_DAO;
 import entity.*;
 import gui.form.Form_QuanLyDatPhong;
+import gui.swing.scrollbar.ScrollBarCustom;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -35,6 +36,8 @@ public class DL_ChuyenPhong extends javax.swing.JDialog {
     public DL_ChuyenPhong(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        jScrollPane1.getViewport().setOpaque(false);
+        jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
         loadData();
         tblDSP.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -206,7 +209,7 @@ public class DL_ChuyenPhong extends javax.swing.JDialog {
             String maHD = hd.getHoaDon().getMaHD();
             db.connect();
 
-            cthdp_dao.doiPhong(maHD, maPhong);
+            cthdp_dao.doiPhong(maHD, frmPH.getRoomSelected(), maPhong);
             Form_QuanLyDatPhong updatePhong = new Form_QuanLyDatPhong();
             db.connect();
             ph_dao.updateTinhTrangPhong(updatePhong.getRoomSelected(), "Trong");

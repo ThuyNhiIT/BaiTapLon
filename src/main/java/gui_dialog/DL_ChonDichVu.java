@@ -33,6 +33,7 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
        private ChiTietHoaDonPhong_Dao cthdp_dao;
     private int currentSL;
     private double gia;
+    private String maHD;
 
 
     public DL_ChonDichVu(java.awt.Frame parent, boolean modal) {
@@ -454,21 +455,36 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
             // Create an instance of DL_KiemTravsAddKH and show it
             DL_KiemTravsAddKH dataHD = new DL_KiemTravsAddKH((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
             Form_QuanLyDatPhong frm = new Form_QuanLyDatPhong();
-
+            // bắt sưj kiện khi mở từ DL_NhanPhongDatTruoc
+            if (dataHD.getMaHDPublic() != null) {
+                maHD = dataHD.getMaHDPublic();
+            }else{
+                DL_NhanPhongDatTruoc dataHD1 = new DL_NhanPhongDatTruoc((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
+                 maHD = dataHD1.getMaHDPublic();
+            }
 
             // Call getMaHDPublic method
-            String maHD = dataHD.getMaHDPublic();
+
             for (MatHangModel data : dvThemData) {
                 ChiTietHoaDonDV cthddv = new ChiTietHoaDonDV();
 
                 ChiTietHoaDonDV cthddvadd = new ChiTietHoaDonDV(new HoaDon(maHD), new MatHang(data.getMaMH()), data.getSL(), data.getGia());
-                cthddv_dao.createChiTietHoaDonPhong(cthddvadd);
+              // check chưa tồn tại thì create, đã tồn tại thì update sl, nếu trong database có mà trong table không có thì xóa trong database do sl dưới 0 thì đã xóa khỏi table\
+                if (cthddv_dao.findChiTietHoaDonDV(maHD, data.getMaMH()) != null) {
+                    if (data.getSL() > 0) {
+                        cthddv_dao.updateChiTietHoaDonDV(cthddvadd);
+                    } else {
+                        cthddv_dao.deleteChiTietHoaDonDV(maHD, data.getMaMH());
+                    }
+                } else {
+
+                        cthddv_dao.createChiTietHoaDonDV(cthddvadd);
+
+                }
+
             }
 
-            // Close the dialog
             this.dispose();
-//            MainForm mainForm = new MainForm();
-//            mainForm.showForm(new Form_QuanLyDatPhong());
         } catch (Exception e) {
             // Log the exception or display an error message to the user.
             e.printStackTrace();

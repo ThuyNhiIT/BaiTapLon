@@ -44,7 +44,7 @@ public class DL_TraPhongVsThanhToan extends javax.swing.JDialog {
         kh_dao = new KhachHang_DAO();
         ph_dao = new PhongHat_DAO();
         tinhTien();
-        setlblThanhToan();
+        setThanhToan();
     }
 
     public String getMaHDDSD() {
@@ -75,21 +75,19 @@ public class DL_TraPhongVsThanhToan extends javax.swing.JDialog {
                 } else {
                     gia = 60000f;
                 }
-                System.out.println(gia);
-                ChiTietHoaDonPhong ct = cthdp_dao.getChiTietHoaDonPhongTheoMaHD(maHD);
+
+                ChiTietHoaDonPhong ct = cthdp_dao.getChiTietHoaDonPhongTheoMaHD(maHD, frmPH.getRoomSelected());
                 gioVao = ct.getGioVao();
                 LocalDateTime oneHourAgo = LocalDateTime.now().minusHours(1);
                 if (ct.getGioVao().isBefore(oneHourAgo)) {
                     long durationInMinutes = Duration.between(gioVao, LocalDateTime.now()).toMinutes();
                     thanhTien = (durationInMinutes / 60.0f) * gia;
-                    System.out.println(durationInMinutes);
-                    System.out.println(thanhTien);
+
                 } else {
                     thanhTien = gia;
                 }
 
-
-                cthdp_dao.updateGioRaVsGia(maHD, LocalDateTime.now(), thanhTien);
+                cthdp_dao.updateGioRaVsGia(maHD, LocalDateTime.now(), thanhTien, frmPH.getRoomSelected());
 
             }
 
@@ -98,20 +96,20 @@ public class DL_TraPhongVsThanhToan extends javax.swing.JDialog {
         }
     }
 
-    public void setlblThanhToan() {
+    public void setThanhToan() {
         //check connect
         ConnectDB db = ConnectDB.getInstance();
         try {
             db.connect();
             if (db != null) {
-                System.out.println("Connect success");
 
                 HoaDon hd = hd_dao.getHoaDonTheoMaHD(maHDDSD);
                 db.connect();
                 KhachHang loadKH = kh_dao.getdataKH(hd.getKhachHang().getMaKH());
                 lblTenKH.setText(loadKH.getTenKH());
                 lblSDT.setText(loadKH.getSdt());
-                ChiTietHoaDonPhong ct = cthdp_dao.getChiTietHoaDonPhongTheoMaHD(maHDDSD);
+                Form_QuanLyDatPhong frmPHforctp = new Form_QuanLyDatPhong();
+                ChiTietHoaDonPhong ct = cthdp_dao.getChiTietHoaDonPhongTheoMaHD(maHDDSD, frmPHforctp.getRoomSelected());
                 ChiTietHoaDonDV ctdv = cthddv_dao.getChiTietHoaDonDVTheoMaHD(maHDDSD);
                 // Lấy giờ vào
                 int gioVao = ct.getGioVao().getHour();
@@ -129,7 +127,7 @@ public class DL_TraPhongVsThanhToan extends javax.swing.JDialog {
                 DefaultTableModel model = (DefaultTableModel) tblHoaDon.getModel();
                 model.setRowCount(0);
                 for (ChiTietHoaDonPhong cthdp : cthdp_dao.getalltbChiTietHoaDonPhong()) {
-                    if (cthdp.getHoaDon().getMaHD().equals(maHDDSD)) {
+                    if (cthdp.getHoaDon().getMaHD().equals(maHDDSD) && cthdp.getPhongHat().getMaPhong().equals(frmPHforctp.getRoomSelected())) {
                         int gioVaoHour = cthdp.getGioVao().getHour();
                         int gioVaoMinute = cthdp.getGioVao().getMinute();
                         int gioRaHour = cthdp.getGioRa().getHour();
@@ -465,7 +463,13 @@ public class DL_TraPhongVsThanhToan extends javax.swing.JDialog {
                 System.out.println("Connect success");
                 HoaDon hd = hd_dao.getHoaDonTheoMaHD(maHDDSD);
                 db.connect();
-                hd_dao.updateTongTien(maHDDSD, tongTien);
+                // check if khach hang da thanh toan
+                if (hd.getTongTien() == 0) {
+                    hd_dao.updateTongTien(maHDDSD, tongTien);
+                }
+                else {
+                    hd_dao.updateTongTien(maHDDSD, tongTien + hd.getTongTien());
+                }
                 JOptionPane.showMessageDialog(this, "Thanh toán thành công");
                 this.dispose();
             }

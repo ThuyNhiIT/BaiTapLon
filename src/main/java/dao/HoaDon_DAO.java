@@ -93,18 +93,18 @@ public class HoaDon_DAO {
     }
 
     // update tongtien cua hoa don bằng maHD
-    public boolean updateTongTien(String maHD,Double tongTien){
+    public boolean updateTongTien(String maHD, Double tongTien) {
 
         Connection con = ConnectDB.getInstance().getConnection();
         PreparedStatement stmt = null;
         int n = 0;
 
-        try{
+        try {
             stmt = con.prepareStatement("UPDATE HoaDon SET tongTien = ? WHERE maHD = ?");
             stmt.setDouble(1, tongTien);
             stmt.setString(2, maHD);
             n = stmt.executeUpdate();
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return n > 0;
@@ -128,5 +128,33 @@ public class HoaDon_DAO {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    // Tìm hóa đơn theo mã khách hàng getHoaDonTheoMaKH
+    public ArrayList<HoaDon> getHoaDonTheoMaKH(String maKH) {
+
+        ArrayList<HoaDon> dsHD = new ArrayList<HoaDon>();
+        try {
+            ConnectDB.getInstance();
+            Connection con = ConnectDB.getConnection();
+            String sql = "SELECT *FROM HoaDon WHERE maKH = ?";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setString(1, maKH);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                String maHD = rs.getString(1);
+                java.sql.Date ngayLapHD_sql = rs.getDate(2);
+                LocalDate ngayLapHD = ngayLapHD_sql.toLocalDate();
+                String maKH1 = rs.getString(3);
+                String maNV = rs.getString(4);
+                double tongTien = rs.getDouble(5);
+
+                HoaDon hd = new HoaDon(maHD, ngayLapHD, new KhachHang(maKH1), new NhanVien(maNV), tongTien);
+                dsHD.add(hd);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dsHD;
     }
 }

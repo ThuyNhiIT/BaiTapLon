@@ -44,7 +44,6 @@ public class DL_ThemDV extends javax.swing.JDialog {
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
         jScrollPane2.getViewport().setOpaque(false);
         jScrollPane2.setVerticalScrollBar(new ScrollBarCustom());
-
         mh_dao = new MatHang_DAO();
         dtmMatHang = (DefaultTableModel) tblDSDV.getModel();
         dtmDVThem = (DefaultTableModel) tblDVThem.getModel();
@@ -60,6 +59,7 @@ public class DL_ThemDV extends javax.swing.JDialog {
                 }
             }
         });
+        loadDVThemTable();
         TableActionEvent event = new TableActionEvent() {
             @Override
             public void tangSoLuong(int row) {
@@ -79,7 +79,25 @@ public class DL_ThemDV extends javax.swing.JDialog {
                     double newTotalPrice = (currentSL - 1) * gia;
                     dtmDVThem.setValueAt(newTotalPrice, row, 3);
                 } else { // currentSL == 1
-                    dtmDVThem.removeRow(row);
+
+                    //delete in database cthddv
+                    cthddv_dao = new ChiTietHoaDonDichVu_DAO();
+                    ConnectDB db = ConnectDB.getInstance();
+                    try {
+                        db.connect();
+                        Form_QuanLyDatPhong frmPH = new Form_QuanLyDatPhong();
+                        cthdp_dao = new ChiTietHoaDonPhong_Dao();
+                        ChiTietHoaDonPhong hd = cthdp_dao.finHDByRoomID(frmPH.getRoomSelected());
+                        String maHD = hd.getHoaDon().getMaHD();
+                        //lấy ra mã mặt hàng trong row vừa xóa
+                        String maMH = (String) dtmDVThem.getValueAt(row, 0);
+                        db.connect();
+                        cthddv_dao.deleteChiTietHoaDonDV(maHD, maMH);
+                        dtmDVThem.removeRow(row);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+
                 }
             }
         };
@@ -101,13 +119,9 @@ private void addToDVThemTable(MatHang selectedMatHang) {
         // Row already exists, update quantity and total price
          currentSL = (int) dtmDVThem.getValueAt(rowIndex, 2);
          gia = (double) dtmDVThem.getValueAt(rowIndex, 3);
-
-
         dtmDVThem.setValueAt(currentSL + 1, rowIndex, 2);
-
         // Calculate the new total price based on the updated quantity
         double newTotalPrice = (currentSL +1 ) * gia;
-
         // Set the new total price in the table
         dtmDVThem.setValueAt(newTotalPrice, rowIndex, 3);
     } else {
@@ -115,7 +129,6 @@ private void addToDVThemTable(MatHang selectedMatHang) {
         dtmDVThem.addRow(new Object[]{selectedMatHang.getMaMH(), selectedMatHang.getTenMH(), 1, selectedMatHang.getGia()});
     }
 }
-
     private int findRowIndexByCode(String code) {
         for (int i = 0; i < dtmDVThem.getRowCount(); i++) {
             String codeInDVThem = String.valueOf(dtmDVThem.getValueAt(i, 0));
@@ -182,6 +195,34 @@ private void addToDVThemTable(MatHang selectedMatHang) {
         DefaultTableModel dtm = (DefaultTableModel) tblDSDV.getModel();
         dtm.getDataVector().removeAllElements();
     }
+//load dịch vụ đã thêm vào databasse lên tblDVThem
+    public void loadDVThemTable() {
+        ConnectDB db = ConnectDB.getInstance();
+        try {
+            db.connect();
+            Form_QuanLyDatPhong frmPH = new Form_QuanLyDatPhong();
+            cthdp_dao = new ChiTietHoaDonPhong_Dao();
+            ChiTietHoaDonPhong hd = cthdp_dao.finHDByRoomID(frmPH.getRoomSelected());
+            String maHD = hd.getHoaDon().getMaHD();
+            cthddv_dao = new ChiTietHoaDonDichVu_DAO();
+           //
+            db.connect();
+            ArrayList<ChiTietHoaDonDV> ds = cthddv_dao.getalltbChiTietHoaDonDV();
+
+            for (ChiTietHoaDonDV cthddv : ds) {
+                if (cthddv.getHoaDon().getMaHD().equals(maHD)) {
+                    db.connect();
+                    mh_dao = new MatHang_DAO();
+                    MatHang mh = mh_dao.findMatHang(cthddv.getMatHang().getMaMH());
+                    dtmDVThem.addRow(new Object[]{mh.getMaMH(), mh.getTenMH(), cthddv.getSoLuong(), cthddv.getGia()});
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public class MatHangModel {
 
@@ -440,10 +481,17 @@ private void addToDVThemTable(MatHang selectedMatHang) {
             List<MatHangModel> dvThemData = getDVThemData();
             for (MatHangModel data : dvThemData) {
                 ChiTietHoaDonDV cthddv = new ChiTietHoaDonDV();
-
                 ChiTietHoaDonDV cthddvadd = new ChiTietHoaDonDV(new HoaDon(maHD), new MatHang(data.getMaMH()), data.getSL(), data.getGia());
                 db.connect();
-                cthddv_dao.createChiTietHoaDonPhong(cthddvadd);
+              // xóa mặt hàng nếu nếu trong table có mà trong database không có , lấy mặt hàng trong table so sánh vs mặt hàng trong database
+                if (cthddv_dao.findChiTietHoaDonDV(maHD, data.getMaMH()) == null) {
+                    cthddv_dao.createChiTietHoaDonDV(cthddvadd);
+                }
+                // nếu mặt hàng trong table có mà trong database có thì update lại số lượng
+                else {
+                    cthddv_dao.updateChiTietHoaDonDV(cthddvadd);
+                }
+
             }
 
             this.dispose();

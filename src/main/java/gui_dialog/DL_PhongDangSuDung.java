@@ -82,7 +82,6 @@ public class DL_PhongDangSuDung extends javax.swing.JDialog {
         setMaHDPDSD(result.getHoaDon().getMaHD());
         // Lấy giờ vào từ kết quả
         gioVao = result.getGioVao();
-
         // Bắt đầu timer để cập nhật thời gian sử dụng
         startTimer();
     }
@@ -136,6 +135,7 @@ public class DL_PhongDangSuDung extends javax.swing.JDialog {
         setUndecorated(true);
 
         pnlCover.setBackground(new java.awt.Color(255, 255, 255));
+        pnlCover.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lblMaPhong.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblMaPhong.setText("Mã phòng:");
@@ -163,6 +163,7 @@ public class DL_PhongDangSuDung extends javax.swing.JDialog {
 
         btnThemDV.setBackground(new java.awt.Color(0, 204, 51));
         btnThemDV.setText("Thêm Dịch Vụ");
+        btnThemDV.setToolTipText("Xem dịch vụ đã thêm");
         btnThemDV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemDVActionPerformed(evt);
@@ -200,7 +201,7 @@ public class DL_PhongDangSuDung extends javax.swing.JDialog {
         pnlCoverLayout.setHorizontalGroup(
             pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCoverLayout.createSequentialGroup()
-                .addContainerGap(345, Short.MAX_VALUE)
+                .addContainerGap(343, Short.MAX_VALUE)
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(pnlCoverLayout.createSequentialGroup()
                 .addGap(42, 42, 42)
@@ -229,7 +230,7 @@ public class DL_PhongDangSuDung extends javax.swing.JDialog {
                                 .addGap(43, 43, 43)
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtTenPhong, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)))))
+                                .addComponent(txtTenPhong, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)))))
                 .addGap(18, 18, 18))
         );
         pnlCoverLayout.setVerticalGroup(
@@ -255,7 +256,7 @@ public class DL_PhongDangSuDung extends javax.swing.JDialog {
                             .addComponent(btnChuyenPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnThemDV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -276,40 +277,7 @@ public class DL_PhongDangSuDung extends javax.swing.JDialog {
         if(JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn thanh toán không?","Thông báo",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
             timer.cancel();
             timer.purge();
-//            check connect
-//            ConnectDB db = ConnectDB.getInstance();
-//            try {
-//                db.connect();
-//                if(db!=null){
-//                    Form_QuanLyDatPhong frmPH = new Form_QuanLyDatPhong();
-//
-//                    PhongHat ph = ph_dao.getPhongHatByMaPhong(frmPH.getRoomSelected());
-//                    if(ph.getLoaiPhong().getMaLoaiPhong().equals("LP001")){
-//                        gia = 100000f;
-//                    }
-//                    else{
-//                        gia = 60000f;
-//                    }
-//                    System.out.println(gia);
-//                       ChiTietHoaDonPhong ct= cthdp_dao.getChiTietHoaDonPhongTheoMaHD(maHDDSD);
-//                       setMaHDThanhToan(ct.getHoaDon().getMaHD());
-//                    LocalDateTime oneHourAgo = LocalDateTime.now().minusHours(1);
-//                    if (ct.getGioVao().isBefore(oneHourAgo)) {
-//                        long durationInMinutes = Duration.between(gioVao, LocalDateTime.now()).toMinutes();
-//                         thanhTien = (durationInMinutes / 60.0f) * gia;
-//                        System.out.println(durationInMinutes);
-//                        System.out.println(thanhTien);
-//                    } else {
-//                       thanhTien = gia;
-//                    }
-//
-//
-//                    cthdp_dao.updateGioRaVsGia(maHDDSD,LocalDateTime.now(),thanhTien);
-//
-//                }
-//            } catch (SQLException e) {
-//                throw new RuntimeException(e);
-//            }
+
             this.dispose();
            Form_QuanLyDatPhong updatePhong = new Form_QuanLyDatPhong();
             ph_dao.updateTinhTrangPhong(updatePhong.getRoomSelected(), "Trong");
@@ -327,6 +295,7 @@ public class DL_PhongDangSuDung extends javax.swing.JDialog {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnThemDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDVActionPerformed
+        this.dispose();
         DL_ThemDV themDV = new DL_ThemDV((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
         themDV.setLocationRelativeTo(this);
         themDV.setVisible(true);

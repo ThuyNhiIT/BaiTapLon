@@ -46,25 +46,26 @@ public class ChiTietHoaDonPhong_Dao {
         return dsCTHDP;
     }
 
-public ChiTietHoaDonPhong getChiTietHoaDonPhongTheoMaHD(String id) {
+public ChiTietHoaDonPhong getChiTietHoaDonPhongTheoMaHD(String id, String maPhong) {
         ChiTietHoaDonPhong cthdp = null;
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
         PreparedStatement statement = null;
 
         try {
-            String sql = "Select * from ChiTietHoaDonPhong where maHD = ?";
+            String sql = "Select * from ChiTietHoaDonPhong where maHD = ? and maPhong = ?";
             statement = con.prepareStatement(sql);
             statement.setString(1, id);
+            statement.setString(2, maPhong);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 String maHD = rs.getString(1);
-                String maPhong = rs.getString(2);
+                String maPhong1 = rs.getString(2);
                 Double gia = rs.getDouble(3);
                 LocalDateTime gioVao = rs.getTimestamp(4).toLocalDateTime();
                 LocalDateTime gioRa = rs.getTimestamp(5).toLocalDateTime();
                 String maGiamGia = rs.getString(6);
-                cthdp = new ChiTietHoaDonPhong(new HoaDon(maHD), new PhongHat(maPhong), gia, gioVao, gioRa, maGiamGia);
+                cthdp = new ChiTietHoaDonPhong(new HoaDon(maHD), new PhongHat(maPhong1), gia, gioVao, gioRa, maGiamGia);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -89,15 +90,7 @@ public ChiTietHoaDonPhong getChiTietHoaDonPhongTheoMaHD(String id) {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-//        finally {
-//            try {
-//                if (stmt != null) {
-//                    stmt.close();
-//                }
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        }
+
         return n > 0;
     }
     public ChiTietHoaDonPhong finHDByRoomID(String roomID) {
@@ -155,15 +148,18 @@ public ChiTietHoaDonPhong getChiTietHoaDonPhongTheoMaHD(String id) {
 
 
 
-    public boolean updateGioRaVsGia(String maHD, LocalDateTime gioRa,Float gia) {
+    public boolean updateGioRaVsGia(String maHD, LocalDateTime gioRa, Float gia, String maPhong) {
         int n = 0;
 
         try (Connection con = ConnectDB.getConnection();
-             PreparedStatement stmt = con.prepareStatement("UPDATE ChiTietHoaDonPhong SET gioRa = ? , gia = ? WHERE maHD = ?")) {
+             PreparedStatement stmt = con.prepareStatement("UPDATE ChiTietHoaDonPhong SET gioRa = ? , gia = ? WHERE maHD = ? AND maPhong = ?")) {
 
             stmt.setTimestamp(1, java.sql.Timestamp.valueOf(gioRa));
             stmt.setFloat(2, gia);
             stmt.setString(3, maHD);
+            stmt.setString(4, maPhong);
+
+            // Thực thi câu lệnh SQL và nhận số hàng bị ảnh hưởng
             n = stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -173,22 +169,64 @@ public ChiTietHoaDonPhong getChiTietHoaDonPhongTheoMaHD(String id) {
         return n > 0;
     }
 
+
     //update room
-    public Boolean doiPhong(String maHD, String maPhong){
+    public Boolean doiPhong(String maHD, String maPhongHienTai,String maPhongMoi){
 
         Connection con = ConnectDB.getInstance().getConnection();
         PreparedStatement stmt = null;
         int n = 0;
         try{
-            stmt = con.prepareStatement("UPDATE ChiTietHoaDonPhong SET maPhong = ? WHERE maHD = ?");
-            stmt.setString(1, maPhong);
+            stmt = con.prepareStatement("UPDATE ChiTietHoaDonPhong SET maPhong = ? WHERE maHD = ? AND maPhong = ?");
+            stmt.setString(1, maPhongMoi);
             stmt.setString(2, maHD);
+            stmt.setString(3, maPhongHienTai);
+
             n = stmt.executeUpdate();
         }catch(Exception e){
             e.printStackTrace();
         }
         return n > 0;
     }
+
+    // lấy ra ds cthdp theo maHD
+    // lấy ra ds cthdp theo maHD
+    public ArrayList<ChiTietHoaDonPhong> getAllTheMaHDArray(String maHD) {
+        ArrayList<ChiTietHoaDonPhong> dsCTHDP = new ArrayList<>();
+
+        try {
+            ConnectDB.getInstance();
+            Connection con = ConnectDB.getConnection();
+            String sql = "SELECT * FROM ChiTietHoaDonPhong WHERE maHD = ?";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setString(1, maHD);
+
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                String maPhong = rs.getString("maPhong");
+                Double gia = rs.getDouble("gia");
+                LocalDateTime gioVao = rs.getTimestamp("gioVao").toLocalDateTime();
+                LocalDateTime gioRa = rs.getTimestamp("gioRa").toLocalDateTime();
+                String maGiamGia = rs.getString("maGiamGia");
+
+                ChiTietHoaDonPhong cthdp = new ChiTietHoaDonPhong(
+                        new HoaDon(maHD),
+                        new PhongHat(maPhong),
+                        gia,
+                        gioVao,
+                        gioRa,
+                        maGiamGia
+                );
+
+                dsCTHDP.add(cthdp);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return dsCTHDP;
+    }
+
 
 
 }

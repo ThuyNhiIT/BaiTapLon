@@ -1,13 +1,14 @@
 package entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class DonDatPhong {
 
     private String maDonDatPhong;
-    private LocalDate ngayDat;
-    private LocalDate ngayNhan;
+    private LocalDateTime ngayDat;
+    private LocalDateTime ngayNhan;
     private PhongHat phongHat;
     private KhachHang khachHang;
 
@@ -16,7 +17,7 @@ public class DonDatPhong {
         // TODO Auto-generated constructor stub
     }
 
-    public DonDatPhong(String maDonDatPhong, LocalDate ngayDat, LocalDate ngayNhan, PhongHat phongHat,
+    public DonDatPhong(String maDonDatPhong, LocalDateTime ngayDat, LocalDateTime ngayNhan, PhongHat phongHat,
             KhachHang khachHang) {
         super();
         this.maDonDatPhong = maDonDatPhong;
@@ -38,23 +39,23 @@ public class DonDatPhong {
         this.maDonDatPhong = maDonDatPhong;
     }
 
-    public LocalDate getNgayDat() {
+    public LocalDateTime getNgayDat() {
         return ngayDat;
     }
 
-    public void setNgayDat(LocalDate ngayDat) throws Exception {
-        if (ngayDat.compareTo(LocalDate.now()) != 0 && ngayDat.isBefore(LocalDate.now())) {
+    public void setNgayDat(LocalDateTime ngayDat) throws Exception {
+        if (ngayDat.compareTo(LocalDateTime.now()) != 0 && ngayDat.isBefore(LocalDateTime.now())) {
             throw new Exception("Ngày đặt phải bằng hoặc sau ngày hiện tại!");
         } else {
             this.ngayDat = ngayDat;
         }
     }
 
-    public LocalDate getNgayNhan() {
+    public LocalDateTime getNgayNhan() {
         return ngayNhan;
     }
 
-    public void setNgayNhan(LocalDate ngayNhan) throws Exception {
+    public void setNgayNhan(LocalDateTime ngayNhan) throws Exception {
         if (ngayNhan != ngayDat) {
             throw new Exception("Ngày nhận bằng ngày đặt!");
         } else {
