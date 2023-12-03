@@ -1,10 +1,14 @@
 package gui.form;
 
+import gui.component.Header;
 import gui.main.Main;
+import gui_dialog.DL_DangXuat;
 import gui_dialog.DL_DoiMatKhau;
+import java.awt.Component;
 import java.awt.Desktop;
 import java.net.URL;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -98,28 +102,29 @@ public class Form_Setting extends javax.swing.JPanel {
 
     private void DangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DangXuatActionPerformed
         // TODO add your handling code here:
+        
 
     }//GEN-LAST:event_DangXuatActionPerformed
 
     private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
-        if (JOptionPane.showConfirmDialog(null, "Bạn có muốn đăng xuất không?") == 0) {
-            // Đóng chương trình
-            System.exit(0);
+        int option = JOptionPane.showConfirmDialog(Form_Setting.this, "Bạn có chắc chắc muốn đăng xuất ?",
+                "Xác nhận đăng xuất", JOptionPane.YES_NO_OPTION);
+        if (option == JOptionPane.YES_OPTION) {
+            Form_Login loginForm = new Form_Login();
+            loginForm.setVisible(true);
 
-            // Tạo phiên bản mới của màn hình đăng nhập và hiển thị nó
-            java.awt.EventQueue.invokeLater(new Runnable() {
-                public void run() {
-                    new Form_Login().setVisible(true);
-                }
-            });
-        }
+            SwingUtilities.getWindowAncestor(Form_Setting.this).dispose();// đóng cửa sổ hiện tại lại (nếu có)
+        }       
+//          DL_DangXuat log_out = new DL_DangXuat((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
+//          log_out.setLocationRelativeTo(Form_Setting.this);
+//          log_out.setVisible(true);
     }//GEN-LAST:event_btnDangXuatActionPerformed
 
     private void HDSDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HDSDActionPerformed
-       try{
+        try {
             Desktop.getDesktop().browse(new URL("https://wordpress.com/home/nguyenthiquynhgiang.wordpress.com?source=pwa").toURI());
-        }catch(Exception e){
-            
+        } catch (Exception e) {
+
         }
     }//GEN-LAST:event_HDSDActionPerformed
 

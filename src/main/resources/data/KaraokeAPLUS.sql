@@ -275,7 +275,7 @@ VALUES ('P040', 'T040', 'LP002', 'Dang bao tri');
 -- Tạo bảng TaiKhoan
 CREATE TABLE TaiKhoan (
     maNV VARCHAR(50) PRIMARY KEY,
-    Password VARCHAR(50),
+    Password VARCHAR(150),
     FOREIGN KEY (maNV) REFERENCES NhanVien(maNV)
 );
 GO
@@ -286,6 +286,7 @@ INSERT INTO TaiKhoan (maNV, Password) VALUES ('NV002', '123A');
 INSERT INTO TaiKhoan (maNV, Password) VALUES ('NV003', '1');
 INSERT INTO TaiKhoan (maNV, Password) VALUES ('NV004', '123A');
 INSERT INTO TaiKhoan (maNV, Password) VALUES ('NV005', '123A');
+
 
 
 -- Tạo bảng DonDatPhong

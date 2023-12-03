@@ -316,7 +316,7 @@ public class Form_QuanLyNhanVien extends javax.swing.JPanel {
                         .addComponent(lblTong)
                         .addGap(18, 18, 18)
                         .addComponent(txtTong, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(127, 127, 127)
+                        .addGap(128, 128, 128)
                         .addComponent(cmbLocNV, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
