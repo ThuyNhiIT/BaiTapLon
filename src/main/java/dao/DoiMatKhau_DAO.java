@@ -1,50 +1,55 @@
-//
-//package dao;
-//
-//import java.sql.Connection;
-//import java.sql.DriverManager;
-//import java.sql.PreparedStatement;
-//import java.sql.ResultSet;
-//import java.sql.SQLException;
-//
-///**
-// *
-// * @author 84934 NguyenThiQuynhGiang
-// */
-//public class DoiMatKhau_DAO {
-//    private static final String JDBC_URL = "jdbc:sqlserver://localhost:1433;databaseName=KaraokeAPLUS";
-//    private static final String JDBC_USER = "sa";
-//    private static final String JDBC_PASSWORD = "0934119430";
-//    
-//    public boolean doiMatKhau(String userName, String oldPassword, String newPassword){
-//       if(!isOldPasswordCorrect(userName, oldPassword)){
-//           System.out.println("Old password is incorrect");
-//           return false;
-//       }
-//       
-//       String updateQuery = "UPDATE TaiKhoan SET Password = ? WHERE maNV = ?";
-//       
-//       try(Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
-//           PreparedStatement preparedStatement = connection.prepareStatement(updateQuery))
-//       
-//       
-//    }
-//    
-//    @SuppressWarnings("empty-statement")
-//    private boolean isOldPasswordCorrect(String userName = null, String oldPassword) throws SQLException{
-//        String selectQuery = "SELECT Password FROM TaiKhoan WHERE maNV= ?";
-//        try(Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
-//            PreparedStatement preparedStatement = connection.prepareStatement(selectQuery)){
-//            preparedStatement.setString(1, userName);
-//            
-//            try(ResultSet rs = preparedStatement.executeQuery()){
-//                if(rs.next()){
-//                    String currentPassword = rs.getString("Password");
-//                    return currentPassword.equals(oldPassword);
-//                }
-//            }
-//        }catch(SQLException e){
-//                e.printStackTrace();}
-//        return false;
-//    }
-//}
+package dao;
+
+import connectDB.ConnectDB;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Base64;
+
+/**
+ *
+ * @author 84934
+ */
+public class DoiMatKhau_DAO {
+     public boolean doiMatKhau(String maNV, String matKhauMoi) {
+        try {
+            Connection con = ConnectDB.getConnection();
+            String sql = "UPDATE TaiKhoan SET Password = ? WHERE maNV = ?";
+            PreparedStatement statement = con.prepareStatement(sql);
+
+            // Băm mật khẩu mới trước khi lưu vào cơ sở dữ liệu (thay bằng hàm băm thực tế của bạn)
+            String hashedMatKhauMoi = hashPassword(matKhauMoi);
+
+            statement.setString(1, hashedMatKhauMoi);
+            statement.setString(2, maNV);
+
+            int rowsAffected = statement.executeUpdate();
+
+            // Nếu có ít nhất một dòng bị ảnh hưởng, có nghĩa là cập nhật thành công
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            System.out.println("DB related Error");
+            e.printStackTrace();
+        }
+        return false;
+    }
+     
+      private String hashPassword(String plainPassword) {
+        try {
+            // Sử dụng thuật toán SHA-256
+            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+
+            // Băm mật khẩu
+            byte[] hashedBytes = messageDigest.digest(plainPassword.getBytes());
+
+            // Chuyển đổi byte array thành chuỗi Base64
+            return Base64.getEncoder().encodeToString(hashedBytes);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+      }
+}
+

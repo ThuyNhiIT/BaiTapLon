@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -23,19 +24,19 @@ import javax.swing.JOptionPane;
  * @author 84343
  */
 public class DL_ThemNV extends javax.swing.JFrame {
-
-
-
     private NhanVien_DAO nv_dao;
     private LoaiNV_DAO loainv_dao;
     private Form_QuanLyNhanVien qlnv;
+    private ButtonGroup group;
   
     public DL_ThemNV() {
         initComponents();
         setLocationRelativeTo(null);
         nv_dao = new NhanVien_DAO();
         loadLoaiNhanVien();
-        
+        group = new ButtonGroup();
+        group.add(radNam);
+        group.add(radNu);   
     }
 
     /**
@@ -81,9 +82,14 @@ public class DL_ThemNV extends javax.swing.JFrame {
         String CCCD = txtCCCD.getText();
         String SDT = txtSDT.getText();
         String diaChi = txtDiaChi.getText();
-        String caLam = "";
-        
-        
+        LoaiNhanVien loaiNV = (LoaiNhanVien) cmbLNV.getSelectedItem();
+        /**
+         * Tên không được rỗng
+         */
+         if(!(tenNV.length() > 0 && tenNV.matches("^.+$"))){
+            JOptionPane.showMessageDialog(this, "Tên nhân viên không được rỗng !!!");
+            return false;
+        }
         /**
          * Số điện thoại gồm 10 số
          */
@@ -107,6 +113,20 @@ public class DL_ThemNV extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Căn cước công dân phải gồm 12 số !!!");
             return false;
         }
+        
+        /**
+         * Phải chọn không được để trống
+         */
+        if(!(radNam.isSelected() || radNu.isSelected())){
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn giới tính !!!");
+            return false;
+        }
+        
+        if(!(cmbLNV.getSelectedItem() == null)){
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn loại nhân viên !!!");
+            return false;
+        }
+        
         return true;
     }
     
@@ -181,14 +201,39 @@ public class DL_ThemNV extends javax.swing.JFrame {
         lblCa.setText("Ca làm:");
 
         radNam.setText("Nam");
+        radNam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radNamActionPerformed(evt);
+            }
+        });
 
         radNu.setText("Nữ");
+        radNu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radNuActionPerformed(evt);
+            }
+        });
 
         radCa1.setText("Ca 1");
+        radCa1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radCa1ActionPerformed(evt);
+            }
+        });
 
         radCa2.setText("Ca 2");
+        radCa2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radCa2ActionPerformed(evt);
+            }
+        });
 
         radCa3.setText("Ca 3");
+        radCa3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radCa3ActionPerformed(evt);
+            }
+        });
 
         btnThoat.setBackground(new java.awt.Color(255, 51, 51));
         btnThoat.setForeground(new java.awt.Color(255, 255, 255));
@@ -334,6 +379,7 @@ public class DL_ThemNV extends javax.swing.JFrame {
             String SDT = txtSDT.getText();
             String diaChi = txtDiaChi.getText();
             String caLam = "";
+            
         if(radCa1.isSelected()){
            caLam = "Ca 1";
         }
@@ -345,9 +391,9 @@ public class DL_ThemNV extends javax.swing.JFrame {
         }
         LoaiNhanVien loaiNV = (LoaiNhanVien) cmbLNV.getSelectedItem();
         
-            NhanVien addNV = new NhanVien(maNV, tenNV, gioiTinh, CCCD, SDT, diaChi, caLam, loaiNV);
-            System.out.println("Xong" +addNV);
-            Boolean isSuccess = nv_dao.addStaff(addNV);
+        NhanVien addNV = new NhanVien(maNV, tenNV, gioiTinh, CCCD, SDT, diaChi, caLam, loaiNV);
+        System.out.println("Xong" + addNV);
+        Boolean isSuccess = nv_dao.addStaff(addNV);
 //            qlnv.loadTable(nv_dao.getalltbNhanVien());
             
             if(isSuccess){
@@ -363,6 +409,39 @@ public class DL_ThemNV extends javax.swing.JFrame {
             Logger.getLogger(DL_ThemNV.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnThemActionPerformed
+
+    private void radNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radNamActionPerformed
+        if(radNam.isSelected()){
+           radNu.setSelected(false);
+       }
+    }//GEN-LAST:event_radNamActionPerformed
+
+    private void radNuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radNuActionPerformed
+        if(radNu.isSelected()){
+           radNam.setSelected(false);
+       }
+    }//GEN-LAST:event_radNuActionPerformed
+
+    private void radCa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radCa1ActionPerformed
+        if(radCa1.isSelected()){
+            radCa2.setSelected(false);
+            radCa3.setSelected(false);
+        }
+    }//GEN-LAST:event_radCa1ActionPerformed
+
+    private void radCa2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radCa2ActionPerformed
+        if(radCa2.isSelected()){
+            radCa1.setSelected(false);
+            radCa3.setSelected(false);
+        }
+    }//GEN-LAST:event_radCa2ActionPerformed
+
+    private void radCa3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radCa3ActionPerformed
+        if(radCa3.isSelected()){
+            radCa1.setSelected(false);
+            radCa2.setSelected(false);
+        }
+    }//GEN-LAST:event_radCa3ActionPerformed
 
  
     public static void main(String args[]) {

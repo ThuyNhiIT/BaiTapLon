@@ -18,10 +18,16 @@ import gui.swing.PopupMenu;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.ImageIcon;
+import javax.swing.InputMap;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
@@ -118,20 +124,49 @@ public class Main extends javax.swing.JFrame {
         header.addMenuEvent(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!animator.isRunning()) {
-                    if (menu.isShowMenu()) {
-                        header.btnMenu.setIcon(new ImageIcon(getClass().getResource("/icon/next.png")));
-                    } else {
-                        header.btnMenu.setIcon(new ImageIcon(getClass().getResource("/icon/left.png")));
-                    }
-                    animator.start();
-                }
-//                menu.setEnbleMenu(false);
-                if (menu.isShowMenu()) {
-                    menu.hideallMenu();
-                }
+//                if (!animator.isRunning()) {
+//                    if (menu.isShowMenu()) {
+//                        header.btnMenu.setIcon(new ImageIcon(getClass().getResource("/icon/next.png")));
+//                    } else {
+//                        header.btnMenu.setIcon(new ImageIcon(getClass().getResource("/icon/left.png")));
+//                    }
+//                    animator.start();
+//                }
+////                menu.setEnbleMenu(false);
+//                if (menu.isShowMenu()) {
+//                    menu.hideallMenu();
+//                }
+
+                chuyenDoiMenu();
             }
         });
+        
+        //Thêm phím tắt đóng mở Menu (Ctrl + M)
+        Action toggleMenuAction = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                chuyenDoiMenu();
+            }
+        };
+        
+        InputMap inputMap = bg.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_M, KeyEvent.CTRL_DOWN_MASK), "chuyenDoiMenu");
+        bg.getActionMap().put("chuyenDoiMenu", toggleMenuAction);
+    }
+
+    private void chuyenDoiMenu() {
+        if (!animator.isRunning()) {
+            if (menu.isShowMenu()) {
+                header.btnMenu.setIcon(new ImageIcon(getClass().getResource("/icon/next.png")));
+            } else {
+                header.btnMenu.setIcon(new ImageIcon(getClass().getResource("/icon/left.png")));
+            }
+            animator.start();
+        }
+//                menu.setEnbleMenu(false);
+        if (menu.isShowMenu()) {
+            menu.hideallMenu();
+        }
     }
 
     private void phanQuyenQL() {

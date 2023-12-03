@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -27,11 +28,15 @@ public class DL_ThongTinKhachHang extends javax.swing.JDialog {
     private DefaultTableModel dtmKhachHang;
 
     private Form_QuanLyKhachHang qlKH;
+    private ButtonGroup group;
 
     public DL_ThongTinKhachHang() {
         initComponents();
         setLocationRelativeTo(null);
         kh_dao = new KhachHang_DAO();
+        group = new ButtonGroup();
+        group.add(radNam);
+        group.add(radNu);
     }
 
 //   public void DocDuLieu() {
@@ -72,14 +77,10 @@ public class DL_ThongTinKhachHang extends javax.swing.JDialog {
         Boolean gt = radNam.isSelected();
          
         /**
-         * Tên khách hàng:
-         *    + Chỉ chứa các kí tự từ a-z
-         *    + Chỉ chứa các kí tự từ A-Z
-         *    + Chứa kí tự khoảng trắng và không chứa kí tự số
-         *    + Tối thiểu 3 kí tự, tối đa 25 kí tự
+         * Tên không được rỗng
          */
-        if(!(tenKH.length() > 0 && tenKH.matches("^[a-zA-Z\s_-]{3,100}$"))){
-            JOptionPane.showMessageDialog(this, "Tên KH không chứa kí tự số và tối thiểu là 3 kí tự, tối đa là 25 kí tự!!!");
+        if(!(tenKH.length() > 0 && tenKH.matches("^.+$"))){
+            JOptionPane.showMessageDialog(this, "Tên khách hàng không được rỗng !!!");
             return false;
         }
         
@@ -90,6 +91,15 @@ public class DL_ThongTinKhachHang extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Số điện thoại gồm 10 chữ số và phải bắt đầu bằng số 0 !!!");
             return false;
         }
+        
+        /**
+         * Phải chọn không được để trống
+         */
+        if(!(radNam.isSelected() || radNu.isSelected())){
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn giới tính !!!");
+            return false;
+        }
+        
         return true;
     }
 
@@ -181,12 +191,6 @@ public class DL_ThongTinKhachHang extends javax.swing.JDialog {
         btnThoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThoatActionPerformed(evt);
-            }
-        });
-
-        txtTenKH.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTenKHActionPerformed(evt);
             }
         });
 
@@ -318,16 +322,16 @@ public class DL_ThongTinKhachHang extends javax.swing.JDialog {
         return;
     }//GEN-LAST:event_btnThoatActionPerformed
 
-    private void txtTenKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenKHActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTenKHActionPerformed
-
     private void radNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radNamActionPerformed
-        // TODO add your handling code here:
+       if(radNam.isSelected()){
+           radNu.setSelected(false);
+       }
     }//GEN-LAST:event_radNamActionPerformed
 
     private void radNuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radNuActionPerformed
-        // TODO add your handling code here:
+        if(radNu.isSelected()){
+            radNu.setSelected(false);
+        }
     }//GEN-LAST:event_radNuActionPerformed
 
     public static void main(String args[]) {

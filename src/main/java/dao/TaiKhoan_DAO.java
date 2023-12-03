@@ -1,39 +1,106 @@
-
 package dao;
 
 import connectDB.ConnectDB;
 import entity.NhanVien;
 import entity.TaiKhoan;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import java.sql.*;
 import java.util.ArrayList;
-
-
+import java.util.Base64;
 
 /**
  *
  * @author HO MINH HAU
  */
 public class TaiKhoan_DAO {
+
     public TaiKhoan_DAO() {
     }
-    public boolean authenticate(String maNV, String Password)
-            throws Exception {
+//    public boolean authenticate(String maNV, String Password)
+//            throws Exception {
+//        boolean isUser = false;
+//        try {
+//
+//            Connection con = ConnectDB.getConnection();
+//            String sql = "select  *from TaiKhoan where maNV = ? and Password = ?";
+//            PreparedStatement statement = con.prepareStatement(sql);
+//
+//            statement.setString(1, maNV);
+//            statement.setString(2, Password);
+//            ResultSet result = statement.executeQuery();
+//            if (result.next()) {
+//                isUser = true;
+//                System.out.println("User authenticated successfully");
+//            } else {
+//                System.out.println("Invalid maNV or password!");
+//            }
+//        } catch (Exception e) {
+//            System.out.println("DB related Error");
+//            e.printStackTrace();
+//        }
+//        return isUser;
+//    }
+
+    // Hàm băm mật khẩu sử dụng SHA-256
+    private String hashPassword(String plainPassword) {
+//        try {
+//            MessageDigest md = MessageDigest.getInstance("SHA-256");
+//            md.update(plainPassword.getBytes());
+//            byte[] hashedBytes = md.digest();
+//
+//            // Chuyển đổi byte array sang dạng hex string
+//            StringBuilder sb = new StringBuilder();
+//            for (byte b : hashedBytes) {
+//                sb.append(String.format("%02x", b));
+//            }
+//
+//            return sb.toString();
+//        } catch (NoSuchAlgorithmException e) {
+//            // Xử lý exception nếu thuật toán không được hỗ trợ
+//            e.printStackTrace();
+//            return null;
+//        }
+
+        try {
+            // Sử dụng thuật toán SHA-256
+            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+
+            // Băm mật khẩu
+            byte[] hashedBytes = messageDigest.digest(plainPassword.getBytes());
+
+            // Chuyển đổi byte array thành chuỗi Base64
+            return Base64.getEncoder().encodeToString(hashedBytes);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public boolean authenticate(String maNV, String plainPassword) throws Exception {
         boolean isUser = false;
         try {
-
             Connection con = ConnectDB.getConnection();
-            String sql = "select  *from TaiKhoan where maNV = ? and Password = ?";
+            String sql = "SELECT * FROM TaiKhoan WHERE maNV = ?";
             PreparedStatement statement = con.prepareStatement(sql);
 
             statement.setString(1, maNV);
-            statement.setString(2, Password);
             ResultSet result = statement.executeQuery();
             if (result.next()) {
-                isUser = true;
-                System.out.println("User authenticated successfully");
+                // Lấy mật khẩu đã băm từ cơ sở dữ liệu
+                String hashedPasswordFromDB = result.getString(2);
+
+                // Băm mật khẩu nhập vào và so sánh với mật khẩu trong cơ sở dữ liệu
+                String hashedPasswordInput = hashPassword(plainPassword);
+                if (hashedPasswordInput != null && hashedPasswordInput.equals(hashedPasswordFromDB)) {
+                    isUser = true;
+                    System.out.println("User authenticated successfully");
+                } else {
+                    System.out.println("Invalid password!");
+                }
             } else {
-                System.out.println("Invalid maNV or password!");
+                System.out.println("Invalid maNV!");
             }
         } catch (Exception e) {
             System.out.println("DB related Error");
@@ -42,8 +109,26 @@ public class TaiKhoan_DAO {
         return isUser;
     }
 
+    public boolean taoTK(String maNV) {
+        Connection con = ConnectDB.getConnection();
+        int n = 0;
+        try {
+            PreparedStatement statement = con.prepareStatement("INSERT into TaiKhoan VALUES(?,?)");
+            statement.setString(1, maNV);
+            
+            String hashedDefaultPassword = hashPassword("123A");
+            statement.setString(2, hashedDefaultPassword);
+
+            n = statement.executeUpdate();
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return n > 0;
+
+    }
+    
+    
 
 }
-
-
-

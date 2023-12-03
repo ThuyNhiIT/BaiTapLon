@@ -27,7 +27,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Form_QuanLyKhachHang extends javax.swing.JPanel {
 
-       private KhachHang_DAO kh_dao;
+    private KhachHang_DAO kh_dao;
     private DefaultTableModel dtmKhachHang;
     private ArrayList<KhachHang> customers;
 

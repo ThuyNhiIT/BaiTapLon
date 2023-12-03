@@ -11,15 +11,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author HO MINH HAU
  */
 public class NhanVien_DAO {
+    private TaiKhoan_DAO tk_dao;
 
     public NhanVien_DAO() {
-
+        tk_dao = new TaiKhoan_DAO();
     }
 
     public ArrayList<NhanVien> getalltbNhanVien() {
@@ -173,6 +175,11 @@ public class NhanVien_DAO {
             stmt.setString(8, nv.getLoaiNV().getMaLoai());
             System.out.println("Xong lần 2");
             n = stmt.executeUpdate();
+            
+            if(tk_dao.taoTK(nv.getMaNV())== false)
+            {
+                JOptionPane.showInputDialog(null, "Tạo Tài khoant thất bại!");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
 //        } finally {
