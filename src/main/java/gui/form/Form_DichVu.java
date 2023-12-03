@@ -93,6 +93,7 @@ public class Form_DichVu extends javax.swing.JPanel {
             }
         ));
         tblDichVu.setRowHeight(40);
+        tblDichVu.setSelectionBackground(new java.awt.Color(0, 169, 183));
         scr.setViewportView(tblDichVu);
         if (tblDichVu.getColumnModel().getColumnCount() > 0) {
             tblDichVu.getColumnModel().getColumn(0).setPreferredWidth(50);

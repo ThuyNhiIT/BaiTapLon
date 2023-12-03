@@ -275,7 +275,7 @@ VALUES ('P040', 'T040', 'LP002', 'Dang bao tri');
 -- Tạo bảng TaiKhoan
 CREATE TABLE TaiKhoan (
     maNV VARCHAR(50) PRIMARY KEY,
-    Password VARCHAR(50),
+    Password VARCHAR(150),
     FOREIGN KEY (maNV) REFERENCES NhanVien(maNV)
 );
 GO
@@ -286,6 +286,7 @@ INSERT INTO TaiKhoan (maNV, Password) VALUES ('NV002', '123A');
 INSERT INTO TaiKhoan (maNV, Password) VALUES ('NV003', '1');
 INSERT INTO TaiKhoan (maNV, Password) VALUES ('NV004', '123A');
 INSERT INTO TaiKhoan (maNV, Password) VALUES ('NV005', '123A');
+
 
 
 -- Tạo bảng DonDatPhong
@@ -323,10 +324,7 @@ VALUES ('DDP007', '2023-12-01', '2023-12-02', 'P007', 'KH007');
 
 INSERT INTO DonDatPhong (maDonDatPhong, ngayDat, ngayNhan, maPhong, maKH)
 VALUES ('DDP008', '2023-12-05', '2023-12-06', 'P008', 'KH008');
-<<<<<<< HEAD:src/main/resources/data/KaraokeAPLUS(verFinal).sql
-=======
 */
->>>>>>> 246ca9dec2a2b44337dcf8da60474f572b04d0aa:src/main/resources/data/KaraokeAPLUS.sql
 -- Tạo bảng HoaDon
 CREATE TABLE HoaDon (
     maHD VARCHAR(50) PRIMARY KEY,
@@ -343,26 +341,11 @@ GO
 INSERT INTO HoaDon (maHD, ngayLapHD, maKH, maNV, tongTien)
 VALUES ('HD001', '2023-10-30', 'KH001', 'NV001', 1000000.00);
 
-<<<<<<< HEAD:src/main/resources/data/KaraokeAPLUS(verFinal).sql
--- Thêm dữ liệu vào bảng HoaDon
-INSERT INTO HoaDon (maHD, ngayLapHD, maKH, maNV, tongTien)
-VALUES ('HD001', '2023-10-30', 'KH001', 'NV001', 1000000.00);
-
 INSERT INTO HoaDon (maHD, ngayLapHD, maKH, maNV, tongTien)
 VALUES ('HD002', '2023-10-31', 'KH002', 'NV002', 1500000.00);
 
 INSERT INTO HoaDon (maHD, ngayLapHD, maKH, maNV, tongTien)
 VALUES ('HD003', '2023-11-01', 'KH003', 'NV003', 800000.00);
-
-INSERT INTO HoaDon (maHD, ngayLapHD, maKH, maNV, tongTien)
-VALUES ('HD004', '2023-11-02', 'KH004', 'NV004', 1200000.00);
-=======
-INSERT INTO HoaDon (maHD, ngayLapHD, maKH, maNV, tongTien)
-VALUES ('HD002', '2023-10-31', 'KH002', 'NV002', 1500000.00);
-
-INSERT INTO HoaDon (maHD, ngayLapHD, maKH, maNV, tongTien)
-VALUES ('HD003', '2023-11-01', 'KH003', 'NV003', 800000.00);
->>>>>>> 246ca9dec2a2b44337dcf8da60474f572b04d0aa:src/main/resources/data/KaraokeAPLUS.sql
 
 INSERT INTO HoaDon (maHD, ngayLapHD, maKH, maNV, tongTien)
 VALUES ('HD004', '2023-11-02', 'KH004', 'NV004', 1200000.00);
@@ -383,26 +366,11 @@ GO
 INSERT INTO ChiTietHoaDonDV (maHD, maMH, soLuong, gia)
 VALUES ('HD001', 'MH001', 1, 100000);
 
-<<<<<<< HEAD:src/main/resources/data/KaraokeAPLUS(verFinal).sql
--- Thêm dữ liệu vào bảng ChiTietHoaDonDV
-INSERT INTO ChiTietHoaDonDV (maHD, maMH, soLuong, gia)
-VALUES ('HD001', 'MH001', 1, 100000);
-
 INSERT INTO ChiTietHoaDonDV (maHD, maMH, soLuong, gia)
 VALUES ('HD002', 'MH002', 1, 120000);
 
 INSERT INTO ChiTietHoaDonDV (maHD, maMH, soLuong, gia)
 VALUES ('HD003', 'MH003', 1, 130000);
-
-INSERT INTO ChiTietHoaDonDV (maHD, maMH, soLuong, gia)
-VALUES ('HD004', 'MH004', 1, 140000);
-=======
-INSERT INTO ChiTietHoaDonDV (maHD, maMH, soLuong, gia)
-VALUES ('HD002', 'MH002', 1, 120000);
-
-INSERT INTO ChiTietHoaDonDV (maHD, maMH, soLuong, gia)
-VALUES ('HD003', 'MH003', 1, 130000);
->>>>>>> 246ca9dec2a2b44337dcf8da60474f572b04d0aa:src/main/resources/data/KaraokeAPLUS.sql
 
 INSERT INTO ChiTietHoaDonDV (maHD, maMH, soLuong, gia)
 VALUES ('HD004', 'MH004', 1, 140000);
@@ -420,11 +388,7 @@ CREATE TABLE ChiTietHoaDonPhong (
     FOREIGN KEY (maPhong) REFERENCES PhongHat(maPhong)
 );
 GO
-<<<<<<< HEAD:src/main/resources/data/KaraokeAPLUS(verFinal).sql
-
-=======
 /*
->>>>>>> 246ca9dec2a2b44337dcf8da60474f572b04d0aa:src/main/resources/data/KaraokeAPLUS.sql
 -- Thêm dữ liệu vào bảng ChiTietHoaDonPhong
 INSERT INTO ChiTietHoaDonPhong (maHD, maPhong, gia, gioVao, gioRa, maGiamGia)
 VALUES ('HD001', 'P001', 100000, '2023-10-30 13:00:00', '2023-10-30 15:00:00', 'VIP');
@@ -438,7 +402,4 @@ VALUES ('HD003', 'P003', 60000, '2023-10-30 12:00:00', '2023-10-30 15:00:00', 'V
 INSERT INTO ChiTietHoaDonPhong (maHD, maPhong, gia, gioVao, gioRa, maGiamGia)
 VALUES ('HD004', 'P004', 60000, '2023-10-30 11:00:00', '2023-10-30 13:00:00', 'VIP');
 
-<<<<<<< HEAD:src/main/resources/data/KaraokeAPLUS(verFinal).sql
-=======
 */
->>>>>>> 246ca9dec2a2b44337dcf8da60474f572b04d0aa:src/main/resources/data/KaraokeAPLUS.sql

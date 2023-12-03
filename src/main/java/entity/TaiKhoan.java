@@ -12,6 +12,10 @@ public class TaiKhoan {
         // TODO Auto-generated constructor stub
     }
 
+    public TaiKhoan(NhanVien username) {
+        this.username = username;
+    }
+    
     public TaiKhoan(NhanVien username, String passWord) {
         super();
         this.username = username;
@@ -68,6 +72,10 @@ public class TaiKhoan {
     @Override
     public String toString() {
         return "TaiKhoan [username=" + username + ", passWord=" + passWord + "]";
+    }
+
+    public void setUsername(String maNV) {
+       
     }
 
 }

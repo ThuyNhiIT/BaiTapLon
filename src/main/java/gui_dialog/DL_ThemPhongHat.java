@@ -260,18 +260,42 @@ public class DL_ThemPhongHat extends javax.swing.JDialog {
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
+    public boolean validData() {
+        String maPH = phatSinhMaPH();
+        String tenPH = txtTenPhong.getText();
+        String LP = radVIP.isSelected() ? "LP001" : "LP002";
+        String tinhTrang = radVIP.isSelected() ? "Trong" : "Dang bao tri";
+        if (!(tenPH.length() > 0 && tenPH.matches("^[VT]{1}[0-9]{3}$"))) {
+            JOptionPane.showMessageDialog(null, "Tên phòng theo dạng Txxx hoặc Vxxx với x là số");
+            return false;
+        }
+        if (!(radThuong.isSelected() || radVIP.isSelected())) {
+//            JOptionPane.showMessageDialog(null, "Vui lòng nhập đủ thông tin");
+            return false;
+        }
+        if (!(radTrong.isSelected() || radBaoTri.isSelected())) {
+//            JOptionPane.showMessageDialog(null, "Vui lòng nhập đủ thông tin");
+            return false;
+        }
+        return true;
+    }
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         ConnectDB db = ConnectDB.getInstance();
         try {
             db.connect();
+
             String maPH = phatSinhMaPH();
             String tenPH = txtTenPhong.getText();
             String LP = radVIP.isSelected() ? "LP001" : "LP002";
             String tinhTrang = radVIP.isSelected() ? "Trong" : "Dang bao tri";
-            PhongHat addPH = new PhongHat(maPH, tenPH, new LoaiPhong(LP), tinhTrang);
-            ph_dao.addPhongHat(addPH);
-            JOptionPane.showMessageDialog(null, "Thêm thành công");
+            if (validData()) {
+                PhongHat addPH = new PhongHat(maPH, tenPH, new LoaiPhong(LP), tinhTrang);
+                ph_dao.addPhongHat(addPH);
+                JOptionPane.showMessageDialog(null, "Thêm thành công");
+            } else {
+                JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin");
+            }
         } catch (SQLException ex) {
             Logger.getLogger(DL_ThemPhongHat.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -281,9 +305,11 @@ public class DL_ThemPhongHat extends javax.swing.JDialog {
         txtTenPhong.setText("");
         radThuong.setSelected(false);
         radVIP.setSelected(false);
-        txtTenPhong.requestFocus();
         radTrong.setSelected(false);
         radBaoTri.setSelected(false);
+        txtTenPhong.requestFocus();
+        group1.clearSelection();
+        group2.clearSelection();
     }//GEN-LAST:event_btnXoaRActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed

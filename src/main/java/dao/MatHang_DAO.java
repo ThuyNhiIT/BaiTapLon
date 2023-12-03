@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -168,4 +169,219 @@ public class MatHang_DAO {
         return n > 0;
     }
 
+    public static final String TABLE_NAME = "MatHang";
+    public static final String COLUMN_MatHang = "SoMatHang";
+
+    public int getTongSoMH() {
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        try {
+            String sql = "SELECT COUNT(*) AS SoMatHang FROM " + TABLE_NAME + " ";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            if (rs.next()) {
+                return rs.getInt(COLUMN_MatHang);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    /**
+     *
+     * @param nam
+     * @return Danh sách mặt hàng theo năm
+     */
+    public ArrayList<String[]> getMHNam(String nam) {
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        ArrayList<String[]> list = new ArrayList<>();
+        try {
+            String sql = "SELECT sp.maMH, sp.tenMH, SUM(od.soLuong) AS SoLuong, \n"
+                    + "ROUND(SUM(od.soLuong * sp.gia), 2) AS TongTien\n"
+                    + "FROM [dbo].[ChiTietHoaDonDV] od\n"
+                    + "JOIN HoaDon o ON od.maHD = o.maHD\n"
+                    + "JOIN [dbo].[MatHang] sp ON od.maMH = sp.maMH\n"
+                    + "WHERE YEAR(o.ngayLapHD) = ? "
+                    + "GROUP BY sp.maMH, sp.tenMH\n"
+                    + "ORDER BY sp.maMH ASC";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, nam);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String[] arr = new String[4];
+                arr[0] = rs.getString("MaMH");
+                arr[1] = rs.getString("TenMH");
+                arr[2] = rs.getString("SoLuong");
+                arr[3] = rs.getString("TongTien");
+
+                list.add(arr);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    public static final String COLUMN_TONG_TIEN_MH_NAM = "TongTatCaTien";
+
+    /**
+     *
+     * @param nam
+     * @return Tổng tiền mặt hàng theo năm
+     */
+    public int getTongTienNam(String nam) {
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        try {
+            String sql = "SELECT SUM(TongTien) AS TongTatCaTien\n"
+                    + "FROM\n"
+                    + "(\n"
+                    + "    SELECT ROUND(SUM(od.soLuong * sp.gia), 2) AS TongTien\n"
+                    + "    FROM [dbo].[ChiTietHoaDonDV] od\n"
+                    + "    JOIN HoaDon o ON od.maHD = o.maHD\n"
+                    + "    JOIN [dbo].[MatHang] sp ON od.maMH = sp.maMH\n"
+                    + "    WHERE YEAR(o.ngayLapHD) = ? \n"
+                    + "    GROUP BY sp.maMH, sp.tenMH\n"
+                    + ") AS Tong";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, nam);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(COLUMN_TONG_TIEN_MH_NAM);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    /**
+     *
+     * @param thang
+     * @param nam
+     * @return Danh sách mặt hàng theo tháng
+     */
+    public ArrayList<String[]> getMHThang(String thang, String nam) {
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        ArrayList<String[]> list = new ArrayList<>();
+        try {
+            String sql = "SELECT sp.maMH, sp.tenMH, SUM(od.soLuong) AS SoLuong, \n"
+                    + "ROUND(SUM(od.soLuong * sp.gia), 2) AS TongTien\n"
+                    + "FROM [dbo].[ChiTietHoaDonDV] od\n"
+                    + "JOIN HoaDon o ON od.maHD = o.maHD\n"
+                    + "JOIN [dbo].[MatHang] sp ON od.maMH = sp.maMH\n"
+                    + "WHERE MONTH(o.ngayLapHD) = ? AND YEAR(o.ngayLapHD) = ? "
+                    + "GROUP BY sp.maMH, sp.tenMH\n"
+                    + "ORDER BY sp.maMH ASC";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, thang);
+            stmt.setString(2, nam);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String[] arr = new String[4];
+                arr[0] = rs.getString("MaMH");
+                arr[1] = rs.getString("TenMH");
+                arr[2] = rs.getString("SoLuong");
+                arr[3] = rs.getString("TongTien");
+                list.add(arr);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static final String COLUMN_TONG_TIEN_MH_THANG = "TongTatCaTienThang";
+
+    /**
+     *
+     * @param thang
+     * @param nam
+     * @return Tổng tiền mặt hàng theo tháng
+     */
+    public int getTongTienThang(String thang, String nam) {
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        try {
+            String sql = "SELECT SUM(TongTien) AS TongTatCaTienThang\n"
+                    + "FROM\n"
+                    + "(\n"
+                    + "    SELECT ROUND(SUM(od.soLuong * sp.gia), 2) AS TongTien\n"
+                    + "    FROM [dbo].[ChiTietHoaDonDV] od\n"
+                    + "    JOIN HoaDon o ON od.maHD = o.maHD\n"
+                    + "    JOIN [dbo].[MatHang] sp ON od.maMH = sp.maMH\n"
+                    + "    WHERE MONTH(o.ngayLapHD) = ? AND YEAR(o.ngayLapHD) = ? \n"
+                    + "    GROUP BY sp.maMH, sp.tenMH\n"
+                    + ") AS Tong";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, thang);
+            stmt.setString(2, nam);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(COLUMN_TONG_TIEN_MH_THANG);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    
+    public ArrayList<String[]> getMHNgay(Date ngay) {
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        ArrayList<String[]> list = new ArrayList<>();
+        try {
+            String sql = "SELECT sp.maMH, sp.tenMH, SUM(od.soLuong) AS SoLuong, \n"
+                    + "ROUND(SUM(od.soLuong * sp.gia), 2) AS TongTien\n"
+                    + "FROM [dbo].[ChiTietHoaDonDV] od\n"
+                    + "JOIN HoaDon o ON od.maHD = o.maHD\n"
+                    + "JOIN [dbo].[MatHang] sp ON od.maMH = sp.maMH\n"
+                    + "WHERE (o.ngayLapHD) = ? "
+                    + "GROUP BY sp.maMH, sp.tenMH\n"
+                    + "ORDER BY sp.maMH ASC";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, ngay.toString());
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String[] arr = new String[4];
+                arr[0] = rs.getString("MaMH");
+                arr[1] = rs.getString("TenMH");
+                arr[2] = rs.getString("SoLuong");
+                arr[3] = rs.getString("TongTien");
+                list.add(arr);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    
+       public static final String COLUMN_TONG_TIEN_MH_NGAY = "TongTatCaTienNgay";
+       public int getTongTienNgay(Date ngay) {
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        try {
+            String sql = "SELECT SUM(TongTien) AS TongTatCaTienNgay\n"
+                    + "FROM\n"
+                    + "(\n"
+                    + "    SELECT ROUND(SUM(od.soLuong * sp.gia), 2) AS TongTien\n"
+                    + "    FROM [dbo].[ChiTietHoaDonDV] od\n"
+                    + "    JOIN HoaDon o ON od.maHD = o.maHD\n"
+                    + "    JOIN [dbo].[MatHang] sp ON od.maMH = sp.maMH\n"
+                    + "    WHERE (o.ngayLapHD) = ?  \n"
+                    + "    GROUP BY sp.maMH, sp.tenMH\n"
+                    + ") AS Tong";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, ngay.toString());
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(COLUMN_TONG_TIEN_MH_NGAY);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

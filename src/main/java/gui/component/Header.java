@@ -2,6 +2,8 @@ package gui.component;
 
 import entity.NhanVien;
 import gui.form.Form_Login;
+import gui.main.Main;
+import gui_dialog.DL_DoiMatKhau;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -14,6 +16,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.ImageIcon;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 /**
@@ -25,7 +31,7 @@ import javax.swing.Timer;
 public class Header extends javax.swing.JPanel {
 
     private boolean isMenuOpen = false; // Ban đầu, menu chưa mở.
-    
+    private JPopupMenu popupMenu;
 
     /**
      * Creates new form Header
@@ -35,6 +41,39 @@ public class Header extends javax.swing.JPanel {
         setOpaque(false);
         lock();
         setTenNhanVien();
+        
+        popupMenu = new JPopupMenu();
+        JMenuItem item1 = new JMenuItem("Đổi mật khẩu");
+        JMenuItem item2 = new JMenuItem("Đăng xuất");
+        
+        item1.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                 new DL_DoiMatKhau().setVisible(true);
+            }
+            
+        });
+        
+        item2.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int option = JOptionPane.showConfirmDialog(Header.this, "Bạn có chắc chắc muốn đăng xuất ?",
+                        "Xác nhận đăng xuất", JOptionPane.YES_NO_OPTION);
+                if(option == JOptionPane.YES_OPTION){
+                    Form_Login loginForm = new Form_Login();
+                    loginForm.setVisible(true);
+
+                SwingUtilities.getWindowAncestor(Header.this).dispose();// đóng cửa sổ hiện tại lại (nếu có)
+                }  
+            }
+            
+        });
+        
+        popupMenu.add(item1);
+        popupMenu.add(item2);
+        
+        btnChiTietNhanVien.setComponentPopupMenu(popupMenu);
+        
     }
     public void setTenNhanVien(){
         NhanVien nhanVienDangNhap = Form_Login.getNhanVienDangNhap();
@@ -152,10 +191,8 @@ public class Header extends javax.swing.JPanel {
     }//GEN-LAST:event_btnMenuActionPerformed
 
     private void btnChiTietNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietNhanVienActionPerformed
-
-
+        popupMenu.show(btnChiTietNhanVien, 0, btnChiTietNhanVien.getHeight());// Hiên thị popup
     }//GEN-LAST:event_btnChiTietNhanVienActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.swing.ButtonGradient btnChiTietNhanVien;
