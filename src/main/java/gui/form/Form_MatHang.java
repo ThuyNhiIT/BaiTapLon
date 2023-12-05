@@ -50,19 +50,15 @@ public class Form_MatHang extends javax.swing.JPanel implements MouseListener {
                             Double gia = Double.parseDouble(tblMatHang.getValueAt(rowIndex, 2).toString());
                             Boolean trangThai = Boolean.parseBoolean(tblMatHang.getValueAt(rowIndex, 3).toString());
 
-                            // Tạo đối tượng MatHang từ dữ liệu đã lấy
-                            System.out.println(maHang);
-                            System.out.println(tenHang);
-                            System.out.println(gia);
+                           
                             MatHang mh = new MatHang(maHang, tenHang, gia, trangThai);
-                            tblMatHang.setValueAt(tenHang, rowIndex, 1);
-                            tblMatHang.setValueAt(gia, rowIndex, 2);
-                            tblMatHang.setValueAt(trangThai, rowIndex, 3);
+
                             if (mh_dao.editMatHang(mh)) {
-                                System.out.println("Sửa thành công");
+                                tblMatHang.setValueAt(tenHang, rowIndex, 1);
+                                tblMatHang.setValueAt(gia, rowIndex, 2);
+                                tblMatHang.setValueAt(trangThai, rowIndex, 3);
                                 JOptionPane.showMessageDialog(null, "Sửa thành công");
                             } else {
-                                System.out.println("Sửa thất bại");
                                 JOptionPane.showMessageDialog(null, "Sửa thất bại");
                             }
                         }

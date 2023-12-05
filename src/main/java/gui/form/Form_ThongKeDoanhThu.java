@@ -91,7 +91,7 @@ public class Form_ThongKeDoanhThu extends javax.swing.JPanel {
         List<HoaDon> dsHoaDon = hd_dao.getalltbHoaDon();
         int stt = 1;
         for (HoaDon hd : dsHoaDon) {
-            dtmhd.addRow(new Object[]{stt++ + "", hd.getMaHD(), hd.getNgayLapHD(), hd.getKhachHang().getMaKH(), hd.getNhanVien().getMaNV(), hd.getTongTien()});
+            dtmhd.addRow(new Object[]{stt++ + "", hd.getMaHD(), hd.getNgayLapHD(), hd.getKhachHang().getMaKH(), hd.getNhanVien().getMaNV(), hd.getMaKM().getMaKM(), hd.getTongTien()});
         }
     }
 
@@ -218,7 +218,7 @@ public class Form_ThongKeDoanhThu extends javax.swing.JPanel {
 
             },
             new String [] {
-                "STT", "Mã hóa đơn", "Ngày lập hóa đơn", "Nhân viên", "Khách hàng", "Tổng hóa đơn"
+                "STT", "Mã hóa đơn", "Ngày lập hóa đơn", "Nhân viên", "Khách hàng", "Khuyến mãi", "Tổng hóa đơn"
             }
         ));
         tblTKDT.setRowHeight(40);
@@ -358,7 +358,7 @@ public class Form_ThongKeDoanhThu extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Không có hóa đơn trong tháng");
                 removeData();
             } else {
-                dtmhd.addRow(new Object[]{stt++ + "", hd.getMaHD(), hd.getNgayLapHD(), hd.getKhachHang().getMaKH(), hd.getNhanVien().getMaNV(), hd.getTongTien()});
+                dtmhd.addRow(new Object[]{stt++ + "", hd.getMaHD(), hd.getNgayLapHD(), hd.getKhachHang().getMaKH(), hd.getNhanVien().getMaNV(), hd.getMaKM().getMaKM(), hd.getTongTien()});
             }
         }
         HoaDon_DAO HD = new HoaDon_DAO();
@@ -380,12 +380,10 @@ public class Form_ThongKeDoanhThu extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Không có hóa đơn trong tháng");
                 removeData();
             } else {
-                dtmhd.addRow(new Object[]{stt++ + "", hd.getMaHD(), hd.getNgayLapHD(), hd.getKhachHang().getMaKH(), hd.getNhanVien().getMaNV(), hd.getTongTien()});
+                dtmhd.addRow(new Object[]{stt++ + "", hd.getMaHD(), hd.getNgayLapHD(), hd.getKhachHang().getMaKH(), hd.getNhanVien().getMaNV(), hd.getMaKM().getMaKM(), hd.getTongTien()});
             }
         }
 
-//        ArrayList<String[]> data = hd_dao.getDoanhThuTungThangNam(nam); // Đặt năm tương ứng
-//        pnlBieuDo.removeAll();
         BieuDo(new ArrayList<>(), nam);
         /**
          * Load tiền
@@ -396,36 +394,15 @@ public class Form_ThongKeDoanhThu extends javax.swing.JPanel {
         double tongTien = HD.getTongTienNam(nam);
         lblTongTien.setText(String.valueOf(tongTien));
     }//GEN-LAST:event_cmbTKChiTietActionPerformed
-//    private void BieuDo(ArrayList<String[]> list, String nam) {
-//        chart.removeAllData();
-//        pnlChart.removeAll();
-//        pnlBieuDo.removeAll();
-//        list = hd_dao.getDoanhThuTungThangNam(nam);
-//        chart.addLegend("Tổng tiền", new Color(189, 135, 245));
-//        for (String[] arr : list) {
-//            String month = arr[0];
-//            double total = Double.parseDouble(arr[1]);
-//            chart.addData(new ModelChart(month, new double[]{total}));
-//        }
-//        pnlChart.add(chart);
-//        pnlBieuDo.removeAll();
-//        pnlBieuDo.add(pnlChart, BorderLayout.CENTER);
-//        pnlBieuDo.revalidate();
-//    }
 
     private void BieuDo(ArrayList<String[]> list, String nam) {
         chart.removeAllData();
         System.out.println("1,2");
-// Xóa dữ liệu trong biểu đồ
-//        pnlChart.removeAll(); // Xóa các thành phần trong pnlChart
-//        pnlBieuDo.removeAll(); // Xóa các thành phần trong pnlBieuDo
+
         chart.clear();
         System.out.println("1,3");
         pnlChart.removeAll();
 
-        // Khởi tạo đối tượng biểu đồ và đính kèm vào pnlChart (nếu chưa được thực hiện trước đó)
-//        chart = new Chart(); // Thay thế Chart() bằng lớp biểu đồ mà bạn đang sử dụng
-        // Tạo biểu đồ mới
         list = hd_dao.getDoanhThuTungThangNam(nam);
         chart.addLegend("Tổng tiền", new Color(189, 135, 245));
         for (String[] arr : list) {
@@ -433,12 +410,7 @@ public class Form_ThongKeDoanhThu extends javax.swing.JPanel {
             double total = Double.parseDouble(arr[1]);
             chart.addData(new ModelChart(month, new double[]{total}));
         }
-
         pnlChart.add(chart);
-//        System.out.println("1,4");
-//
-//        pnlBieuDo.add(pnlChart, BorderLayout.CENTER);
-//        pnlBieuDo.revalidate();
     }
 
     private void txtDatePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtDatePropertyChange
@@ -469,7 +441,7 @@ public class Form_ThongKeDoanhThu extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Không có hóa đơn trong ngày");
                 removeData();
             } else {
-                dtmhd.addRow(new Object[]{stt++ + "", hd.getMaHD(), hd.getNgayLapHD(), hd.getKhachHang().getMaKH(), hd.getNhanVien().getMaNV(), hd.getTongTien()});
+                dtmhd.addRow(new Object[]{stt++ + "", hd.getMaHD(), hd.getNgayLapHD(), hd.getKhachHang().getMaKH(), hd.getNhanVien().getMaNV(), hd.getMaKM().getMaKM(), hd.getTongTien()});
             }
 
         }

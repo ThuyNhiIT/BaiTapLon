@@ -1,4 +1,3 @@
-
 package dao;
 
 import com.toedter.calendar.JDateChooser;
@@ -34,14 +33,14 @@ public class HoaDon_DAO {
 
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
-                String maHD = rs.getString(1);
+               String maHD = rs.getString(1);
                 java.sql.Date ngayLapHD_sql = rs.getDate(2);
                 LocalDate ngayLapHD = ngayLapHD_sql.toLocalDate();
                 String maKH = rs.getString(3);
                 String maNV = rs.getString(4);
-                double tongTien = rs.getDouble(5);
-
-                HoaDon hd = new HoaDon(maHD, ngayLapHD, new KhachHang(maKH), new NhanVien(maNV), tongTien);
+                String maKM = rs.getString(5);
+                double tongTien = rs.getDouble(6);
+                HoaDon hd = new HoaDon(maHD, ngayLapHD, new KhachHang(maKH), new NhanVien(maNV), new KhuyenMai(maKM), tongTien);
                 dsHD.add(hd);
             }
         } catch (SQLException e) {
@@ -56,12 +55,13 @@ public class HoaDon_DAO {
         PreparedStatement stmt = null;
         int n = 0;
         try {
-            stmt = con.prepareStatement("INSERT INTO HoaDon VALUES (?, ?, ?, ?, ? )");
+            stmt = con.prepareStatement("INSERT INTO HoaDon VALUES (?, ?, ?, ?, ?, ? )");
             stmt.setString(1, hd.getMaHD());
             stmt.setDate(2, java.sql.Date.valueOf(hd.getNgayLapHD()));
             stmt.setString(3, hd.getKhachHang().getMaKH());
             stmt.setString(4, hd.getNhanVien().getMaNV());
-            stmt.setDouble(5, hd.getTongTien());
+            stmt.setString(5, hd.getMaKM().getMaKM());
+            stmt.setDouble(6, hd.getTongTien());
             n = stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -154,15 +154,16 @@ public class HoaDon_DAO {
             statement.setString(1, maKH);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                String maHD = rs.getString(1);
+              String maHD = rs.getString(1);
                 java.sql.Date ngayLapHD_sql = rs.getDate(2);
                 LocalDate ngayLapHD = ngayLapHD_sql.toLocalDate();
                 String maKH1 = rs.getString(3);
                 String maNV = rs.getString(4);
-                double tongTien = rs.getDouble(5);
-
-                HoaDon hd = new HoaDon(maHD, ngayLapHD, new KhachHang(maKH1), new NhanVien(maNV), tongTien);
+                String maKM = rs.getString(5);
+                double tongTien = rs.getDouble(6);
+                HoaDon hd = new HoaDon(maHD, ngayLapHD, new KhachHang(maKH1), new NhanVien(maNV), new KhuyenMai(maKM), tongTien);
                 dsHD.add(hd);
+                
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -266,6 +267,7 @@ public class HoaDon_DAO {
                     + "    ngayLapHD,\n"
                     + "    maKH,\n"
                     + "    maNV,\n"
+                    + "    maKM,\n"
                     + "    tongTien\n"
                     + "\n"
                     + "FROM HoaDon\n"
@@ -278,8 +280,9 @@ public class HoaDon_DAO {
                 LocalDate ngayLapHD = ngayLapHD_sql.toLocalDate();
                 String maKH = rs.getString(3);
                 String maNV = rs.getString(4);
-                double tongTien = rs.getDouble(5);
-                HoaDon hd = new HoaDon(maHD, ngayLapHD, new KhachHang(maKH), new NhanVien(maNV), tongTien);
+                String maKM = rs.getString(5);
+                double tongTien = rs.getDouble(6);
+                HoaDon hd = new HoaDon(maHD, ngayLapHD, new KhachHang(maKH), new NhanVien(maNV), new KhuyenMai(maKM), tongTien);
                 dsHD.add(hd);
             }
         } catch (SQLException e) {
@@ -299,7 +302,7 @@ public class HoaDon_DAO {
         Connection con = ConnectDB.getConnection();
         ArrayList<HoaDon> dsHD = new ArrayList<HoaDon>();
         try {
-            String sql = "SELECT maHD, ngayLapHD, maKH, maNV,tongTien\n"
+            String sql = "SELECT maHD, ngayLapHD, maKH, maNV, maKM, tongTien\n"
                     + "FROM HoaDon\n"
                     + "WHERE (ngayLapHD) = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
@@ -309,12 +312,13 @@ public class HoaDon_DAO {
             // Iterate through the result set and create HoaDon objects for each invoice
             while (rs.next()) {
                 String maHD = rs.getString(1);
-                LocalDate ngayLapHD = rs.getDate(2).toLocalDate();
+                java.sql.Date ngayLapHD_sql = rs.getDate(2);
+                LocalDate ngayLapHD = ngayLapHD_sql.toLocalDate();
                 String maKH = rs.getString(3);
                 String maNV = rs.getString(4);
-                double tongTien = rs.getDouble(5);
-
-                HoaDon hd = new HoaDon(maHD, ngayLapHD, new KhachHang(maKH), new NhanVien(maNV), tongTien);
+                String maKM = rs.getString(5);
+                double tongTien = rs.getDouble(6);
+                HoaDon hd = new HoaDon(maHD, ngayLapHD, new KhachHang(maKH), new NhanVien(maNV), new KhuyenMai(maKM), tongTien);
                 dsHD.add(hd);
             }
         } catch (SQLException e) {
@@ -365,17 +369,18 @@ public class HoaDon_DAO {
         Connection con = ConnectDB.getConnection();
         ArrayList<HoaDon> dsHD = new ArrayList<HoaDon>();
         try {
-            String sql = "SELECT maHD, ngayLapHD, maKH, maNV, tongTien  FROM HoaDon WHERE MONTH(ngayLapHD) = " + thang + " AND YEAR(ngayLapHD) = " + nam + " ;";
+            String sql = "SELECT maHD, ngayLapHD, maKH, maNV, maKM, tongTien  FROM HoaDon WHERE MONTH(ngayLapHD) = " + thang + " AND YEAR(ngayLapHD) = " + nam + " ;";
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                String maHD = rs.getString(1);
-                LocalDate ngayLapHD = rs.getDate(2).toLocalDate();
+               String maHD = rs.getString(1);
+                java.sql.Date ngayLapHD_sql = rs.getDate(2);
+                LocalDate ngayLapHD = ngayLapHD_sql.toLocalDate();
                 String maKH = rs.getString(3);
                 String maNV = rs.getString(4);
-                double tongTien = rs.getDouble(5);
-
-                HoaDon hd = new HoaDon(maHD, ngayLapHD, new KhachHang(maKH), new NhanVien(maNV), tongTien);
+                String maKM = rs.getString(5);
+                double tongTien = rs.getDouble(6);
+                HoaDon hd = new HoaDon(maHD, ngayLapHD, new KhachHang(maKH), new NhanVien(maNV), new KhuyenMai(maKM), tongTien);
                 dsHD.add(hd);
             }
         } catch (SQLException e) {

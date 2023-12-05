@@ -175,13 +175,13 @@ public class Form_ThongKeMatHang extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(160, 160, 160)
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbTKTheo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbTKTheo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(172, 172, 172)
-                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbTKChiTiet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbTKChiTiet, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(139, 139, 139))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHeader1Layout.createSequentialGroup()
                 .addGap(415, 415, 415)
@@ -244,8 +244,8 @@ public class Form_ThongKeMatHang extends javax.swing.JPanel {
             .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel7Layout.createSequentialGroup()
                     .addGap(5, 5, 5)
-                    .addComponent(scr1, javax.swing.GroupLayout.DEFAULT_SIZE, 1006, Short.MAX_VALUE)
-                    .addGap(6, 6, 6)))
+                    .addComponent(scr1, javax.swing.GroupLayout.DEFAULT_SIZE, 988, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -287,7 +287,7 @@ public class Form_ThongKeMatHang extends javax.swing.JPanel {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scr2, javax.swing.GroupLayout.DEFAULT_SIZE, 980, Short.MAX_VALUE)
+                .addComponent(scr2, javax.swing.GroupLayout.DEFAULT_SIZE, 982, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -315,12 +315,10 @@ public class Form_ThongKeMatHang extends javax.swing.JPanel {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(materialTabbed5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(materialTabbed5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(16, 16, 16))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -572,37 +570,7 @@ public class Form_ThongKeMatHang extends javax.swing.JPanel {
         double tongTienMH = ctmh.getTongTienNgay(sqlDate);
         txtTong.setText(String.valueOf(tongTienMH));
 
-        /**
-         * Vẽ biểu đồ
-         */
-//        DefaultPieDataset dataset = new DefaultPieDataset();
-//        pnlChart.removeAll();
-//        pnl.removeAll();
-//        pieChart1.removeAll();
-//        // Mảng các màu sắc
-//        int[][] rgbValues = {
-//            {41, 173, 86},
-//            {205, 13, 13},
-//            {255, 153, 153},
-//            {166, 208, 238},
-//            {189, 135, 245}
-//        // Thêm các mã màu khác tại đây nếu cần
-//        };
-//
-//        for (int i = 0; i < 5 && i < dsDVNgay.size(); i++) {
-//
-//            String[] item = dsDVNgay.get(i);
-//            String tenMH = item[1];
-//            double tyle = Double.parseDouble(item[3]);
-//            int[] rgb = rgbValues[i % rgbValues.length];
-//            Color color = new Color(rgb[0], rgb[1], rgb[2]);
-//
-//            dataset.setValue(tenMH, tyle);
-//            pieChart1.addData(new ModelPieChart(tenMH, tyle, color));
-//
-//        }
-//        pnl.add(pieChart1);
-//        pnlChart.add(pnl);
+      
 
     }//GEN-LAST:event_txtDatePropertyChange
 
@@ -617,7 +585,7 @@ public class Form_ThongKeMatHang extends javax.swing.JPanel {
         ArrayList<String[]> dsDVThang = ctdv_dao.getTOPDVThang(thang, nam);
         removeData();
         pieChart1.removeAll();
-        System.out.println("Cập nhật biểu đồ 4");
+      ;
         ChiTietHoaDonDichVu_DAO cthd = new ChiTietHoaDonDichVu_DAO();
         int stt = 1;
         for (int i = 0; i < 5 && i < dsDVThang.size(); i++) {
@@ -668,16 +636,16 @@ public class Form_ThongKeMatHang extends javax.swing.JPanel {
             Color color = new Color(rgb[0], rgb[1], rgb[2]);
             dataset.setValue(tenMH, tyle);
             pieChart1.removeAll();
-            System.out.println("Xóa biểu đồ");
+           
             pieChart1.addData(new ModelPieChart(tenMH, tyle, color));
-            System.out.println("Cập nhật biểu đồ");
+           
         }
         pnlChart.removeAll();
-        System.out.println("Xóa biểu đồ 2");
+      
         pnlChart.add(pieChart1);
-        System.out.println("Cập nhật biểu đồ 2");
+       
         pnlBieuDo.add(pnlChart);
-        System.out.println("Cập nhật biểu đồ 3");
+       
         pnlBieuDo.validate();
     }//GEN-LAST:event_cmbTKTheoActionPerformed
 
