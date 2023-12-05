@@ -352,6 +352,7 @@ public class DL_KiemTravsAddKH extends javax.swing.JDialog {
         LocalDate ngayLapHD = LocalDate.now();
         String maKH = getMaKHPublic();
         String maNV = nhanVienDangNhap.getMaNV();
+        // tôi nghĩ là lỗi ở đây
         double tongTien = 0;
         HoaDon hd = new HoaDon(maHD, ngayLapHD, new KhachHang(maKH), new NhanVien(maNV), tongTien);
         return hd;

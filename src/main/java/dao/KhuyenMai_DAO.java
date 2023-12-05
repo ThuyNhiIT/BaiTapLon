@@ -50,7 +50,7 @@ public class KhuyenMai_DAO {
     }
 
     /**
-     * 
+     *
      * @param km
      * @return Thêm khuyến mãi
      */
@@ -73,4 +73,47 @@ public class KhuyenMai_DAO {
         return n > 0;
     }
 
+    public boolean editKhuyenMai(KhuyenMai km) {
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement stmt = null;
+        int n = 0;
+        try {
+            stmt = con.prepareStatement("update KhuyenMai set moTa=?, batDau=?, ketThuc=?,  phanTram=? where maKM=?");
+            stmt.setString(1, km.getMoTa());
+            LocalDate gioBatDau = km.getGioBatDau();
+            java.sql.Date gioBatDauSql = java.sql.Date.valueOf(gioBatDau);
+            stmt.setDate(2, gioBatDauSql);
+            LocalDate gioKetThuc = km.getGioKetThuc();
+            java.sql.Date gioKetThucSql = java.sql.Date.valueOf(gioKetThuc);
+            stmt.setDate(3, gioKetThucSql);
+            stmt.setDouble(4, km.getPhanTram());
+            stmt.setString(5, km.getMaKM());
+            n = stmt.executeUpdate();
+            System.out.println("Cập nhật");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return n > 0;
+    }
+    // Xóa mặt hàng
+
+    public boolean DeleteKhuyenMai(String maKM) {
+        Connection con = ConnectDB.getInstance().getConnection();
+        PreparedStatement stmt = null;
+        int n = 0;
+        try {
+
+            stmt = con.prepareStatement("update HoaDon set maKM = ? where maKM = ?");
+            stmt.setString(1, null);
+            stmt.setString(2, maKM);
+            n = stmt.executeUpdate();
+            stmt = con.prepareStatement("delete KhuyenMai from KhuyenMai where maKM=?");
+            stmt.setString(1, maKM);
+            n = stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return n > 0;
+    }
 }
