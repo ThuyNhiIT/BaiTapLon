@@ -27,6 +27,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -154,8 +155,6 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
     }
 
     public void phongTrong() {
-        // Xóa tất cả phòng trên giao diện trước khi thêm mới
-        pnlPhongTrong.removeAll();
         ConnectDB db = ConnectDB.getInstance();
         try {
             db.connect();
@@ -164,9 +163,7 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         }
         // Lấy danh sách phòng có trạng thái "Trong" từ cơ sở dữ liệu
         ArrayList<PhongHat> phongTrongList = ph_dao.getPhongByTinhTrang("Trong");
-        // check tên phòng all
-
-
+        // check tên phòng all phòng có trong ds đặt trước
         Icon icon;
         Icon iconPhongThuong = new ImageIcon(getClass().getResource("/icon/microphone.png"));
         Icon iconPhongVip = new ImageIcon(getClass().getResource("/icon/microphonevip.png"));
@@ -177,13 +174,12 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         List<PhongHat> phongCanLoaiBo = new ArrayList<>();
 
         for (DonDatPhong ddp : dsDDP) {
-            if (ddp.getNgayNhan().toLocalDate().equals(thoiGianBatDau.getDatePicker().getDate())) {
-                int gioNhan = ddp.getNgayNhan().getHour();
-                int gioDat = thoiGianBatDau.getTimePicker().getTime().getHour();
 
+            if (ddp.getNgayNhan().toLocalDate().equals(LocalDateTime.now().toLocalDate())) {
+                int gioNhan = ddp.getNgayNhan().getHour();
+                int gioDat = LocalDateTime.now().getHour();
                 if (!(gioDat - gioNhan >= 6 || gioDat - gioNhan <= -6)) {
                     maPhongDuocDatTruoc = ddp.getPhongHat().getMaPhong();
-
                     for (PhongHat phong : phongTrongList) {
                         if (phong.getMaPhong().equals(maPhongDuocDatTruoc)) {
                             phongCanLoaiBo.add(phong);
@@ -202,9 +198,9 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
             } else {
                 icon = iconPhongVip;
             }
-//            System.out.println("PhongTrong" +phong.getTenPhong());
             addPhongTrong(new ModelRoom(phong.getMaPhong(), phong.getTenPhong(), icon, null, null));
         }
+    }
 //        // Thêm từng phòng có trạng thái "Trong" vào giao diện
 //        for (PhongHat phong : phongTrongList) {
 //            String loaiPhong = phong.getLoaiPhong().getMaLoaiPhong();
@@ -216,9 +212,9 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
 //            addPhongTrong(new ModelRoom(phong.getMaPhong(), phong.getTenPhong(), icon,null,null));
 //
 //        }
-
-
-    }
+//
+//
+//    }
 
     private void setLoaiPhong(PhongHat ph) {
         if (ph.getLoaiPhong().getMaLoaiPhong().equals("LP001")) {
@@ -401,6 +397,12 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         chonDV.setVisible(true);
     }
 
+    public void openDL_ThemDV() {
+        DL_ThemDV themDV = new DL_ThemDV((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
+        themDV.setLocationRelativeTo(Form_QuanLyDatPhong.this);
+        themDV.setVisible(true);
+    }
+
     public void openDL_CheckKH() {
         DL_KiemTravsAddKHforDatPhong checkKH = new DL_KiemTravsAddKHforDatPhong((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
         checkKH.setLocationRelativeTo(Form_QuanLyDatPhong.this);
@@ -412,18 +414,21 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         datPhong.setLocationRelativeTo(Form_QuanLyDatPhong.this);
         datPhong.setVisible(true);
     }
-    public void openDL_CheckKHThueNhieuPhong(){
+
+    public void openDL_CheckKHThueNhieuPhong() {
         DL_CheckKHforDatNhieuPhong checkKH = new DL_CheckKHforDatNhieuPhong((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
         checkKH.setLocationRelativeTo(Form_QuanLyDatPhong.this);
         checkKH.setVisible(true);
 
     }
-    public void openDL_DatNhieuPhong(){
+
+    public void openDL_DatNhieuPhong() {
         DL_ChonNhieuPhong datNhieuPhong = new DL_ChonNhieuPhong((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
         datNhieuPhong.setLocationRelativeTo(Form_QuanLyDatPhong.this);
         datNhieuPhong.setVisible(true);
     }
-    public void openDL_ThanhToanNhieuPhong(){
+
+    public void openDL_ThanhToanNhieuPhong() {
         DL_ThanhToanNhieuphong thanhToanNhieuPhong = new DL_ThanhToanNhieuphong((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
         thanhToanNhieuPhong.setLocationRelativeTo(Form_QuanLyDatPhong.this);
         thanhToanNhieuPhong.setVisible(true);
@@ -462,12 +467,12 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         javax.swing.GroupLayout panelPopUpMoreDatPhong1Layout = new javax.swing.GroupLayout(panelPopUpMoreDatPhong1);
         panelPopUpMoreDatPhong1.setLayout(panelPopUpMoreDatPhong1Layout);
         panelPopUpMoreDatPhong1Layout.setHorizontalGroup(
-            panelPopUpMoreDatPhong1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+                panelPopUpMoreDatPhong1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 100, Short.MAX_VALUE)
         );
         panelPopUpMoreDatPhong1Layout.setVerticalGroup(
-            panelPopUpMoreDatPhong1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+                panelPopUpMoreDatPhong1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 100, Short.MAX_VALUE)
         );
 
         jScrollPane3.setBorder(null);
@@ -479,12 +484,12 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         javax.swing.GroupLayout pnlSearchLayout = new javax.swing.GroupLayout(pnlSearch);
         pnlSearch.setLayout(pnlSearchLayout);
         pnlSearchLayout.setHorizontalGroup(
-            pnlSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+                pnlSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE)
         );
         pnlSearchLayout.setVerticalGroup(
-            pnlSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 38, Short.MAX_VALUE)
+                pnlSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 38, Short.MAX_VALUE)
         );
 
         pnlRoom.setBackground(new java.awt.Color(0, 153, 102));
@@ -492,30 +497,30 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         javax.swing.GroupLayout pnlRoomLayout = new javax.swing.GroupLayout(pnlRoom);
         pnlRoom.setLayout(pnlRoomLayout);
         pnlRoomLayout.setHorizontalGroup(
-            pnlRoomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1038, Short.MAX_VALUE)
+                pnlRoomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 1038, Short.MAX_VALUE)
         );
         pnlRoomLayout.setVerticalGroup(
-            pnlRoomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 533, Short.MAX_VALUE)
+                pnlRoomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 533, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout pnlPhongChoLayout = new javax.swing.GroupLayout(pnlPhongCho);
         pnlPhongCho.setLayout(pnlPhongChoLayout);
         pnlPhongChoLayout.setHorizontalGroup(
-            pnlPhongChoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPhongChoLayout.createSequentialGroup()
-                .addComponent(pnlRoom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                pnlPhongChoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(pnlSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPhongChoLayout.createSequentialGroup()
+                                .addComponent(pnlRoom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())
         );
         pnlPhongChoLayout.setVerticalGroup(
-            pnlPhongChoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlPhongChoLayout.createSequentialGroup()
-                .addComponent(pnlSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlRoom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 120, Short.MAX_VALUE))
+                pnlPhongChoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlPhongChoLayout.createSequentialGroup()
+                                .addComponent(pnlSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(pnlRoom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 120, Short.MAX_VALUE))
         );
 
         jScrollPane3.setViewportView(pnlPhongCho);
@@ -530,12 +535,12 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         javax.swing.GroupLayout pnlPhongTrongLayout = new javax.swing.GroupLayout(pnlPhongTrong);
         pnlPhongTrong.setLayout(pnlPhongTrongLayout);
         pnlPhongTrongLayout.setHorizontalGroup(
-            pnlPhongTrongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1044, Short.MAX_VALUE)
+                pnlPhongTrongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 1044, Short.MAX_VALUE)
         );
         pnlPhongTrongLayout.setVerticalGroup(
-            pnlPhongTrongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 697, Short.MAX_VALUE)
+                pnlPhongTrongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 697, Short.MAX_VALUE)
         );
 
         jScrollPane1.setViewportView(pnlPhongTrong);
@@ -549,12 +554,12 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         javax.swing.GroupLayout pnlPhongDangSuDungLayout = new javax.swing.GroupLayout(pnlPhongDangSuDung);
         pnlPhongDangSuDung.setLayout(pnlPhongDangSuDungLayout);
         pnlPhongDangSuDungLayout.setHorizontalGroup(
-            pnlPhongDangSuDungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1044, Short.MAX_VALUE)
+                pnlPhongDangSuDungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 1044, Short.MAX_VALUE)
         );
         pnlPhongDangSuDungLayout.setVerticalGroup(
-            pnlPhongDangSuDungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 697, Short.MAX_VALUE)
+                pnlPhongDangSuDungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 697, Short.MAX_VALUE)
         );
 
         jScrollPane2.setViewportView(pnlPhongDangSuDung);
@@ -593,41 +598,41 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         javax.swing.GroupLayout pnlSearch1Layout = new javax.swing.GroupLayout(pnlSearch1);
         pnlSearch1.setLayout(pnlSearch1Layout);
         pnlSearch1Layout.setHorizontalGroup(
-            pnlSearch1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSearch1Layout.createSequentialGroup()
-                .addGap(219, 219, 219)
-                .addComponent(lblNgayNhanPhong)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(thoiGianBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnNgayDatPhong)
-                .addGap(36, 36, 36)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 263, Short.MAX_VALUE)
-                .addComponent(btnReloadDSphongDatTruoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                pnlSearch1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSearch1Layout.createSequentialGroup()
+                                .addGap(219, 219, 219)
+                                .addComponent(lblNgayNhanPhong)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(thoiGianBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnNgayDatPhong)
+                                .addGap(36, 36, 36)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 263, Short.MAX_VALUE)
+                                .addComponent(btnReloadDSphongDatTruoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
         );
         pnlSearch1Layout.setVerticalGroup(
-            pnlSearch1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlSearch1Layout.createSequentialGroup()
-                .addGroup(pnlSearch1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnReloadDSphongDatTruoc, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
-                    .addGroup(pnlSearch1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(pnlSearch1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlSearch1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1)
-                                .addComponent(thoiGianBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblNgayNhanPhong)
-                                .addComponent(btnNgayDatPhong))
-                            .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                pnlSearch1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlSearch1Layout.createSequentialGroup()
+                                .addGroup(pnlSearch1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(btnReloadDSphongDatTruoc, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                                        .addGroup(pnlSearch1Layout.createSequentialGroup()
+                                                .addContainerGap()
+                                                .addGroup(pnlSearch1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(pnlSearch1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(jLabel1)
+                                                                .addComponent(thoiGianBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(lblNgayNhanPhong)
+                                                                .addComponent(btnNgayDatPhong))
+                                                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addContainerGap())
         );
 
         jScrollPane4.setBorder(null);
@@ -637,12 +642,12 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         javax.swing.GroupLayout pnlDSPhongDatTruocLayout = new javax.swing.GroupLayout(pnlDSPhongDatTruoc);
         pnlDSPhongDatTruoc.setLayout(pnlDSPhongDatTruocLayout);
         pnlDSPhongDatTruocLayout.setHorizontalGroup(
-            pnlDSPhongDatTruocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1044, Short.MAX_VALUE)
+                pnlDSPhongDatTruocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 1044, Short.MAX_VALUE)
         );
         pnlDSPhongDatTruocLayout.setVerticalGroup(
-            pnlDSPhongDatTruocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 657, Short.MAX_VALUE)
+                pnlDSPhongDatTruocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 657, Short.MAX_VALUE)
         );
 
         jScrollPane4.setViewportView(pnlDSPhongDatTruoc);
@@ -650,16 +655,16 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlSearch1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1054, Short.MAX_VALUE)
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(pnlSearch1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1054, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(pnlSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE))
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(pnlSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         tabPhongDatTruoc.addTab("Phòng đặt trước ", jPanel1);
@@ -682,39 +687,39 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         javax.swing.GroupLayout pnlCoverLayout = new javax.swing.GroupLayout(pnlCover);
         pnlCover.setLayout(pnlCoverLayout);
         pnlCoverLayout.setHorizontalGroup(
-            pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlCoverLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(tabPhongDatTruoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCoverLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72)
-                .addComponent(btnMore, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+                pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlCoverLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(tabPhongDatTruoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCoverLayout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(72, 72, 72)
+                                .addComponent(btnMore, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18))
         );
         pnlCoverLayout.setVerticalGroup(
-            pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlCoverLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnMore, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tabPhongDatTruoc, javax.swing.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+                pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlCoverLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(btnMore, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tabPhongDatTruoc, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+                                .addGap(0, 0, 0))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlCover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(pnlCover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlCover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(pnlCover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -738,7 +743,8 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
 
             @Override
             public void thanhToanNhieuPhong() {
-        openDL_ThanhToanNhieuPhong();}
+                openDL_ThanhToanNhieuPhong();
+            }
 
         });
 

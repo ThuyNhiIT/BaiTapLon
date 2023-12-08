@@ -4,10 +4,7 @@ import connectDB.ConnectDB;
 import dao.ChiTietHoaDonDichVu_DAO;
 import dao.ChiTietHoaDonPhong_Dao;
 import dao.MatHang_DAO;
-import entity.ChiTietHoaDonDV;
-import entity.ChiTietHoaDonPhong;
-import entity.HoaDon;
-import entity.MatHang;
+import entity.*;
 import gui.form.Form_QuanLyDatPhong;
 import gui.swing.scrollbar.ScrollBarCustom;
 import gui.swing.table.PanelAction;
@@ -64,7 +61,9 @@ public class DL_ThemDV extends javax.swing.JDialog {
             @Override
             public void tangSoLuong(int row) {
                 currentSL = (int) dtmDVThem.getValueAt(row, 2);
-                gia = (double) dtmDVThem.getValueAt(row, 3);
+                mh_dao = new MatHang_DAO();
+                MatHang mh = mh_dao.findMatHang((String) dtmDVThem.getValueAt(row, 0));
+                gia = mh.getGia();
                 dtmDVThem.setValueAt(currentSL + 1, row, 2);
                 double newTotalPrice = (currentSL + 1) * gia;
                 dtmDVThem.setValueAt(newTotalPrice, row, 3);
@@ -73,7 +72,9 @@ public class DL_ThemDV extends javax.swing.JDialog {
             @Override
             public void giamSoLuong(int row) {
                 currentSL = (int) dtmDVThem.getValueAt(row, 2);
-                gia = (double) dtmDVThem.getValueAt(row, 3);
+                mh_dao = new MatHang_DAO();
+                MatHang mh = mh_dao.findMatHang((String) dtmDVThem.getValueAt(row, 0));
+                gia = mh.getGia();
                 if (currentSL > 1) {
                     dtmDVThem.setValueAt(currentSL - 1, row, 2);
                     double newTotalPrice = (currentSL - 1) * gia;
@@ -207,8 +208,7 @@ private void addToDVThemTable(MatHang selectedMatHang) {
             cthddv_dao = new ChiTietHoaDonDichVu_DAO();
            //
             db.connect();
-            ArrayList<ChiTietHoaDonDV> ds = cthddv_dao.getalltbChiTietHoaDonDV();
-
+            ArrayList<ChiTietHoaDonDV> ds = cthddv_dao.getAllTheMaHDDVforRoomArray(maHD, frmPH.getRoomSelected());
             for (ChiTietHoaDonDV cthddv : ds) {
                 if (cthddv.getHoaDon().getMaHD().equals(maHD)) {
                     db.connect();
@@ -481,14 +481,16 @@ private void addToDVThemTable(MatHang selectedMatHang) {
             List<MatHangModel> dvThemData = getDVThemData();
             for (MatHangModel data : dvThemData) {
                 ChiTietHoaDonDV cthddv = new ChiTietHoaDonDV();
-                ChiTietHoaDonDV cthddvadd = new ChiTietHoaDonDV(new HoaDon(maHD), new MatHang(data.getMaMH()), data.getSL(), data.getGia());
+                ChiTietHoaDonDV cthddvadd = new ChiTietHoaDonDV(new HoaDon(maHD), new MatHang(data.getMaMH()),new PhongHat(frmPH.getRoomSelected()), data.getSL(), data.getGia());
+
                 db.connect();
-              // xóa mặt hàng nếu nếu trong table có mà trong database không có , lấy mặt hàng trong table so sánh vs mặt hàng trong database
-                if (cthddv_dao.findChiTietHoaDonDV(maHD, data.getMaMH()) == null) {
+//               xóa mặt hàng nếu nếu trong table có mà trong database không có , lấy mặt hàng trong table so sánh vs mặt hàng trong database
+                if (cthddv_dao.findChiTietHoaDonDVforThem(maHD, data.getMaMH(), frmPH.getRoomSelected()) == null) {
                     cthddv_dao.createChiTietHoaDonDV(cthddvadd);
                 }
                 // nếu mặt hàng trong table có mà trong database có thì update lại số lượng
                 else {
+                    System.out.println(cthddvadd);
                     cthddv_dao.updateChiTietHoaDonDV(cthddvadd);
                 }
 

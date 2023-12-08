@@ -277,7 +277,6 @@ public class DL_PhongDangSuDung extends javax.swing.JDialog {
         if(JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn thanh toán không?","Thông báo",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
             timer.cancel();
             timer.purge();
-
             this.dispose();
            Form_QuanLyDatPhong updatePhong = new Form_QuanLyDatPhong();
             ph_dao.updateTinhTrangPhong(updatePhong.getRoomSelected(), "Trong");
@@ -296,9 +295,8 @@ public class DL_PhongDangSuDung extends javax.swing.JDialog {
 
     private void btnThemDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDVActionPerformed
         this.dispose();
-        DL_ThemDV themDV = new DL_ThemDV((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
-        themDV.setLocationRelativeTo(this);
-        themDV.setVisible(true);
+        Form_QuanLyDatPhong frm = new Form_QuanLyDatPhong();
+        frm.openDL_ThemDV();
     }//GEN-LAST:event_btnThemDVActionPerformed
 
     private void btnChuyenPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChuyenPhongActionPerformed

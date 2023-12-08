@@ -107,9 +107,9 @@ public class DL_ChonNhieuPhong extends javax.swing.JDialog {
         String maPhongDuocDatTruoc = "";
         List<PhongHat> phongCanLoaiBo = new ArrayList<>();
         for (DonDatPhong ddp : dsDDP) {
-            if (ddp.getNgayNhan().toLocalDate().equals(LocalDate.now())) {
+            if (ddp.getNgayNhan().toLocalDate().equals(LocalDateTime.now().toLocalDate())) {
                 int gioNhan = ddp.getNgayNhan().getHour();
-                int gioDat = LocalDate.now().atStartOfDay().getHour();
+                int gioDat = LocalDateTime.now().getHour();
                 if (!(gioDat - gioNhan >= 6 || gioDat - gioNhan <= -6)) {
                     maPhongDuocDatTruoc = ddp.getPhongHat().getMaPhong();
 
@@ -255,7 +255,8 @@ public class DL_ChonNhieuPhong extends javax.swing.JDialog {
         String maNV = nhanVienDangNhap.getMaNV();
         double tongTien = 0;
         LocalDate ngayLapHD = LocalDate.now();
-        HoaDon hd = new HoaDon(maHD, ngayLapHD, new KhachHang(makH), new NhanVien(maNV), tongTien);
+        String maKM = null;
+        HoaDon hd = new HoaDon(maHD, ngayLapHD, new KhachHang(makH), new NhanVien(maNV),new KhuyenMai(maKM), tongTien);
 
 
             int[] selectedRows = jTable1.getSelectedRows();

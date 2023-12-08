@@ -55,13 +55,14 @@ public class HoaDon_DAO {
         PreparedStatement stmt = null;
         int n = 0;
         try {
-            stmt = con.prepareStatement("INSERT INTO HoaDon VALUES (?, ?, ?, ?, ?, ? )");
+            stmt = con.prepareStatement("INSERT INTO HoaDon VALUES(?,?,?,?,?,?)");
             stmt.setString(1, hd.getMaHD());
-            stmt.setDate(2, java.sql.Date.valueOf(hd.getNgayLapHD()));
+            stmt.setDate(2, Date.valueOf(hd.getNgayLapHD()));
             stmt.setString(3, hd.getKhachHang().getMaKH());
             stmt.setString(4, hd.getNhanVien().getMaNV());
             stmt.setString(5, hd.getMaKM().getMaKM());
             stmt.setDouble(6, hd.getTongTien());
+
             n = stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -105,16 +106,18 @@ public class HoaDon_DAO {
     }
 
     // update tongtien cua hoa don bằng maHD
-    public boolean updateTongTien(String maHD, Double tongTien) {
+    public boolean updateTongTien(String maHD, Double tongTien,String maKM) {
 
         Connection con = ConnectDB.getInstance().getConnection();
         PreparedStatement stmt = null;
         int n = 0;
 
         try {
-            stmt = con.prepareStatement("UPDATE HoaDon SET tongTien = ? WHERE maHD = ?");
+            stmt = con.prepareStatement("UPDATE HoaDon SET tongTien = ?,maKM = ? WHERE maHD = ?");
             stmt.setDouble(1, tongTien);
-            stmt.setString(2, maHD);
+            stmt.setString(2, maKM);
+            stmt.setString(3, maHD);
+
             n = stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -328,9 +331,10 @@ public class HoaDon_DAO {
     }
 
     /**
+     * Doanh thu theo tháng
      *
-     * @param Thống kê doanh thu của các tháng trong năm
-     * @return tháng, doanh thu
+     * @param nam
+     * @return Doanh thu theo tháng, xuất hóa đơn theo tháng
      */
     public ArrayList<String[]> getDoanhThuTungThangNam(String nam) {
         ConnectDB.getInstance();

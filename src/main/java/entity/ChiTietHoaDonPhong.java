@@ -10,7 +10,7 @@ public class ChiTietHoaDonPhong {
     private Double gia;
     private LocalDateTime gioVao;
     private LocalDateTime gioRa;
-    private String maGiamGia;
+    private String ghiChu;
 
     public ChiTietHoaDonPhong() {
         super();
@@ -22,17 +22,17 @@ public class ChiTietHoaDonPhong {
     }
 
     public ChiTietHoaDonPhong(HoaDon hoaDon, PhongHat phongHat, Double gia, LocalDateTime gioVao, LocalDateTime gioRa,
-            String maGiamGia) {
+            String ghiChu) {
         super();
         this.hoaDon = hoaDon;
         this.phongHat = phongHat;
         this.gia = gia;
         this.gioVao = gioVao;
         this.gioRa = gioRa;
-        this.maGiamGia = maGiamGia;
+        this.ghiChu = ghiChu;
     }
-    public ChiTietHoaDonPhong(HoaDon hoaDon, PhongHat phongHat, Double gia, LocalDateTime gioVao, String maGiamGia) {
-        this(hoaDon, phongHat, gia, gioVao, null, maGiamGia);
+    public ChiTietHoaDonPhong(HoaDon hoaDon, PhongHat phongHat, Double gia, LocalDateTime gioVao, String ghiChu) {
+        this(hoaDon, phongHat, gia, gioVao, null, ghiChu);
     }
     public HoaDon getHoaDon() {
         return hoaDon;
@@ -83,12 +83,12 @@ public class ChiTietHoaDonPhong {
         this.gioRa = gioRa;
     }
 
-    public String getMaGiamGia() {
-        return maGiamGia;
+    public String getghiChu() {
+        return ghiChu;
     }
 
-    public void setMaGiamGia(String maGiamGia) {
-        this.maGiamGia = maGiamGia;
+    public void setghiChu(String ghiChu) {
+        this.ghiChu = ghiChu;
     }
 
     @Override
@@ -118,9 +118,9 @@ public class ChiTietHoaDonPhong {
     }
 
     public Double tinhTienGiam() {
-        if (maGiamGia.equals("VIP")) {
+        if (ghiChu.equals("VIP")) {
             return tinhTienPhong() * 0.02;
-        } else if (maGiamGia.equals("TH")) {
+        } else if (ghiChu.equals("TH")) {
             return tinhTienPhong() * 0.01;
         } else {
             return 0.0;
@@ -129,8 +129,8 @@ public class ChiTietHoaDonPhong {
 
     @Override
     public String toString() {
-        return "ChiTietHoaDonPhong [hoaDon=" + hoaDon + ", phongHat=" + phongHat + ", gia=" + gia + ", maGiamGia="
-                + maGiamGia + "]";
+        return "ChiTietHoaDonPhong [hoaDon=" + hoaDon + ", phongHat=" + phongHat + ", gia=" + gia + ", ghiChu="
+                + ghiChu + "]";
     }
 
 }

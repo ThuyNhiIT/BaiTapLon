@@ -6,6 +6,7 @@ import dao.MatHang_DAO;
 import entity.ChiTietHoaDonDV;
 import entity.HoaDon;
 import entity.MatHang;
+import entity.PhongHat;
 import gui.form.Form_QuanLyDatPhong;
 import gui.form.MainForm;
 import gui.main.Main;
@@ -60,28 +61,39 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
         });
         
          TableActionEvent event = new TableActionEvent() {
-            @Override
-            public void tangSoLuong(int row) {
-                currentSL = (int) dtmDVThem.getValueAt(row, 2);
-                gia = (double) dtmDVThem.getValueAt(row, 3);
-                dtmDVThem.setValueAt(currentSL + 1, row, 2);
-                double newTotalPrice = (currentSL + 1) * gia;
-                dtmDVThem.setValueAt(newTotalPrice, row, 3);
-            }
+             @Override
+             public void tangSoLuong(int row) {
+                 currentSL = (int) dtmDVThem.getValueAt(row, 2);
+                 // lấy giá từ dao
+                 mh_dao = new MatHang_DAO();
+                 MatHang mh = mh_dao.findMatHang((String) dtmDVThem.getValueAt(row, 0));
+                 gia = mh.getGia();
+                 dtmDVThem.setValueAt(currentSL + 1, row, 2);
 
-            @Override
-            public void giamSoLuong(int row) {
-                currentSL = (int) dtmDVThem.getValueAt(row, 2);
-                gia = (double) dtmDVThem.getValueAt(row, 3);
-                if (currentSL > 1) {
-                    dtmDVThem.setValueAt(currentSL - 1, row, 2);
-                    double newTotalPrice = (currentSL - 1) * gia;
-                    dtmDVThem.setValueAt(newTotalPrice, row, 3);
-                } else { // currentSL == 1
-                    dtmDVThem.removeRow(row);
-                }
-            }
-        };
+                 // Tính lại tổng tiền dựa trên số lượng mới
+                 double newTotalPrice = (currentSL + 1) * gia;
+                 dtmDVThem.setValueAt(newTotalPrice, row, 3);
+             }
+
+             @Override
+             public void giamSoLuong(int row) {
+                 currentSL = (int) dtmDVThem.getValueAt(row, 2);
+                 mh_dao = new MatHang_DAO();
+                 MatHang mh = mh_dao.findMatHang((String) dtmDVThem.getValueAt(row, 0));
+                 gia = mh.getGia();
+
+                 if (currentSL > 1) {
+                     dtmDVThem.setValueAt(currentSL - 1, row, 2);
+
+                     // Tính lại tổng tiền dựa trên số lượng mới
+                     double newTotalPrice = (currentSL - 1) * gia;
+                     dtmDVThem.setValueAt(newTotalPrice, row, 3);
+                 } else { // currentSL == 1
+                     dtmDVThem.removeRow(row);
+                 }
+             }
+         };
+
         tblDVThem.getColumnModel().getColumn(4).setCellRenderer(new TableActionCellRender());
         tblDVThem.getColumnModel().getColumn(4).setCellEditor(new TableActionCellEditor(event));
 
@@ -468,7 +480,7 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
             for (MatHangModel data : dvThemData) {
                 ChiTietHoaDonDV cthddv = new ChiTietHoaDonDV();
 
-                ChiTietHoaDonDV cthddvadd = new ChiTietHoaDonDV(new HoaDon(maHD), new MatHang(data.getMaMH()), data.getSL(), data.getGia());
+                ChiTietHoaDonDV cthddvadd = new ChiTietHoaDonDV(new HoaDon(maHD), new MatHang(data.getMaMH()),new PhongHat(frm.getRoomSelected()), data.getSL(), data.getGia());
               // check chưa tồn tại thì create, đã tồn tại thì update sl, nếu trong database có mà trong table không có thì xóa trong database do sl dưới 0 thì đã xóa khỏi table\
                 if (cthddv_dao.findChiTietHoaDonDV(maHD, data.getMaMH()) != null) {
                     if (data.getSL() > 0) {
@@ -477,7 +489,6 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
                         cthddv_dao.deleteChiTietHoaDonDV(maHD, data.getMaMH());
                     }
                 } else {
-
                         cthddv_dao.createChiTietHoaDonDV(cthddvadd);
 
                 }

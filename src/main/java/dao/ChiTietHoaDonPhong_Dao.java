@@ -36,8 +36,8 @@ public class ChiTietHoaDonPhong_Dao {
                 Double gia = rs.getDouble(3);
                 LocalDateTime gioVao = rs.getTimestamp(4).toLocalDateTime();
                 LocalDateTime gioRa = rs.getTimestamp(5).toLocalDateTime();
-                String maGiamGia = rs.getString(6);
-                ChiTietHoaDonPhong cthdp = new ChiTietHoaDonPhong(new HoaDon(maHD), new PhongHat(maPhong), gia, gioVao, gioRa, maGiamGia);
+                String ghiChu = rs.getString(6);
+                ChiTietHoaDonPhong cthdp = new ChiTietHoaDonPhong(new HoaDon(maHD), new PhongHat(maPhong), gia, gioVao, gioRa, ghiChu);
                 dsCTHDP.add(cthdp);
             }
         } catch (SQLException e) {
@@ -64,8 +64,8 @@ public ChiTietHoaDonPhong getChiTietHoaDonPhongTheoMaHD(String id, String maPhon
                 Double gia = rs.getDouble(3);
                 LocalDateTime gioVao = rs.getTimestamp(4).toLocalDateTime();
                 LocalDateTime gioRa = rs.getTimestamp(5).toLocalDateTime();
-                String maGiamGia = rs.getString(6);
-                cthdp = new ChiTietHoaDonPhong(new HoaDon(maHD), new PhongHat(maPhong1), gia, gioVao, gioRa, maGiamGia);
+                String ghiChu = rs.getString(6);
+                cthdp = new ChiTietHoaDonPhong(new HoaDon(maHD), new PhongHat(maPhong1), gia, gioVao, gioRa, ghiChu);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -84,7 +84,7 @@ public ChiTietHoaDonPhong getChiTietHoaDonPhongTheoMaHD(String id, String maPhon
             stmt.setDouble(3, cthdp.getGia());
             stmt.setTimestamp(4, java.sql.Timestamp.valueOf(cthdp.getGioVao()));
             stmt.setTimestamp(5, java.sql.Timestamp.valueOf(cthdp.getGioRa()));
-            stmt.setString(6, cthdp.getMaGiamGia());
+            stmt.setString(6, cthdp.getghiChu());
 
             n = stmt.executeUpdate();
         } catch (SQLException e) {
@@ -108,9 +108,9 @@ public ChiTietHoaDonPhong getChiTietHoaDonPhongTheoMaHD(String id, String maPhon
                 Double gia = rs.getDouble("gia");
                 LocalDateTime gioVao = rs.getTimestamp("gioVao").toLocalDateTime();
                 LocalDateTime gioRa = rs.getTimestamp("gioRa").toLocalDateTime();
-                String maGiamGia = rs.getString("maGiamGia");
+                String ghiChu = rs.getString("ghiChu");
 
-                cthdp = new ChiTietHoaDonPhong(new HoaDon(maHD), new PhongHat(maPhong), gia, gioVao, gioRa, maGiamGia);
+                cthdp = new ChiTietHoaDonPhong(new HoaDon(maHD), new PhongHat(maPhong), gia, gioVao, gioRa,ghiChu);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -171,17 +171,17 @@ public ChiTietHoaDonPhong getChiTietHoaDonPhongTheoMaHD(String id, String maPhon
 
 
     //update room
-    public Boolean doiPhong(String maHD, String maPhongHienTai,String maPhongMoi){
+    public Boolean doiPhong(String maHD, String maPhongHienTai,String maPhongMoi, String ghiChu){
 
         Connection con = ConnectDB.getInstance().getConnection();
         PreparedStatement stmt = null;
         int n = 0;
         try{
-            stmt = con.prepareStatement("UPDATE ChiTietHoaDonPhong SET maPhong = ? WHERE maHD = ? AND maPhong = ?");
+            stmt = con.prepareStatement("UPDATE ChiTietHoaDonPhong SET maPhong = ?, ghiChu = ? WHERE maHD = ? AND maPhong = ?");
             stmt.setString(1, maPhongMoi);
-            stmt.setString(2, maHD);
-            stmt.setString(3, maPhongHienTai);
-
+            stmt.setString(2, ghiChu);
+            stmt.setString(3, maHD);
+            stmt.setString(4, maPhongHienTai);
             n = stmt.executeUpdate();
         }catch(Exception e){
             e.printStackTrace();
@@ -207,7 +207,7 @@ public ChiTietHoaDonPhong getChiTietHoaDonPhongTheoMaHD(String id, String maPhon
                 Double gia = rs.getDouble("gia");
                 LocalDateTime gioVao = rs.getTimestamp("gioVao").toLocalDateTime();
                 LocalDateTime gioRa = rs.getTimestamp("gioRa").toLocalDateTime();
-                String maGiamGia = rs.getString("maGiamGia");
+                String ghiChu = rs.getString("ghiChu");
 
                 ChiTietHoaDonPhong cthdp = new ChiTietHoaDonPhong(
                         new HoaDon(maHD),
@@ -215,7 +215,7 @@ public ChiTietHoaDonPhong getChiTietHoaDonPhongTheoMaHD(String id, String maPhon
                         gia,
                         gioVao,
                         gioRa,
-                        maGiamGia
+                        ghiChu
                 );
 
                 dsCTHDP.add(cthdp);
@@ -226,6 +226,10 @@ public ChiTietHoaDonPhong getChiTietHoaDonPhongTheoMaHD(String id, String maPhon
 
         return dsCTHDP;
     }
+    
+    // updateGioRaVsGiaforNhieu
+
+
 
 
 
