@@ -6,11 +6,13 @@ package gui_dialog;
 
 import dao.*;
 import entity.*;
+import gui.form.Form_QuanLyDatPhong;
 import gui.swing.notification.Notification;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
+import java.util.Timer;
 
 /**
  * @author HO MINH HAU
@@ -30,11 +32,22 @@ public class DL_ThanhToanNhieuphong extends javax.swing.JDialog {
     private String loaiPhong;
     private float giaPhong;
     private MatHang matHang;
+    private Timer timer;
+    private static String maHDDSD;
+    private DefaultTableModel model;
 
 
     public DL_ThanhToanNhieuphong(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+
+    public String getMaHDDSD() {
+        return maHDDSD;
+    }
+
+    public void setMaHDDSD(String maHDDSD) {
+        this.maHDDSD = maHDDSD;
     }
 
     public Boolean validDateSDT() {
@@ -232,7 +245,26 @@ public class DL_ThanhToanNhieuphong extends javax.swing.JDialog {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnThanhToanNhieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanNhieuActionPerformed
-        // TODO add your handling code here:
+        if (JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn thanh toán không?", "Thông báo", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            this.dispose();
+            Form_QuanLyDatPhong updatePhong = new Form_QuanLyDatPhong();
+//            ph_dao.updateTinhTrangPhong(updatePhong.getRoomSelected(), "Trong");
+            ph_dao = new PhongHat_DAO();
+            // lấy ds maPhong từ cột số 1
+            ArrayList<String> dsMaPhong = new ArrayList<>();
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                dsMaPhong.add(jTable1.getValueAt(i, 0).toString());
+            }
+            // update tình trạng phòng
+            for (String maPhong : dsMaPhong) {
+                ph_dao.updateTinhTrangPhong(maPhong, "Trong");
+            }
+            DL_TraPhongvsThanhToanNhieuPhong thanhToan = new DL_TraPhongvsThanhToanNhieuPhong((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
+            thanhToan.setLocationRelativeTo(this);
+            thanhToan.setVisible(true);
+        }
+
+        this.dispose();
     }//GEN-LAST:event_btnThanhToanNhieuActionPerformed
 
     private void btnTimHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimHDActionPerformed
@@ -243,81 +275,76 @@ public class DL_ThanhToanNhieuphong extends javax.swing.JDialog {
             ArrayList<KhachHang> kh = kh_dao.getKhachHangTheoSdtKH(sdt);
 
             if (!kh.isEmpty()) {
-
                 khachHang = kh.get(0);
-                // tìm hD theo maKH
                 hd_dao = new HoaDon_DAO();
                 ArrayList<HoaDon> hd = hd_dao.getHoaDonTheoMaKH(khachHang.getMaKH());
-
-                // lấy ra ds cthdp theo maHD
-                cthdp_dao = new ChiTietHoaDonPhong_Dao();
-
-                for (HoaDon hoaDon : hd) {
-                    ArrayList<ChiTietHoaDonPhong> dsCTHDP = cthdp_dao.getAllTheMaHDArray(hoaDon.getMaHD());
-                    for (ChiTietHoaDonPhong cthdp : dsCTHDP) {
-                        // chỉ lấy ra phòng có gia = 0
-                        if (cthdp.getGia() == 0) {
-                            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-                            // lấy ra tên phòng , loại phòng , giá phòng
-
-                            PhongHat_DAO ph_dao = new PhongHat_DAO();
-                            PhongHat addph = ph_dao.getPhongHatByMaPhong(cthdp.getPhongHat().getMaPhong());
-                            // check loại phòng và giá
-                            if(addph.getLoaiPhong().getMaLoaiPhong().equals("LP01")) {
-
-                                giaPhong = 100000f;
-                                loaiPhong = "Phòng VIP";
-                            }else{
-                                giaPhong = 60000f;
-                                loaiPhong = "Phòng thường";
-                            }
-                            model.addRow(new Object[]{
-                                    cthdp.getPhongHat().getMaPhong(),
-                                    addph.getTenPhong(),
-                                    loaiPhong,
-                                    giaPhong
-
-
-                            });
+                if (hd.size() > 0) {
+                    // lấy ra hd có điều kiện là chưa thanh toán
+                    for(HoaDon hoaDon : hd){
+                        if(hoaDon.getTongTien() == 0){
+                            maHDDSD = hoaDon.getMaHD();
+                            setMaHDDSD(maHDDSD);
                         }
-
                     }
-                }
+                    cthdp_dao = new ChiTietHoaDonPhong_Dao();
+                    for (HoaDon hoaDon : hd) {
+                        ArrayList<ChiTietHoaDonPhong> dsCTHDP = cthdp_dao.getAllTheMaHDArray(hoaDon.getMaHD());
+                        for (ChiTietHoaDonPhong cthdp : dsCTHDP) {
+                            if (cthdp.getGia() == 0) {
+                                 model = (DefaultTableModel) jTable1.getModel();
+                                PhongHat_DAO ph_dao = new PhongHat_DAO();
+                                PhongHat addph = ph_dao.getPhongHatByMaPhong(cthdp.getPhongHat().getMaPhong());
+                                if (addph.getLoaiPhong().getMaLoaiPhong().equals("LP001")) {
+                                    giaPhong = 100000f;
+                                    loaiPhong = "Phòng VIP";
+                                } else {
+                                    giaPhong = 60000f;
+                                    loaiPhong = "Phòng thường";
+                                }
+                                model.addRow(new Object[]{
+                                        cthdp.getPhongHat().getMaPhong(),
+                                        addph.getTenPhong(),
+                                        loaiPhong,
+                                        giaPhong
+                                });
 
-                // lấy ra ds cthddv theo maHD
-                cthddv_dao = new ChiTietHoaDonDichVu_DAO();
-                for (HoaDon hoaDon : hd) {
-                    ArrayList<ChiTietHoaDonDV> dsCTHDDV = cthddv_dao.getAllTheMaHDDVArray(hoaDon.getMaHD());
-                    for (ChiTietHoaDonDV cthddv : dsCTHDDV) {
-                        // lấy ra tên mh
-                        mh_dao = new MatHang_DAO();
-                        MatHang addmh = mh_dao.findMatHang(cthddv.getMatHang().getMaMH());
-
-                        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-                        model.addRow(new Object[]{
-                                cthddv.getMatHang().getMaMH(),
-                                addmh.getTenMH(),
-                                cthddv.getSoLuong(),
-                                cthddv.getGia()
-                        });
+                                cthddv_dao = new ChiTietHoaDonDichVu_DAO();
+                                ArrayList<ChiTietHoaDonDV> dsCTHDDV = cthddv_dao.getAllTheMaHDDVforRoomArray(hoaDon.getMaHD(), cthdp.getPhongHat().getMaPhong());
+                                for (ChiTietHoaDonDV cthddv : dsCTHDDV) {
+                                    mh_dao = new MatHang_DAO();
+                                    MatHang addmh = mh_dao.findMatHang(cthddv.getMatHang().getMaMH());
+                                    DefaultTableModel serviceModel = (DefaultTableModel) jTable2.getModel();
+                                    serviceModel.addRow(new Object[]{
+                                            cthddv.getMatHang().getMaMH(),
+                                            addmh.getTenMH(),
+                                            cthddv.getSoLuong(),
+                                            cthddv.getGia()
+                                    });
+                                }
+                            }
+                        }
                     }
+                } else {
+                    Notification noti = new Notification(
+                            (java.awt.Frame) SwingUtilities.getWindowAncestor(this),
+                            Notification.Type.WARNING,
+                            Notification.Location.TOP_RIGHT,
+                            "Khách hàng chưa thuê phòng nào"
+                    );
+                    noti.showNotification();
                 }
-
             }
+        } else {
+            Notification noti = new Notification(
+                    (java.awt.Frame) SwingUtilities.getWindowAncestor(this),
+                    Notification.Type.WARNING,
+                    Notification.Location.TOP_RIGHT,
+                    "Số điện thoại không hợp lệ"
+            );
+            noti.showNotification();
+        }
 
-    }else
-
-    {
-        Notification noti = new Notification(
-                (java.awt.Frame) SwingUtilities.getWindowAncestor(this),
-                Notification.Type.WARNING,
-                Notification.Location.TOP_RIGHT,
-                "Số điện thoại không hợp lệ"
-        );
-        noti.showNotification();
-    }
-
-}//GEN-LAST:event_btnTimHDActionPerformed
+    }//GEN-LAST:event_btnTimHDActionPerformed
 
     /**
      * @param args the command line arguments

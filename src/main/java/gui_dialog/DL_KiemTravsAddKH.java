@@ -354,7 +354,8 @@ public class DL_KiemTravsAddKH extends javax.swing.JDialog {
         String maNV = nhanVienDangNhap.getMaNV();
         // tôi nghĩ là lỗi ở đây
         double tongTien = 0;
-        HoaDon hd = new HoaDon(maHD, ngayLapHD, new KhachHang(maKH), new NhanVien(maNV), tongTien);
+        String maKM = null;
+        HoaDon hd = new HoaDon(maHD, ngayLapHD, new KhachHang(maKH), new NhanVien(maNV),new KhuyenMai(null),  tongTien);
         return hd;
 
     }

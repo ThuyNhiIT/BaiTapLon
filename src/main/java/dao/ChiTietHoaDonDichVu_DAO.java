@@ -5,6 +5,7 @@ import connectDB.ConnectDB;
 import entity.ChiTietHoaDonDV;
 import entity.HoaDon;
 import entity.MatHang;
+import entity.PhongHat;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,11 +29,12 @@ public class ChiTietHoaDonDichVu_DAO {
         PreparedStatement stmt = null;
         int n = 0;
         try {
-            stmt = con.prepareStatement("INSERT INTO ChiTietHoaDonDV VALUES (?, ?, ?, ? )");
+            stmt = con.prepareStatement("INSERT INTO ChiTietHoaDonDV VALUES (?, ?, ?, ?, ? )");
             stmt.setString(1, cthddv.getHoaDon().getMaHD());
             stmt.setString(2, cthddv.getMatHang().getMaMH());
-            stmt.setInt(3, cthddv.getSoLuong());
-            stmt.setDouble(4, cthddv.getGia());
+            stmt.setString(3, cthddv.getPhongHat().getMaPhong());
+            stmt.setInt(4, cthddv.getSoLuong());
+            stmt.setDouble(5, cthddv.getGia());
 
             n = stmt.executeUpdate();
         } catch (SQLException e) {
@@ -49,7 +51,7 @@ public class ChiTietHoaDonDichVu_DAO {
         return n > 0;
     }
 
-    public ChiTietHoaDonDV getChiTietHoaDonDVTheoMaHD(String id) {
+    public ChiTietHoaDonDV getChiTietHoaDonDVTheoMaHD(String id,String maPhong) {
 
         ChiTietHoaDonDV cthddv = null;
         ConnectDB.getInstance();
@@ -57,16 +59,19 @@ public class ChiTietHoaDonDichVu_DAO {
         PreparedStatement statement = null;
 
         try{
-            String sql = "Select * from ChiTietHoaDonDV where maHD = ?";
+            String sql = "Select * from ChiTietHoaDonDV where maHD = ? AND maPhong = ?";
             statement = con.prepareStatement(sql);
             statement.setString(1, id);
+            statement.setString(2, maPhong);
             ResultSet rs = statement.executeQuery();
             while(rs.next()){
                 String maHD = rs.getString(1);
                 String maMH = rs.getString(2);
-                int soLuong = rs.getInt(3);
-                double gia = rs.getDouble(4);
-                cthddv = new ChiTietHoaDonDV(new HoaDon(maHD), new MatHang(maMH), soLuong, gia);
+                String maPhong1 = rs.getString(3);
+                int soLuong = rs.getInt(4);
+                double gia = rs.getDouble(5);
+                cthddv = new ChiTietHoaDonDV(new HoaDon(maHD), new MatHang(maMH),new PhongHat(maPhong1), soLuong, gia);
+
             }
         }catch(SQLException e){
             e.printStackTrace();
@@ -86,9 +91,10 @@ public class ChiTietHoaDonDichVu_DAO {
             while (rs.next()) {
                 String maHD = rs.getString(1);
                 String maMH = rs.getString(2);
-                int soLuong = rs.getInt(3);
-                double gia = rs.getDouble(4);
-                ChiTietHoaDonDV cthddv = new ChiTietHoaDonDV(new HoaDon(maHD), new MatHang(maMH), soLuong, gia);
+                String maPhong = rs.getString(3);
+                int soLuong = rs.getInt(4);
+                double gia = rs.getDouble(5);
+                ChiTietHoaDonDV cthddv = new ChiTietHoaDonDV(new HoaDon(maHD), new MatHang(maMH),new PhongHat(maPhong), soLuong, gia);
                 dsCTHDDV.add(cthddv);
             }
         } catch (SQLException e) {
@@ -110,9 +116,10 @@ public class ChiTietHoaDonDichVu_DAO {
             while (rs.next()) {
                 String maHD = rs.getString(1);
                 String maMH1 = rs.getString(2);
-                int soLuong = rs.getInt(3);
-                double gia = rs.getDouble(4);
-                ChiTietHoaDonDV cthddv = new ChiTietHoaDonDV(new HoaDon(maHD), new MatHang(maMH1), soLuong, gia);
+                String maPhong = rs.getString(3);
+                int soLuong = rs.getInt(4);
+                double gia = rs.getDouble(5);
+                ChiTietHoaDonDV cthddv = new ChiTietHoaDonDV(new HoaDon(maHD), new MatHang(maMH1),new PhongHat(maPhong), soLuong, gia);
                 dsCTHDDV.add(cthddv);
             }
         } catch (SQLException e) {
@@ -121,7 +128,7 @@ public class ChiTietHoaDonDichVu_DAO {
         return dsCTHDDV;
     }
 
-    // update sl theo maHD
+    // update sl và giá theo maHD
     public boolean updateChiTietHoaDonDV(ChiTietHoaDonDV cthddv){
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
@@ -129,10 +136,12 @@ public class ChiTietHoaDonDichVu_DAO {
         int n = 0;
 
         try{
-            stmt = con.prepareStatement("UPDATE ChiTietHoaDonDV SET soLuong = ? WHERE maHD = ? AND maMH = ?");
+            stmt = con.prepareStatement("UPDATE ChiTietHoaDonDV SET soLuong = ?, gia = ? WHERE maHD = ? AND maMH = ?");
             stmt.setInt(1, cthddv.getSoLuong());
-            stmt.setString(2, cthddv.getHoaDon().getMaHD());
-            stmt.setString(3, cthddv.getMatHang().getMaMH());
+            stmt.setDouble(2, cthddv.getGia());
+            stmt.setString(3, cthddv.getHoaDon().getMaHD());
+            stmt.setString(4, cthddv.getMatHang().getMaMH());
+
             n = stmt.executeUpdate();
         }catch(SQLException e){
             e.printStackTrace();
@@ -177,9 +186,36 @@ public class ChiTietHoaDonDichVu_DAO {
             while(rs.next()){
                 String maHD1 = rs.getString(1);
                 String maMH1 = rs.getString(2);
-                int soLuong = rs.getInt(3);
-                double gia = rs.getDouble(4);
-                cthddv = new ChiTietHoaDonDV(new HoaDon(maHD1), new MatHang(maMH1), soLuong, gia);
+                String maPhong = rs.getString(3);
+                int soLuong = rs.getInt(4);
+                double gia = rs.getDouble(5);
+                cthddv = new ChiTietHoaDonDV(new HoaDon(maHD1), new MatHang(maMH1),new PhongHat(maPhong), soLuong, gia);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return cthddv;
+    }
+    public ChiTietHoaDonDV findChiTietHoaDonDVforThem(String maHD, String maMH,String maPhong){
+        ChiTietHoaDonDV cthddv = null;
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement statement = null;
+
+        try{
+            String sql = "Select * from ChiTietHoaDonDV where maHD = ? AND maMH = ? AND maPhong = ?";
+            statement = con.prepareStatement(sql);
+            statement.setString(1, maHD);
+            statement.setString(2, maMH);
+            statement.setString(3, maPhong);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()){
+                String maHD1 = rs.getString(1);
+                String maMH1 = rs.getString(2);
+                String maPhong1 = rs.getString(3);
+                int soLuong = rs.getInt(4);
+                double gia = rs.getDouble(5);
+                cthddv = new ChiTietHoaDonDV(new HoaDon(maHD1), new MatHang(maMH1),new PhongHat(maPhong), soLuong, gia);
             }
         }catch(SQLException e){
             e.printStackTrace();
@@ -187,23 +223,27 @@ public class ChiTietHoaDonDichVu_DAO {
         return cthddv;
     }
     // lấy ra ds cthddv theo maHD
-    public ArrayList<ChiTietHoaDonDV> getAllTheMaHDDVArray(String maHD) {
+    public ArrayList<ChiTietHoaDonDV> getAllTheMaHDDVforRoomArray(String maHD,String maPhong) {
         ArrayList<ChiTietHoaDonDV> dsCTHDDV = new ArrayList<>();
 
         try {
             ConnectDB.getInstance();
             Connection con = ConnectDB.getConnection();
-            String sql = "SELECT * FROM ChiTietHoaDonDV WHERE maHD = ?";
+            String sql = "SELECT * FROM ChiTietHoaDonDV WHERE maHD = ? AND maPhong = ?";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, maHD);
+            statement.setString(2, maPhong);
+
 
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 String maHD1 = rs.getString(1);
                 String maMH = rs.getString(2);
-                int soLuong = rs.getInt(3);
-                double gia = rs.getDouble(4);
-                ChiTietHoaDonDV cthddv = new ChiTietHoaDonDV(new HoaDon(maHD1), new MatHang(maMH), soLuong, gia);
+                String maPhong1 = rs.getString(3);
+                int soLuong = rs.getInt(4);
+                double gia = rs.getDouble(5);
+
+                ChiTietHoaDonDV cthddv = new ChiTietHoaDonDV(new HoaDon(maHD1), new MatHang(maMH),new PhongHat(maPhong), soLuong, gia);
                 dsCTHDDV.add(cthddv);
             }
         } catch (SQLException e) {

@@ -368,7 +368,7 @@ public class DL_ThemNV extends javax.swing.JFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-         System.out.println("Xonggg");
+         System.out.println("Xong");
         ConnectDB db = ConnectDB.getInstance();
         try {
             db.connect();

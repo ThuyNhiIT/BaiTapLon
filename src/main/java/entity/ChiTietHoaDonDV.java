@@ -5,9 +5,13 @@ import java.util.Objects;
 public class ChiTietHoaDonDV {
 
     private HoaDon hoaDon;
+
+
     private MatHang matHang;
+    private PhongHat phongHat;
     private int soLuong;
     private Double gia;
+
 
     public ChiTietHoaDonDV() {
         super();
@@ -18,11 +22,11 @@ public class ChiTietHoaDonDV {
         this.hoaDon = hoaDon;
     }
 
-    public ChiTietHoaDonDV(HoaDon hoaDon, MatHang matHang, int soLuong, Double gia) {
+    public ChiTietHoaDonDV(HoaDon hoaDon, MatHang matHang, PhongHat phongHat, int soLuong, Double gia) {
         super();
         this.hoaDon = hoaDon;
         this.matHang = matHang;
-
+        this.phongHat = phongHat;
         this.soLuong = soLuong;
         this.gia = gia;
     }
@@ -41,6 +45,14 @@ public class ChiTietHoaDonDV {
 
     public void setMatHang(MatHang matHang) {
         this.matHang = matHang;
+    }
+
+    public PhongHat getPhongHat() {
+        return phongHat;
+    }
+
+    public void setPhongHat(PhongHat phongHat) {
+        this.phongHat = phongHat;
     }
 
     public int getSoLuong() {
@@ -93,7 +105,13 @@ public class ChiTietHoaDonDV {
 
     @Override
     public String toString() {
-        return "ChiTietHoaDonDV{" + "hoaDon=" + hoaDon + ", matHang=" + matHang + ", soLuong=" + soLuong + ", gia=" + gia + '}';
+        return "ChiTietHoaDonDV{" +
+                "hoaDon=" + hoaDon +
+                ", matHang=" + matHang +
+                ", phongHat=" + phongHat +
+                ", soLuong=" + soLuong +
+                ", gia=" + gia +
+                '}';
     }
 
 }

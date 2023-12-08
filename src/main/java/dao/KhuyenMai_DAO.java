@@ -103,7 +103,6 @@ public class KhuyenMai_DAO {
         PreparedStatement stmt = null;
         int n = 0;
         try {
-
             stmt = con.prepareStatement("update HoaDon set maKM = ? where maKM = ?");
             stmt.setString(1, null);
             stmt.setString(2, maKM);

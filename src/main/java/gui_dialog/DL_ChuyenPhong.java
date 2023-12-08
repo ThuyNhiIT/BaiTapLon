@@ -9,8 +9,10 @@ import dao.ChiTietHoaDonPhong_Dao;
 import dao.PhongHat_DAO;
 import entity.*;
 import gui.form.Form_QuanLyDatPhong;
+import gui.swing.notification.Notification;
 import gui.swing.scrollbar.ScrollBarCustom;
 
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -21,15 +23,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
  * @author HO MINH HAU
  */
 public class DL_ChuyenPhong extends javax.swing.JDialog {
 
-   private PhongHat_DAO ph_dao;
-   private String loaiPhong;
-   private Float gia;
-   private String maPhong;
+    private PhongHat_DAO ph_dao;
+    private String loaiPhong;
+    private Float gia;
+    private String maPhong;
 
     private ChiTietHoaDonPhong_Dao cthdp_dao;
 
@@ -45,8 +46,8 @@ public class DL_ChuyenPhong extends javax.swing.JDialog {
                 if (!event.getValueIsAdjusting()) {
                     int selectedRow = tblDSP.getSelectedRow();
                     if (selectedRow != -1) {
-                         maPhong = (String) tblDSP.getValueAt(selectedRow, 0);
-                         loaiPhong = (String) tblDSP.getValueAt(selectedRow, 2);
+                        maPhong = (String) tblDSP.getValueAt(selectedRow, 0);
+                        loaiPhong = (String) tblDSP.getValueAt(selectedRow, 2);
                         System.out.println(maPhong);
                         System.out.println(loaiPhong);
                     }
@@ -55,7 +56,8 @@ public class DL_ChuyenPhong extends javax.swing.JDialog {
         });
 
     }
-    public void loadData(){
+
+    public void loadData() {
         ConnectDB db = ConnectDB.getInstance();
         try {
             db.connect();
@@ -63,15 +65,13 @@ public class DL_ChuyenPhong extends javax.swing.JDialog {
             ph_dao = new PhongHat_DAO();
             ArrayList<PhongHat> phongTrongList = ph_dao.getPhongByTinhTrang("Trong");
             for (PhongHat phongHat : phongTrongList) {
-                if (phongHat.getLoaiPhong().getMaLoaiPhong().equals("LP001")){
+                if (phongHat.getLoaiPhong().getMaLoaiPhong().equals("LP001")) {
                     loaiPhong = "VIP";
-                    gia=100000f;
-                }
-                else {
+                    gia = 100000f;
+                } else {
                     loaiPhong = "Thường";
-                    gia=60000f;
+                    gia = 60000f;
                 }
-
                 String[] rowData = {phongHat.getMaPhong(), phongHat.getTenPhong(), loaiPhong, gia.toString()};
                 DefaultTableModel model = (DefaultTableModel) tblDSP.getModel();
                 model.addRow(rowData);
@@ -85,6 +85,14 @@ public class DL_ChuyenPhong extends javax.swing.JDialog {
 
     }
 
+    // check txtLyDo không được rỗng và thông báo
+    public boolean checkLyDo() {
+        if (txtLyDo.getText().equals("")) {
+            return false;
+        }
+        return true;
+    }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -96,11 +104,14 @@ public class DL_ChuyenPhong extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDSP = new javax.swing.JTable();
         btnXacNhan = new gui.swing.RadiusButton();
+        jLabel2 = new javax.swing.JLabel();
+        txtLyDo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -146,6 +157,15 @@ public class DL_ChuyenPhong extends javax.swing.JDialog {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setText("Lý do chuyển phòng:");
+
+        txtLyDo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLyDoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -159,12 +179,16 @@ public class DL_ChuyenPhong extends javax.swing.JDialog {
                         .addGap(144, 144, 144)
                         .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 19, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addGap(34, 34, 34)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtLyDo, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(55, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 17, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,11 +198,18 @@ public class DL_ChuyenPhong extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtLyDo)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnXacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 3, Short.MAX_VALUE))
+                .addGap(0, 18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -200,26 +231,62 @@ public class DL_ChuyenPhong extends javax.swing.JDialog {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
-       ConnectDB db = ConnectDB.getInstance();
-        try {
-            db.connect();
-            Form_QuanLyDatPhong frmPH = new Form_QuanLyDatPhong();
-            cthdp_dao = new ChiTietHoaDonPhong_Dao();
-            ChiTietHoaDonPhong hd = cthdp_dao.finHDByRoomID(frmPH.getRoomSelected());
-            String maHD = hd.getHoaDon().getMaHD();
-            db.connect();
+        if (checkLyDo()) {
+            ConnectDB db = ConnectDB.getInstance();
+            try {
+                db.connect();
+                Form_QuanLyDatPhong frmPH = new Form_QuanLyDatPhong();
+                cthdp_dao = new ChiTietHoaDonPhong_Dao();
+                ChiTietHoaDonPhong hd = cthdp_dao.finHDByRoomID(frmPH.getRoomSelected());
 
-            cthdp_dao.doiPhong(maHD, frmPH.getRoomSelected(), maPhong);
-            Form_QuanLyDatPhong updatePhong = new Form_QuanLyDatPhong();
-            db.connect();
-            ph_dao.updateTinhTrangPhong(updatePhong.getRoomSelected(), "Trong");
-            db.connect();
-            ph_dao.updateTinhTrangPhong(maPhong,"Dang su dung");
-            this.dispose();
-        } catch (Exception e) {
+                // Lấy ra loại phòng từ maPhong
+                ph_dao = new PhongHat_DAO();
+                db.connect();
+                PhongHat dataPH = ph_dao.getPhongHatByMaPhong(frmPH.getRoomSelected());
+                String loaiPhong = dataPH.getLoaiPhong().getMaLoaiPhong();
 
+                // Kiểm tra điều kiện chuyển phòng
+                if (loaiPhong.equals("LP001") && tblDSP.getValueAt(tblDSP.getSelectedRow(), 2).equals("Thường")) {
+                    Notification noti = new Notification(
+                            (java.awt.Frame) SwingUtilities.getWindowAncestor(this),
+                            Notification.Type.WARNING,
+                            Notification.Location.TOP_RIGHT,
+                            "Không thể chuyển từ phòng VIP sang phòng thường"
+                    );
+                    noti.showNotification();
+                } else {
+                    String maHD = hd.getHoaDon().getMaHD();
+
+                    db.connect();
+                    cthdp_dao.doiPhong(maHD, frmPH.getRoomSelected(), maPhong, txtLyDo.getText());
+
+                    Form_QuanLyDatPhong updatePhong = new Form_QuanLyDatPhong();
+                    db.connect();
+                    ph_dao.updateTinhTrangPhong(updatePhong.getRoomSelected(), "Trong");
+                    db.connect();
+                    ph_dao.updateTinhTrangPhong(maPhong, "Dang su dung");
+                    this.dispose();
+                }
+
+            } catch (Exception e) {
+                // Xử lý exception
+            }
+
+        } else {
+            txtLyDo.requestFocus();
+            Notification noti = new Notification(
+                    (java.awt.Frame) SwingUtilities.getWindowAncestor(this),
+                    Notification.Type.WARNING,
+                    Notification.Location.TOP_RIGHT,
+                    "Vui lòng nhập lý do chuyển phòng"
+            );
+            noti.showNotification();
         }
     }//GEN-LAST:event_btnXacNhanActionPerformed
+
+    private void txtLyDoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLyDoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtLyDoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -228,7 +295,7 @@ public class DL_ChuyenPhong extends javax.swing.JDialog {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -267,8 +334,10 @@ public class DL_ChuyenPhong extends javax.swing.JDialog {
     private gui.swing.Button btnExit;
     private gui.swing.RadiusButton btnXacNhan;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblDSP;
+    private javax.swing.JTextField txtLyDo;
     // End of variables declaration//GEN-END:variables
 }

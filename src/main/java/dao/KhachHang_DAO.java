@@ -279,4 +279,7 @@ public class KhachHang_DAO {
         }
         return 0;
     }
+
+
+
 }
