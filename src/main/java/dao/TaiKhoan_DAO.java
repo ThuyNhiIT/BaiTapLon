@@ -115,7 +115,7 @@ public class TaiKhoan_DAO {
         try {
             PreparedStatement statement = con.prepareStatement("INSERT into TaiKhoan VALUES(?,?)");
             statement.setString(1, maNV);
-            
+
             String hashedDefaultPassword = hashPassword("123A");
             statement.setString(2, hashedDefaultPassword);
 
@@ -128,7 +128,36 @@ public class TaiKhoan_DAO {
         return n > 0;
 
     }
-    
-    
 
+//    public void nhoMK(String maNV, StringBuilder passwordRef) {
+//        Connection con = ConnectDB.getConnection();
+//        try {
+//            PreparedStatement statement = con.prepareStatement("SELECT Password FROM TaiKhoan WHERE maNV = ?");
+//            statement.setString(1, maNV);
+//            ResultSet resultSet = statement.executeQuery();
+//            if (resultSet.next()) {
+//                String pass = resultSet.getString("Password");
+//                passwordRef.append(pass);
+//            } else {
+//                System.out.println("Không tồn tại");
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
+    public boolean nhoMK(String maNV, StringBuilder password) {
+        Connection con = ConnectDB.getConnection();
+        int n = 0;
+        try {
+            System.out.println("Không ");
+            PreparedStatement statement = con.prepareStatement("SELECT Password FROM TaiKhoan WHERE maNV = ?");
+            statement.setString(1, maNV);
+            ResultSet resultSet = statement.executeQuery();
+            System.out.println(statement);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return n > 0;
+    }
 }

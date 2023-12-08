@@ -1,7 +1,9 @@
 package gui.form;
 
 import dao.MatHang_DAO;
+import dao.PhongHat_DAO;
 import entity.MatHang;
+import entity.PhongHat;
 import gui.swing.scrollbar.ScrollBarCustom;
 import gui.swing.table.TableActionCellEditorMatHang;
 import gui.swing.table.TableActionCellRenderMatHang;
@@ -10,6 +12,8 @@ import gui_dialog.DL_ThemMatHang;
 import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;
@@ -18,12 +22,16 @@ import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
  * @author HO MINH HAU
  */
-public class Form_MatHang extends javax.swing.JPanel implements MouseListener {
+public class Form_MatHang extends javax.swing.JPanel  {
 
     private MatHang_DAO mh_dao;
     private DefaultTableModel dtmMatHang;
@@ -50,7 +58,6 @@ public class Form_MatHang extends javax.swing.JPanel implements MouseListener {
                             Double gia = Double.parseDouble(tblMatHang.getValueAt(rowIndex, 2).toString());
                             Boolean trangThai = Boolean.parseBoolean(tblMatHang.getValueAt(rowIndex, 3).toString());
 
-                           
                             MatHang mh = new MatHang(maHang, tenHang, gia, trangThai);
 
                             if (mh_dao.editMatHang(mh)) {
@@ -149,6 +156,7 @@ public class Form_MatHang extends javax.swing.JPanel implements MouseListener {
         tblMatHang = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         lblTong = new javax.swing.JLabel();
+        btnExcel = new gui.swing.RadiusButton();
 
         pnlMatHang.setBackground(new java.awt.Color(235, 249, 249));
 
@@ -161,7 +169,7 @@ public class Form_MatHang extends javax.swing.JPanel implements MouseListener {
         lblTim.setText("Tìm kiếm");
 
         btnTim.setBorder(null);
-        btnTim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-find-24.png"))); // NOI18N
+        btnTim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/magnifying-glass.png"))); // NOI18N
         btnTim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTimActionPerformed(evt);
@@ -258,6 +266,13 @@ public class Form_MatHang extends javax.swing.JPanel implements MouseListener {
 
         lblTong.setText("jLabel2");
 
+        btnExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Excel32.png"))); // NOI18N
+        btnExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlMatHangLayout = new javax.swing.GroupLayout(pnlMatHang);
         pnlMatHang.setLayout(pnlMatHangLayout);
         pnlMatHangLayout.setHorizontalGroup(
@@ -272,7 +287,9 @@ public class Form_MatHang extends javax.swing.JPanel implements MouseListener {
                 .addComponent(jLabel1)
                 .addGap(34, 34, 34)
                 .addComponent(lblTong)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
         pnlMatHangLayout.setVerticalGroup(
             pnlMatHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,11 +297,16 @@ public class Form_MatHang extends javax.swing.JPanel implements MouseListener {
                 .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(scr, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
-                .addGap(28, 28, 28)
-                .addGroup(pnlMatHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTong)
-                    .addComponent(jLabel1))
-                .addGap(32, 32, 32))
+                .addGroup(pnlMatHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlMatHangLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(pnlMatHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTong)
+                            .addComponent(jLabel1)))
+                    .addGroup(pnlMatHangLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btnExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(16, 16, 16))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -325,7 +347,6 @@ public class Form_MatHang extends javax.swing.JPanel implements MouseListener {
                 clearDataOnModel();
                 for (MatHang mh : dsMHTim) {
                     dtmMatHang.addRow(new Object[]{mh.getMaMH(), mh.getTenMH(), mh.getGia(), mh.isTrangThai() ? "Còn hàng" : "Hết hàng"});
-//                    int index = mh_dao.traVeViTri(mh);
                 }
             } else if (dsMHTim == null) {
                 JOptionPane.showMessageDialog(this, "Không tìm thấy");
@@ -339,8 +360,63 @@ public class Form_MatHang extends javax.swing.JPanel implements MouseListener {
         DocDuLieu();
     }//GEN-LAST:event_btnRefeshActionPerformed
 
+    private void btnExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcelActionPerformed
+        try {
+            writeFileExcell();
+            JOptionPane.showMessageDialog(null, "Xuất thành công!");
+        } catch (Exception e2) {
+            JOptionPane.showMessageDialog(null, "Lỗi hệ thống");
+
+        }        // TODO add your handling code he
+    }//GEN-LAST:event_btnExcelActionPerformed
+    public void writeFileExcell() throws IOException {
+        FileOutputStream file = new FileOutputStream("DSMatHang.xlsx");
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet("name");
+        XSSFRow row;
+        XSSFCell cellA; // 0
+        XSSFCell cellB; // 1
+        XSSFCell cellC; // 2
+        XSSFCell cellD; // 3
+        XSSFCell cellE; // 4
+        int j = 0;
+        mh_dao = new MatHang_DAO();
+        List<MatHang> list = new ArrayList<MatHang>();
+        list = mh_dao.getalltbMatHang();
+        row = sheet.createRow(j++);
+        String[] headers = {"Mã phòng", "Tên phòng", "Giá", "Trạng thái"};
+        for (int i = 0; i <= 3; i++) {
+            cellA = row.createCell(i);
+            cellA.setCellValue(headers[i]);
+        }
+        for (MatHang c : list) {
+            row = sheet.createRow(j++);
+
+            cellA = row.createCell(0);
+            cellA.setCellValue(c.getMaMH());
+
+            cellB = row.createCell(1);
+            cellB.setCellValue(c.getTenMH());
+
+            cellC = row.createCell(2);
+            Double gia = c.getGia();
+            if (gia != null) {
+                cellC.setCellValue(gia);
+            } else {
+                cellC.setCellValue("");
+            }
+            cellD = row.createCell(3);
+            String tinhTrang = c.isTrangThai() ? "Còn hàng" : "Hết hàng";
+            cellD.setCellValue(tinhTrang);
+
+        }
+        workbook.write(file);
+        workbook.close();
+        file.close();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private gui.swing.RadiusButton btnExcel;
     private gui.swing.RadiusButton btnRefesh;
     private gui.swing.RadiusButton btnThem;
     private gui.swing.RadiusButton btnTim;
@@ -355,27 +431,4 @@ public class Form_MatHang extends javax.swing.JPanel implements MouseListener {
     private javax.swing.JTextField txtTim;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }

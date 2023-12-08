@@ -13,6 +13,7 @@ gui\swing\ActionButton$1.class
 gui_dialog\DL_CheckKHforDatNhieuPhong$3.class
 com\raven\chart\blankchart\NiceScale.class
 gui\event\EventMenu.class
+gui\form\Form_QuanLiHoaDon$5.class
 gui_dialog\DL_KiemTravsAddKH$4.class
 gui\swing\PanelAction$1.class
 gui_dialog\DL_ThemDV$MatHangModel.class
@@ -161,7 +162,6 @@ gui_dialog\DL_ThemDV$2.class
 gui_dialog\DL_ThongTinDatPhong.class
 gui\swing\table\PanelActionMatHang.class
 gui\event\EventRefreshRoom.class
-gui\form\Form_ThongKeDoanhThu$2.class
 gui\form\Form_QuanLyPhongHat$3.class
 gui_dialog\DL_SuaKhachHang$4.class
 com\raven\chart\blankchart\SeriesSize.class
@@ -199,6 +199,7 @@ gui\swing\table\PanelActionKH.class
 gui_dialog\DL_ChonDichVu$5.class
 gui_dialog\DL_DatPhong$2.class
 gui\swing\MenuButton.class
+gui\form\Form_QuanLyPhongHat$5.class
 gui\model\ModelPhongDatTruoc.class
 gui\swing\TableActionEvent.class
 gui\form\Form_QuanLyDatPhong$5.class
@@ -212,7 +213,6 @@ gui\swing\PanelAction$2.class
 gui\swing\table\PanelActionNhanVien.class
 gui\swing\notification\Notification.class
 gui\form\Form_DichVu$2.class
-gui\form\Form_ThongKeDoanhThu$1.class
 gui_dialog\DL_ThemDV$5.class
 gui\swing\table\PanelActionPhongHat$4.class
 gui\component\PanelKiemTraThongTinvsAddKH$5.class
@@ -226,6 +226,7 @@ gui_dialog\DL_CapNhatMatHang$2.class
 gui_dialog\DL_ChonDichVu$4.class
 gui_dialog\DL_ThanhToan.class
 entity\NhanVien.class
+gui\form\Form_MatHang$5.class
 gui\main\Main$6.class
 gui_dialog\DL_ThemKhuyenMai$6.class
 gui_dialog\DL_CapNhatMatHang.class
@@ -266,6 +267,7 @@ dao\KhuyenMai_DAO.class
 gui\form\ProcessesLoading.class
 gui_dialog\DL_PhongDangSuDung$2.class
 entity\DonDatPhong.class
+gui\form\Form_QuanLiHoaDon$6.class
 gui\component\PanelKiemTraThongTinvsAddKH$2.class
 gui\form\Form_QuanLyDatPhong$9.class
 gui\swing\Button$1.class
@@ -274,6 +276,7 @@ gui\swing\ActionButtonTable.class
 gui_dialog\DL_SuaNV$4.class
 gui_dialog\DL_DatPhongTruoc$2.class
 gui_dialog\DL_ThanhToanNhieuphong$3.class
+gui\form\Form_QuanLyKhachHang$6.class
 gui\event\EventMenuSelected.class
 gui\form\Form_QuanLyDatPhong.class
 gui\form\Form_QuanLyKhachHang$3.class
@@ -307,6 +310,7 @@ com\raven\chart\blankchart\BlankPlotChart.class
 gui_dialog\DL_ThanhToanNhieuphong$6$1.class
 gui\form\Form_QuenMatKhau.class
 gui\Application$1$2.class
+gui\form\Form_QuanLyNhanVien$9.class
 gui_dialog\DL_NhanPhongDatTruoc.class
 dao\DonDatPhong_DAO.class
 gui_dialog\DL_test$3.class

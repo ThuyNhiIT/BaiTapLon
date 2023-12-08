@@ -126,23 +126,24 @@ public class Form_ThongKeMatHang extends javax.swing.JPanel {
 
         lblTKMH1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         lblTKMH1.setForeground(new java.awt.Color(41, 173, 86));
+        lblTKMH1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTKMH1.setText("THỐNG KÊ MẶT HÀNG");
         lblTKMH1.setFocusable(false);
         lblTKMH1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        cmbTKChiTiet.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmbTKChiTiet.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023" }));
+        cmbTKChiTiet.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmbTKChiTiet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbTKChiTietActionPerformed(evt);
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel8.setText("Năm:");
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
-        lblNgay.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblNgay.setText("Ngày");
+        lblNgay.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         txtDate.setDate(new Date());
         txtDate.setDateFormatString("dd-MM-yyyy hh:mm");
@@ -154,11 +155,11 @@ public class Form_ThongKeMatHang extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Tháng");
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
-        cmbTKTheo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmbTKTheo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        cmbTKTheo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmbTKTheo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbTKTheoActionPerformed(evt);
@@ -183,10 +184,10 @@ public class Form_ThongKeMatHang extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cmbTKChiTiet, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(139, 139, 139))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHeader1Layout.createSequentialGroup()
+            .addGroup(pnlHeader1Layout.createSequentialGroup()
                 .addGap(415, 415, 415)
-                .addComponent(lblTKMH1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(383, 383, 383))
+                .addComponent(lblTKMH1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlHeader1Layout.setVerticalGroup(
             pnlHeader1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,8 +227,8 @@ public class Form_ThongKeMatHang extends javax.swing.JPanel {
         tblTKMH.setSelectionBackground(new java.awt.Color(0, 169, 183));
         scr1.setViewportView(tblTKMH);
 
-        lblTong.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTong.setText("Tổng");
+        lblTong.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         txtTong.setEditable(false);
 
@@ -236,11 +237,11 @@ public class Form_ThongKeMatHang extends javax.swing.JPanel {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(809, 809, 809)
-                .addComponent(lblTong, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtTong, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTong, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtTong, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
             .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel7Layout.createSequentialGroup()
                     .addGap(5, 5, 5)
@@ -276,8 +277,8 @@ public class Form_ThongKeMatHang extends javax.swing.JPanel {
         tblTKDV.setSelectionBackground(new java.awt.Color(0, 169, 183));
         scr2.setViewportView(tblTKDV);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Tổng");
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         txtTienDV.setEditable(false);
 
@@ -334,8 +335,8 @@ public class Form_ThongKeMatHang extends javax.swing.JPanel {
 
         pnlChart.setBackground(new java.awt.Color(255, 255, 255));
 
-        lblBieuDo.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         lblBieuDo.setText("BIỂU ĐỒ THỐNG KÊ CÁC DỊCH VỤ BÁN CHẠY");
+        lblBieuDo.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
 
         pnl.setBackground(new java.awt.Color(255, 255, 255));
         pnl.setPreferredSize(new java.awt.Dimension(1000, 481));
@@ -356,7 +357,7 @@ public class Form_ThongKeMatHang extends javax.swing.JPanel {
             .addGroup(pnlLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(pieChart1, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlChartLayout = new javax.swing.GroupLayout(pnlChart);
@@ -377,7 +378,7 @@ public class Form_ThongKeMatHang extends javax.swing.JPanel {
                 .addGap(15, 15, 15)
                 .addComponent(lblBieuDo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnl, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -406,7 +407,7 @@ public class Form_ThongKeMatHang extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(pnlHeader1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(materialTabbed4, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE))
+                .addComponent(materialTabbed4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

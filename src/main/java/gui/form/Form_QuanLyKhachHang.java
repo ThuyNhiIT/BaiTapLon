@@ -1,7 +1,9 @@
 package gui.form;
 
 import dao.KhachHang_DAO;
+import dao.NhanVien_DAO;
 import entity.KhachHang;
+import entity.NhanVien;
 import gui.swing.CustomJOptionPane;
 import gui.swing.scrollbar.ScrollBarCustom;
 import gui.swing.table.PanelActionCellEditor_KhachHang;
@@ -15,11 +17,17 @@ import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import gui_dialog.DL_ThongTinKhachHang;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -39,39 +47,37 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
                 //System.out.println("sua" +row);
                 //Viết sự kiên dô đây 
                 kh_dao = new KhachHang_DAO();
-                if (tblDSKH.getSelectedRowCount() > 0){
-                             int[] selectedRows = tblDSKH.getSelectedRows();
-                for (int i = 0; i < selectedRows.length; i++) {
-                    int rowIndex = selectedRows[i];
-                    String maKH = tblDSKH.getValueAt(rowIndex, 0).toString();
-                    String tenKH = tblDSKH.getValueAt(rowIndex, 1).toString();
-                    String sdt = tblDSKH.getValueAt(rowIndex, 2).toString();
-                    Boolean gioiTinh = Boolean.parseBoolean(tblDSKH.getValueAt(rowIndex, 3).toString());
+                if (tblDSKH.getSelectedRowCount() > 0) {
+                    int[] selectedRows = tblDSKH.getSelectedRows();
+                    for (int i = 0; i < selectedRows.length; i++) {
+                        int rowIndex = selectedRows[i];
+                        String maKH = tblDSKH.getValueAt(rowIndex, 0).toString();
+                        String tenKH = tblDSKH.getValueAt(rowIndex, 1).toString();
+                        String sdt = tblDSKH.getValueAt(rowIndex, 2).toString();
+                        Boolean gioiTinh = Boolean.parseBoolean(tblDSKH.getValueAt(rowIndex, 3).toString());
 
-                    KhachHang kh = new KhachHang(maKH, tenKH, sdt, gioiTinh);
-                    tblDSKH.setValueAt(tenKH, rowIndex, 1);
-                    tblDSKH.setValueAt(sdt, rowIndex, 2);
-                    tblDSKH.setValueAt(gioiTinh, rowIndex, 3);
-                    if (kh_dao.editCustomer(kh)) {
-                        System.out.println("Sửa thành công");
-                        JOptionPane.showMessageDialog(null, "Sửa thành công");
-                    } else {
-                        System.out.println("Sửa thất bại");
-                        JOptionPane.showMessageDialog(null, "Sửa thất bại");
+                        KhachHang kh = new KhachHang(maKH, tenKH, sdt, gioiTinh);
+                        tblDSKH.setValueAt(tenKH, rowIndex, 1);
+                        tblDSKH.setValueAt(sdt, rowIndex, 2);
+                        tblDSKH.setValueAt(gioiTinh, rowIndex, 3);
+                        if (kh_dao.editCustomer(kh)) {
+                            System.out.println("Sửa thành công");
+                            JOptionPane.showMessageDialog(null, "Sửa thành công");
+                        } else {
+                            System.out.println("Sửa thất bại");
+                            JOptionPane.showMessageDialog(null, "Sửa thất bại");
+                        }
                     }
                 }
-            }
 
-            clearJTable();
-            DocDuLieu();
-                
-                
+                clearJTable();
+                DocDuLieu();
+
             }
         };
         tblDSKH.getColumnModel().getColumn(4).setCellRenderer(new PanelActionCellRender_KhachHang());
         tblDSKH.getColumnModel().getColumn(4).setCellEditor(new PanelActionCellEditor_KhachHang(event));
-        
-        
+
         scr.getViewport().setOpaque(false);
         scr.setVerticalScrollBar(new ScrollBarCustom());
         kh_dao = new KhachHang_DAO();
@@ -130,6 +136,7 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
         btnThem = new gui.swing.RadiusButton();
         btnRefesh = new gui.swing.RadiusButton();
         lblTong = new javax.swing.JLabel();
+        btnExcel = new gui.swing.RadiusButton();
 
         pnlKhachHang.setBackground(new java.awt.Color(235, 249, 249));
 
@@ -247,6 +254,13 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
 
         lblTong.setText("jLabel2");
 
+        btnExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Excel32.png"))); // NOI18N
+        btnExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlKhachHangLayout = new javax.swing.GroupLayout(pnlKhachHang);
         pnlKhachHang.setLayout(pnlKhachHangLayout);
         pnlKhachHangLayout.setHorizontalGroup(
@@ -256,7 +270,9 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(32, 32, 32)
                 .addComponent(lblTong)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
             .addGroup(pnlKhachHangLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(scr, javax.swing.GroupLayout.DEFAULT_SIZE, 1209, Short.MAX_VALUE)
@@ -269,11 +285,16 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
                 .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(9, 9, 9)
                 .addComponent(scr, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addGroup(pnlKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(lblTong))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addGroup(pnlKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlKhachHangLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(pnlKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(lblTong)))
+                    .addGroup(pnlKhachHangLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btnExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -358,12 +379,64 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
         updateTotalCustomer();
 
     }//GEN-LAST:event_btnRefeshActionPerformed
+
+    private void btnExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcelActionPerformed
+        try {
+            writeFileExcell();
+//            System.out.println("Lỗi hệ thống");
+            JOptionPane.showMessageDialog(null, "Xuất thành công!");
+        } catch (Exception e2) {
+            JOptionPane.showMessageDialog(null, "Lỗi hệ thống");
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_btnExcelActionPerformed
     private void updateTotalCustomer() {
         int totalCustomer = dtmKhachHang.getRowCount();
         lblTong.setText("" + totalCustomer);
     }
 
+    public void writeFileExcell() throws IOException {
+        FileOutputStream file = new FileOutputStream("DSKhachHang.xlsx");
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet("name");
+        XSSFRow row;
+        XSSFCell cellA; // 0
+        XSSFCell cellB; // 1
+        XSSFCell cellC; // 2
+        XSSFCell cellD; // 3
+        int j = 0;
+        kh_dao = new KhachHang_DAO();
+        List<KhachHang> list = new ArrayList<KhachHang>();
+        list = kh_dao.getalltbKhachHang();
+        row = sheet.createRow(j++);
+        String[] headers = {"Mã khách hàng", "Tên Khách Hàng", "SĐT", "Giới tính"};
+        for (int i = 0; i <= 3; i++) {
+            cellA = row.createCell(i);
+            cellA.setCellValue(headers[i]);
+        }
+        for (KhachHang c : list) {
+            row = sheet.createRow(j++);
+
+            cellA = row.createCell(0);
+            cellA.setCellValue(c.getMaKH());
+
+            cellB = row.createCell(1);
+            cellB.setCellValue(c.getTenKH());
+
+            cellC = row.createCell(2);
+            cellC.setCellValue(c.getSdt());
+
+            cellD = row.createCell(3);
+            String gioiTinh = c.isGioitinh() ? "Nam" : "Nữ";
+            cellD.setCellValue(gioiTinh);
+
+        }
+        workbook.write(file);
+        workbook.close();
+        file.close();
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private gui.swing.RadiusButton btnExcel;
     private gui.swing.RadiusButton btnRefesh;
     private gui.swing.RadiusButton btnSua;
     private gui.swing.RadiusButton btnThem;

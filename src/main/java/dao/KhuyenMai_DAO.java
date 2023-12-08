@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public class KhuyenMai_DAO {
 
@@ -90,7 +91,7 @@ public class KhuyenMai_DAO {
             stmt.setDouble(4, km.getPhanTram());
             stmt.setString(5, km.getMaKM());
             n = stmt.executeUpdate();
-            System.out.println("Cập nhật");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -116,4 +117,49 @@ public class KhuyenMai_DAO {
         }
         return n > 0;
     }
+
+//    public String[] getKhuyenMai() {
+//        List<String> DSMoTa = new ArrayList<>();
+//        Connection con = ConnectDB.getInstance().getConnection();
+//        PreparedStatement stmt = null;
+//        try {
+//            LocalDate currentDate = LocalDate.now(); // Ngày hiện tại
+//            stmt = con.prepareStatement("SELECT moTa FROM KhuyenMai WHERE batDau <= ? AND ketThuc >= ?");
+//            stmt.setDate(1, java.sql.Date.valueOf(currentDate));
+//            stmt.setDate(2, java.sql.Date.valueOf(currentDate));
+//            try (ResultSet resultSet = stmt.executeQuery()) {
+//                while (resultSet.next()) {
+//                    String moTa = resultSet.getString("moTa");
+//                    DSMoTa.add(moTa);
+//                }
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        String[] ArrayMoTa = DSMoTa.toArray(new String[0]);
+//        return ArrayMoTa;
+//    }
+    
+    
+       
+       public String getKhuyenMai() {
+    String moTa = null;
+    Connection con = ConnectDB.getInstance().getConnection();
+    PreparedStatement stmt = null;
+    try {
+        LocalDate currentDate = LocalDate.now(); // Ngày hiện tại
+        stmt = con.prepareStatement("SELECT moTa FROM KhuyenMai WHERE batDau <= ? AND ketThuc >= ?");
+        stmt.setDate(1, java.sql.Date.valueOf(currentDate));
+        stmt.setDate(2, java.sql.Date.valueOf(currentDate));
+        try (ResultSet resultSet = stmt.executeQuery()) {
+            if (resultSet.next()) {
+                moTa = resultSet.getString("moTa");
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return moTa;
+} 
+        
 }

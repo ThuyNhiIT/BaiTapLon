@@ -6,26 +6,37 @@ import dao.ChiTietHoaDonPhong_Dao;
 import dao.HoaDon_DAO;
 import dao.KhachHang_DAO;
 import dao.KhuyenMai_DAO;
+import dao.MatHang_DAO;
 import dao.PhongHat_DAO;
 import entity.ChiTietHoaDonDV;
 import entity.ChiTietHoaDonPhong;
 import entity.HoaDon;
 import entity.KhachHang;
 import entity.KhuyenMai;
+import entity.MatHang;
 import gui.swing.scrollbar.ScrollBarCustom;
 import gui.swing.table.TableActionCellEditorKhuyenMai;
 import gui.swing.table.TableActionCellRenderKhuyenMai;
 import gui.swing.table.TableActionEvent_KhuyenMai;
 import gui_dialog.DL_ThemKhuyenMai;
 import java.awt.Component;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -70,7 +81,7 @@ public class Form_QuanLiHoaDon extends javax.swing.JPanel {
             public void Sua(int row) {
                 km_dao = new KhuyenMai_DAO();
                 if (tblKM.getSelectedRowCount() > 0) {
-                    if (JOptionPane.showConfirmDialog(null, "Xác nhận sửa mặt hàng đã chọn?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    if (JOptionPane.showConfirmDialog(null, "Xác nhận sửa khuyến mãi đã chọn?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                         int[] selectedRows = tblKM.getSelectedRows();
                         for (int i = 0; i < selectedRows.length; i++) {
                             int rowIndex = selectedRows[i];
@@ -173,10 +184,12 @@ public class Form_QuanLiHoaDon extends javax.swing.JPanel {
         btnTim = new gui.swing.RadiusButton();
         txtTim = new javax.swing.JTextField();
         btnRefesh = new gui.swing.RadiusButton();
+        btnExcelHD = new gui.swing.RadiusButton();
         jLabel1 = new javax.swing.JLabel();
         scr1 = new javax.swing.JScrollPane();
         tblHD = new javax.swing.JTable();
         btnThemMH = new gui.swing.RadiusButton();
+        btnExcelKM = new gui.swing.RadiusButton();
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -205,9 +218,8 @@ public class Form_QuanLiHoaDon extends javax.swing.JPanel {
         lblTim.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTim.setText("Tìm kiếm");
 
-        btnTim.setBackground(new java.awt.Color(166, 208, 238));
         btnTim.setBorder(null);
-        btnTim.setText("Tìm");
+        btnTim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/magnifying-glass.png"))); // NOI18N
         btnTim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTimActionPerformed(evt);
@@ -223,18 +235,19 @@ public class Form_QuanLiHoaDon extends javax.swing.JPanel {
                 .addComponent(lblTim)
                 .addGap(27, 27, 27)
                 .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81))
+                .addGap(31, 31, 31)
+                .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(122, 122, 122))
         );
         pnlTimLayout.setVerticalGroup(
             pnlTimLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTimLayout.createSequentialGroup()
                 .addContainerGap(16, Short.MAX_VALUE)
-                .addGroup(pnlTimLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTim)
-                    .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlTimLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlTimLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblTim)
+                        .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(10, 10, 10))
         );
 
@@ -243,6 +256,13 @@ public class Form_QuanLiHoaDon extends javax.swing.JPanel {
         btnRefesh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRefeshActionPerformed(evt);
+            }
+        });
+
+        btnExcelHD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Excel32.png"))); // NOI18N
+        btnExcelHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcelHDActionPerformed(evt);
             }
         });
 
@@ -255,21 +275,30 @@ public class Form_QuanLiHoaDon extends javax.swing.JPanel {
                 .addComponent(pnlTim, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnRefesh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65))
+                .addGap(18, 18, 18)
+                .addComponent(btnExcelHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
         pnlHeaderLayout.setVerticalGroup(
             pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlHeaderLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnRefesh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlHeaderLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnExcelHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlHeaderLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
                         .addComponent(pnlTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap(14, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHeaderLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnRefesh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("DANH SÁCH KHUYẾN MÃI");
 
         tblHD.setModel(new javax.swing.table.DefaultTableModel(
@@ -296,17 +325,26 @@ public class Form_QuanLiHoaDon extends javax.swing.JPanel {
             }
         });
 
+        btnExcelKM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Excel32.png"))); // NOI18N
+        btnExcelKM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcelKMActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnlHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(510, 510, 510)
+                .addGap(385, 385, 385)
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(131, 131, 131)
                 .addComponent(btnThemMH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(108, 108, 108))
+                .addGap(48, 48, 48)
+                .addComponent(btnExcelKM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(scr)
@@ -322,10 +360,12 @@ public class Form_QuanLiHoaDon extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(236, 236, 236)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnThemMH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnThemMH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnExcelKM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
                 .addComponent(scr, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -376,7 +416,7 @@ public class Form_QuanLiHoaDon extends javax.swing.JPanel {
             if (dsHDTim != null) {
                 clearDataOnModel();
                 for (HoaDon hd : dsHDTim) {
-                    dtmhd.addRow(new Object[]{hd.getMaHD(), hd.getNgayLapHD(), hd.getKhachHang().getMaKH(), hd.getNhanVien().getMaNV(),hd.getMaKM().getMaKM(), hd.getTongTien()});
+                    dtmhd.addRow(new Object[]{hd.getMaHD(), hd.getNgayLapHD(), hd.getKhachHang().getMaKH(), hd.getNhanVien().getMaNV(), hd.getMaKM().getMaKM(), hd.getTongTien()});
                 }
 //                setThongTin();
             } else if (dsHDTim == null) {
@@ -399,8 +439,126 @@ public class Form_QuanLiHoaDon extends javax.swing.JPanel {
         DocDuLieu();
     }//GEN-LAST:event_btnRefeshActionPerformed
 
+    private void btnExcelKMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcelKMActionPerformed
+        try {
+            writeFileExcell1();
+            JOptionPane.showMessageDialog(null, "Xuất thành công!");
+        } catch (Exception e2) {
+            //            JOptionPane.showMessageDialog(null, "Lỗi hệ thống");
+            e2.printStackTrace();
+        }
+    }//GEN-LAST:event_btnExcelKMActionPerformed
 
+    private void btnExcelHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcelHDActionPerformed
+        try {
+            writeFileExcell2();
+            JOptionPane.showMessageDialog(null, "Xuất thành công!");
+        } catch (Exception e2) {
+            JOptionPane.showMessageDialog(null, "Lỗi hệ thống");
+            e2.printStackTrace();
+        }
+    }//GEN-LAST:event_btnExcelHDActionPerformed
+
+    public void writeFileExcell2() throws IOException {
+        FileOutputStream file = new FileOutputStream("DSHoaDon.xlsx");
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet("name");
+        XSSFRow row;
+        XSSFCell cellA; // 0
+        XSSFCell cellB; // 1
+        XSSFCell cellC; // 2
+        XSSFCell cellD; // 3
+        XSSFCell cellE; // 4
+        XSSFCell cellF; // 5
+        int j = 0;
+        hd_dao = new HoaDon_DAO();
+        List<HoaDon> list = new ArrayList<HoaDon>();
+        list = hd_dao.getalltbHoaDon();
+        row = sheet.createRow(j++);
+        String[] headers = {"Mã HD", "Ngày lập", "Mã khách hàng", "Mã nhân viên", "Khuyến mãi", "Tổng tiền"};
+        for (int i = 0; i <= 5; i++) {
+            cellA = row.createCell(i);
+            cellA.setCellValue(headers[i]);
+        }
+        for (HoaDon c : list) {
+            row = sheet.createRow(j++);
+
+            cellA = row.createCell(0);
+            cellA.setCellValue(c.getMaHD());
+
+            cellB = row.createCell(1);
+            LocalDate ngay = c.getNgayLapHD();
+            String ngayString = ngay.toString();
+            cellB.setCellValue(ngayString);
+
+            cellC = row.createCell(2);
+            cellC.setCellValue(c.getKhachHang().getMaKH());
+
+            cellD = row.createCell(3);
+            cellD.setCellValue(c.getNhanVien().getMaNV());
+
+            cellE = row.createCell(4);
+            cellE.setCellValue(c.getMaKM().getMaKM());
+
+            cellF = row.createCell(5);
+            cellF.setCellValue(c.getTongTien());
+
+        }
+        workbook.write(file);
+        workbook.close();
+        file.close();
+    }
+
+    public void writeFileExcell1() throws IOException {
+        FileOutputStream file = new FileOutputStream("DSKhuyenMai.xlsx");
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet("name");
+        XSSFRow row;
+        XSSFCell cellA; // 0
+        XSSFCell cellB; // 1
+        XSSFCell cellC; // 2
+        XSSFCell cellD; // 3
+        XSSFCell cellE; // 4
+        XSSFCell cellF; // 5
+        int j = 0;
+        km_dao = new KhuyenMai_DAO();
+        List<KhuyenMai> list = new ArrayList<KhuyenMai>();
+        list = km_dao.getAllKhuyenMai();
+        row = sheet.createRow(j++);
+        String[] headers = {"Mã KM", "Mô tả", "Bắt đầu", "Kết thúc", "Phần trăm"};
+        for (int i = 0; i <= 4; i++) {
+            cellA = row.createCell(i);
+            cellA.setCellValue(headers[i]);
+        }
+        for (KhuyenMai c : list) {
+            row = sheet.createRow(j++);
+
+            cellA = row.createCell(0);
+            cellA.setCellValue(c.getMaKM());
+
+            cellB = row.createCell(1);
+            cellB.setCellValue(c.getMoTa());
+
+            cellC = row.createCell(2);
+            LocalDate ngayBD = c.getGioBatDau();
+            String ngayBDString = ngayBD.toString();
+            cellC.setCellValue(ngayBDString);
+
+            cellD = row.createCell(3);
+            LocalDate ngayKT = c.getGioBatDau();
+            String ngayKTString = ngayKT.toString();
+            cellD.setCellValue(ngayKTString);
+
+            cellE = row.createCell(4);
+            cellE.setCellValue(c.getPhanTram());
+        }
+        workbook.write(file);
+        workbook.close();
+        file.close();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private gui.swing.RadiusButton btnExcelHD;
+    private gui.swing.RadiusButton btnExcelKM;
     private gui.swing.RadiusButton btnRefesh;
     private gui.swing.RadiusButton btnThemMH;
     private gui.swing.RadiusButton btnTim;
