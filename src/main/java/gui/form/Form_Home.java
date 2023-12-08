@@ -5,11 +5,15 @@ import dao.KhachHang_DAO;
 import dao.KhuyenMai_DAO;
 import dao.PhongHat_DAO;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
@@ -20,6 +24,7 @@ import javax.swing.text.StyleConstants;
  */
 public class Form_Home extends javax.swing.JPanel {
 
+  
     public Form_Home() {
         initComponents();
         KhachHang_DAO KH = new KhachHang_DAO();
@@ -36,37 +41,23 @@ public class Form_Home extends javax.swing.JPanel {
 
         KhuyenMai_DAO KM = new KhuyenMai_DAO();
         String[] km = KM.getKhuyenMai();
-        StringBuilder kmText = new StringBuilder();
-        for (String khuyenMai : km) {
-            kmText.append(khuyenMai).append("\n"); // Thêm mô tả và xuống dòng
-        }
-        txtKM.setText(kmText.toString());
-        
-//          // Định dạng văn bản để căn giữa
-//        DefaultStyledDocument doc = new DefaultStyledDocument();
-//        Style centerStyle = doc.addStyle("centerStyle", null);
-//        StyleConstants.setAlignment(centerStyle, StyleConstants.ALIGN_CENTER);
-//        doc.setParagraphAttributes(0, doc.getLength(), centerStyle, false);
-//        txtKM.setDocument(doc);
-//  scrollPane = new JScrollPane(txtKM);
-//        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        String kmText = String.join(",     ", km);
+        txtKM.setText(kmText);
+        animateText();
 
-//KhuyenMai_DAO KM = new KhuyenMai_DAO();
-//String[] km = KM.getKhuyenMai();
-//StringBuilder htmlText = new StringBuilder("<html>");
-//for (String khuyenMai : km) {
-//    htmlText.append(khuyenMai).append("<br>"); // Thêm mô tả và thẻ xuống hàng HTML
-//}
-//htmlText.append("</html>");
-//
-//textPane = new JTextPane();
-//textPane.setContentType("text/html");
-//textPane.setText(htmlText.toString());
-//textPane.setEditable(false);
-//        KhuyenMai_DAO KM = new KhuyenMai_DAO();
-//        String km = KM.getKhuyenMai();
-//        txtKM.setText(String.valueOf(km));
+    }
 
+    public void animateText() {
+        Timer t = new Timer(200, new ActionListener() {
+            String text = txtKM.getText() + "      ";
+
+            public void actionPerformed(ActionEvent e) {
+                text = text.substring(1, text.length()) + text.charAt(0);
+                txtKM.setText(text);
+            }
+        });
+
+        t.start();
     }
 
     @SuppressWarnings("unchecked")
@@ -86,8 +77,7 @@ public class Form_Home extends javax.swing.JPanel {
         lblHD = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        scrollPane = new javax.swing.JScrollPane();
-        txtKM = new javax.swing.JTextArea();
+        txtKM = new javax.swing.JLabel();
 
         pnlChinh.setBackground(new java.awt.Color(235, 249, 249));
 
@@ -221,16 +211,9 @@ public class Form_Home extends javax.swing.JPanel {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Tin.png"))); // NOI18N
         jLabel4.setText("Khuyến mãi ");
 
-        txtKM.setEditable(false);
-        txtKM.setBackground(new java.awt.Color(235, 249, 249));
-        txtKM.setColumns(20);
         txtKM.setFont(new java.awt.Font("Sitka Text", 3, 12)); // NOI18N
         txtKM.setForeground(new java.awt.Color(255, 51, 51));
-        txtKM.setRows(2);
-        txtKM.setTabSize(4);
-        txtKM.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 255, 255)));
-        txtKM.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        scrollPane.setViewportView(txtKM);
+        txtKM.setText("jLabel6");
 
         javax.swing.GroupLayout pnlChinhLayout = new javax.swing.GroupLayout(pnlChinh);
         pnlChinh.setLayout(pnlChinhLayout);
@@ -245,21 +228,19 @@ public class Form_Home extends javax.swing.JPanel {
                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlChinhLayout.createSequentialGroup()
-                .addGroup(pnlChinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pnlChinhLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(320, 320, 320))
-                    .addGroup(pnlChinhLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(pnlCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(64, 64, 64)
-                        .addComponent(pnlIcome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(58, 58, 58)
-                        .addComponent(pnlRoom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(50, 50, 50)
+                .addComponent(pnlCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(64, 64, 64)
+                .addComponent(pnlIcome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(58, 58, 58)
+                .addComponent(pnlRoom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(59, 59, 59))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlChinhLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(txtKM, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(235, 235, 235))
         );
         pnlChinhLayout.setVerticalGroup(
             pnlChinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,20 +248,17 @@ public class Form_Home extends javax.swing.JPanel {
                 .addGap(72, 72, 72)
                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(30, 30, 30)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, Short.MAX_VALUE)
-                .addGap(76, 76, 76)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(pnlChinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtKM, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
                 .addGroup(pnlChinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnlRoom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlIcome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(pnlChinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlChinhLayout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlChinhLayout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jLabel4)))
-                .addGap(96, 96, 96))
+                .addGap(190, 190, 190))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -310,7 +288,6 @@ public class Form_Home extends javax.swing.JPanel {
     private javax.swing.JPanel pnlCustomer;
     private javax.swing.JPanel pnlIcome;
     private javax.swing.JPanel pnlRoom;
-    private javax.swing.JScrollPane scrollPane;
-    private javax.swing.JTextArea txtKM;
+    private javax.swing.JLabel txtKM;
     // End of variables declaration//GEN-END:variables
 }

@@ -48,7 +48,6 @@ gui\swing\table\TableActionCellRenderMatHang.class
 gui\form\ProcessesLoading$1.class
 gui\swing\MenuAnimation$1.class
 gui\swing\MenuItem$2.class
-gui\swing\PopupMenu$2.class
 gui_dialog\DL_ThanhToan$3.class
 gui\swing\table\PanelActionKhuyenMai$2.class
 gui_dialog\DL_ThemNV$8.class
@@ -63,6 +62,7 @@ gui_dialog\DL_DichVu$2.class
 gui\component\PanelKiemTraThongTinvsAddKH$1.class
 gui\form\Form_Login$1.class
 gui_dialog\DL_KiemTravsAddKHforDatPhong$4.class
+gui\form\Form_Home$1.class
 javaswingdev\chart\PieChart$PeiChartType.class
 gui\swing\table\PanelActionMatHang$3.class
 gui_dialog\DL_ThemMatHang.class
@@ -133,7 +133,6 @@ gui\swing\TimKiem$2.class
 gui\swing\CustomJPasswordField.class
 gui\swing\scrollbar\ModernScrollBarUI$ScrollBarButton.class
 gui_dialog\DL_PhongDangSuDung$1.class
-gui\swing\PopupMenu.class
 gui\form\Form_QuanLyDatPhong$2.class
 gui\swing\table\PanelAction$2.class
 gui\form\Form_QuanLyPhongHat$1.class
@@ -236,7 +235,6 @@ gui\form\Form_QuenMatKhau$3.class
 gui_dialog\DL_ThongTinDatPhong$2.class
 dao\DoiMatKhau_DAO.class
 gui\form\Form_QuanLyDatPhong$4.class
-gui\swing\PanelPopUp.class
 gui_dialog\DL_KiemTravsAddKHforDatPhong$3.class
 gui\swing\ButtonGradient.class
 gui_dialog\DL_DatPhong$1.class
