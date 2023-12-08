@@ -190,6 +190,7 @@ public class DL_DoiMatKhau extends javax.swing.JFrame {
         if (!matKhauMoi.equals(confirmMatKhauMoi)) {
             // Show an error message or handle the password mismatch
             System.out.println("Mật khẩu mới không khớp.");
+            JOptionPane.showMessageDialog(null, "Mật khẩu không khớp !!!");
             return;
         }
 

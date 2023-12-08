@@ -15,7 +15,8 @@ GO
 
 INSERT INTO LoaiNhanVien (maLoai, tenLoai) VALUES ('NVQL', N'Nhân viên quản lý');
 INSERT INTO LoaiNhanVien (maLoai, tenLoai) VALUES ('NVTN', N'Nhân viên thu ngân');
-GO
+INSERT INTO LoaiNhanVien (maLoai, tenLoai) VALUES ('Khac', N'Nhân viên khác');
+
 -- Tạo bảng LoaiPhong
 CREATE TABLE LoaiPhong (
     maLoaiPhong VARCHAR(50) PRIMARY KEY,
@@ -47,30 +48,7 @@ INSERT INTO MatHang (maMH, tenMH, Gia, trangThai) VALUES ('MH007', N'Bia Sapporo
 INSERT INTO MatHang (maMH, tenMH, Gia, trangThai) VALUES ('MH008', N'Nước suối Aquafina', 10000, 1);
 INSERT INTO MatHang (maMH, tenMH, Gia, trangThai) VALUES ('MH009', N'Nước ngọt Cocacola', 12000, 1);
 INSERT INTO MatHang (maMH, tenMH, Gia, trangThai) VALUES ('MH010', N'Nước ngọt Pepsi', 12000, 1);
-INSERT INTO MatHang (maMH, tenMH, Gia, trangThai) VALUES ('MH011', N'Nước giải khát', 12000, 0);
 
-/**
--- Tạo bảng DichVu
-CREATE TABLE DichVu (
-    maDV VARCHAR(50) PRIMARY KEY,
-    tenDV NVARCHAR(255),
-	maMH VARCHAR(50),
-	FOREIGN KEY (maMH) REFERENCES MatHang(maMH)
-);
-GO
-**/
-/*
-INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV001', N'Bia Heineken lon 330ml', 'MH001');
-INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV002', N'Bia Heineken chai 330ml', 'MH002');
-INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV003', N'Bia Tiger lon 330ml', 'MH003');
-INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV004', N'Bia Tiger Crystal lon 330ml', 'MH004');
-INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV005', N'Bia Budweiser lon 330ml', 'MH005');
-INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV006', N'Bia Budweiser chai 330ml', 'MH006');
-INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV007', N'Bia Sapporo lon 330ml', 'MH007');
-INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV008', N'Nước suối Aquafina', 'MH008');
-INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV009', N'Nước ngọt Cocacola', 'MH009');
-INSERT INTO DichVu (maDV, tenDV, maMH) VALUES ('DV010', N'Nước ngọt Pepsi', 'MH010');
-*/
 
 -- Tạo bảng KhachHang
 CREATE TABLE KhachHang (
@@ -129,9 +107,7 @@ INSERT INTO KhachHang (maKH, tenKH, SDT, GioiTinh) VALUES ('KH036', N'Nguyễn P
 INSERT INTO KhachHang (maKH, tenKH, SDT, GioiTinh) VALUES ('KH037', N'Hồ Tuấn Nam', '0908888789', 1);
 INSERT INTO KhachHang (maKH, tenKH, SDT, GioiTinh) VALUES ('KH038', N'Đặng Thanh Thảo', '0559999999', 0);
 INSERT INTO KhachHang (maKH, tenKH, SDT, GioiTinh) VALUES ('KH039', N'Phạm Việt Đăng', '0911222643', 1);
-INSERT INTO KhachHang (maKH, tenKH, SDT, GioiTinh) VALUES ('KH040', N'Nguyễn Phương Trang', '0375643215', 0);
-
-
+INSERT INTO KhachHang (maKH, tenKH, SDT, GioiTinh) VALUES ('KH040', N'Hồ Minh Hậu', '0585576500', 1);
 -- Tạo bảng NhanVien
 CREATE TABLE NhanVien (
     maNV VARCHAR(50) PRIMARY KEY,
@@ -181,86 +157,72 @@ INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P002', 'V002 ', 'LP001', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P003', 'V003', 'LP001', 'Trong');
-
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P004', 'T004 ', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P005', 'T005 ', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P006', 'T006', 'LP002', 'Trong');
-
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P007', 'T007', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P008', 'T008', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P009', 'T009', 'LP002', 'Trong');
-
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P010', 'T010', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P011', 'T011', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
-VALUES ('P012', 'T012', 'LP002', 'Dang bao tri');
-
+VALUES ('P012', 'T012', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P013', 'T013', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P014', 'T014', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
-VALUES ('P015', 'T015', 'LP002', 'Dang bao tri');
-
+VALUES ('P015', 'T015', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P016', 'T016', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P017', 'T017', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P018', 'T018', 'LP002', 'Trong');
-
-
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P019', 'T019', 'LP001', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P020', 'T020', 'LP001', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P021', 'T021', 'LP001', 'Trong');
-
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P022', 'T022', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P023', 'T023', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P024', 'T024', 'LP002', 'Trong');
-
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
-VALUES ('P025', 'T025', 'LP002', 'Dang bao tri');
+VALUES ('P025', 'T025', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P026', 'T026', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P027', 'T027', 'LP002', 'Trong');
-
-
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P028', 'T028', 'LP001', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P029', 'T029', 'LP001', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P030', 'T030', 'LP001', 'Trong');
-
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P031', 'T031', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P032', 'T032', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P033', 'T033', 'LP002', 'Trong');
-
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P034', 'T034', 'LP001', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P035', 'T035', 'LP001', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P036', 'T036', 'LP001', 'Trong');
-
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P037', 'T037', 'LP002', 'Trong');
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
@@ -269,7 +231,7 @@ INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
 VALUES ('P039', 'T039', 'LP002', 'Trong');
 
 INSERT INTO PhongHat (maPhong, tenPhong, maLoaiPhong, tinhTrangPhong)
-VALUES ('P040', 'T040', 'LP002', 'Dang bao tri');
+VALUES ('P040', 'T040', 'LP002', 'Trong');
 
 
 -- Tạo bảng TaiKhoan
@@ -283,98 +245,135 @@ GO
 
 INSERT INTO TaiKhoan (maNV, Password) VALUES ('NV001', '123A');
 INSERT INTO TaiKhoan (maNV, Password) VALUES ('NV002', '123A');
-INSERT INTO TaiKhoan (maNV, Password) VALUES ('NV003', '1');
+INSERT INTO TaiKhoan (maNV, Password) VALUES ('NV003', 'a4ayc/80/OGda4BO/1o/V0etpOqiLx1JwB5S3beHW0s=');
 INSERT INTO TaiKhoan (maNV, Password) VALUES ('NV004', '123A');
 INSERT INTO TaiKhoan (maNV, Password) VALUES ('NV005', '123A');
 
 
-
 -- Tạo bảng DonDatPhong
 CREATE TABLE DonDatPhong (
-    maDonDatPhong VARCHAR(50) PRIMARY KEY,
-    ngayDat DATE,
-    ngayNhan DATE,
+    maDonDatPhong VARCHAR(50),
+    ngayDat DATETIME,
+    ngayNhan DATETIME,
     maPhong VARCHAR(50),
     maKH VARCHAR(50),
     FOREIGN KEY (maPhong) REFERENCES PhongHat(maPhong),
     FOREIGN KEY (maKH) REFERENCES KhachHang(maKH)
 );
 GO
-/*
-INSERT INTO DonDatPhong (maDonDatPhong, ngayDat, ngayNhan, maPhong, maKH)
-VALUES ('DDP001', '2023-10-31', '2023-11-01', 'P001', 'KH001');
 
 INSERT INTO DonDatPhong (maDonDatPhong, ngayDat, ngayNhan, maPhong, maKH)
-VALUES ('DDP002', '2023-11-05', '2023-11-06', 'P002', 'KH002');
+VALUES ('DDP001', '2023-10-31 13:00:00', '2023-11-01 13:00:00', 'P001', 'KH001');
 
 INSERT INTO DonDatPhong (maDonDatPhong, ngayDat, ngayNhan, maPhong, maKH)
-VALUES ('DDP003', '2023-11-10', '2023-11-11', 'P003', 'KH003');
+VALUES ('DDP002', '2023-11-05 13:00:00', '2023-11-06 13:00:00', 'P002', 'KH002');
 
 INSERT INTO DonDatPhong (maDonDatPhong, ngayDat, ngayNhan, maPhong, maKH)
-VALUES ('DDP004', '2023-11-15', '2023-11-16', 'P004', 'KH004');
+VALUES ('DDP003', '2023-11-10 13:00:00', '2023-11-11 13:00:00', 'P003', 'KH003');
 
 INSERT INTO DonDatPhong (maDonDatPhong, ngayDat, ngayNhan, maPhong, maKH)
-VALUES ('DDP005', '2023-11-25', '2023-11-26', 'P005', 'KH005');
+VALUES ('DDP004', '2023-11-15 13:00:00', '2023-11-16 13:00:00', 'P004', 'KH004');
 
 INSERT INTO DonDatPhong (maDonDatPhong, ngayDat, ngayNhan, maPhong, maKH)
-VALUES ('DDP006', '2023-11-29', '2023-11-30', 'P006', 'KH006');
+VALUES ('DDP005', '2023-11-25 13:00:00', '2023-11-26 13:00:00', 'P005', 'KH005');
 
 INSERT INTO DonDatPhong (maDonDatPhong, ngayDat, ngayNhan, maPhong, maKH)
-VALUES ('DDP007', '2023-12-01', '2023-12-02', 'P007', 'KH007');
+VALUES ('DDP006', '2023-11-29 13:00:00', '2023-11-30 13:00:00', 'P006', 'KH006');
 
 INSERT INTO DonDatPhong (maDonDatPhong, ngayDat, ngayNhan, maPhong, maKH)
-VALUES ('DDP008', '2023-12-05', '2023-12-06', 'P008', 'KH008');
-*/
--- Tạo bảng HoaDon
+VALUES ('DDP007', '2023-12-01 13:00:00', '2023-12-02 13:00:00', 'P007', 'KH007');
+
+INSERT INTO DonDatPhong (maDonDatPhong, ngayDat, ngayNhan, maPhong, maKH)
+VALUES ('DDP008', '2023-12-05 13:00:00', '2023-12-06 13:00:00', 'P008', 'KH008');
+
+GO
+-- Tạo bảng KhuyenMai
+CREATE TABLE KhuyenMai (
+    maKM VARCHAR(50) PRIMARY KEY,
+    moTa NVARCHAR(255),
+	batDau DATETIME,
+	ketThuc DATETIME,
+	phanTram FLOAT
+);
+GO
+
+
+INSERT INTO KhuyenMai(maKM, moTa, batDau, ketThuc, phanTram)
+VALUES ('KM001', 'Noel 2023', '2024-12-07', '2024-12-10', 10.00);
+
+INSERT INTO KhuyenMai(maKM, moTa, batDau, ketThuc, phanTram)
+VALUES ('KM002', 'B', '2023-12-15', '2023-12-25', 20.00);
+
+INSERT INTO KhuyenMai(maKM, moTa, batDau, ketThuc, phanTram)
+VALUES ('KM003', 'C', '2023-12-12', '2023-12-30', 30.00);
+
+INSERT INTO KhuyenMai(maKM, moTa, batDau, ketThuc, phanTram)
+VALUES ('KM004', 'D', '2024-01-01', '2024-01-10', 40.00);
+INSERT INTO KhuyenMai(maKM, moTa, batDau, ketThuc, phanTram)
+VALUES ('KM005', 'E', '2023-12-12', '2023-12-30', 30.00);
+
+INSERT INTO KhuyenMai(maKM, moTa, batDau, ketThuc, phanTram)
+VALUES ('KM006', 'F', '2024-01-01', '2024-01-10', 40.00);
+INSERT INTO KhuyenMai(maKM, moTa, batDau, ketThuc, phanTram)
+VALUES ('KM007', 'G', '2023-12-12', '2023-12-30', 30.00);
+
+INSERT INTO KhuyenMai(maKM, moTa, batDau, ketThuc, phanTram)
+VALUES ('KM008', 'H', '2024-01-01', '2024-01-10', 40.00);
+
 CREATE TABLE HoaDon (
     maHD VARCHAR(50) PRIMARY KEY,
     ngayLapHD DATE,
     maKH VARCHAR(50),
     maNV VARCHAR(50),
+	maKM VARCHAR(50),
     tongTien MONEY,
     FOREIGN KEY (maKH) REFERENCES KhachHang(maKH),
-    FOREIGN KEY (maNV) REFERENCES NhanVien(maNV)
+    FOREIGN KEY (maNV) REFERENCES NhanVien(maNV),
+	FOREIGN KEY (maKM) REFERENCES KhuyenMai(maKM)
 );
 GO
-/*
+
+
 -- Thêm dữ liệu vào bảng HoaDon
-INSERT INTO HoaDon (maHD, ngayLapHD, maKH, maNV, tongTien)
-VALUES ('HD001', '2023-10-30', 'KH001', 'NV001', 1000000.00);
+INSERT INTO HoaDon (maHD, ngayLapHD, maKH, maNV, maKM, tongTien)
+VALUES ('HD001', '2023-10-30', 'KH001', 'NV001', 'KM001', 1000000.00);
 
-INSERT INTO HoaDon (maHD, ngayLapHD, maKH, maNV, tongTien)
-VALUES ('HD002', '2023-10-31', 'KH002', 'NV002', 1500000.00);
+INSERT INTO HoaDon (maHD, ngayLapHD, maKH, maNV, maKM, tongTien)
+VALUES ('HD002', '2023-10-31', 'KH002', 'NV002', 'KM002', 1500000.00);
 
-INSERT INTO HoaDon (maHD, ngayLapHD, maKH, maNV, tongTien)
-VALUES ('HD003', '2023-11-01', 'KH003', 'NV003', 800000.00);
+INSERT INTO HoaDon (maHD, ngayLapHD, maKH, maNV, maKM, tongTien)
+VALUES ('HD003', '2023-11-01', 'KH003', 'NV003', 'KM003', 800000.00);
 
-INSERT INTO HoaDon (maHD, ngayLapHD, maKH, maNV, tongTien)
-VALUES ('HD004', '2023-11-02', 'KH004', 'NV004', 1200000.00);
-*/
+INSERT INTO HoaDon (maHD, ngayLapHD, maKH, maNV, maKM, tongTien)
+VALUES ('HD004', '2023-11-02', 'KH004', 'NV004', 'KM004', 1200000.00);
+
 -- Tạo bảng ChiTietHoaDonDV
 CREATE TABLE ChiTietHoaDonDV (
     maHD VARCHAR(50),
     maMH VARCHAR(50),
+	maPhong VARCHAR(50),
     soLuong INT,
     gia FLOAT,
-    PRIMARY KEY (maHD, maMH),
+    PRIMARY KEY (maHD, maMH,maPhong),
     FOREIGN KEY (maHD) REFERENCES HoaDon(maHD),
-    FOREIGN KEY (maMH) REFERENCES MatHang(maMH)
+    FOREIGN KEY (maMH) REFERENCES MatHang(maMH),
+	FOREIGN KEY (maPhong) REFERENCES PhongHat(maPhong)
 );
 GO
-/*
+
 -- Thêm dữ liệu vào bảng ChiTietHoaDonDV
-INSERT INTO ChiTietHoaDonDV (maHD, maMH, soLuong, gia)
-VALUES ('HD001', 'MH001', 1, 100000);
+INSERT INTO ChiTietHoaDonDV (maHD, maMH,maPhong, soLuong, gia)
+VALUES ('HD001', 'MH001','P001', 1, 100000);
 
-INSERT INTO ChiTietHoaDonDV (maHD, maMH, soLuong, gia)
-VALUES ('HD002', 'MH002', 1, 120000);
+INSERT INTO ChiTietHoaDonDV (maHD, maMH,maPhong, soLuong, gia)
+VALUES ('HD002', 'MH002','P002', 1, 120000);
 
-INSERT INTO ChiTietHoaDonDV (maHD, maMH, soLuong, gia)
-VALUES ('HD003', 'MH003', 1, 130000);
+INSERT INTO ChiTietHoaDonDV (maHD, maMH,maPhong, soLuong, gia)
+VALUES ('HD003', 'MH003','P003', 1, 130000);
 
-INSERT INTO ChiTietHoaDonDV (maHD, maMH, soLuong, gia)
-VALUES ('HD004', 'MH004', 1, 140000);
-*/
+INSERT INTO ChiTietHoaDonDV (maHD, maMH,maPhong, soLuong, gia)
+VALUES ('HD004', 'MH004','P004', 1, 140000);
+
 -- Tạo bảng ChiTietHoaDonPhong
 CREATE TABLE ChiTietHoaDonPhong (
     maHD VARCHAR(50),
@@ -382,24 +381,24 @@ CREATE TABLE ChiTietHoaDonPhong (
     gia FLOAT,
     gioVao DATETIME,
     gioRa DATETIME,
-    maGiamGia VARCHAR(50),
+    ghiChu VARCHAR(150),
     PRIMARY KEY (maHD, maPhong),
     FOREIGN KEY (maHD) REFERENCES HoaDon(maHD),
     FOREIGN KEY (maPhong) REFERENCES PhongHat(maPhong)
 );
 GO
-/*
+
 -- Thêm dữ liệu vào bảng ChiTietHoaDonPhong
-INSERT INTO ChiTietHoaDonPhong (maHD, maPhong, gia, gioVao, gioRa, maGiamGia)
-VALUES ('HD001', 'P001', 100000, '2023-10-30 13:00:00', '2023-10-30 15:00:00', 'VIP');
+INSERT INTO ChiTietHoaDonPhong (maHD, maPhong, gia, gioVao, gioRa, ghiChu)
+VALUES ('HD001', 'P001', 100000, '2023-10-30 13:00:00', '2023-10-30 15:00:00', '');
 
-INSERT INTO ChiTietHoaDonPhong (maHD, maPhong, gia, gioVao, gioRa, maGiamGia)
-VALUES ('HD002', 'P002', 100000, '2023-10-30 15:00:00', '2023-10-30 17:00:00', 'VIP');
+INSERT INTO ChiTietHoaDonPhong (maHD, maPhong, gia, gioVao, gioRa, ghiChu)
+VALUES ('HD002', 'P002', 100000, '2023-10-30 15:00:00', '2023-10-30 17:00:00', '');
 
-INSERT INTO ChiTietHoaDonPhong (maHD, maPhong, gia, gioVao, gioRa, maGiamGia)
-VALUES ('HD003', 'P003', 60000, '2023-10-30 12:00:00', '2023-10-30 15:00:00', 'VIP');
+INSERT INTO ChiTietHoaDonPhong (maHD, maPhong, gia, gioVao, gioRa, ghiChu)
+VALUES ('HD003', 'P003', 60000, '2023-10-30 12:00:00', '2023-10-30 15:00:00', '');
 
-INSERT INTO ChiTietHoaDonPhong (maHD, maPhong, gia, gioVao, gioRa, maGiamGia)
-VALUES ('HD004', 'P004', 60000, '2023-10-30 11:00:00', '2023-10-30 13:00:00', 'VIP');
+INSERT INTO ChiTietHoaDonPhong (maHD, maPhong, gia, gioVao, gioRa, ghiChu)
+VALUES ('HD004', 'P004', 60000, '2023-10-30 11:00:00', '2023-10-30 13:00:00', '');
 
-*/
+

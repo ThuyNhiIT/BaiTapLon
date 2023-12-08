@@ -16,10 +16,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-/**
- *
- * @author 84934 NguyenThiQuynhGiang
- */
+
 public class CustomJOptionPane extends JDialog{
     private static final long serialVersionUID = 1L;
 
