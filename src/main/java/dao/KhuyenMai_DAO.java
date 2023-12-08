@@ -118,8 +118,29 @@ public class KhuyenMai_DAO {
         return n > 0;
     }
 
-//    public String[] getKhuyenMai() {
-//        List<String> DSMoTa = new ArrayList<>();
+    public String[] getKhuyenMai() {
+        List<String> DSMoTa = new ArrayList<>();
+        Connection con = ConnectDB.getInstance().getConnection();
+        PreparedStatement stmt = null;
+        try {
+            LocalDate currentDate = LocalDate.now(); // Ngày hiện tại
+            stmt = con.prepareStatement("SELECT moTa FROM KhuyenMai WHERE batDau <= ? AND ketThuc >= ?");
+            stmt.setDate(1, java.sql.Date.valueOf(currentDate));
+            stmt.setDate(2, java.sql.Date.valueOf(currentDate));
+            try (ResultSet resultSet = stmt.executeQuery()) {
+                while (resultSet.next()) {
+                    String moTa = resultSet.getString("moTa");
+                    DSMoTa.add(moTa);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        String[] ArrayMoTa = DSMoTa.toArray(new String[0]);
+        return ArrayMoTa;
+    }
+//    public String getKhuyenMai() {
+//        String moTa = null;
 //        Connection con = ConnectDB.getInstance().getConnection();
 //        PreparedStatement stmt = null;
 //        try {
@@ -128,38 +149,14 @@ public class KhuyenMai_DAO {
 //            stmt.setDate(1, java.sql.Date.valueOf(currentDate));
 //            stmt.setDate(2, java.sql.Date.valueOf(currentDate));
 //            try (ResultSet resultSet = stmt.executeQuery()) {
-//                while (resultSet.next()) {
-//                    String moTa = resultSet.getString("moTa");
-//                    DSMoTa.add(moTa);
+//                if (resultSet.next()) {
+//                    moTa = resultSet.getString("moTa");
 //                }
 //            }
 //        } catch (SQLException e) {
 //            e.printStackTrace();
 //        }
-//        String[] ArrayMoTa = DSMoTa.toArray(new String[0]);
-//        return ArrayMoTa;
+//        return moTa;
 //    }
-    
-    
-       
-       public String getKhuyenMai() {
-    String moTa = null;
-    Connection con = ConnectDB.getInstance().getConnection();
-    PreparedStatement stmt = null;
-    try {
-        LocalDate currentDate = LocalDate.now(); // Ngày hiện tại
-        stmt = con.prepareStatement("SELECT moTa FROM KhuyenMai WHERE batDau <= ? AND ketThuc >= ?");
-        stmt.setDate(1, java.sql.Date.valueOf(currentDate));
-        stmt.setDate(2, java.sql.Date.valueOf(currentDate));
-        try (ResultSet resultSet = stmt.executeQuery()) {
-            if (resultSet.next()) {
-                moTa = resultSet.getString("moTa");
-            }
-        }
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-    return moTa;
-} 
-        
+
 }
