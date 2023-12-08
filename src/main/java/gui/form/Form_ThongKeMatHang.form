@@ -51,7 +51,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="pnlHeader1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="materialTabbed4" pref="577" max="32767" attributes="0"/>
+                  <Component id="materialTabbed4" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -87,10 +87,10 @@
                       <Component id="cmbTKChiTiet" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="139" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="415" max="-2" attributes="0"/>
-                      <Component id="lblTKMH1" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="383" max="-2" attributes="0"/>
+                      <Component id="lblTKMH1" min="-2" pref="273" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -129,6 +129,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="56" green="ad" red="29" type="rgb"/>
                 </Property>
+                <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="TH&#x1ed0;NG K&#xca; M&#x1eb6;T H&#xc0;NG"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -289,12 +290,12 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="809" max="-2" attributes="0"/>
-                              <Component id="lblTong" min="-2" pref="51" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtTong" min="-2" pref="117" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
+                              <Component id="lblTong" min="-2" pref="58" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txtTong" min="-2" pref="107" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
@@ -519,7 +520,7 @@
                               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                               <Component id="lblBieuDo" max="32767" attributes="0"/>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Component id="pnl" max="32767" attributes="0"/>
+                              <Component id="pnl" pref="486" max="32767" attributes="0"/>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -559,7 +560,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                                   <Component id="pieChart1" min="-2" pref="438" max="-2" attributes="0"/>
-                                  <EmptySpace pref="29" max="32767" attributes="0"/>
+                                  <EmptySpace pref="34" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>

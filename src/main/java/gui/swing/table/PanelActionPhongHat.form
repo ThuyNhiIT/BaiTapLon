@@ -17,11 +17,10 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="cmdSua" min="-2" pref="42" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+              <Component id="cmdSua" pref="42" max="32767" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="cmdXoa" min="-2" pref="38" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <Component id="cmdXoa" pref="44" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

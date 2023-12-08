@@ -1,11 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package gui.form;
 
+import dao.KhachHang_DAO;
 import dao.LoaiPhong_DAO;
 import dao.PhongHat_DAO;
+import entity.KhachHang;
 import entity.LoaiPhong;
 import entity.PhongHat;
 import gui.swing.scrollbar.ScrollBarCustom;
@@ -14,11 +12,17 @@ import gui.swing.table.TableActionCellRenderPhongHat;
 import gui.swing.table.TableActionEventPhongHat;
 import gui_dialog.DL_ThemPhongHat;
 import java.awt.Component;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -52,17 +56,13 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
                             Double gia = Double.parseDouble(tblDSPH.getValueAt(rowIndex, 3).toString());
                             String trangThai = tblDSPH.getValueAt(rowIndex, 4).toString();
                             PhongHat ph = new PhongHat(maPhong, tenPhong, new LoaiPhong(maLoai), trangThai);
-
-                            tblDSPH.setValueAt(tenPhong, rowIndex, 1);
-                            tblDSPH.setValueAt(maLoai, rowIndex, 2);
-                            tblDSPH.setValueAt(gia, rowIndex, 3);
-                            tblDSPH.setValueAt(trangThai, rowIndex, 4);
-
                             if (ph_dao.editPhongHat(ph)) {
-                                System.out.println("Sửa thành công");
+                                tblDSPH.setValueAt(tenPhong, rowIndex, 1);
+                                tblDSPH.setValueAt(maLoai, rowIndex, 2);
+                                tblDSPH.setValueAt(gia, rowIndex, 3);
+                                tblDSPH.setValueAt(trangThai, rowIndex, 4);
                                 JOptionPane.showMessageDialog(null, "Sửa thành công");
                             } else {
-                                System.out.println("Sửa thất bại");
                                 JOptionPane.showMessageDialog(null, "Sửa thất bại");
                             }
                         }
@@ -159,6 +159,7 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
         tblDSPH = new javax.swing.JTable();
         lblTongPhong = new javax.swing.JLabel();
         lblTong = new javax.swing.JLabel();
+        btnExcel = new gui.swing.RadiusButton();
 
         pnlPhongHat.setBackground(new java.awt.Color(235, 249, 249));
 
@@ -170,7 +171,7 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
         lblTim.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTim.setText("Tìm kiếm");
 
-        btnTim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-find-24.png"))); // NOI18N
+        btnTim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/magnifying-glass.png"))); // NOI18N
         btnTim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTimActionPerformed(evt);
@@ -247,6 +248,7 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
         );
 
         lblDSPH.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lblDSPH.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDSPH.setText("DANH SÁCH PHÒNG HÁT");
 
         tblDSPH.setModel(new javax.swing.table.DefaultTableModel(
@@ -266,42 +268,54 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
 
         lblTong.setText("jLabel1");
 
+        btnExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Excel32.png"))); // NOI18N
+        btnExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlPhongHatLayout = new javax.swing.GroupLayout(pnlPhongHat);
         pnlPhongHat.setLayout(pnlPhongHatLayout);
         pnlPhongHatLayout.setHorizontalGroup(
             pnlPhongHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnlHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlPhongHatLayout.createSequentialGroup()
-                .addGroup(pnlPhongHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlPhongHatLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(scr))
-                    .addGroup(pnlPhongHatLayout.createSequentialGroup()
-                        .addGroup(pnlPhongHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlPhongHatLayout.createSequentialGroup()
-                                .addGap(92, 92, 92)
-                                .addComponent(lblTongPhong)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblTong))
-                            .addGroup(pnlPhongHatLayout.createSequentialGroup()
-                                .addGap(410, 410, 410)
-                                .addComponent(lblDSPH)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap()
+                .addComponent(scr)
                 .addContainerGap())
+            .addGroup(pnlPhongHatLayout.createSequentialGroup()
+                .addGap(92, 92, 92)
+                .addComponent(lblTongPhong)
+                .addGap(18, 18, 18)
+                .addComponent(lblTong)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
+            .addGroup(pnlPhongHatLayout.createSequentialGroup()
+                .addGap(371, 371, 371)
+                .addComponent(lblDSPH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(283, 283, 283))
         );
         pnlPhongHatLayout.setVerticalGroup(
             pnlPhongHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlPhongHatLayout.createSequentialGroup()
                 .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblDSPH)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scr, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(pnlPhongHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTongPhong)
-                    .addComponent(lblTong))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGroup(pnlPhongHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlPhongHatLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblDSPH)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(scr, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlPhongHatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTongPhong)
+                            .addComponent(lblTong))
+                        .addGap(29, 29, 29))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPhongHatLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -363,8 +377,68 @@ public class Form_QuanLyPhongHat extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnTimActionPerformed
 
+    private void btnExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcelActionPerformed
+        try {
+            writeFileExcell();
+            JOptionPane.showMessageDialog(null, "Xuất thành công!");
+        } catch (Exception e2) {
+//            JOptionPane.showMessageDialog(null, "Lỗi hệ thống");
+            e2.printStackTrace();
+        }        // TODO add your handling code he
+    }//GEN-LAST:event_btnExcelActionPerformed
+    public void writeFileExcell() throws IOException {
+        FileOutputStream file = new FileOutputStream("DSPhongHat.xlsx");
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet("name");
+        XSSFRow row;
+        XSSFCell cellA; // 0
+        XSSFCell cellB; // 1
+        XSSFCell cellC; // 2
+        XSSFCell cellD; // 3
+        XSSFCell cellE; // 4
+        int j = 0;
+        ph_dao = new PhongHat_DAO();
+        List<PhongHat> list = new ArrayList<PhongHat>();
+        list = ph_dao.getAllPhongHat();
+        row = sheet.createRow(j++);
+        String[] headers = {"Mã phòng", "Tên phòng", "Mã loại phòng", "Giá", "Trạng thái"};
+        for (int i = 0; i <= 4; i++) {
+            cellA = row.createCell(i);
+            cellA.setCellValue(headers[i]);
+        }
+        for (PhongHat c : list) {
+            row = sheet.createRow(j++);
+
+            cellA = row.createCell(0);
+            cellA.setCellValue(c.getMaPhong());
+
+            cellB = row.createCell(1);
+            cellB.setCellValue(c.getTenPhong());
+
+            cellC = row.createCell(2);
+            cellC.setCellValue(c.getLoaiPhong().getMaLoaiPhong());
+
+            cellD = row.createCell(3);
+            Double gia = c.getLoaiPhong().getGia();
+            if (gia != null) {
+                cellD.setCellValue(gia);
+            } else {
+                cellD.setCellValue("");
+            }
+//            cellD.setCellValue(c.getLoaiPhong().getGia());
+
+            cellE = row.createCell(4);
+            cellE.setCellValue(c.getTinhTrangPhong());
+
+        }
+        workbook.write(file);
+        workbook.close();
+        file.close();
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private gui.swing.RadiusButton btnExcel;
     private gui.swing.RadiusButton btnRefesh;
     private gui.swing.RadiusButton btnThem;
     private gui.swing.RadiusButton btnTim;

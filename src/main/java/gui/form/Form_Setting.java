@@ -122,7 +122,7 @@ public class Form_Setting extends javax.swing.JPanel {
 
     private void HDSDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HDSDActionPerformed
         try {
-            Desktop.getDesktop().browse(new URL("https://wordpress.com/home/nguyenthiquynhgiang.wordpress.com?source=pwa").toURI());
+            Desktop.getDesktop().browse(new URL("https://minhnhut1812.github.io/huongdansudung/html/hdsd.html").toURI());
         } catch (Exception e) {
 
         }
