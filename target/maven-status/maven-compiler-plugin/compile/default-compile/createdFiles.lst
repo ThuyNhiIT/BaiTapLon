@@ -23,7 +23,6 @@ dao\LoaiPhong_DAO.class
 gui\swing\notification\Notification$1.class
 gui_dialog\DL_XacNhanTraPhong$2.class
 gui_dialog\DL_ThemNV$3.class
-gui_dialog\DL_CheckKHforDatNhieuPhong$5$1.class
 gui_dialog\DL_DangXuat$1.class
 gui\component\PanelKiemTraThongTinvsAddKH$3.class
 gui\swing\TimKiem.class
@@ -305,7 +304,6 @@ gui\swing\PanelAction.class
 com\raven\chart\Chart.class
 gui\swing\MenuItem.class
 com\raven\chart\blankchart\BlankPlotChart.class
-gui_dialog\DL_ThanhToanNhieuphong$6$1.class
 gui\Application$1$2.class
 gui\form\Form_QuanLyNhanVien$9.class
 gui_dialog\DL_NhanPhongDatTruoc.class
@@ -378,7 +376,6 @@ gui_dialog\DL_ThemMatHang$7.class
 gui\swing\notification\Notification$2.class
 gui\swing\PopupMenu$1.class
 gui\swing\MenuItem$1.class
-gui_dialog\DL_KiemTravsAddKHforDatPhong$5$1.class
 gui\form\Form_Home.class
 gui\form\Form_QuanLiHoaDon$4.class
 com\raven\chart\ModelChart.class

@@ -229,7 +229,7 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         phongTrong();
         phongDangSuDung();
         phongCho();
-        System.out.println("refresh fun");
+
     }
 
     public void addPhongDangSuDung(ModelRoom data) {
@@ -458,6 +458,14 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         thanhToan.setVisible(true);
         if(thanhToan.isVisible() == false){
             pnlPhongDangSuDung.removeAll();
+            refreshRooms();
+        }
+    }
+    public void openDL_ThanhToanNhieu(){
+        DL_TraPhongvsThanhToanNhieuPhong thanhToanNhieuPhong = new DL_TraPhongvsThanhToanNhieuPhong((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
+        thanhToanNhieuPhong.setLocationRelativeTo(Form_QuanLyDatPhong.this);
+        thanhToanNhieuPhong.setVisible(true);
+        if(thanhToanNhieuPhong.isVisible() == false){
             refreshRooms();
         }
     }

@@ -358,7 +358,8 @@ public class DL_KiemTravsAddKHforDatPhong extends javax.swing.JDialog {
     }//GEN-LAST:event_btnKiemTraActionPerformed
 
     private void btnDatPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatPhongActionPerformed
-     // nếu tìm được kh bằng sdt
+
+        // nếu tìm được kh bằng sdt
         if(khachHang != null){
             Form_QuanLyDatPhong ph = new Form_QuanLyDatPhong();
             ph_dao = new PhongHat_DAO();
@@ -415,6 +416,9 @@ public class DL_KiemTravsAddKHforDatPhong extends javax.swing.JDialog {
             );
             noti.showNotification();
         }
+
+        this.dispose();
+
     }//GEN-LAST:event_btnDatPhongActionPerformed
 
     private void radNuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radNuActionPerformed

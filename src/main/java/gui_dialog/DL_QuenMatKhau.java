@@ -213,10 +213,10 @@ public class DL_QuenMatKhau extends javax.swing.JDialog {
     //Kiem tra sdt co trong bang nhan vien khong
     private boolean SDT_tonTaiNV(String soDienThoai){
         try{
-            Connection conn = ConnectDB.getConnection();
+            Connection con = ConnectDB.getConnection();
             String sql = "SELECT *FROM NhanVien WHERE SDT=?";
             System.out.println("Xong");
-            PreparedStatement pst = conn.prepareStatement(sql);
+            PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, soDienThoai);
             ResultSet rs = pst.executeQuery();
             return rs.next();// true nếu sd ton tai bang nhan vien

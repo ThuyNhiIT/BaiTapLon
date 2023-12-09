@@ -5,6 +5,7 @@
 package gui_dialog;
 
 import connectDB.ConnectDB;
+import dao.ChiTietHoaDonDichVu_DAO;
 import dao.ChiTietHoaDonPhong_Dao;
 import dao.PhongHat_DAO;
 import entity.*;
@@ -33,6 +34,7 @@ public class DL_ChuyenPhong extends javax.swing.JDialog {
     private String maPhong;
 
     private ChiTietHoaDonPhong_Dao cthdp_dao;
+    private ChiTietHoaDonDichVu_DAO cthddv_dao;
 
     public DL_ChuyenPhong(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -259,6 +261,9 @@ public class DL_ChuyenPhong extends javax.swing.JDialog {
 
                     db.connect();
                     cthdp_dao.doiPhong(maHD, frmPH.getRoomSelected(), maPhong, txtLyDo.getText());
+                    cthddv_dao = new ChiTietHoaDonDichVu_DAO();
+                    db.connect();
+                    cthddv_dao.doiPhong(maHD, frmPH.getRoomSelected(), maPhong);
 
                     Form_QuanLyDatPhong updatePhong = new Form_QuanLyDatPhong();
                     db.connect();

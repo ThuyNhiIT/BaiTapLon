@@ -16,7 +16,6 @@ import connectDB.ConnectDB;
 import dao.*;
 import entity.*;
 import gui.swing.notification.Notification;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -56,6 +55,8 @@ public class DL_TraPhongvsThanhToanNhieuPhong extends javax.swing.JDialog {
     private double tongTienThanhToan = 0.0;
     private double thue = 0.05;
     private String maKM="";
+    private String mota = "";
+    private ArrayList<String> dsHD = new ArrayList<>();
 
     public DL_TraPhongvsThanhToanNhieuPhong(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -68,7 +69,7 @@ public class DL_TraPhongvsThanhToanNhieuPhong extends javax.swing.JDialog {
     }
     public void inHoaDon() {
 
-        try (PdfWriter writer = new PdfWriter("src/main/resources/HoaDonPDF/HoaDon" + maHD + ".pdf")) {
+        try (PdfWriter writer = new PdfWriter("src/main/resources/HoaDonPDF/HoaDon"  + ".pdf")) {
             PdfDocument pdf = new PdfDocument(writer);
             Document document = new Document(pdf);
 
@@ -124,13 +125,13 @@ public class DL_TraPhongvsThanhToanNhieuPhong extends javax.swing.JDialog {
             e.printStackTrace();
         }
     }
-    public void tinhTien() {
+    public void tinhTien(String maHD) {
         ConnectDB db = ConnectDB.getInstance();
         try {
             db.connect();
             hd_dao = new HoaDon_DAO();
-            DL_ThanhToanNhieuphong dl = new DL_ThanhToanNhieuphong(new javax.swing.JFrame(), true);
-            maHD = dl.getMaHDDSD();
+//            DL_ThanhToanNhieuphong dl = new DL_ThanhToanNhieuphong(new javax.swing.JFrame(), true);
+//            maHD = dl.getMaHDDSD();
             HoaDon hd = hd_dao.getHoaDonTheoMaHD(maHD);
 
             db.connect();
@@ -212,7 +213,8 @@ public class DL_TraPhongvsThanhToanNhieuPhong extends javax.swing.JDialog {
                     ArrayList<ChiTietHoaDonPhong> dsCTHDP = cthdp_dao.getAllTheMaHDArray(hoaDon.getMaHD());
                     for (ChiTietHoaDonPhong cthdp : dsCTHDP) {
                         if (cthdp.getGia() == 0) {
-                            tinhTien();
+                            tinhTien(cthdp.getHoaDon().getMaHD());
+                            dsHD.add(cthdp.getHoaDon().getMaHD());
                             // cập nhật lại cthdp
                             db.connect();
                             cthdp = cthdp_dao.getChiTietHoaDonPhongTheoMaHD(hoaDon.getMaHD(), cthdp.getPhongHat().getMaPhong());
@@ -300,11 +302,13 @@ public class DL_TraPhongvsThanhToanNhieuPhong extends javax.swing.JDialog {
                 // chuyển thành chuỗi ngăn cách bỏi , và loại bỏ chữ null
                 maKM += khuyenMai.getMaKM() + ",";
                 tienGiam += (khuyenMai.getPhanTram() / 100);
-                lblMoTaKhuyenMai.setText(khuyenMai.getMoTa());
+                mota += khuyenMai.getMoTa() + ",";
+
 
             }
 
         }
+        lblMoTaKhuyenMai.setText(mota);
 
     }
 
@@ -328,7 +332,7 @@ public class DL_TraPhongvsThanhToanNhieuPhong extends javax.swing.JDialog {
         btnThanhToan = new gui.swing.RadiusButton();
         jLabel11 = new javax.swing.JLabel();
         lblTongTienThanhtoan = new javax.swing.JLabel();
-        cbInHoaDon = new javax.swing.JCheckBox();
+        jCheckBox1 = new javax.swing.JCheckBox();
         lblMoTaKhuyenMai = new javax.swing.JLabel();
         lblTienGiam = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -401,11 +405,10 @@ public class DL_TraPhongvsThanhToanNhieuPhong extends javax.swing.JDialog {
         lblTongTienThanhtoan.setForeground(new java.awt.Color(204, 0, 0));
         lblTongTienThanhtoan.setText("10000000");
 
-        cbInHoaDon.setSelected(true);
-        cbInHoaDon.setText("Xuất hóa đơn");
-        cbInHoaDon.addActionListener(new java.awt.event.ActionListener() {
+        jCheckBox1.setText("Xuất hóa đơn");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbInHoaDonActionPerformed(evt);
+                jCheckBox1ActionPerformed(evt);
             }
         });
 
@@ -427,11 +430,6 @@ public class DL_TraPhongvsThanhToanNhieuPhong extends javax.swing.JDialog {
                 .addGap(39, 39, 39)
                 .addGroup(pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlCoverLayout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(pnlCoverLayout.createSequentialGroup()
                         .addGroup(pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlCoverLayout.createSequentialGroup()
                                 .addGap(194, 194, 194)
@@ -444,18 +442,24 @@ public class DL_TraPhongvsThanhToanNhieuPhong extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblTenKH)))
+                                    .addComponent(lblTenKH))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnlCoverLayout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pnlCoverLayout.createSequentialGroup()
+                        .addGroup(pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlCoverLayout.createSequentialGroup()
-                                .addGroup(pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pnlCoverLayout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(lblMoTaKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(pnlCoverLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(lblTienGiam, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(18, 18, 18)
+                                .addComponent(lblMoTaKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnlCoverLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblTienGiam, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCoverLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -464,7 +468,7 @@ public class DL_TraPhongvsThanhToanNhieuPhong extends javax.swing.JDialog {
                         .addGroup(pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(pnlCoverLayout.createSequentialGroup()
                                 .addGap(25, 25, 25)
-                                .addComponent(cbInHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pnlCoverLayout.createSequentialGroup()
@@ -520,7 +524,7 @@ public class DL_TraPhongvsThanhToanNhieuPhong extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbInHoaDon))
+                    .addComponent(jCheckBox1))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
@@ -544,26 +548,22 @@ public class DL_TraPhongvsThanhToanNhieuPhong extends javax.swing.JDialog {
         try {
             db.connect();
             if (db != null) {
-                System.out.println("Connect success");
-                HoaDon hd = hd_dao.getHoaDonTheoMaHD(maHD);
-                db.connect();
-                // check if khach hang da thanh toan
-                if (hd.getTongTien() == 0) {
-                    hd_dao.updateTongTien(maHD, tongTien, maKM);
-                } else {
-                    hd_dao.updateTongTien(maHD, tongTien + hd.getTongTien(), maKM);
+                // duyệt từng dsHD
+                for (String s : dsHD) {
+
+                    HoaDon hd = hd_dao.getHoaDonTheoMaHD(s);
+                    db.connect();
+                    // check if khach hang da thanh toan
+                    if (hd.getTongTien() == 0) {
+                        hd_dao.updateTongTien(s, tongTien, maKM);
+                    } else {
+                        hd_dao.updateTongTien(s, tongTien + hd.getTongTien(), maKM);
+                    }
+                 
                 }
-                Notification noti = new Notification(
-                        (java.awt.Frame) SwingUtilities.getWindowAncestor(this),
-                        Notification.Type.WARNING,
-                        Notification.Location.TOP_RIGHT,
-                        "Thanh toán thành công"
-                );
-                noti.showNotification();
-                this.dispose();
-            }
-            if(cbInHoaDon.isSelected()){
-                inHoaDon();
+                if(jCheckBox1.isSelected()){
+                    inHoaDon();
+                }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -572,9 +572,9 @@ public class DL_TraPhongvsThanhToanNhieuPhong extends javax.swing.JDialog {
 
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
-    private void cbInHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbInHoaDonActionPerformed
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbInHoaDonActionPerformed
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -620,7 +620,7 @@ public class DL_TraPhongvsThanhToanNhieuPhong extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.swing.RadiusButton btnThanhToan;
-    private javax.swing.JCheckBox cbInHoaDon;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel3;

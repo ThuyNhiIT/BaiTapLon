@@ -21,6 +21,7 @@ import java.util.List;
  * @author HO MINH HAU
  */
 public class DL_CheckKHforDatNhieuPhong extends javax.swing.JDialog {
+
     private KhachHang_DAO kh_dao;
     private PhongHat_DAO ph_dao;
     private HoaDon_DAO hd_dao;
@@ -114,6 +115,7 @@ public class DL_CheckKHforDatNhieuPhong extends javax.swing.JDialog {
         }
 
     }
+
     public Boolean validDateSDT() {
         String sdt = txtSDT.getText();
         if (sdt.length() != 10 || !sdt.matches("^0[0-9]{9}$")) {
@@ -362,11 +364,11 @@ public class DL_CheckKHforDatNhieuPhong extends javax.swing.JDialog {
     }//GEN-LAST:event_btnKiemTraActionPerformed
 
     private void btnThueNhieuPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThueNhieuPhongActionPerformed
-        if(khachHang != null) {
+        if (khachHang != null) {
             Form_QuanLyDatPhong ph = new Form_QuanLyDatPhong();
             this.dispose();
             ph.openDL_DatNhieuPhong();
-        }else if (validDateTenKH()) {
+        } else if (validDateTenKH()) {
             kh_dao = new KhachHang_DAO();
             String maKH = phatSinhMaKH();
             setMaKHPublic(maKH);
@@ -404,7 +406,7 @@ public class DL_CheckKHforDatNhieuPhong extends javax.swing.JDialog {
             );
             noti.showNotification();
         }
-
+        this.dispose();
     }//GEN-LAST:event_btnThueNhieuPhongActionPerformed
 
     private void radNuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radNuActionPerformed

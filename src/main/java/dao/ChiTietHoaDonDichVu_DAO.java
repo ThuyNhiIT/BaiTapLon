@@ -550,6 +550,21 @@ public class ChiTietHoaDonDichVu_DAO {
         }
         return list;
     }
-
+public boolean doiPhong(String maHD, String phongHT,String phongMoi){
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement stmt = null;
+        int n = 0;
+        try{
+            stmt = con.prepareStatement("UPDATE ChiTietHoaDonDV SET maPhong = ? WHERE maHD = ? AND maPhong = ?");
+            stmt.setString(1, phongMoi);
+            stmt.setString(2, maHD);
+            stmt.setString(3, phongHT);
+            n = stmt.executeUpdate();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return n > 0;
+}
 
 }
