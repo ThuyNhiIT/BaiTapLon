@@ -123,7 +123,7 @@ public class Form_ThongKeDoanhThu extends javax.swing.JPanel {
 
         pnlTKDT.setBackground(new java.awt.Color(235, 249, 249));
 
-        pnlHeader.setBackground(new java.awt.Color(235, 249, 249));
+        pnlHeader.setBackground(new java.awt.Color(255, 255, 255));
         pnlHeader.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlHeader.setPreferredSize(new java.awt.Dimension(1000, 103));
 

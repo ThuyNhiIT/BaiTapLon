@@ -98,10 +98,10 @@ public class Form_DichVu extends javax.swing.JPanel {
             tblDichVu.getColumnModel().getColumn(0).setPreferredWidth(50);
         }
 
-        pnlHeader.setBackground(new java.awt.Color(235, 249, 249));
+        pnlHeader.setBackground(new java.awt.Color(255, 255, 255));
         pnlHeader.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        pnlTraCuu.setBackground(new java.awt.Color(235, 249, 249));
+        pnlTraCuu.setBackground(new java.awt.Color(255, 255, 255));
 
         lblTimKiem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTimKiem.setText("Tìm kiếm");

@@ -146,12 +146,11 @@ public class Form_MatHang extends javax.swing.JPanel  {
 
         pnlMatHang = new javax.swing.JPanel();
         pnlHeader = new javax.swing.JPanel();
-        pnlTim = new javax.swing.JPanel();
-        lblTim = new javax.swing.JLabel();
-        btnTim = new gui.swing.RadiusButton();
-        txtTim = new javax.swing.JTextField();
-        btnThem = new gui.swing.RadiusButton();
         btnRefesh = new gui.swing.RadiusButton();
+        lblTim = new javax.swing.JLabel();
+        txtTim = new javax.swing.JTextField();
+        btnTim = new gui.swing.RadiusButton();
+        btnThem = new gui.swing.RadiusButton();
         scr = new javax.swing.JScrollPane();
         tblMatHang = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -160,10 +159,16 @@ public class Form_MatHang extends javax.swing.JPanel  {
 
         pnlMatHang.setBackground(new java.awt.Color(235, 249, 249));
 
-        pnlHeader.setBackground(new java.awt.Color(235, 249, 249));
+        pnlHeader.setBackground(new java.awt.Color(255, 255, 255));
         pnlHeader.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        pnlTim.setBackground(new java.awt.Color(235, 249, 249));
+        btnRefesh.setBackground(new java.awt.Color(235, 249, 249));
+        btnRefesh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/refresh.png"))); // NOI18N
+        btnRefesh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefeshActionPerformed(evt);
+            }
+        });
 
         lblTim.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTim.setText("Tìm kiếm");
@@ -176,34 +181,6 @@ public class Form_MatHang extends javax.swing.JPanel  {
             }
         });
 
-        javax.swing.GroupLayout pnlTimLayout = new javax.swing.GroupLayout(pnlTim);
-        pnlTim.setLayout(pnlTimLayout);
-        pnlTimLayout.setHorizontalGroup(
-            pnlTimLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTimLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblTim)
-                .addGap(27, 27, 27)
-                .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(145, 145, 145))
-        );
-        pnlTimLayout.setVerticalGroup(
-            pnlTimLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTimLayout.createSequentialGroup()
-                .addContainerGap(10, Short.MAX_VALUE)
-                .addGroup(pnlTimLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTimLayout.createSequentialGroup()
-                        .addGroup(pnlTimLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblTim)
-                            .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(12, 12, 12))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTimLayout.createSequentialGroup()
-                        .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
-        );
-
         btnThem.setBackground(new java.awt.Color(235, 249, 249));
         btnThem.setForeground(new java.awt.Color(255, 255, 255));
         btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add-to-basket.png"))); // NOI18N
@@ -213,39 +190,41 @@ public class Form_MatHang extends javax.swing.JPanel  {
             }
         });
 
-        btnRefesh.setBackground(new java.awt.Color(235, 249, 249));
-        btnRefesh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-refresh-48.png"))); // NOI18N
-        btnRefesh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRefeshActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout pnlHeaderLayout = new javax.swing.GroupLayout(pnlHeader);
         pnlHeader.setLayout(pnlHeaderLayout);
         pnlHeaderLayout.setHorizontalGroup(
             pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlHeaderLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(pnlTim, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 473, Short.MAX_VALUE)
-                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61)
+                .addGap(48, 48, 48)
+                .addComponent(lblTim)
+                .addGap(27, 27, 27)
+                .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 617, Short.MAX_VALUE)
+                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addComponent(btnRefesh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addGap(29, 29, 29))
         );
         pnlHeaderLayout.setVerticalGroup(
             pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlHeaderLayout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addComponent(pnlTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHeaderLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnRefesh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlHeaderLayout.createSequentialGroup()
+                        .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTim)
+                            .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6))
+                    .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
+            .addGroup(pnlHeaderLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRefesh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         tblMatHang.setModel(new javax.swing.table.DefaultTableModel(
@@ -295,7 +274,7 @@ public class Form_MatHang extends javax.swing.JPanel  {
             pnlMatHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlMatHangLayout.createSequentialGroup()
                 .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addGap(44, 44, 44)
                 .addComponent(scr, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
                 .addGroup(pnlMatHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlMatHangLayout.createSequentialGroup()
@@ -425,7 +404,6 @@ public class Form_MatHang extends javax.swing.JPanel  {
     private javax.swing.JLabel lblTong;
     private javax.swing.JPanel pnlHeader;
     private javax.swing.JPanel pnlMatHang;
-    private javax.swing.JPanel pnlTim;
     private javax.swing.JScrollPane scr;
     private javax.swing.JTable tblMatHang;
     private javax.swing.JTextField txtTim;

@@ -121,7 +121,7 @@ public class Form_ThongKeMatHang extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(235, 249, 249));
 
-        pnlHeader1.setBackground(new java.awt.Color(235, 249, 249));
+        pnlHeader1.setBackground(new java.awt.Color(255, 255, 255));
         pnlHeader1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lblTKMH1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
@@ -131,19 +131,19 @@ public class Form_ThongKeMatHang extends javax.swing.JPanel {
         lblTKMH1.setFocusable(false);
         lblTKMH1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        cmbTKChiTiet.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023" }));
         cmbTKChiTiet.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cmbTKChiTiet.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023" }));
         cmbTKChiTiet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbTKChiTietActionPerformed(evt);
             }
         });
 
-        jLabel8.setText("Năm:");
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setText("Năm:");
 
-        lblNgay.setText("Ngày");
         lblNgay.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblNgay.setText("Ngày");
 
         txtDate.setDate(new Date());
         txtDate.setDateFormatString("dd-MM-yyyy hh:mm");
@@ -155,11 +155,11 @@ public class Form_ThongKeMatHang extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setText("Tháng");
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setText("Tháng");
 
-        cmbTKTheo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
         cmbTKTheo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cmbTKTheo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
         cmbTKTheo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbTKTheoActionPerformed(evt);
@@ -227,8 +227,8 @@ public class Form_ThongKeMatHang extends javax.swing.JPanel {
         tblTKMH.setSelectionBackground(new java.awt.Color(0, 169, 183));
         scr1.setViewportView(tblTKMH);
 
-        lblTong.setText("Tổng");
         lblTong.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblTong.setText("Tổng");
 
         txtTong.setEditable(false);
 
@@ -277,8 +277,8 @@ public class Form_ThongKeMatHang extends javax.swing.JPanel {
         tblTKDV.setSelectionBackground(new java.awt.Color(0, 169, 183));
         scr2.setViewportView(tblTKDV);
 
-        jLabel2.setText("Tổng");
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setText("Tổng");
 
         txtTienDV.setEditable(false);
 
@@ -335,8 +335,8 @@ public class Form_ThongKeMatHang extends javax.swing.JPanel {
 
         pnlChart.setBackground(new java.awt.Color(255, 255, 255));
 
-        lblBieuDo.setText("BIỂU ĐỒ THỐNG KÊ CÁC DỊCH VỤ BÁN CHẠY");
         lblBieuDo.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lblBieuDo.setText("BIỂU ĐỒ THỐNG KÊ CÁC DỊCH VỤ BÁN CHẠY");
 
         pnl.setBackground(new java.awt.Color(255, 255, 255));
         pnl.setPreferredSize(new java.awt.Dimension(1000, 481));
