@@ -4,10 +4,7 @@ package gui.swing;
 import java.awt.Graphics;
 import javax.swing.JPasswordField;
 
-/**
- *
- * @author 84934 NguyenThiQuynhGiang
- */
+
 public class CustomJPasswordField extends JPasswordField{
     @Override
     protected void paintBorder(Graphics g) {

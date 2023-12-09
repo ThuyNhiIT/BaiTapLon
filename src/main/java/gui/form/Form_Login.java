@@ -5,6 +5,8 @@ import dao.NhanVien_DAO;
 import dao.TaiKhoan_DAO;
 import entity.NhanVien;
 import gui.main.Main;
+import gui_dialog.DL_QuenMatKhau;
+import java.awt.Component;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,11 +20,12 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  * @author 84934 NguyenThiQuynhGiang
  */
-public class Form_Login extends javax.swing.JFrame {
+public class Form_Login extends javax.swing.JFrame{
 
     private NhanVien_DAO nv_dao;
     private TaiKhoan_DAO tk_dao;
@@ -44,6 +47,7 @@ public class Form_Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         txtTenDangNhap.setText("NV003");
         txtPassword.setText("1");
+        
 
 //        btnThoat.addActionListener(this);
 //        btnQuenMatKhau.addActionListener(this);
@@ -243,7 +247,8 @@ public class Form_Login extends javax.swing.JFrame {
 
     private void btnQuenMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuenMatKhauActionPerformed
         // TODO add your handling code here:
-        new Form_QuenMatKhau().setVisible(true);
+        DL_QuenMatKhau qMK = new DL_QuenMatKhau((java.awt.Frame)SwingUtilities.getWindowAncestor(this), true);
+        qMK.setVisible(true);
     }//GEN-LAST:event_btnQuenMatKhauActionPerformed
 
     private void txtTenDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenDangNhapActionPerformed
@@ -307,13 +312,9 @@ public class Form_Login extends javax.swing.JFrame {
     //Event
 //    public void actionPerformed(ActionEvent e) {
 //        Object o = e.getSource();
-//        if (o.equals(btnThoat)) {
-//            System.exit(0);
-//            return;
-//        } else if (o.equals(btnQuenMatKhau)) {
-//            Form_QuenMatKhau quen_mk = new Form_QuenMatKhau();
-//            quen_mk.setVisible(true);
-//        }
+//        if (o.equals(btnQuenMatKhau)) {
+//            DL_QuenMatKhau qMK = new DL_QuenMatKhau((java.awt.Frame)SwingUtilities.getWindowAncestor(this), true);
+//        } 
 //    }
     public static void main(String args[]) {
 
@@ -374,5 +375,8 @@ public class Form_Login extends javax.swing.JFrame {
     private gui.swing.CustomJPasswordField txtPassword;
     private gui.swing.CustomJTextField txtTenDangNhap;
     // End of variables declaration//GEN-END:variables
+
+  
+   
 
 }
