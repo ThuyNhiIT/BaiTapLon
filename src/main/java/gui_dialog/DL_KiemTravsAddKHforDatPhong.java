@@ -37,6 +37,14 @@ public class DL_KiemTravsAddKHforDatPhong extends javax.swing.JDialog {
     public DL_KiemTravsAddKHforDatPhong(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        txtSDT.addKeyListener(new java.awt.event.KeyAdapter() {
+            // nếu nhấn enter thì sẽ kiểm tra sdt
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    btnKiemTra.doClick();
+                }
+            }
+        });
     }
 
     public static void setMaKHPublic(String makh) {
