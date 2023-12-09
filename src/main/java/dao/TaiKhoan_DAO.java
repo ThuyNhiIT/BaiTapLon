@@ -64,13 +64,8 @@ public class TaiKhoan_DAO {
 //        }
 
         try {
-            // Sử dụng thuật toán SHA-256
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-
-            // Băm mật khẩu
             byte[] hashedBytes = messageDigest.digest(plainPassword.getBytes());
-
-            // Chuyển đổi byte array thành chuỗi Base64
             return Base64.getEncoder().encodeToString(hashedBytes);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
@@ -88,10 +83,7 @@ public class TaiKhoan_DAO {
             statement.setString(1, maNV);
             ResultSet result = statement.executeQuery();
             if (result.next()) {
-                // Lấy mật khẩu đã băm từ cơ sở dữ liệu
                 String hashedPasswordFromDB = result.getString(2);
-
-                // Băm mật khẩu nhập vào và so sánh với mật khẩu trong cơ sở dữ liệu
                 String hashedPasswordInput = hashPassword(plainPassword);
                 if (hashedPasswordInput != null && hashedPasswordInput.equals(hashedPasswordFromDB)) {
                     isUser = true;
