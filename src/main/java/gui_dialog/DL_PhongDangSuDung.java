@@ -280,9 +280,9 @@ public class DL_PhongDangSuDung extends javax.swing.JDialog {
             this.dispose();
            Form_QuanLyDatPhong updatePhong = new Form_QuanLyDatPhong();
             ph_dao.updateTinhTrangPhong(updatePhong.getRoomSelected(), "Trong");
-            DL_TraPhongVsThanhToan thanhToan = new DL_TraPhongVsThanhToan((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
-            thanhToan.setLocationRelativeTo(this);
-            thanhToan.setVisible(true);
+           updatePhong.openDL_ThanhToan();
+
+
         }
 
         this.dispose();

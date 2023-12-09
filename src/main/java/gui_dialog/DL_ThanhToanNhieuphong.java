@@ -40,6 +40,14 @@ public class DL_ThanhToanNhieuphong extends javax.swing.JDialog {
     public DL_ThanhToanNhieuphong(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        txtSDTKH.addKeyListener(new java.awt.event.KeyAdapter() {
+            // nếu nhấn enter thì sẽ kiểm tra sdt
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    btnTimHD.doClick();
+                }
+            }
+        });
     }
 
     public String getMaHDDSD() {

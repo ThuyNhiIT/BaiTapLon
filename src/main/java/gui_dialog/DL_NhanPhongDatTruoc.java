@@ -36,6 +36,7 @@ public class DL_NhanPhongDatTruoc extends javax.swing.JDialog {
         setInfo();
 
 
+
     }
 
     public static void setMaHDPublic(String mahd) {
