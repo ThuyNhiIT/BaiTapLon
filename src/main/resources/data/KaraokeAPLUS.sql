@@ -299,26 +299,11 @@ GO
 
 
 INSERT INTO KhuyenMai(maKM, moTa, batDau, ketThuc, phanTram)
-VALUES ('KM001', 'Noel 2023', '2024-12-07', '2024-12-10', 10.00);
+VALUES ('KM001', 'Noel 2023', '2023-12-07 00:00:00.000', '2023-12-25 00:00:00.000', 10.00);
 
 INSERT INTO KhuyenMai(maKM, moTa, batDau, ketThuc, phanTram)
-VALUES ('KM002', 'B', '2023-12-15', '2023-12-25', 20.00);
+VALUES ('KM002', 'Tết Tây 2023', '2023-12-25 00:00:00.000', '2023-01-01 00:00:00.000', 20.00);
 
-INSERT INTO KhuyenMai(maKM, moTa, batDau, ketThuc, phanTram)
-VALUES ('KM003', 'C', '2023-12-12', '2023-12-30', 30.00);
-
-INSERT INTO KhuyenMai(maKM, moTa, batDau, ketThuc, phanTram)
-VALUES ('KM004', 'D', '2024-01-01', '2024-01-10', 40.00);
-INSERT INTO KhuyenMai(maKM, moTa, batDau, ketThuc, phanTram)
-VALUES ('KM005', 'E', '2023-12-12', '2023-12-30', 30.00);
-
-INSERT INTO KhuyenMai(maKM, moTa, batDau, ketThuc, phanTram)
-VALUES ('KM006', 'F', '2024-01-01', '2024-01-10', 40.00);
-INSERT INTO KhuyenMai(maKM, moTa, batDau, ketThuc, phanTram)
-VALUES ('KM007', 'G', '2023-12-12', '2023-12-30', 30.00);
-
-INSERT INTO KhuyenMai(maKM, moTa, batDau, ketThuc, phanTram)
-VALUES ('KM008', 'H', '2024-01-01', '2024-01-10', 40.00);
 
 CREATE TABLE HoaDon (
     maHD VARCHAR(50) PRIMARY KEY,
@@ -329,7 +314,7 @@ CREATE TABLE HoaDon (
     tongTien MONEY,
     FOREIGN KEY (maKH) REFERENCES KhachHang(maKH),
     FOREIGN KEY (maNV) REFERENCES NhanVien(maNV),
-	FOREIGN KEY (maKM) REFERENCES KhuyenMai(maKM)
+/*	FOREIGN KEY (maKM) REFERENCES KhuyenMai(maKM)*/
 );
 GO
 
