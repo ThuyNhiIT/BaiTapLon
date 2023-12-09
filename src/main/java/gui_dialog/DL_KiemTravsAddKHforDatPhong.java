@@ -37,6 +37,14 @@ public class DL_KiemTravsAddKHforDatPhong extends javax.swing.JDialog {
     public DL_KiemTravsAddKHforDatPhong(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        txtSDT.addKeyListener(new java.awt.event.KeyAdapter() {
+            // nếu nhấn enter thì sẽ kiểm tra sdt
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    btnKiemTra.doClick();
+                }
+            }
+        });
     }
 
     public static void setMaKHPublic(String makh) {
@@ -350,7 +358,8 @@ public class DL_KiemTravsAddKHforDatPhong extends javax.swing.JDialog {
     }//GEN-LAST:event_btnKiemTraActionPerformed
 
     private void btnDatPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatPhongActionPerformed
-     // nếu tìm được kh bằng sdt
+
+        // nếu tìm được kh bằng sdt
         if(khachHang != null){
             Form_QuanLyDatPhong ph = new Form_QuanLyDatPhong();
             ph_dao = new PhongHat_DAO();
@@ -407,6 +416,9 @@ public class DL_KiemTravsAddKHforDatPhong extends javax.swing.JDialog {
             );
             noti.showNotification();
         }
+
+        this.dispose();
+
     }//GEN-LAST:event_btnDatPhongActionPerformed
 
     private void radNuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radNuActionPerformed

@@ -4,13 +4,22 @@
  */
 package gui_dialog;
 
+import com.itextpdf.io.font.constants.StandardFonts;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
 import connectDB.ConnectDB;
 import dao.*;
 import entity.*;
 import gui.swing.notification.Notification;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.io.File;
 import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.time.Duration;
@@ -46,6 +55,8 @@ public class DL_TraPhongvsThanhToanNhieuPhong extends javax.swing.JDialog {
     private double tongTienThanhToan = 0.0;
     private double thue = 0.05;
     private String maKM="";
+    private String mota = "";
+    private ArrayList<String> dsHD = new ArrayList<>();
 
     public DL_TraPhongvsThanhToanNhieuPhong(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -56,14 +67,71 @@ public class DL_TraPhongvsThanhToanNhieuPhong extends javax.swing.JDialog {
 
 
     }
+    public void inHoaDon() {
 
-    public void tinhTien() {
+        try (PdfWriter writer = new PdfWriter("src/main/resources/HoaDonPDF/HoaDon"  + ".pdf")) {
+            PdfDocument pdf = new PdfDocument(writer);
+            Document document = new Document(pdf);
+
+            PdfFont font = PdfFontFactory.createFont(StandardFonts.TIMES_ROMAN);
+
+            // Thiết kế giống với DL_TraPhongVsThanhToan
+
+            document.add(new Paragraph("HOA DON THANH TOAN").setFont(font));
+            document.add(new Paragraph("KARAOKEAPLUS").setFont(font));
+            document.add(new Paragraph("Dia chi: Go Vap, TPHCM").setFont(font));
+            document.add(new Paragraph("----------------------------------------------------------").setFont(font));
+            document.add(new Paragraph("Ten khach hang: " + lblTenKH.getText()).setFont(font));
+            document.add(new Paragraph("So dien thoai: " + lblSDT.getText()).setFont(font));
+
+
+            // Tạo bảng
+            Table table = new Table(4);
+            table.addCell("STT").setFont(font);
+            table.addCell("Ten").setFont(font);
+            table.addCell("Thoi gian / So luong").setFont(font);
+            table.addCell("Thanh tien").setFont(font);
+
+            for (int i = 0; i < tblHoaDon.getRowCount(); i++) {
+                table.addCell(tblHoaDon.getValueAt(i, 0).toString()).setFont(font);
+                table.addCell(tblHoaDon.getValueAt(i, 1).toString()).setFont(font);
+                table.addCell(tblHoaDon.getValueAt(i, 2).toString()).setFont(font);
+                table.addCell(tblHoaDon.getValueAt(i, 3).toString()).setFont(font);
+            }
+
+            document.add(table);
+            document.add(new Paragraph("----------------------------------------------------------").setFont(font));
+
+            document.add(new Paragraph("Tong tien: " + lblTongTien.getText()).setFont(font));
+            document.add(new Paragraph("Khuyen mai: " + lblMoTaKhuyenMai.getText()).setFont(font));
+            document.add(new Paragraph("Tien giam: " + lblTienGiam.getText()).setFont(font));
+            document.add(new Paragraph("VAT: " + jLabel7.getText()).setFont(font));
+            document.add(new Paragraph("Tong tien can thanh toan: " + lblTongTienThanhtoan.getText()).setFont(font));
+
+            document.close();
+
+            // Mở file PDF trên desktop
+            File file = new File("src/main/resources/HoaDonPDF/HoaDon" + maHD + ".pdf");
+            if (file.exists()) {
+                if (Desktop.isDesktopSupported()) {
+                    Desktop.getDesktop().open(file);
+                } else {
+                    System.out.println("Awt Desktop is not supported!");
+                }
+            } else {
+                System.out.println("File is not exists!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void tinhTien(String maHD) {
         ConnectDB db = ConnectDB.getInstance();
         try {
             db.connect();
             hd_dao = new HoaDon_DAO();
-            DL_ThanhToanNhieuphong dl = new DL_ThanhToanNhieuphong(new javax.swing.JFrame(), true);
-            maHD = dl.getMaHDDSD();
+//            DL_ThanhToanNhieuphong dl = new DL_ThanhToanNhieuphong(new javax.swing.JFrame(), true);
+//            maHD = dl.getMaHDDSD();
             HoaDon hd = hd_dao.getHoaDonTheoMaHD(maHD);
 
             db.connect();
@@ -145,7 +213,8 @@ public class DL_TraPhongvsThanhToanNhieuPhong extends javax.swing.JDialog {
                     ArrayList<ChiTietHoaDonPhong> dsCTHDP = cthdp_dao.getAllTheMaHDArray(hoaDon.getMaHD());
                     for (ChiTietHoaDonPhong cthdp : dsCTHDP) {
                         if (cthdp.getGia() == 0) {
-                            tinhTien();
+                            tinhTien(cthdp.getHoaDon().getMaHD());
+                            dsHD.add(cthdp.getHoaDon().getMaHD());
                             // cập nhật lại cthdp
                             db.connect();
                             cthdp = cthdp_dao.getChiTietHoaDonPhongTheoMaHD(hoaDon.getMaHD(), cthdp.getPhongHat().getMaPhong());
@@ -233,11 +302,13 @@ public class DL_TraPhongvsThanhToanNhieuPhong extends javax.swing.JDialog {
                 // chuyển thành chuỗi ngăn cách bỏi , và loại bỏ chữ null
                 maKM += khuyenMai.getMaKM() + ",";
                 tienGiam += (khuyenMai.getPhanTram() / 100);
-                lblMoTaKhuyenMai.setText(khuyenMai.getMoTa());
+                mota += khuyenMai.getMoTa() + ",";
+
 
             }
 
         }
+        lblMoTaKhuyenMai.setText(mota);
 
     }
 
@@ -477,23 +548,22 @@ public class DL_TraPhongvsThanhToanNhieuPhong extends javax.swing.JDialog {
         try {
             db.connect();
             if (db != null) {
-                System.out.println("Connect success");
-                HoaDon hd = hd_dao.getHoaDonTheoMaHD(maHD);
-                db.connect();
-                // check if khach hang da thanh toan
-                if (hd.getTongTien() == 0) {
-                    hd_dao.updateTongTien(maHD, tongTien, maKM);
-                } else {
-                    hd_dao.updateTongTien(maHD, tongTien + hd.getTongTien(), maKM);
+                // duyệt từng dsHD
+                for (String s : dsHD) {
+
+                    HoaDon hd = hd_dao.getHoaDonTheoMaHD(s);
+                    db.connect();
+                    // check if khach hang da thanh toan
+                    if (hd.getTongTien() == 0) {
+                        hd_dao.updateTongTien(s, tongTien, maKM);
+                    } else {
+                        hd_dao.updateTongTien(s, tongTien + hd.getTongTien(), maKM);
+                    }
+                 
                 }
-                Notification noti = new Notification(
-                        (java.awt.Frame) SwingUtilities.getWindowAncestor(this),
-                        Notification.Type.WARNING,
-                        Notification.Location.TOP_RIGHT,
-                        "Thanh toán thành công"
-                );
-                noti.showNotification();
-                this.dispose();
+                if(jCheckBox1.isSelected()){
+                    inHoaDon();
+                }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

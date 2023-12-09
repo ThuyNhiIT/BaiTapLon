@@ -10,6 +10,8 @@ import java.awt.Component;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.Connection;
@@ -47,6 +49,15 @@ public class Form_Login extends javax.swing.JFrame{
         setLocationRelativeTo(null);
         txtTenDangNhap.setText("NV003");
         txtPassword.setText("1");
+        
+        
+        txtPassword.addKeyListener(new KeyAdapter(){
+            public void keyPressed(KeyEvent e){
+                if(e.getKeyCode() ==  KeyEvent.VK_ENTER){
+                    btnDangNhapActionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Enter"));
+                }
+            }
+        });
         
 
 //        btnThoat.addActionListener(this);
