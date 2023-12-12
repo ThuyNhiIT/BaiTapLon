@@ -112,7 +112,6 @@ public class Form_Setting extends javax.swing.JPanel {
         if (option == JOptionPane.YES_OPTION) {
             Form_Login loginForm = new Form_Login();
             loginForm.setVisible(true);
-
             SwingUtilities.getWindowAncestor(Form_Setting.this).dispose();// đóng cửa sổ hiện tại lại (nếu có)
         }       
 //          DL_DangXuat log_out = new DL_DangXuat((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
@@ -122,12 +121,11 @@ public class Form_Setting extends javax.swing.JPanel {
 
     private void HDSDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HDSDActionPerformed
         try {
-            Desktop.getDesktop().browse(new URL("https://minhnhut1812.github.io/huongdansudung/html/hdsd.html").toURI());
+            Desktop.getDesktop().browse(new URL("https://minhnhut1812.github.io/HDSDKaraokeAPLUS/html/Index.html").toURI());
         } catch (Exception e) {
 
         }
     }//GEN-LAST:event_HDSDActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DoiMK;

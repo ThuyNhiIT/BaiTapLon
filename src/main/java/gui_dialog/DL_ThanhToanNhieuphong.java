@@ -258,9 +258,7 @@ public class DL_ThanhToanNhieuphong extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        this.setVisible(false);  // Close the dialog
-
-
+        this.dispose();
 
     }//GEN-LAST:event_btnExitActionPerformed
 

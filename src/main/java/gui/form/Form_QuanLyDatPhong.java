@@ -760,7 +760,9 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         panelPopUpMoreDatPhong1.addEvent(new gui.event.EventPopUpMoreDatPhong() {
             @Override
             public void datPhongTruoc() {
+
                 openDL_CheckKH();
+
             }
 
             @Override
