@@ -98,10 +98,10 @@ public class Form_DichVu extends javax.swing.JPanel {
             tblDichVu.getColumnModel().getColumn(0).setPreferredWidth(50);
         }
 
-        pnlHeader.setBackground(new java.awt.Color(235, 249, 249));
+        pnlHeader.setBackground(new java.awt.Color(255, 255, 255));
         pnlHeader.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        pnlTraCuu.setBackground(new java.awt.Color(235, 249, 249));
+        pnlTraCuu.setBackground(new java.awt.Color(255, 255, 255));
 
         lblTimKiem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTimKiem.setText("Tìm kiếm");
@@ -154,7 +154,7 @@ public class Form_DichVu extends javax.swing.JPanel {
             .addGroup(pnlHeaderLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(pnlTraCuu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(715, Short.MAX_VALUE))
+                .addContainerGap(418, Short.MAX_VALUE))
         );
         pnlHeaderLayout.setVerticalGroup(
             pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

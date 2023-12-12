@@ -173,7 +173,7 @@ public class Main extends javax.swing.JFrame {
         menu.addEvent(new EventMenuSelected() {
             @Override
             public void menuSelect(int menuIndex, int subMenuIndex) {
-                System.out.println("Menu Index:" + menuIndex + "SubMenuIndex:" + subMenuIndex);
+//                System.out.println("Menu Index:" + menuIndex + "SubMenuIndex:" + subMenuIndex);
                 // Xử lý khi một mục menu được chọn
                 // Ví dụ: Hiển thị một form tương ứng với mục menu được chọn.
                 if (menuIndex == 0) {
@@ -228,7 +228,7 @@ public class Main extends javax.swing.JFrame {
         menu.addEvent(new EventMenuSelected() {
             @Override
             public void menuSelect(int menuIndex, int subMenuIndex) {
-                System.out.println("Menu Index:" + menuIndex + "SubMenuIndex:" + subMenuIndex);
+//                System.out.println("Menu Index:" + menuIndex + "SubMenuIndex:" + subMenuIndex);
                 // Xử lý khi một mục menu được chọn
                 // Ví dụ: Hiển thị một form tương ứng với mục menu được chọn.
                 if (menuIndex == 0) {

@@ -223,9 +223,17 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
     public void refreshRooms() {
 
         pnlDSPhongDatTruoc.removeAll();
+        pnlDSPhongDatTruoc.revalidate();
+        pnlDSPhongDatTruoc.repaint();
         pnlPhongTrong.removeAll();
+        pnlPhongTrong.revalidate();
+        pnlPhongTrong.repaint();
         pnlPhongDangSuDung.removeAll();
+        pnlPhongDangSuDung.revalidate();
+        pnlPhongDangSuDung.repaint();
         pnlPhongCho.removeAll();
+        pnlPhongCho.revalidate();
+        pnlPhongCho.repaint();
         phongTrong();
         phongDangSuDung();
         phongCho();
@@ -262,7 +270,7 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
 
     public void phongDangSuDung() {
         // Xóa tất cả phòng trên giao diện trước khi thêm mới
-        pnlPhongDangSuDung.removeAll();
+
         ConnectDB db = ConnectDB.getInstance();
         try {
             db.connect();
@@ -271,7 +279,6 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         }
         // Lấy danh sách phòng có trạng thái "Dang su dung" từ cơ sở dữ liệu
         ArrayList<PhongHat> phongTrongList = ph_dao.getPhongByTinhTrang("Dang su dung");
-
         Icon icon;
         Icon iconPhongThuong = new ImageIcon(getClass().getResource("/icon/microphone.png"));
         Icon iconPhongVip = new ImageIcon(getClass().getResource("/icon/microphonevip.png"));
@@ -310,10 +317,8 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
                     nhanPhong.setLocationRelativeTo(Form_QuanLyDatPhong.this);
                     nhanPhong.setVisible(true);
                     if (nhanPhong.isVisible() == false) {
-
                         refreshRooms();
                     }
-
 
                 }
 
@@ -336,7 +341,7 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
 
     public void phongCho() {
         // Xóa tất cả phòng trên giao diện trước khi thêm mới
-        pnlPhongCho.removeAll();
+//        pnlPhongCho.removeAll();
         ConnectDB db = ConnectDB.getInstance();
         try {
             db.connect();
@@ -358,7 +363,6 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
 
 // Set thoiGianBatDau to today
         thoiGianBatDau.getDatePicker().setDate(ngayDat);
-
         ArrayList<DonDatPhong> dsDonDatPhong = ddp_dao.getDonDatPhongTheoNgayNhanPhong(ngayDat);
 
         // so sánh phongList và dsDonDatPhong lấy ra thông tin các phòng có trong dsDonDatPhong
@@ -376,16 +380,7 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
                 }
             }
         }
-        // Thêm từng phòng có trạng thái "Trong" vào giao diện
-//        for (PhongHat phong : phongTrongList) {
-//            String loaiPhong = phong.getLoaiPhong().getMaLoaiPhong();
-//            if ("LP002".equals(loaiPhong)) {
-//                icon = iconPhongThuong;
-//            } else {
-//                icon = iconPhongVip;
-//            }
-//            addPhongCho(new ModelRoom(phong.getMaPhong(), phong.getTenPhong(), icon));
-//        }
+
     }
 
     //Open DL_ChonDichVu in frame Form_QuanLyDatPhong
@@ -397,7 +392,6 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
             refreshRooms();
         }
     }
-
     public void openDL_ThemDV() {
         DL_ThemDV themDV = new DL_ThemDV((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
         themDV.setLocationRelativeTo(Form_QuanLyDatPhong.this);
@@ -406,7 +400,6 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
             refreshRooms();
         }
     }
-
     public void openDL_CheckKH() {
         DL_KiemTravsAddKHforDatPhong checkKH = new DL_KiemTravsAddKHforDatPhong((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
         checkKH.setLocationRelativeTo(Form_QuanLyDatPhong.this);
@@ -457,7 +450,7 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         thanhToan.setLocationRelativeTo(Form_QuanLyDatPhong.this);
         thanhToan.setVisible(true);
         if(thanhToan.isVisible() == false){
-            pnlPhongDangSuDung.removeAll();
+//            pnlPhongDangSuDung.removeAll();
             refreshRooms();
         }
     }

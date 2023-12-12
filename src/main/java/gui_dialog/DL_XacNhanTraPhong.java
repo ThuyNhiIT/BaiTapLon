@@ -117,7 +117,7 @@ public class DL_XacNhanTraPhong extends javax.swing.JDialog {
         try {
             db.connect();
             if(db!=null){
-                System.out.println("Connect success");
+//                System.out.println("Connect success");
                 DL_PhongDangSuDung dl = new DL_PhongDangSuDung((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
                 String maHDDSD = dl.getMaHDPDSD();
 //                cthdp_dao.updateGioRa(maHDDSD,LocalDateTime.now());

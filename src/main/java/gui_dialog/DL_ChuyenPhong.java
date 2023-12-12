@@ -50,8 +50,8 @@ public class DL_ChuyenPhong extends javax.swing.JDialog {
                     if (selectedRow != -1) {
                         maPhong = (String) tblDSP.getValueAt(selectedRow, 0);
                         loaiPhong = (String) tblDSP.getValueAt(selectedRow, 2);
-                        System.out.println(maPhong);
-                        System.out.println(loaiPhong);
+//                        System.out.println(maPhong);
+//                        System.out.println(loaiPhong);
                     }
                 }
             }

@@ -237,7 +237,6 @@ public class DL_DatPhongTruoc extends javax.swing.JDialog {
         // Lấy danh sách phòng
         ph_dao = new PhongHat_DAO();
         ArrayList<PhongHat> dsPH = ph_dao.getAllPhongHat();
-
         // Xác định loại phòng và giá
         for (PhongHat ph : dsPH) {
             setLoaiPhong(ph);

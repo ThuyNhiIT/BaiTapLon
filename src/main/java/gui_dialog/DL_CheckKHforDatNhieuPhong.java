@@ -364,10 +364,11 @@ public class DL_CheckKHforDatNhieuPhong extends javax.swing.JDialog {
     }//GEN-LAST:event_btnKiemTraActionPerformed
 
     private void btnThueNhieuPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThueNhieuPhongActionPerformed
+        Form_QuanLyDatPhong ph = new Form_QuanLyDatPhong();
         if (khachHang != null) {
-            Form_QuanLyDatPhong ph = new Form_QuanLyDatPhong();
-            this.dispose();
+
             ph.openDL_DatNhieuPhong();
+            this.dispose();
         } else if (validDateTenKH()) {
             kh_dao = new KhachHang_DAO();
             String maKH = phatSinhMaKH();
@@ -384,6 +385,7 @@ public class DL_CheckKHforDatNhieuPhong extends javax.swing.JDialog {
                         "Thuê phòng thành công"
                 );
                 noti.showNotification();
+
             } else {
                 Notification noti = new Notification(
                         (java.awt.Frame) SwingUtilities.getWindowAncestor(this),
@@ -394,7 +396,8 @@ public class DL_CheckKHforDatNhieuPhong extends javax.swing.JDialog {
                 noti.showNotification();
             }
 
-            Form_QuanLyDatPhong ph = new Form_QuanLyDatPhong();
+
+            this.dispose();
             ph.openDL_DatNhieuPhong();
         } else {
 
@@ -406,7 +409,7 @@ public class DL_CheckKHforDatNhieuPhong extends javax.swing.JDialog {
             );
             noti.showNotification();
         }
-        this.dispose();
+
     }//GEN-LAST:event_btnThueNhieuPhongActionPerformed
 
     private void radNuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radNuActionPerformed

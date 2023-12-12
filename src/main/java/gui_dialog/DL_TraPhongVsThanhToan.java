@@ -573,13 +573,13 @@ public class DL_TraPhongVsThanhToan extends javax.swing.JDialog {
                 } else {
                     hd_dao.updateTongTien(maHDDSD, tongTien + hd.getTongTien(), maKM);
                 }
-                Notification noti = new Notification(
-                        (java.awt.Frame) SwingUtilities.getWindowAncestor(this),
-                        Notification.Type.SUCCESS,
-                        Notification.Location.TOP_RIGHT,
-                        "Thanh toán thành công"
-                );
-                noti.showNotification();
+//                Notification noti = new Notification(
+//                        (java.awt.Frame) SwingUtilities.getWindowAncestor(this),
+//                        Notification.Type.SUCCESS,
+//                        Notification.Location.TOP_RIGHT,
+//                        "Thanh toán thành công"
+//                );
+//                noti.showNotification();
                 this.dispose();
             }
             // bắt sự kiện nếu cbInHoaDon được check thì in hóa đơn

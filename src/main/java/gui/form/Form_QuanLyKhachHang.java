@@ -61,10 +61,10 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
                         tblDSKH.setValueAt(sdt, rowIndex, 2);
                         tblDSKH.setValueAt(gioiTinh, rowIndex, 3);
                         if (kh_dao.editCustomer(kh)) {
-                            System.out.println("Sửa thành công");
+//                            System.out.println("Sửa thành công");
                             JOptionPane.showMessageDialog(null, "Sửa thành công");
                         } else {
-                            System.out.println("Sửa thất bại");
+//                            System.out.println("Sửa thất bại");
                             JOptionPane.showMessageDialog(null, "Sửa thất bại");
                         }
                     }
@@ -353,10 +353,10 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
                     tblDSKH.setValueAt(sdt, rowIndex, 2);
                     tblDSKH.setValueAt(gioiTinh, rowIndex, 3);
                     if (kh_dao.editCustomer(kh)) {
-                        System.out.println("Sửa thành công");
+//                        System.out.println("Sửa thành công");
                         JOptionPane.showMessageDialog(this, "Sửa thành công");
                     } else {
-                        System.out.println("Sửa thất bại");
+//                        System.out.println("Sửa thất bại");
                         JOptionPane.showMessageDialog(this, "Sửa thất bại");
                     }
                 }

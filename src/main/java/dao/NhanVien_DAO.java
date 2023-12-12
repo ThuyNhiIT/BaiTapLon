@@ -164,7 +164,7 @@ public class NhanVien_DAO {
 //            stmt = con.prepareStatement("INSERT INTO NhanVien VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
             stmt = con.prepareStatement("INSERT INTO nhanvien (maNV, tenNV, gioiTinh, CCCD, SDT, diaChi, caLam, loaiNV) " +
                      "VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-            System.out.println("Xong lần 1");
+//            System.out.println("Xong lần 1");
             stmt.setString(1, nv.getMaNV());
             stmt.setString(2, nv.getTenNV());
             stmt.setBoolean(3, nv.isGioiTinh());
@@ -173,7 +173,7 @@ public class NhanVien_DAO {
             stmt.setString(6, nv.getDiaChi());
             stmt.setString(7, nv.getCaLam());
             stmt.setString(8, nv.getLoaiNV().getMaLoai());
-            System.out.println("Xong lần 2");
+//            System.out.println("Xong lần 2");
             n = stmt.executeUpdate();
             
             if(tk_dao.taoTK(nv.getMaNV())== false)
@@ -199,7 +199,7 @@ public class NhanVien_DAO {
         int n = 0;
         try {
             stmt = con.prepareStatement("update NhanVien set tenNV= ?, gioiTinh= ?, CCCD= ?, SDT = ?, diaChi= ?, caLam= ?, loaiNV= ? WHERE maNV = ?");
-            System.out.println("UP Xongggg");
+//            System.out.println("UP Xongggg");
             stmt.setString(1, nv.getTenNV());
             stmt.setBoolean(2, nv.isGioiTinh());
             stmt.setString(3, nv.getCCCD());
@@ -209,7 +209,7 @@ public class NhanVien_DAO {
             stmt.setString(7, nv.getLoaiNV().getMaLoai());
             stmt.setString(8, nv.getMaNV());
              n = stmt.executeUpdate();
-            System.out.println("Xongggg");
+//            System.out.println("Xongggg");
         } catch (SQLException e) {
             e.printStackTrace();
         }

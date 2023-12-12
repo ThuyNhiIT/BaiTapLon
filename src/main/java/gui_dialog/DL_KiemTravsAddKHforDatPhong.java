@@ -154,10 +154,6 @@ public class DL_KiemTravsAddKHforDatPhong extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlThongTinKHLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlThongTinKHLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblThongTinKH)
-                .addGap(102, 102, 102))
             .addGroup(pnlThongTinKHLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(pnlThongTinKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,13 +170,20 @@ public class DL_KiemTravsAddKHforDatPhong extends javax.swing.JDialog {
                         .addComponent(radNam, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
                         .addComponent(radNu, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlThongTinKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnDatPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(pnlThongTinKHLayout.createSequentialGroup()
-                            .addComponent(lblTenKH)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtTenKH, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(pnlThongTinKHLayout.createSequentialGroup()
+                        .addComponent(lblTenKH)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTenKH, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlThongTinKHLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlThongTinKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlThongTinKHLayout.createSequentialGroup()
+                        .addComponent(lblThongTinKH)
+                        .addGap(102, 102, 102))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlThongTinKHLayout.createSequentialGroup()
+                        .addComponent(btnDatPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46))))
         );
         pnlThongTinKHLayout.setVerticalGroup(
             pnlThongTinKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,7 +323,6 @@ public class DL_KiemTravsAddKHforDatPhong extends javax.swing.JDialog {
     }
     private void btnKiemTraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKiemTraActionPerformed
         String sdt = txtSDT.getText();
-
         if (validDateSDT()) {
             kh_dao = new KhachHang_DAO();
             ArrayList<KhachHang> kh = kh_dao.getKhachHangTheoSdtKH(sdt);
@@ -358,10 +360,10 @@ public class DL_KiemTravsAddKHforDatPhong extends javax.swing.JDialog {
     }//GEN-LAST:event_btnKiemTraActionPerformed
 
     private void btnDatPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatPhongActionPerformed
-
         // nếu tìm được kh bằng sdt
+        Form_QuanLyDatPhong ph = new Form_QuanLyDatPhong();
         if(khachHang != null){
-            Form_QuanLyDatPhong ph = new Form_QuanLyDatPhong();
+
             ph_dao = new PhongHat_DAO();
             this.dispose();
             ph.openDL_DatPhong();
@@ -380,7 +382,7 @@ public class DL_KiemTravsAddKHforDatPhong extends javax.swing.JDialog {
                     (java.awt.Frame) SwingUtilities.getWindowAncestor(this),
                     Notification.Type.SUCCESS,
                     Notification.Location.TOP_RIGHT,
-                    "Đặt phòng thành công"
+                    "Thêm khách hàng thành công "
                 );
                 noti.showNotification();
             } else {
@@ -393,15 +395,16 @@ public class DL_KiemTravsAddKHforDatPhong extends javax.swing.JDialog {
                 noti.showNotification();
             }
 
-            Form_QuanLyDatPhong ph = new Form_QuanLyDatPhong();
-            ph_dao = new PhongHat_DAO();
-            //            ph_dao.updateTinhTrangPhong(ph.getRoomSelected(), "Dang su dung");
-            //            hd_dao = new HoaDon_DAO();
-            //            hd_dao.createHoaDon(revertHoaDonFromTextfields());
-            //            cthdp_dao = new ChiTietHoaDonPhong_Dao();
-            //            cthdp_dao.createChiTietHoaDonPhong(revertChiTietHoaDonPhongText());
+//            Form_QuanLyDatPhong ph = new Form_QuanLyDatPhong();
+//            ph_dao = new PhongHat_DAO();
+//            //            ph_dao.updateTinhTrangPhong(ph.getRoomSelected(), "Dang su dung");
+//            //            hd_dao = new HoaDon_DAO();
+//            //            hd_dao.createHoaDon(revertHoaDonFromTextfields());
+//            //            cthdp_dao = new ChiTietHoaDonPhong_Dao();
+//            //            cthdp_dao.createChiTietHoaDonPhong(revertChiTietHoaDonPhongText());
 
             this.dispose();
+
             ph.openDL_DatPhong();
 
 

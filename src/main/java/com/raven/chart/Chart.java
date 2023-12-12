@@ -115,6 +115,6 @@ public class Chart extends javax.swing.JPanel {
         blankPlotChart.setLabelCount(0);
         model.clear();
         repaint();
-        System.out.println("1,1");
+//        System.out.println("1,1");
     }
 }

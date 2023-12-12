@@ -29,7 +29,7 @@ public class Form_Setting extends javax.swing.JPanel {
         HDSD = new javax.swing.JButton();
         btnDangXuat = new javax.swing.JButton();
 
-        pnlCaiDat.setBackground(new java.awt.Color(235, 249, 249));
+        pnlCaiDat.setBackground(new java.awt.Color(255, 255, 255));
 
         DoiMK.setBackground(new java.awt.Color(205, 13, 13));
         DoiMK.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N

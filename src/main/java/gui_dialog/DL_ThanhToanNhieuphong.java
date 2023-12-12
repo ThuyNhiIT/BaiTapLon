@@ -11,6 +11,7 @@ import gui.swing.notification.Notification;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Timer;
 
@@ -31,8 +32,7 @@ public class DL_ThanhToanNhieuphong extends javax.swing.JDialog {
     private MatHang_DAO mh_dao;
     private String loaiPhong;
     private float giaPhong;
-    private MatHang matHang;
-    private Timer timer;
+
     private static String maHDDSD;
     private DefaultTableModel model;
 
@@ -78,7 +78,6 @@ public class DL_ThanhToanNhieuphong extends javax.swing.JDialog {
         return true;
     }
 
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -122,8 +121,8 @@ public class DL_ThanhToanNhieuphong extends javax.swing.JDialog {
 
         jLabel2.setText("Nhập số điện thoại của khách hàng thuê nhiều phòng :");
 
-        btnTimHD.setBackground(new java.awt.Color(0, 204, 204));
         btnTimHD.setText("Tìm ");
+        btnTimHD.setBackground(new java.awt.Color(0, 204, 204));
         btnTimHD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTimHDActionPerformed(evt);
@@ -201,10 +200,10 @@ public class DL_ThanhToanNhieuphong extends javax.swing.JDialog {
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(82, 82, 82)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtSDTKH, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtSDTKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnTimHD, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -260,37 +259,55 @@ public class DL_ThanhToanNhieuphong extends javax.swing.JDialog {
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         this.dispose();
+
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnThanhToanNhieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanNhieuActionPerformed
+        // check nếu jtable1 khác rỗng
+        if(jTable1.getRowCount() > 0){
 
-        if (JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn thanh toán không?", "Thông báo", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-
-
-            ph_dao = new PhongHat_DAO();
-            // lấy ds maPhong từ cột số 1
-            ArrayList<String> dsMaPhong = new ArrayList<>();
-            for (int i = 0; i < jTable1.getRowCount(); i++) {
-                dsMaPhong.add(jTable1.getValueAt(i, 0).toString());
+            int yesNo = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn thanh toán không?", "Thông báo", JOptionPane.YES_NO_OPTION);
+            if (yesNo == JOptionPane.YES_OPTION) {
+                ph_dao = new PhongHat_DAO();
+                // lấy ds maPhong từ cột số 1
+                ArrayList<String> dsMaPhong = new ArrayList<>();
+                for (int i = 0; i < jTable1.getRowCount(); i++) {
+                    dsMaPhong.add(jTable1.getValueAt(i, 0).toString());
+                }
+                // update tình trạng phòng
+                for (String maPhong : dsMaPhong) {
+                    ph_dao.updateTinhTrangPhong(maPhong, "Trong");
+                }
+                this.dispose();
+                Form_QuanLyDatPhong form_QuanLyDatPhong = new Form_QuanLyDatPhong();
+                form_QuanLyDatPhong.openDL_ThanhToanNhieu();
+            } else {
+                Notification noti = new Notification(
+                        (java.awt.Frame) SwingUtilities.getWindowAncestor(this),
+                        Notification.Type.WARNING,
+                        Notification.Location.TOP_RIGHT,
+                        "Xác nhận không thanh toán"
+                );
+                noti.showNotification();
+                this.dispose();
             }
-            // update tình trạng phòng
-            for (String maPhong : dsMaPhong) {
-                ph_dao.updateTinhTrangPhong(maPhong, "Trong");
-            }
-            Form_QuanLyDatPhong form_QuanLyDatPhong = new Form_QuanLyDatPhong();
-            form_QuanLyDatPhong.openDL_ThanhToanNhieu();
-
-
         }else{
-            this.dispose();
+            Notification noti = new Notification(
+                    (java.awt.Frame) SwingUtilities.getWindowAncestor(this),
+                    Notification.Type.WARNING,
+                    Notification.Location.TOP_RIGHT,
+                    "không có phòng cần thanh toán"
+            );
+            noti.showNotification();
         }
         this.dispose();
+
+
 
     }//GEN-LAST:event_btnThanhToanNhieuActionPerformed
 
     private void btnTimHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimHDActionPerformed
         String sdt = txtSDTKH.getText();
-
         if (validDateSDT()) {
             kh_dao = new KhachHang_DAO();
             ArrayList<KhachHang> kh = kh_dao.getKhachHangTheoSdtKH(sdt);
@@ -298,21 +315,38 @@ public class DL_ThanhToanNhieuphong extends javax.swing.JDialog {
                 khachHang = kh.get(0);
                 hd_dao = new HoaDon_DAO();
                 ArrayList<HoaDon> hd = hd_dao.getHoaDonTheoMaKH(khachHang.getMaKH());
+                // lấy ra mã hóa đơn mà trong chitiethoadon phòng có số hóa đoưn lớn hơn 1
+
+
                 if (hd.size() > 0) {
+
                     // lấy ra hd có điều kiện là chưa thanh toán
                     for (HoaDon hoaDon : hd) {
-                        if (hoaDon.getTongTien() == 0) {
-                            maHDDSD = hoaDon.getMaHD();
-                            // lưu lại bằng arraylist
-                            maHDDSDList.add(maHDDSD);
+                        if (hoaDon.getTongTien() == 0 ) {
+
+//                            maHDDSD = hoaDon.getMaHD();
+//                            // lưu lại bằng arraylist
+//                            maHDDSDList.add(maHDDSD);
 
                         }
                     }
                     cthdp_dao = new ChiTietHoaDonPhong_Dao();
                     for (HoaDon hoaDon : hd) {
                         ArrayList<ChiTietHoaDonPhong> dsCTHDP = cthdp_dao.getAllTheMaHDArray(hoaDon.getMaHD());
+                        // chỉ lấy ra cthdp có nhiều hơn 1 phòng
+                        ArrayList<ChiTietHoaDonPhong> dsCTHDP2 = new ArrayList<>();
                         for (ChiTietHoaDonPhong cthdp : dsCTHDP) {
+                            if (dsCTHDP.size() > 1) {
+                                dsCTHDP2.add(cthdp);
+                            }
+                        }
+
+
+                        for (ChiTietHoaDonPhong cthdp : dsCTHDP2) {
                             if (cthdp.getGia() == 0) {
+                                maHDDSD = hoaDon.getMaHD();
+//                                // lưu lại bằng arraylist
+//                                maHDDSDList.add(maHDDSD);
                                 model = (DefaultTableModel) jTable1.getModel();
                                 PhongHat_DAO ph_dao = new PhongHat_DAO();
                                 PhongHat addph = ph_dao.getPhongHatByMaPhong(cthdp.getPhongHat().getMaPhong());
@@ -347,15 +381,15 @@ public class DL_ThanhToanNhieuphong extends javax.swing.JDialog {
                         }
                     }
                 }
-                } else {
-                    Notification noti = new Notification(
-                            (java.awt.Frame) SwingUtilities.getWindowAncestor(this),
-                            Notification.Type.WARNING,
-                            Notification.Location.TOP_RIGHT,
-                            "Khách hàng chưa thuê phòng nào"
-                    );
-                    noti.showNotification();
-                }
+            } else {
+                Notification noti = new Notification(
+                        (java.awt.Frame) SwingUtilities.getWindowAncestor(this),
+                        Notification.Type.WARNING,
+                        Notification.Location.TOP_RIGHT,
+                        "Khách hàng chưa thuê phòng nào"
+                );
+                noti.showNotification();
+            }
 
         } else {
             Notification noti = new Notification(
@@ -366,50 +400,8 @@ public class DL_ThanhToanNhieuphong extends javax.swing.JDialog {
             );
             noti.showNotification();
         }
-
     }//GEN-LAST:event_btnTimHDActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DL_ThanhToanNhieuphong.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DL_ThanhToanNhieuphong.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DL_ThanhToanNhieuphong.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DL_ThanhToanNhieuphong.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                DL_ThanhToanNhieuphong dialog = new DL_ThanhToanNhieuphong(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.swing.Button btnExit;

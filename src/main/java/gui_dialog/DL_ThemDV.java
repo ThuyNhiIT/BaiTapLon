@@ -490,7 +490,7 @@ private void addToDVThemTable(MatHang selectedMatHang) {
                 }
                 // nếu mặt hàng trong table có mà trong database có thì update lại số lượng
                 else {
-                    System.out.println(cthddvadd);
+//                    System.out.println(cthddvadd);
                     cthddv_dao.updateChiTietHoaDonDV(cthddvadd);
                 }
 

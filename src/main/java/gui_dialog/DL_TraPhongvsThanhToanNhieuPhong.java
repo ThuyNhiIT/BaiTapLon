@@ -57,6 +57,12 @@ public class DL_TraPhongvsThanhToanNhieuPhong extends javax.swing.JDialog {
     private String maKM="";
     private String mota = "";
     private ArrayList<String> dsHD = new ArrayList<>();
+    private String tenKH;
+    private String sdtKH;
+    private String formattedTongTien;
+    private String formattedTienGiam;
+    private String formattedTongTienThanhToan;
+
 
     public DL_TraPhongvsThanhToanNhieuPhong(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -67,64 +73,7 @@ public class DL_TraPhongvsThanhToanNhieuPhong extends javax.swing.JDialog {
 
 
     }
-    public void inHoaDon() {
 
-        try (PdfWriter writer = new PdfWriter("src/main/resources/HoaDonPDF/HoaDon"  + ".pdf")) {
-            PdfDocument pdf = new PdfDocument(writer);
-            Document document = new Document(pdf);
-
-            PdfFont font = PdfFontFactory.createFont(StandardFonts.TIMES_ROMAN);
-
-            // Thiết kế giống với DL_TraPhongVsThanhToan
-
-            document.add(new Paragraph("HOA DON THANH TOAN").setFont(font));
-            document.add(new Paragraph("KARAOKEAPLUS").setFont(font));
-            document.add(new Paragraph("Dia chi: Go Vap, TPHCM").setFont(font));
-            document.add(new Paragraph("----------------------------------------------------------").setFont(font));
-            document.add(new Paragraph("Ten khach hang: " + lblTenKH.getText()).setFont(font));
-            document.add(new Paragraph("So dien thoai: " + lblSDT.getText()).setFont(font));
-
-
-            // Tạo bảng
-            Table table = new Table(4);
-            table.addCell("STT").setFont(font);
-            table.addCell("Ten").setFont(font);
-            table.addCell("Thoi gian / So luong").setFont(font);
-            table.addCell("Thanh tien").setFont(font);
-
-            for (int i = 0; i < tblHoaDon.getRowCount(); i++) {
-                table.addCell(tblHoaDon.getValueAt(i, 0).toString()).setFont(font);
-                table.addCell(tblHoaDon.getValueAt(i, 1).toString()).setFont(font);
-                table.addCell(tblHoaDon.getValueAt(i, 2).toString()).setFont(font);
-                table.addCell(tblHoaDon.getValueAt(i, 3).toString()).setFont(font);
-            }
-
-            document.add(table);
-            document.add(new Paragraph("----------------------------------------------------------").setFont(font));
-
-            document.add(new Paragraph("Tong tien: " + lblTongTien.getText()).setFont(font));
-            document.add(new Paragraph("Khuyen mai: " + lblMoTaKhuyenMai.getText()).setFont(font));
-            document.add(new Paragraph("Tien giam: " + lblTienGiam.getText()).setFont(font));
-            document.add(new Paragraph("VAT: " + jLabel7.getText()).setFont(font));
-            document.add(new Paragraph("Tong tien can thanh toan: " + lblTongTienThanhtoan.getText()).setFont(font));
-
-            document.close();
-
-            // Mở file PDF trên desktop
-            File file = new File("src/main/resources/HoaDonPDF/HoaDon" + maHD + ".pdf");
-            if (file.exists()) {
-                if (Desktop.isDesktopSupported()) {
-                    Desktop.getDesktop().open(file);
-                } else {
-                    System.out.println("Awt Desktop is not supported!");
-                }
-            } else {
-                System.out.println("File is not exists!");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
     public void tinhTien(String maHD) {
         ConnectDB db = ConnectDB.getInstance();
         try {
@@ -193,11 +142,15 @@ public class DL_TraPhongvsThanhToanNhieuPhong extends javax.swing.JDialog {
             String maHD = dl.getMaHDDSD();
             HoaDon hd = hd_dao.getHoaDonTheoMaHD(maHD);
 
+
             db.connect();
             kh_dao = new KhachHang_DAO();
             KhachHang loadKH = kh_dao.getdataKH(hd.getKhachHang().getMaKH());
             lblTenKH.setText(loadKH.getTenKH());
             lblSDT.setText(loadKH.getSdt());
+            tenKH = loadKH.getTenKH();
+            sdtKH = loadKH.getSdt();
+
 
             // load lên table
             kh_dao = new KhachHang_DAO();
@@ -211,7 +164,13 @@ public class DL_TraPhongvsThanhToanNhieuPhong extends javax.swing.JDialog {
                 cthdp_dao = new ChiTietHoaDonPhong_Dao();
                 for (HoaDon hoaDon : hd1) {
                     ArrayList<ChiTietHoaDonPhong> dsCTHDP = cthdp_dao.getAllTheMaHDArray(hoaDon.getMaHD());
+                    ArrayList<ChiTietHoaDonPhong> dsCTHDP2 = new ArrayList<>();
                     for (ChiTietHoaDonPhong cthdp : dsCTHDP) {
+                        if (dsCTHDP.size() > 1) {
+                            dsCTHDP2.add(cthdp);
+                        }
+                    }
+                    for (ChiTietHoaDonPhong cthdp : dsCTHDP2) {
                         if (cthdp.getGia() == 0) {
                             tinhTien(cthdp.getHoaDon().getMaHD());
                             dsHD.add(cthdp.getHoaDon().getMaHD());
@@ -272,15 +231,16 @@ public class DL_TraPhongvsThanhToanNhieuPhong extends javax.swing.JDialog {
                 tongTienThanhToan = tien + tinhThue;
                 // Format the total amount to VND currency
                 NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
-                String formattedTongTien = currencyFormat.format(tongTien);
-                String formattedTienGiam = currencyFormat.format(Giam);
-                String formattedTongTienThanhToan = currencyFormat.format(tongTienThanhToan);
+                 formattedTongTien = currencyFormat.format(tongTien);
+                 formattedTienGiam = currencyFormat.format(Giam);
+                 formattedTongTienThanhToan = currencyFormat.format(tongTienThanhToan);
 
 
                 lblTongTien.setText(formattedTongTien);
 
                 lblTienGiam.setText(formattedTienGiam);
                 lblTongTienThanhtoan.setText(formattedTongTienThanhToan);
+
 
             }
         } catch (SQLException e) {
@@ -303,15 +263,65 @@ public class DL_TraPhongvsThanhToanNhieuPhong extends javax.swing.JDialog {
                 maKM += khuyenMai.getMaKM() + ",";
                 tienGiam += (khuyenMai.getPhanTram() / 100);
                 mota += khuyenMai.getMoTa() + ",";
-
-
             }
-
         }
         lblMoTaKhuyenMai.setText(mota);
 
     }
+    public void inHoaDon() {
 
+        try (PdfWriter writer = new PdfWriter("src/main/resources/HoaDonPDF/HoaDon"  + ".pdf")) {
+            PdfDocument pdf = new PdfDocument(writer);
+            Document document = new Document(pdf);
+            PdfFont font = PdfFontFactory.createFont(StandardFonts.TIMES_ROMAN);
+            // Thiết kế giống với DL_TraPhongVsThanhToan
+
+            document.add(new Paragraph("HOA DON THANH TOAN").setFont(font));
+            document.add(new Paragraph("KARAOKEAPLUS").setFont(font));
+            document.add(new Paragraph("Dia chi: Go Vap, TPHCM").setFont(font));
+            document.add(new Paragraph("----------------------------------------------------------").setFont(font));
+            document.add(new Paragraph("Ten khach hang: " + tenKH).setFont(font));
+            document.add(new Paragraph("So dien thoai: " + sdtKH).setFont(font));
+
+
+            // Tạo bảng
+            Table table = new Table(4);
+            table.addCell("STT").setFont(font);
+            table.addCell("Ten").setFont(font);
+            table.addCell("Thoi gian / So luong").setFont(font);
+            table.addCell("Thanh tien").setFont(font);
+            for (int i = 0; i < tblHoaDon.getRowCount(); i++) {
+                table.addCell(tblHoaDon.getValueAt(i, 0).toString()).setFont(font);
+                table.addCell(tblHoaDon.getValueAt(i, 1).toString()).setFont(font);
+                table.addCell(tblHoaDon.getValueAt(i, 2).toString()).setFont(font);
+                table.addCell(tblHoaDon.getValueAt(i, 3).toString()).setFont(font);
+            }
+            document.add(table);
+            document.add(new Paragraph("----------------------------------------------------------").setFont(font));
+
+            document.add(new Paragraph("Tong tien: " + formattedTongTien).setFont(font));
+            document.add(new Paragraph("Khuyen mai: " + lblMoTaKhuyenMai.getText()).setFont(font));
+            document.add(new Paragraph("Tien giam: " + formattedTienGiam).setFont(font));
+            document.add(new Paragraph("VAT: " + jLabel7.getText()).setFont(font));
+            document.add(new Paragraph("Tong tien can thanh toan: " + formattedTongTienThanhToan).setFont(font));
+
+            document.close();
+
+            // Mở file PDF trên desktop
+            File file = new File("src/main/resources/HoaDonPDF/HoaDon"  + ".pdf");
+            if (file.exists()) {
+                if (Desktop.isDesktopSupported()) {
+                    Desktop.getDesktop().open(file);
+                } else {
+                    System.out.println("Awt Desktop is not supported!");
+                }
+            } else {
+                System.out.println("File is not exists!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -550,16 +560,20 @@ public class DL_TraPhongvsThanhToanNhieuPhong extends javax.swing.JDialog {
             if (db != null) {
                 // duyệt từng dsHD
                 for (String s : dsHD) {
-
+                    System.out.println(s);
                     HoaDon hd = hd_dao.getHoaDonTheoMaHD(s);
+                    System.out.println(hd.getTongTien() + hd.getMaHD());
                     db.connect();
                     // check if khach hang da thanh toan
                     if (hd.getTongTien() == 0) {
-                        hd_dao.updateTongTien(s, tongTien, maKM);
-                    } else {
-                        hd_dao.updateTongTien(s, tongTien + hd.getTongTien(), maKM);
+                        hd_dao.updateTongTien(s, tongTienThanhToan, maKM);
+                        break;
+                    } else if(hd.getTongTien() != 0) {
+                        hd_dao.updateTongTien(s, tongTienThanhToan + hd.getTongTien(), maKM);
+                        break;
                     }
-                 
+
+
                 }
                 if(jCheckBox1.isSelected()){
                     inHoaDon();
@@ -569,6 +583,7 @@ public class DL_TraPhongvsThanhToanNhieuPhong extends javax.swing.JDialog {
             throw new RuntimeException(e);
         }
         this.dispose();
+
 
     }//GEN-LAST:event_btnThanhToanActionPerformed
 

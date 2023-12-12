@@ -234,7 +234,7 @@ private KhachHang_DAO kh_dao;
                     public void actionPerformed(ActionEvent e) {
                         String maKH = phatSinhMaKH();
                         String tenKH = txtTenKH.getText();
-                        System.out.println(tenKH);
+//                        System.out.println(tenKH);
                         String Sdt = txtSDT.getText();
                         Boolean gt = radNam.isSelected();
                         KhachHang addKh = new KhachHang(maKH, tenKH, Sdt, gt);

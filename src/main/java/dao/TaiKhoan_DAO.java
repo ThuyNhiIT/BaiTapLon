@@ -141,11 +141,11 @@ public class TaiKhoan_DAO {
         Connection con = ConnectDB.getConnection();
         int n = 0;
         try {
-            System.out.println("Không ");
+//            System.out.println("Không ");
             PreparedStatement statement = con.prepareStatement("SELECT Password FROM TaiKhoan WHERE maNV = ?");
             statement.setString(1, maNV);
             ResultSet resultSet = statement.executeQuery();
-            System.out.println(statement);
+//            System.out.println(statement);
 
         } catch (SQLException e) {
             e.printStackTrace();

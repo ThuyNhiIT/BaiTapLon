@@ -271,8 +271,8 @@ public class DL_ThemKhuyenMai extends javax.swing.JDialog {
 
             LocalDate batDau = sqlDate.toLocalDate();
             LocalDate ketThuc = sqlDate2.toLocalDate();
-            System.out.println(batDau);
-            System.out.println(ketThuc);
+//            System.out.println(batDau);
+//            System.out.println(ketThuc);
 
             String mucGiamString = (String) cboMucGiam.getSelectedItem();  // Lấy chuỗi mức giảm từ thành phần JComboBox
             Double mucGiam = Double.parseDouble(mucGiamString);  // Chuyển đổi chuỗi thành Double

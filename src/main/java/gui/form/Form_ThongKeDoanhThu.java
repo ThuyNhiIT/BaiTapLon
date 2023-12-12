@@ -123,7 +123,7 @@ public class Form_ThongKeDoanhThu extends javax.swing.JPanel {
 
         pnlTKDT.setBackground(new java.awt.Color(235, 249, 249));
 
-        pnlHeader.setBackground(new java.awt.Color(235, 249, 249));
+        pnlHeader.setBackground(new java.awt.Color(255, 255, 255));
         pnlHeader.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlHeader.setPreferredSize(new java.awt.Dimension(1000, 103));
 
@@ -278,7 +278,7 @@ public class Form_ThongKeDoanhThu extends javax.swing.JPanel {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(pnlBottom, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
+                .addComponent(pnlBottom, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 
@@ -312,7 +312,7 @@ public class Form_ThongKeDoanhThu extends javax.swing.JPanel {
         );
         pnlBieuDoLayout.setVerticalGroup(
             pnlBieuDoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlChart, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
+            .addComponent(pnlChart, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
         );
 
         materialTabbed1.addTab("Biểu đồ", pnlBieuDo);

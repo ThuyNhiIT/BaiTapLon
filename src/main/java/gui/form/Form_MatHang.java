@@ -160,10 +160,10 @@ public class Form_MatHang extends javax.swing.JPanel  {
 
         pnlMatHang.setBackground(new java.awt.Color(235, 249, 249));
 
-        pnlHeader.setBackground(new java.awt.Color(235, 249, 249));
+        pnlHeader.setBackground(new java.awt.Color(255, 255, 255));
         pnlHeader.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        pnlTim.setBackground(new java.awt.Color(235, 249, 249));
+        pnlTim.setBackground(new java.awt.Color(255, 255, 255));
 
         lblTim.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTim.setText("Tìm kiếm");
@@ -213,7 +213,6 @@ public class Form_MatHang extends javax.swing.JPanel  {
             }
         });
 
-        btnRefesh.setBackground(new java.awt.Color(235, 249, 249));
         btnRefesh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-refresh-48.png"))); // NOI18N
         btnRefesh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
