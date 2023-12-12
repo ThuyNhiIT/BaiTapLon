@@ -184,10 +184,10 @@ public class Form_ThongKeMatHang extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cmbTKChiTiet, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(139, 139, 139))
-            .addGroup(pnlHeader1Layout.createSequentialGroup()
-                .addGap(415, 415, 415)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHeader1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblTKMH1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(359, 359, 359))
         );
         pnlHeader1Layout.setVerticalGroup(
             pnlHeader1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -428,6 +428,7 @@ public class Form_ThongKeMatHang extends javax.swing.JPanel {
      * @param evt
      */
     private void cmbTKChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTKChiTietActionPerformed
+
         String thang = cmbTKTheo.getSelectedItem().toString();
         String nam = cmbTKChiTiet.getSelectedItem().toString();
         ArrayList<String[]> dsDVThang = ctdv_dao.getTOPDVThang(thang, nam);
@@ -478,8 +479,8 @@ public class Form_ThongKeMatHang extends javax.swing.JPanel {
 
         ArrayList<String[]> data = ctdv_dao.getTKNam(nam);
         dataset.clear();
-        pnlChart.removeAll();
-        // Mảng các màu sắc
+        pnl.removeAll();
+               // Mảng các màu sắc
         int[][] rgbValues = {
             {41, 173, 86},
             {205, 13, 13},
@@ -490,28 +491,26 @@ public class Form_ThongKeMatHang extends javax.swing.JPanel {
         };
 
         int numDataPoints = Math.min(5, data.size());
-
         for (int i = 0; i < numDataPoints; i++) {
             String[] item = data.get(i);
+            System.out.println(i);
+
             if (item.length > 5) {
                 System.out.println("Không tạo");
+                pnlChart.removeAll();
             }
             String tenMH = item[1];
             double tyle = Double.parseDouble(item[3]);
             int[] rgb = rgbValues[i % rgbValues.length];
             Color color = new Color(rgb[0], rgb[1], rgb[2]);
+
             dataset.setValue(tenMH, tyle);
             pieChart1.addData(new ModelPieChart(tenMH, tyle, color));
-
         }
-        if (data.size() > 5) {
-            // Xóa biểu đồ cũ nếu có nhiều hơn 5 thành phần
-            pnlChart.removeAll();
-        }
-        pnlChart.removeAll();
-        pnlChart.add(pieChart1);
-        pnlBieuDo.revalidate();
-        pnlBieuDo.repaint();
+        pnl.removeAll();
+        pnl.add(pieChart1);
+        pnl.revalidate();
+        pnl.repaint();
     }//GEN-LAST:event_cmbTKChiTietActionPerformed
     public void BieuDo() {
         pieChart1.removeAll();

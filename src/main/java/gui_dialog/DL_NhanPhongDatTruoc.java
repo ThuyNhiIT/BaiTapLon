@@ -327,7 +327,9 @@ public class DL_NhanPhongDatTruoc extends javax.swing.JDialog {
         if (LocalDateTime.now().getDayOfMonth() != dsDDP.get(0).getNgayNhan().getDayOfMonth()) {
             this.dispose();
             JOptionPane.showMessageDialog(this, "Chỉ được nhận phòng trong ngày");
-        } else if (LocalDateTime.now().isBefore(dsDDP.get(0).getNgayNhan())) {
+        }
+        // check giờ nhận phòng phải sau giờ hiện tại hoặc sau tối da 1h so với giờ hiện tại
+        else if (LocalDateTime.now().isBefore(dsDDP.get(0).getNgayNhan()) ||  LocalDateTime.now().getHour() - dsDDP.get(0).getNgayNhan().getHour() <= 1 ) {
             ph_dao = new PhongHat_DAO();
             if (ph_dao.getPhongHatByMaPhong(maPhong).getTinhTrangPhong().equals("Trong")) {
                 // nếu phòng trống thì thêm hóa đơn và chi tiết hóa đơn phòng

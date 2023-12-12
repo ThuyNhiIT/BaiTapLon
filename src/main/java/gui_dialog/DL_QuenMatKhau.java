@@ -49,6 +49,7 @@ public class DL_QuenMatKhau extends javax.swing.JDialog {
         setUndecorated(true);
 
         pnlTong.setBackground(new java.awt.Color(255, 255, 255));
+        pnlTong.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         lblSDT.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lblSDT.setText("Số điện thoại");

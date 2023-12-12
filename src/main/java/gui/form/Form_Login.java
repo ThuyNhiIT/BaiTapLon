@@ -21,8 +21,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 /**
  * @author 84934 NguyenThiQuynhGiang
@@ -47,6 +46,7 @@ public class Form_Login extends javax.swing.JFrame{
     public Form_Login() {
         initComponents();
         setLocationRelativeTo(null);
+        this.setIconImage(new ImageIcon(getClass().getResource("/icon/microphone.png")).getImage());
         txtTenDangNhap.setText("NV003");
         txtPassword.setText("1");
         
@@ -259,6 +259,7 @@ public class Form_Login extends javax.swing.JFrame{
     private void btnQuenMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuenMatKhauActionPerformed
         // TODO add your handling code here:
         DL_QuenMatKhau qMK = new DL_QuenMatKhau((java.awt.Frame)SwingUtilities.getWindowAncestor(this), true);
+        qMK.setLocationRelativeTo(qMK);
         qMK.setVisible(true);
     }//GEN-LAST:event_btnQuenMatKhauActionPerformed
 

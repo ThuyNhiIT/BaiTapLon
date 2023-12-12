@@ -1,6 +1,8 @@
 
 package gui.form;
 
+import javax.swing.*;
+
 /**
  *
  * @author HO MINH HAU
@@ -13,6 +15,7 @@ public class ProcessesLoading extends javax.swing.JFrame {
     public ProcessesLoading() {
         initComponents();
          setLocationRelativeTo(null);
+        this.setIconImage(new ImageIcon(getClass().getResource("/icon/microphone.png")).getImage());
     }
 
     /**

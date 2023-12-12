@@ -258,14 +258,16 @@ public class DL_ThanhToanNhieuphong extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        this.dispose();
+        this.setVisible(false);  // Close the dialog
+
+
 
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnThanhToanNhieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanNhieuActionPerformed
         // check nếu jtable1 khác rỗng
         if(jTable1.getRowCount() > 0){
-
+            Form_QuanLyDatPhong form_QuanLyDatPhong = new Form_QuanLyDatPhong();
             int yesNo = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn thanh toán không?", "Thông báo", JOptionPane.YES_NO_OPTION);
             if (yesNo == JOptionPane.YES_OPTION) {
                 ph_dao = new PhongHat_DAO();
@@ -279,7 +281,6 @@ public class DL_ThanhToanNhieuphong extends javax.swing.JDialog {
                     ph_dao.updateTinhTrangPhong(maPhong, "Trong");
                 }
                 this.dispose();
-                Form_QuanLyDatPhong form_QuanLyDatPhong = new Form_QuanLyDatPhong();
                 form_QuanLyDatPhong.openDL_ThanhToanNhieu();
             } else {
                 Notification noti = new Notification(
@@ -300,7 +301,7 @@ public class DL_ThanhToanNhieuphong extends javax.swing.JDialog {
             );
             noti.showNotification();
         }
-        this.dispose();
+
 
 
 

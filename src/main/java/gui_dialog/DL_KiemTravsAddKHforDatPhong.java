@@ -361,9 +361,9 @@ public class DL_KiemTravsAddKHforDatPhong extends javax.swing.JDialog {
 
     private void btnDatPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatPhongActionPerformed
         // nếu tìm được kh bằng sdt
-        Form_QuanLyDatPhong ph = new Form_QuanLyDatPhong();
-        if(khachHang != null){
 
+        if(khachHang != null){
+            Form_QuanLyDatPhong ph = new Form_QuanLyDatPhong();
             ph_dao = new PhongHat_DAO();
             this.dispose();
             ph.openDL_DatPhong();
@@ -395,7 +395,7 @@ public class DL_KiemTravsAddKHforDatPhong extends javax.swing.JDialog {
                 noti.showNotification();
             }
 
-//            Form_QuanLyDatPhong ph = new Form_QuanLyDatPhong();
+            Form_QuanLyDatPhong ph = new Form_QuanLyDatPhong();
 //            ph_dao = new PhongHat_DAO();
 //            //            ph_dao.updateTinhTrangPhong(ph.getRoomSelected(), "Dang su dung");
 //            //            hd_dao = new HoaDon_DAO();

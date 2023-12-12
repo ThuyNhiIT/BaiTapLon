@@ -48,6 +48,9 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         init();
+        //set icon cho frame
+        this.setIconImage(new ImageIcon(getClass().getResource("/icon/microphone.png")).getImage());
+        
     }
 
     /**

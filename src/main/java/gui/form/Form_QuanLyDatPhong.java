@@ -354,7 +354,6 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         Icon icon;
         Icon iconPhongThuong = new ImageIcon(getClass().getResource("/icon/microphone.png"));
         Icon iconPhongVip = new ImageIcon(getClass().getResource("/icon/microphonevip.png"));
-
         // lấy ra ds phòng được đặt trước
         ddp_dao = new DonDatPhong_DAO();
         // Get the current date
@@ -364,7 +363,6 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
 // Set thoiGianBatDau to today
         thoiGianBatDau.getDatePicker().setDate(ngayDat);
         ArrayList<DonDatPhong> dsDonDatPhong = ddp_dao.getDonDatPhongTheoNgayNhanPhong(ngayDat);
-
         // so sánh phongList và dsDonDatPhong lấy ra thông tin các phòng có trong dsDonDatPhong
         for (PhongHat phong : phongList) {
             for (DonDatPhong donDatPhong : dsDonDatPhong) {
@@ -444,6 +442,7 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         if(thanhToanNhieuPhong.isVisible() == false){
             refreshRooms();
         }
+
     }
     public void openDL_ThanhToan() {
         DL_TraPhongVsThanhToan thanhToan = new DL_TraPhongVsThanhToan((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
