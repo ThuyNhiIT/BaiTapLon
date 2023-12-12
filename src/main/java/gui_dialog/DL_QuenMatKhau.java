@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
+
 package gui_dialog;
 
 import connectDB.ConnectDB;
@@ -44,9 +41,9 @@ public class DL_QuenMatKhau extends javax.swing.JDialog {
         btnXacNhan = new javax.swing.JButton();
         txtSDT = new javax.swing.JTextField();
         lblMKmoi = new javax.swing.JLabel();
-        txtMKmoi = new javax.swing.JTextField();
         btnHuy = new javax.swing.JButton();
         lblTieuDe = new javax.swing.JLabel();
+        txtMKmoi = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -71,8 +68,6 @@ public class DL_QuenMatKhau extends javax.swing.JDialog {
         lblMKmoi.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lblMKmoi.setText("Mật khẩu mới");
 
-        txtMKmoi.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-
         btnHuy.setBackground(new java.awt.Color(255, 51, 51));
         btnHuy.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnHuy.setForeground(new java.awt.Color(255, 255, 255));
@@ -85,6 +80,8 @@ public class DL_QuenMatKhau extends javax.swing.JDialog {
 
         lblTieuDe.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lblTieuDe.setText("QUÊN MẬT KHẨU");
+
+        txtMKmoi.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout pnlTongLayout = new javax.swing.GroupLayout(pnlTong);
         pnlTong.setLayout(pnlTongLayout);
@@ -121,11 +118,11 @@ public class DL_QuenMatKhau extends javax.swing.JDialog {
                 .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSDT)
                     .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                .addGap(40, 40, 40)
                 .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblMKmoi)
                     .addComponent(txtMKmoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnXacNhan)
                     .addComponent(btnHuy))
@@ -262,7 +259,7 @@ public class DL_QuenMatKhau extends javax.swing.JDialog {
     private javax.swing.JLabel lblSDT;
     private javax.swing.JLabel lblTieuDe;
     private javax.swing.JPanel pnlTong;
-    private javax.swing.JTextField txtMKmoi;
+    private javax.swing.JPasswordField txtMKmoi;
     private javax.swing.JTextField txtSDT;
     // End of variables declaration//GEN-END:variables
 }

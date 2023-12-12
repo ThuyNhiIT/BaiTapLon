@@ -284,10 +284,10 @@ public class DL_ThongTinKhachHang extends javax.swing.JDialog {
                 KhachHang addKH = revertKhachHang();
                 boolean isSuccess = kh_dao.addCustomer(addKH);
                 if(isSuccess){
-                    CustomJOptionPane.showMessageDialog("Thêm khách hàng thành công !");
+                    JOptionPane.showMessageDialog(null, "Thêm khách hàng thành công !");
                 }
                 else{
-                    CustomJOptionPane.showMessageDialog("Thêm khách hàng thất bại !!!");
+                    JOptionPane.showMessageDialog(null, "Thêm khách hàng thất bại !!!");
                 }
             }else{
                 JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin !!!");

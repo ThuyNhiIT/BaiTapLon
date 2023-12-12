@@ -399,11 +399,11 @@ public class DL_ThemNV extends javax.swing.JFrame {
             if(isSuccess){
                 TaiKhoan tk = new TaiKhoan();
                 tk.setUsername(maNV);
-                CustomJOptionPane.showMessageDialog("Thêm nhân viên thành công !");
+                JOptionPane.showMessageDialog(null, "Thêm nhân viên thành công !");
                 this.dispose();
             }
             else{
-                CustomJOptionPane.showMessageDialog("Thêm nhân viên không thành công !");
+                JOptionPane.showMessageDialog(null, "Thêm nhân viên không thành công !");
             }
         } catch (SQLException ex) {
             Logger.getLogger(DL_ThemNV.class.getName()).log(Level.SEVERE, null, ex);
