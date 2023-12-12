@@ -61,10 +61,10 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
                         tblDSKH.setValueAt(sdt, rowIndex, 2);
                         tblDSKH.setValueAt(gioiTinh, rowIndex, 3);
                         if (kh_dao.editCustomer(kh)) {
-//                            System.out.println("Sửa thành công");
+                            System.out.println("Sửa thành công");
                             JOptionPane.showMessageDialog(null, "Sửa thành công");
                         } else {
-//                            System.out.println("Sửa thất bại");
+                            System.out.println("Sửa thất bại");
                             JOptionPane.showMessageDialog(null, "Sửa thất bại");
                         }
                     }
@@ -132,7 +132,6 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
         lblTim = new javax.swing.JLabel();
         txtTim = new javax.swing.JTextField();
         btnTim = new gui.swing.RadiusButton();
-        btnSua = new gui.swing.RadiusButton();
         btnThem = new gui.swing.RadiusButton();
         btnRefesh = new gui.swing.RadiusButton();
         lblTong = new javax.swing.JLabel();
@@ -164,7 +163,7 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
         lblTim.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTim.setText("Tìm kiếm");
 
-        btnTim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-find-24.png"))); // NOI18N
+        btnTim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/magnifying-glass.png"))); // NOI18N
         btnTim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTimActionPerformed(evt);
@@ -182,7 +181,7 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
                 .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(227, Short.MAX_VALUE))
+                .addContainerGap(251, Short.MAX_VALUE))
         );
         pnlTraCuuLayout.setVerticalGroup(
             pnlTraCuuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,15 +196,6 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        btnSua.setBackground(new java.awt.Color(235, 249, 249));
-        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/edit.png"))); // NOI18N
-        btnSua.setText("Sửa");
-        btnSua.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSuaActionPerformed(evt);
-            }
-        });
-
         btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-customer-48.png"))); // NOI18N
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -213,7 +203,7 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
             }
         });
 
-        btnRefesh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-refresh-48.png"))); // NOI18N
+        btnRefesh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/refresh.png"))); // NOI18N
         btnRefesh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRefeshActionPerformed(evt);
@@ -227,29 +217,21 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
             .addGroup(pnlHeaderLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(pnlTraCuu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(80, 80, 80)
-                .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(186, 186, 186)
-                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
+                .addGap(385, 385, 385)
+                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnRefesh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
         );
         pnlHeaderLayout.setVerticalGroup(
             pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlHeaderLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
                 .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlHeaderLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnRefesh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnlHeaderLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pnlTraCuu, javax.swing.GroupLayout.PREFERRED_SIZE, 59, Short.MAX_VALUE)
-                            .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(25, 25, 25))
+                    .addComponent(btnRefesh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlTraCuu, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         lblTong.setText("jLabel2");
@@ -266,7 +248,7 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
         pnlKhachHangLayout.setHorizontalGroup(
             pnlKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlKhachHangLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(71, 71, 71)
                 .addComponent(jLabel1)
                 .addGap(32, 32, 32)
                 .addComponent(lblTong)
@@ -283,18 +265,15 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
             pnlKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlKhachHangLayout.createSequentialGroup()
                 .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
-                .addComponent(scr, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(pnlKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlKhachHangLayout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addGroup(pnlKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(lblTong)))
-                    .addGroup(pnlKhachHangLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(btnExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(scr, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(pnlKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(lblTong)))
+                .addGap(51, 51, 51))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -334,40 +313,6 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
         }
         updateTotalCustomer();
     }//GEN-LAST:event_btnTimActionPerformed
-
-    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        kh_dao = new KhachHang_DAO();
-
-        if (tblDSKH.getSelectedRowCount() > 0) {
-            if (JOptionPane.showConfirmDialog(this, "Xác nhận sửa khách hàng đã chọn?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                int[] selectedRows = tblDSKH.getSelectedRows();
-                for (int i = 0; i < selectedRows.length; i++) {
-                    int rowIndex = selectedRows[i];
-                    String maKH = tblDSKH.getValueAt(rowIndex, 0).toString();
-                    String tenKH = tblDSKH.getValueAt(rowIndex, 1).toString();
-                    String sdt = tblDSKH.getValueAt(rowIndex, 2).toString();
-                    Boolean gioiTinh = Boolean.parseBoolean(tblDSKH.getValueAt(rowIndex, 3).toString());
-
-                    KhachHang kh = new KhachHang(maKH, tenKH, sdt, gioiTinh);
-                    tblDSKH.setValueAt(tenKH, rowIndex, 1);
-                    tblDSKH.setValueAt(sdt, rowIndex, 2);
-                    tblDSKH.setValueAt(gioiTinh, rowIndex, 3);
-                    if (kh_dao.editCustomer(kh)) {
-//                        System.out.println("Sửa thành công");
-                        JOptionPane.showMessageDialog(this, "Sửa thành công");
-                    } else {
-//                        System.out.println("Sửa thất bại");
-                        JOptionPane.showMessageDialog(this, "Sửa thất bại");
-                    }
-                }
-            }
-
-            clearJTable();
-            DocDuLieu();
-        } else {
-            JOptionPane.showMessageDialog(this, "Chọn dòng cần sửa!");
-        }
-    }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         new DL_ThongTinKhachHang().setVisible(true);
@@ -438,7 +383,6 @@ public class Form_QuanLyKhachHang extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.swing.RadiusButton btnExcel;
     private gui.swing.RadiusButton btnRefesh;
-    private gui.swing.RadiusButton btnSua;
     private gui.swing.RadiusButton btnThem;
     private gui.swing.RadiusButton btnTim;
     private javax.swing.JLabel jLabel1;
