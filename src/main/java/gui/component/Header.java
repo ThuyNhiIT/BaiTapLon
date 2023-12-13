@@ -2,10 +2,12 @@ package gui.component;
 
 import entity.NhanVien;
 import gui.form.Form_Login;
+import gui.form.Form_Setting;
 import gui.main.Main;
-import gui_dialog.DL_DoiMatKhau;
+import gui_dialog.DL_DoiMK;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -41,45 +43,49 @@ public class Header extends javax.swing.JPanel {
         setOpaque(false);
         lock();
         setTenNhanVien();
-        
+
         popupMenu = new JPopupMenu();
         JMenuItem item1 = new JMenuItem("Đổi mật khẩu");
         JMenuItem item2 = new JMenuItem("Đăng xuất");
-        
-        item1.addActionListener(new ActionListener(){
+
+        item1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                 new DL_DoiMatKhau().setVisible(true);
+                DL_DoiMK doi = new DL_DoiMK((java.awt.Frame) SwingUtilities.getWindowAncestor((Component) e.getSource()), true);
+                doi.setLocationRelativeTo(Header.this);
+                doi.setVisible(true);
             }
-            
+
         });
-        
-        item2.addActionListener(new ActionListener(){
+
+        item2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int option = JOptionPane.showConfirmDialog(Header.this, "Bạn có chắc chắc muốn đăng xuất ?",
                         "Xác nhận đăng xuất", JOptionPane.YES_NO_OPTION);
-                if(option == JOptionPane.YES_OPTION){
+                if (option == JOptionPane.YES_OPTION) {
                     Form_Login loginForm = new Form_Login();
                     loginForm.setVisible(true);
 
-                SwingUtilities.getWindowAncestor(Header.this).dispose();// đóng cửa sổ hiện tại lại (nếu có)
-                }  
+                    SwingUtilities.getWindowAncestor(Header.this).dispose();// đóng cửa sổ hiện tại lại (nếu có)
+                }
             }
-            
+
         });
-        
+
         popupMenu.add(item1);
         popupMenu.add(item2);
-        
+
         btnChiTietNhanVien.setComponentPopupMenu(popupMenu);
-        
+
     }
-    public void setTenNhanVien(){
+
+    public void setTenNhanVien() {
         NhanVien nhanVienDangNhap = Form_Login.getNhanVienDangNhap();
         String tenNV = nhanVienDangNhap.getTenNV();
         btnChiTietNhanVien.setText(tenNV);
     }
+
     /**
      * sự kiện cho nút menu
      *
@@ -89,8 +95,9 @@ public class Header extends javax.swing.JPanel {
         btnMenu.addActionListener(evt);
 
     }
-    public void lock(){
-          Timer timer = new Timer(1000, new ActionListener() {
+
+    public void lock() {
+        Timer timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
@@ -101,8 +108,6 @@ public class Header extends javax.swing.JPanel {
 
         timer.start();
     }
-
-  
 
     @Override
     protected void paintComponent(Graphics g) {

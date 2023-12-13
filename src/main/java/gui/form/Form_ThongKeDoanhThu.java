@@ -397,10 +397,9 @@ public class Form_ThongKeDoanhThu extends javax.swing.JPanel {
 
     private void BieuDo(ArrayList<String[]> list, String nam) {
         chart.removeAllData();
-        System.out.println("1,2");
 
         chart.clear();
-        System.out.println("1,3");
+
         pnlChart.removeAll();
 
         list = hd_dao.getDoanhThuTungThangNam(nam);

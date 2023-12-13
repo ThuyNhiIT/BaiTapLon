@@ -22,7 +22,6 @@ gui\swing\tabbed\MaterialTabbed.class
 gui\event\EventCheckConnectDB.class
 gui\form\Form_QuanLyPhongHat$4.class
 dao\LoaiPhong_DAO.class
-gui_dialog\DL_ThanhToanNhieuphong$7.class
 gui\swing\notification\Notification$1.class
 gui_dialog\DL_XacNhanTraPhong$2.class
 gui_dialog\DL_ThemNV$3.class
@@ -37,6 +36,7 @@ gui\swing\notification\Notification$1$1.class
 gui_dialog\DL_DatPhongTruoc.class
 gui_dialog\DL_ThongTinKhachHang$6.class
 gui\swing\table\PanelActionKH$1.class
+gui_dialog\DL_DoiMK.class
 gui_dialog\DL_ChonNhieuPhong$1.class
 gui_dialog\DL_ThuePhong$3.class
 gui\form\Form_QuanLyKhachHang$2.class
@@ -55,6 +55,7 @@ gui\swing\table\PanelActionKhuyenMai$2.class
 gui_dialog\DL_ThemNV$8.class
 gui\main\Main$5.class
 entity\KhuyenMai.class
+gui_dialog\DL_DoiMK$4.class
 gui_dialog\DL_ThemDV.class
 entity\KhachHang.class
 entity\HoaDon.class
@@ -62,6 +63,7 @@ gui_dialog\DL_NhanPhongDatTruoc$3.class
 gui_dialog\DL_ThemKhuyenMai$7.class
 gui_dialog\DL_ThongTinDatPhong$3.class
 gui_dialog\DL_DichVu$2.class
+gui_dialog\DL_DoiMK$1.class
 gui\component\PanelKiemTraThongTinvsAddKH$1.class
 gui\form\Form_Login$1.class
 gui_dialog\DL_KiemTravsAddKHforDatPhong$4.class
@@ -73,7 +75,6 @@ entity\LoaiNhanVien.class
 gui\swing\MenuButton$2.class
 gui_dialog\DL_test$1.class
 gui_dialog\DL_ThemMatHang$1.class
-gui_dialog\DL_DoiMatKhau$4.class
 gui\swing\TableActionCellRender.class
 connectDB\ConnectDB.class
 gui\swing\notification\GraphicsUtilities.class
@@ -82,7 +83,6 @@ gui_dialog\DL_SuaKhachHang.class
 gui\swing\ActionButton.class
 gui_dialog\DL_ThemPhongHat$3.class
 gui_dialog\DL_test$4.class
-gui_dialog\DL_DoiMatKhau$1.class
 gui_dialog\DL_TraPhongvsThanhToanNhieuPhong$4$1.class
 dao\LoaiNV_DAO.class
 gui\swing\tabbed\MaterialTabbed$MaterialTabbedUI$1.class
@@ -113,6 +113,7 @@ gui_dialog\DL_ThemKhuyenMai$5.class
 gui\form\Form_QuanLyKhachHang$5.class
 gui_dialog\DL_ThanhToanNhieuphong$2.class
 gui\component\Room.class
+gui_dialog\DL_DoiMK$4$1.class
 gui\swing\table\PanelActionKhuyenMai.class
 gui\swing\RoundedButtonUI_v1.class
 gui_dialog\DL_SuaPhong$1.class
@@ -321,6 +322,7 @@ com\raven\chart\Chart.class
 gui\swing\MenuItem.class
 com\raven\chart\blankchart\BlankPlotChart.class
 gui\Application$1$2.class
+gui_dialog\DL_DoiMK$2.class
 gui_dialog\DL_NhanPhongDatTruoc.class
 dao\DonDatPhong_DAO.class
 gui_dialog\DL_test$3.class
@@ -328,11 +330,9 @@ com\raven\chart\LabelColor.class
 gui_dialog\DL_ThanhToanNhieuphong$1.class
 gui\main\Main$1.class
 gui\swing\table\TableActionCellEditorPhongHat.class
-gui_dialog\DL_DoiMatKhau.class
 gui_dialog\DL_DatPhong.class
 gui\component\Menu$1.class
 gui_dialog\DL_ThemPhongHat$4.class
-gui_dialog\DL_DoiMatKhau$3.class
 gui_dialog\DL_test$2.class
 gui_dialog\DL_DichVu$1.class
 javaswingdev\chart\PieChart.class
@@ -345,11 +345,9 @@ gui\form\Form_QuanLyDatPhong$10.class
 gui\main\Main$3.class
 gui\form\Form_ThongKeMatHang$2.class
 gui_dialog\DL_PhongDangSuDung$6.class
-gui_dialog\DL_DoiMatKhau$2.class
 gui\form\Form_QuanLyNhanVien.class
 dao\NhanVien_DAO.class
 gui_dialog\DL_ChonNhieuPhong$4$1.class
-gui_dialog\DL_ThanhToanNhieuphong$7$1.class
 gui\component\Header$3.class
 gui_dialog\DL_ThemPhongHat$2.class
 gui_dialog\DL_ChonDichVu.class
@@ -357,6 +355,7 @@ dao\ChiTietHoaDonPhong_Dao.class
 gui_dialog\DL_ThemPhongHat$7$1.class
 gui_dialog\DL_ThongTinKhachHang$4.class
 gui\form\Form_MatHang$2.class
+gui_dialog\DL_DoiMK$3.class
 gui_dialog\DL_ChonNhieuPhong$3.class
 gui_dialog\DL_NhanPhongDatTruoc$4$1.class
 gui\swing\table\TableActionEventMatHang.class

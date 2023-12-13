@@ -3,7 +3,7 @@ package gui.form;
 import gui.component.Header;
 import gui.main.Main;
 import gui_dialog.DL_DangXuat;
-import gui_dialog.DL_DoiMatKhau;
+import gui_dialog.DL_DoiMK;
 import java.awt.Component;
 import java.awt.Desktop;
 import java.net.URL;
@@ -96,7 +96,9 @@ public class Form_Setting extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DoiMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DoiMKActionPerformed
-        new DL_DoiMatKhau().setVisible(true);
+         DL_DoiMK doi = new DL_DoiMK((java.awt.Frame) SwingUtilities.getWindowAncestor((Component) evt.getSource()), true);
+        doi.setLocationRelativeTo(Form_Setting.this);
+        doi.setVisible(true);
     }//GEN-LAST:event_DoiMKActionPerformed
 
 

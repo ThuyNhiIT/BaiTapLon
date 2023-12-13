@@ -493,8 +493,7 @@ public class Form_ThongKeMatHang extends javax.swing.JPanel {
         int numDataPoints = Math.min(5, data.size());
         for (int i = 0; i < numDataPoints; i++) {
             String[] item = data.get(i);
-            System.out.println(i);
-
+           
             if (item.length > 5) {
                 System.out.println("Không tạo");
                 pnlChart.removeAll();
