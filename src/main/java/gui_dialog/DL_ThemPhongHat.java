@@ -264,7 +264,7 @@ public class DL_ThemPhongHat extends javax.swing.JDialog {
         String maPH = phatSinhMaPH();
         String tenPH = txtTenPhong.getText();
         String LP = radVIP.isSelected() ? "LP001" : "LP002";
-        String tinhTrang = radVIP.isSelected() ? "Trong" : "Dang bao tri";
+        String tinhTrang = radTrong.isSelected() ? "Trong" : "Dang bao tri";
         if (!(tenPH.length() > 0 && tenPH.matches("^[VT]{1}[0-9]{3}$"))) {
             JOptionPane.showMessageDialog(null, "Tên phòng theo dạng Txxx hoặc Vxxx với x là số");
             return false;
@@ -288,7 +288,7 @@ public class DL_ThemPhongHat extends javax.swing.JDialog {
             String maPH = phatSinhMaPH();
             String tenPH = txtTenPhong.getText();
             String LP = radVIP.isSelected() ? "LP001" : "LP002";
-            String tinhTrang = radVIP.isSelected() ? "Trong" : "Dang bao tri";
+            String tinhTrang = radTrong.isSelected() ? "Trong" : "Dang bao tri";
             if (validData()) {
                 PhongHat addPH = new PhongHat(maPH, tenPH, new LoaiPhong(LP), tinhTrang);
                 ph_dao.addPhongHat(addPH);
