@@ -67,7 +67,7 @@ public class KhuyenMai {
         this.phanTram = phanTram;
     }
 
-  
+
     @Override
     public int hashCode() {
         int hash = 7;

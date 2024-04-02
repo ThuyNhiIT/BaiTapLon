@@ -2,23 +2,11 @@ package dao;
 
 import connectDB.ConnectDB;
 import entity.KhachHang;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 
-import java.util.ArrayList;
-
-import java.util.ArrayList;
-
-import connectDB.ConnectDB;
-
+import java.sql.*;
 import java.util.ArrayList;
 
 /**
- *
  * @author 84934 NguyenThiQuynhGiang
  */
 public class KhachHang_DAO {
@@ -260,6 +248,7 @@ public class KhachHang_DAO {
         }
         return kh;
     }
+
     public static final String TABLE_NAME = "KhachHang";
     public static final String COLUMN_SO_LUONG = "SoLuong";
     public static final String COLUMN_SO_LUONG_KHACH_HANG = "SoLuongKhachHang";
@@ -279,7 +268,6 @@ public class KhachHang_DAO {
         }
         return 0;
     }
-
 
 
 }

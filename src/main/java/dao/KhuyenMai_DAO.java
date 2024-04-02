@@ -2,13 +2,9 @@ package dao;
 
 import connectDB.ConnectDB;
 import entity.KhuyenMai;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
+import java.sql.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +17,6 @@ public class KhuyenMai_DAO {
     }
 
     /**
-     *
      * @return ALL DS Khuyến mãi
      */
     public ArrayList<KhuyenMai> getAllKhuyenMai() {
@@ -51,7 +46,6 @@ public class KhuyenMai_DAO {
     }
 
     /**
-     *
      * @param km
      * @return Thêm khuyến mãi
      */

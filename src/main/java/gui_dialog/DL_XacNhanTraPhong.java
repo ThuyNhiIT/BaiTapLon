@@ -12,7 +12,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
-
 /**
  * @author HO MINH HAU
  */
@@ -110,13 +109,12 @@ public class DL_XacNhanTraPhong extends javax.swing.JDialog {
     }//GEN-LAST:event_btnNoActionPerformed
 
 
-
     private void btnYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYesActionPerformed
 //check connect
         ConnectDB db = ConnectDB.getInstance();
         try {
             db.connect();
-            if(db!=null){
+            if (db != null) {
 //                System.out.println("Connect success");
                 DL_PhongDangSuDung dl = new DL_PhongDangSuDung((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
                 String maHDDSD = dl.getMaHDPDSD();
@@ -136,10 +134,9 @@ public class DL_XacNhanTraPhong extends javax.swing.JDialog {
      * @param args the command line arguments
      */
 
-        //</editor-fold>
+    //</editor-fold>
 
-        /* Create and display the dialog */
-
+    /* Create and display the dialog */
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

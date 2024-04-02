@@ -3,13 +3,13 @@ package gui;
 import connectDB.ConnectDB;
 import gui.form.Form_Login;
 import gui.form.ProcessesLoading;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import javax.swing.*;
 
 /**
- *
  * @author HO MINH HAU
  */
 public class Application {

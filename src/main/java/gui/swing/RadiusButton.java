@@ -14,16 +14,16 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
+
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
 /**
- *
  * @author 84934 NguyenThiQuynhGiang
  */
-public class RadiusButton extends JButton{
-     public Color getEffectColor() {
+public class RadiusButton extends JButton {
+    public Color getEffectColor() {
         return effectColor;
     }
 

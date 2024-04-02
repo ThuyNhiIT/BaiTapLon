@@ -37,7 +37,7 @@ class GraphicsUtilities {
     }
 
     public static BufferedImage createCompatibleImage(BufferedImage image,
-            int width, int height) {
+                                                      int width, int height) {
         return getGraphicsConfiguration().createCompatibleImage(width, height,
                 image.getTransparency());
     }
@@ -47,7 +47,7 @@ class GraphicsUtilities {
     }
 
     public static BufferedImage createCompatibleTranslucentImage(int width,
-            int height) {
+                                                                 int height) {
         return getGraphicsConfiguration().createCompatibleImage(width, height,
                 Transparency.TRANSLUCENT);
     }
@@ -66,8 +66,8 @@ class GraphicsUtilities {
 
         BufferedImage compatibleImage
                 = getGraphicsConfiguration().createCompatibleImage(
-                        image.getWidth(), image.getHeight(),
-                        image.getTransparency());
+                image.getWidth(), image.getHeight(),
+                image.getTransparency());
         Graphics g = compatibleImage.getGraphics();
         g.drawImage(image, 0, 0, null);
         g.dispose();
@@ -76,7 +76,7 @@ class GraphicsUtilities {
     }
 
     public static BufferedImage createThumbnailFast(BufferedImage image,
-            int newSize) {
+                                                    int newSize) {
         float ratio;
         int width = image.getWidth();
         int height = image.getHeight();
@@ -118,7 +118,7 @@ class GraphicsUtilities {
     }
 
     public static BufferedImage createThumbnailFast(BufferedImage image,
-            int newWidth, int newHeight) {
+                                                    int newWidth, int newHeight) {
         if (newWidth >= image.getWidth()
                 || newHeight >= image.getHeight()) {
             throw new IllegalArgumentException("newWidth and newHeight cannot"
@@ -140,7 +140,7 @@ class GraphicsUtilities {
     }
 
     public static BufferedImage createThumbnail(BufferedImage image,
-            int newSize) {
+                                                int newSize) {
         int width = image.getWidth();
         int height = image.getHeight();
 
@@ -195,7 +195,7 @@ class GraphicsUtilities {
     }
 
     public static BufferedImage createThumbnail(BufferedImage image,
-            int newWidth, int newHeight) {
+                                                int newWidth, int newHeight) {
         int width = image.getWidth();
         int height = image.getHeight();
 
@@ -239,7 +239,7 @@ class GraphicsUtilities {
     }
 
     public static int[] getPixels(BufferedImage img,
-            int x, int y, int w, int h, int[] pixels) {
+                                  int x, int y, int w, int h, int[] pixels) {
         if (w == 0 || h == 0) {
             return new int[0];
         }
@@ -262,7 +262,7 @@ class GraphicsUtilities {
     }
 
     public static void setPixels(BufferedImage img,
-            int x, int y, int w, int h, int[] pixels) {
+                                 int x, int y, int w, int h, int[] pixels) {
         if (pixels == null || w == 0 || h == 0) {
             return;
         } else if (pixels.length < w * h) {

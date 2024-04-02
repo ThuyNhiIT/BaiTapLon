@@ -34,7 +34,7 @@ public class panelPopUpMoreDatPhong extends javax.swing.JPanel {
         popupMenu = new JPopupMenu();
         // Create and add a menu item
         // list item
-         menuItem = new JMenuItem("Đặt Phòng Trước");
+        menuItem = new JMenuItem("Đặt Phòng Trước");
 
 
         menuItem1 = new JMenuItem("Thuê nhiều phòng");
@@ -46,9 +46,10 @@ public class panelPopUpMoreDatPhong extends javax.swing.JPanel {
         popupMenu.add(menuItem1);
         popupMenu.add(menuItem2);
     }
+
     // event click
     public void addEvent(EventPopUpMoreDatPhong event) {
-      menuItem.addActionListener(e -> {
+        menuItem.addActionListener(e -> {
             event.datPhongTruoc();
         });
         menuItem1.addActionListener(e -> {
@@ -58,6 +59,7 @@ public class panelPopUpMoreDatPhong extends javax.swing.JPanel {
             event.thanhToanNhieuPhong();
         });
     }
+
     // Display the popup menu
     public void showPopupMenu(Component component, int x, int y) {
         if (popupMenu != null) {

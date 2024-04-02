@@ -88,7 +88,7 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
             }
         });
     }
-   // thêm sự kiên tự refreshRoom sau mỗi 2s
+    // thêm sự kiên tự refreshRoom sau mỗi 2s
 
     public static void setRoomSelected(String roomID) {
         selectedRoom = roomID;
@@ -386,23 +386,25 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         DL_ChonDichVu chonDV = new DL_ChonDichVu((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
         chonDV.setLocationRelativeTo(Form_QuanLyDatPhong.this);
         chonDV.setVisible(true);
-        if(chonDV.isVisible() == false){
+        if (chonDV.isVisible() == false) {
             refreshRooms();
         }
     }
+
     public void openDL_ThemDV() {
         DL_ThemDV themDV = new DL_ThemDV((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
         themDV.setLocationRelativeTo(Form_QuanLyDatPhong.this);
         themDV.setVisible(true);
-        if(themDV.isVisible() == false){
+        if (themDV.isVisible() == false) {
             refreshRooms();
         }
     }
+
     public void openDL_CheckKH() {
         DL_KiemTravsAddKHforDatPhong checkKH = new DL_KiemTravsAddKHforDatPhong((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
         checkKH.setLocationRelativeTo(Form_QuanLyDatPhong.this);
         checkKH.setVisible(true);
-        if(checkKH.isVisible() == false){
+        if (checkKH.isVisible() == false) {
             refreshRooms();
         }
     }
@@ -411,7 +413,7 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         DL_DatPhongTruoc datPhong = new DL_DatPhongTruoc((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
         datPhong.setLocationRelativeTo(Form_QuanLyDatPhong.this);
         datPhong.setVisible(true);
-        if(datPhong.isVisible() == false){
+        if (datPhong.isVisible() == false) {
             refreshRooms();
         }
     }
@@ -420,7 +422,7 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         DL_CheckKHforDatNhieuPhong checkKH = new DL_CheckKHforDatNhieuPhong((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
         checkKH.setLocationRelativeTo(Form_QuanLyDatPhong.this);
         checkKH.setVisible(true);
-        if(checkKH.isVisible() == false){
+        if (checkKH.isVisible() == false) {
             refreshRooms();
         }
 
@@ -430,7 +432,7 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         DL_ChonNhieuPhong datNhieuPhong = new DL_ChonNhieuPhong((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
         datNhieuPhong.setLocationRelativeTo(Form_QuanLyDatPhong.this);
         datNhieuPhong.setVisible(true);
-        if(datNhieuPhong.isVisible() == false){
+        if (datNhieuPhong.isVisible() == false) {
             refreshRooms();
         }
     }
@@ -439,25 +441,27 @@ public final class Form_QuanLyDatPhong extends javax.swing.JPanel {
         DL_ThanhToanNhieuphong thanhToanNhieuPhong = new DL_ThanhToanNhieuphong((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
         thanhToanNhieuPhong.setLocationRelativeTo(Form_QuanLyDatPhong.this);
         thanhToanNhieuPhong.setVisible(true);
-        if(thanhToanNhieuPhong.isVisible() == false){
+        if (thanhToanNhieuPhong.isVisible() == false) {
             refreshRooms();
         }
 
     }
+
     public void openDL_ThanhToan() {
         DL_TraPhongVsThanhToan thanhToan = new DL_TraPhongVsThanhToan((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
         thanhToan.setLocationRelativeTo(Form_QuanLyDatPhong.this);
         thanhToan.setVisible(true);
-        if(thanhToan.isVisible() == false){
+        if (thanhToan.isVisible() == false) {
 //            pnlPhongDangSuDung.removeAll();
             refreshRooms();
         }
     }
-    public void openDL_ThanhToanNhieu(){
+
+    public void openDL_ThanhToanNhieu() {
         DL_TraPhongvsThanhToanNhieuPhong thanhToanNhieuPhong = new DL_TraPhongvsThanhToanNhieuPhong((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
         thanhToanNhieuPhong.setLocationRelativeTo(Form_QuanLyDatPhong.this);
         thanhToanNhieuPhong.setVisible(true);
-        if(thanhToanNhieuPhong.isVisible() == false){
+        if (thanhToanNhieuPhong.isVisible() == false) {
             refreshRooms();
         }
     }

@@ -76,8 +76,9 @@ public class KhachHang {
 
         this.gioiTinh = true;
     }
-    public Object[] getObject(){
-        return new Object[] {maKH, tenKH, sdt, gioiTinh};
+
+    public Object[] getObject() {
+        return new Object[]{maKH, tenKH, sdt, gioiTinh};
     }
 
     @Override

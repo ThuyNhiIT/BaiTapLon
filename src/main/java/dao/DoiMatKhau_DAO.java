@@ -1,6 +1,7 @@
 package dao;
 
 import connectDB.ConnectDB;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -9,11 +10,10 @@ import java.sql.SQLException;
 import java.util.Base64;
 
 /**
- *
  * @author 84934
  */
 public class DoiMatKhau_DAO {
-     public boolean doiMatKhau(String maNV, String matKhauMoi) {
+    public boolean doiMatKhau(String maNV, String matKhauMoi) {
         try {
             Connection con = ConnectDB.getConnection();
             String sql = "UPDATE TaiKhoan SET Password = ? WHERE maNV = ?";
@@ -35,8 +35,8 @@ public class DoiMatKhau_DAO {
         }
         return false;
     }
-     
-      private String hashPassword(String plainPassword) {
+
+    private String hashPassword(String plainPassword) {
         try {
             // Sử dụng thuật toán SHA-256
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
@@ -50,6 +50,6 @@ public class DoiMatKhau_DAO {
             e.printStackTrace();
             return null;
         }
-      }
+    }
 }
 

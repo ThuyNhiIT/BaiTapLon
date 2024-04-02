@@ -1,13 +1,14 @@
 package dao;
 
-import com.toedter.calendar.JDateChooser;
 import connectDB.ConnectDB;
-import entity.*;
+import entity.HoaDon;
+import entity.KhachHang;
+import entity.KhuyenMai;
+import entity.NhanVien;
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author HO MINH HAU
@@ -33,7 +34,7 @@ public class HoaDon_DAO {
 
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
-               String maHD = rs.getString(1);
+                String maHD = rs.getString(1);
                 java.sql.Date ngayLapHD_sql = rs.getDate(2);
                 LocalDate ngayLapHD = ngayLapHD_sql.toLocalDate();
                 String maKH = rs.getString(3);
@@ -106,7 +107,7 @@ public class HoaDon_DAO {
     }
 
     // update tongtien cua hoa don bằng maHD
-    public boolean updateTongTien(String maHD, Double tongTien,String maKM) {
+    public boolean updateTongTien(String maHD, Double tongTien, String maKM) {
 
         Connection con = ConnectDB.getInstance().getConnection();
         PreparedStatement stmt = null;
@@ -157,7 +158,7 @@ public class HoaDon_DAO {
             statement.setString(1, maKH);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-              String maHD = rs.getString(1);
+                String maHD = rs.getString(1);
                 java.sql.Date ngayLapHD_sql = rs.getDate(2);
                 LocalDate ngayLapHD = ngayLapHD_sql.toLocalDate();
                 String maKH1 = rs.getString(3);
@@ -166,7 +167,7 @@ public class HoaDon_DAO {
                 double tongTien = rs.getDouble(6);
                 HoaDon hd = new HoaDon(maHD, ngayLapHD, new KhachHang(maKH1), new NhanVien(maNV), new KhuyenMai(maKM), tongTien);
                 dsHD.add(hd);
-                
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -362,7 +363,6 @@ public class HoaDon_DAO {
     }
 
     /**
-     *
      * @param thang
      * @param nam
      * @return Xuất danh sách hóa đơn, Doanh thu của tháng trên từng hóa đơn
@@ -377,7 +377,7 @@ public class HoaDon_DAO {
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-               String maHD = rs.getString(1);
+                String maHD = rs.getString(1);
                 java.sql.Date ngayLapHD_sql = rs.getDate(2);
                 LocalDate ngayLapHD = ngayLapHD_sql.toLocalDate();
                 String maKH = rs.getString(3);
@@ -435,6 +435,7 @@ public class HoaDon_DAO {
         }
         return 0;
     }
+
     public static final String COLUMN_SO_LUONG_HOA_DON_NAM = "SoLuongHoaDonNam";
 
     public int getSoLuongHoaDonNam(String nam) {
@@ -452,6 +453,7 @@ public class HoaDon_DAO {
         }
         return 0;
     }
+
     public static final String COLUMN_TONG_TIEN_HOA_DON_NAM = "TongTienHoaDonNam";
 
     public int getTongTienNam(String nam) {

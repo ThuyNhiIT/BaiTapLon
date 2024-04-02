@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import javax.swing.JPasswordField;
 
 
-public class CustomJPasswordField extends JPasswordField{
+public class CustomJPasswordField extends JPasswordField {
     @Override
     protected void paintBorder(Graphics g) {
         // Draw a green border line with a thickness of 2 pixels

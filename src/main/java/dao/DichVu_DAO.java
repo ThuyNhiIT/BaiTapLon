@@ -2,15 +2,11 @@ package dao;
 
 import connectDB.ConnectDB;
 import entity.DichVu;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
+import java.sql.*;
 import java.util.ArrayList;
 
 /**
- *
  * @author 84343
  */
 public class DichVu_DAO {
@@ -40,7 +36,7 @@ public class DichVu_DAO {
 //                String tenMH = rs.getString(4);
 //                Double gia = rs.getDouble(4);
                 DichVu dv = new DichVu(maDV, tenDV, maMH);
-                
+
                 dsDV.add(dv);
             }
         } catch (Exception e) {
@@ -81,7 +77,7 @@ public class DichVu_DAO {
         return dsDV;
     }
 
-// Thêm dịch vụ
+    // Thêm dịch vụ
     public boolean addDichVu(DichVu dv) {
         ConnectDB db = ConnectDB.getInstance();
         Connection con = db.getConnection();
@@ -93,7 +89,7 @@ public class DichVu_DAO {
             stmt.setString(2, dv.getTenDV());
             stmt.setString(1, dv.getMaDV());
 //            stmt.setString(3, dv.getMaMH());
-            
+
             n = stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -122,7 +118,7 @@ public class DichVu_DAO {
         return n > 0;
     }
 
-//    Tìm dịch vụ 
+    //    Tìm dịch vụ
     public DichVu findDichVu(String maTim) {
         DichVu dv = null;
         Connection con = ConnectDB.getInstance().getConnection();

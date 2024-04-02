@@ -4,7 +4,6 @@ package gui.model;
 import javax.swing.Icon;
 
 /**
- *
  * @author HO MINH HAU
  */
 public class ModelRoom {
@@ -41,8 +40,10 @@ public class ModelRoom {
     public void setIcon(Icon icon) {
         this.icon = icon;
     }
-     public ModelRoom() {
+
+    public ModelRoom() {
     }
+
     public String getMaddp() {
         return maddp;
     }
@@ -58,7 +59,6 @@ public class ModelRoom {
     public void setMakh(String makh) {
         this.makh = makh;
     }
-
 
 
     String roomId;

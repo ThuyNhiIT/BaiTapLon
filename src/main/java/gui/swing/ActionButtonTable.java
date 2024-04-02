@@ -5,9 +5,8 @@
 package gui.swing;
 
 /**
- *
  * @author 84343
  */
 public class ActionButtonTable {
-    
+
 }

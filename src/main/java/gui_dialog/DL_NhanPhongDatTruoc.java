@@ -36,7 +36,6 @@ public class DL_NhanPhongDatTruoc extends javax.swing.JDialog {
         setInfo();
 
 
-
     }
 
     public static void setMaHDPublic(String mahd) {
@@ -329,7 +328,7 @@ public class DL_NhanPhongDatTruoc extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Chỉ được nhận phòng trong ngày");
         }
         // check giờ nhận phòng phải sau giờ hiện tại hoặc sau tối da 1h so với giờ hiện tại
-        else if (LocalDateTime.now().isBefore(dsDDP.get(0).getNgayNhan()) ||  LocalDateTime.now().getHour() - dsDDP.get(0).getNgayNhan().getHour() <= 1 ) {
+        else if (LocalDateTime.now().isBefore(dsDDP.get(0).getNgayNhan()) || LocalDateTime.now().getHour() - dsDDP.get(0).getNgayNhan().getHour() <= 1) {
             ph_dao = new PhongHat_DAO();
             if (ph_dao.getPhongHatByMaPhong(maPhong).getTinhTrangPhong().equals("Trong")) {
                 // nếu phòng trống thì thêm hóa đơn và chi tiết hóa đơn phòng

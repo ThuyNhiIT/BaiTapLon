@@ -2,6 +2,7 @@
 package gui_dialog;
 
 import connectDB.ConnectDB;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -13,7 +14,6 @@ import java.util.Base64;
 import javax.swing.JOptionPane;
 
 /**
- *
  * @author ADMIN
  */
 public class DL_QuenMatKhau extends javax.swing.JDialog {
@@ -87,58 +87,58 @@ public class DL_QuenMatKhau extends javax.swing.JDialog {
         javax.swing.GroupLayout pnlTongLayout = new javax.swing.GroupLayout(pnlTong);
         pnlTong.setLayout(pnlTongLayout);
         pnlTongLayout.setHorizontalGroup(
-            pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTongLayout.createSequentialGroup()
-                .addGap(85, 85, 85)
-                .addComponent(btnXacNhan)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
-                .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(89, 89, 89))
-            .addGroup(pnlTongLayout.createSequentialGroup()
-                .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlTongLayout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSDT)
-                            .addComponent(lblMKmoi))
-                        .addGap(27, 27, 27)
-                        .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtSDT, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
-                            .addComponent(txtMKmoi)))
-                    .addGroup(pnlTongLayout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addComponent(lblTieuDe)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlTongLayout.createSequentialGroup()
+                                .addGap(85, 85, 85)
+                                .addComponent(btnXacNhan)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                                .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(89, 89, 89))
+                        .addGroup(pnlTongLayout.createSequentialGroup()
+                                .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(pnlTongLayout.createSequentialGroup()
+                                                .addGap(45, 45, 45)
+                                                .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(lblSDT)
+                                                        .addComponent(lblMKmoi))
+                                                .addGap(27, 27, 27)
+                                                .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(txtSDT, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                                                        .addComponent(txtMKmoi)))
+                                        .addGroup(pnlTongLayout.createSequentialGroup()
+                                                .addGap(140, 140, 140)
+                                                .addComponent(lblTieuDe)))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlTongLayout.setVerticalGroup(
-            pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTongLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(lblTieuDe)
-                .addGap(32, 32, 32)
-                .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSDT)
-                    .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
-                .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMKmoi)
-                    .addComponent(txtMKmoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnXacNhan)
-                    .addComponent(btnHuy))
-                .addGap(44, 44, 44))
+                pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlTongLayout.createSequentialGroup()
+                                .addGap(36, 36, 36)
+                                .addComponent(lblTieuDe)
+                                .addGap(32, 32, 32)
+                                .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(lblSDT)
+                                        .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(40, 40, 40)
+                                .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(lblMKmoi)
+                                        .addComponent(txtMKmoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                                .addGroup(pnlTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btnXacNhan)
+                                        .addComponent(btnHuy))
+                                .addGap(44, 44, 44))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlTong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(pnlTong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlTong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(pnlTong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -153,14 +153,14 @@ public class DL_QuenMatKhau extends javax.swing.JDialog {
         // TODO add your handling code here:
         String soDienThoai = txtSDT.getText();
         String matKhauMoi = hashPassword(txtMKmoi.getText());
-        
-        if(SDT_tonTaiNV(soDienThoai)){
+
+        if (SDT_tonTaiNV(soDienThoai)) {
             updatePasswordTaiKhoan(soDienThoai, matKhauMoi);
             System.out.println("Mật khẩu được cập nhật thành công");
             JOptionPane.showMessageDialog(null, "Mật khẩu được cập nhật thành công !!!");
             this.dispose();
-                    
-        }else{
+
+        } else {
             System.out.println("SDT không tồn tại trong CSDL");
             JOptionPane.showMessageDialog(null, "Số điện thoại không tồn tại !!! Vui lòng kiểm tra lại");
         }
@@ -173,7 +173,7 @@ public class DL_QuenMatKhau extends javax.swing.JDialog {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -209,8 +209,8 @@ public class DL_QuenMatKhau extends javax.swing.JDialog {
     }
 
     //Kiem tra sdt co trong bang nhan vien khong
-    private boolean SDT_tonTaiNV(String soDienThoai){
-        try{
+    private boolean SDT_tonTaiNV(String soDienThoai) {
+        try {
             Connection con = ConnectDB.getConnection();
             String sql = "SELECT *FROM NhanVien WHERE SDT=?";
             System.out.println("Xong");
@@ -218,32 +218,32 @@ public class DL_QuenMatKhau extends javax.swing.JDialog {
             pst.setString(1, soDienThoai);
             ResultSet rs = pst.executeQuery();
             return rs.next();// true nếu sd ton tai bang nhan vien
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
     }
-    
+
     //Update pass taikhoan
-    private void updatePasswordTaiKhoan(String soDienThoai, String matKhauMoi){
-        try{
+    private void updatePasswordTaiKhoan(String soDienThoai, String matKhauMoi) {
+        try {
             Connection conn = ConnectDB.getConnection();
             String sql = "UPDATE TaiKhoan SET Password=? WHERE maNV IN(SELECT maNV FROM NhanVien WHERE SDT=?)";
             System.out.println("Xong 2");
             PreparedStatement pst = conn.prepareStatement(sql);
-            
+
             pst.setString(1, matKhauMoi);
             pst.setString(2, soDienThoai);
             pst.executeUpdate();
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    
-     
+
+
     private String hashPassword(String plainPassword) {
         try {
-            
+
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
             byte[] hashedBytes = messageDigest.digest(plainPassword.getBytes());
             return Base64.getEncoder().encodeToString(hashedBytes);
@@ -252,7 +252,7 @@ public class DL_QuenMatKhau extends javax.swing.JDialog {
             return null;
         }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHuy;
     private javax.swing.JButton btnXacNhan;

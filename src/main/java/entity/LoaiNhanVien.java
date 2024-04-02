@@ -11,8 +11,8 @@ public class LoaiNhanVien {
         super();
         // TODO Auto-generated constructor stub
     }
-    
-    public LoaiNhanVien(String maLoai){
+
+    public LoaiNhanVien(String maLoai) {
         this.maLoai = maLoai;
     }
 
@@ -65,8 +65,6 @@ public class LoaiNhanVien {
     public String toString() {
         return maLoai;
     }
-    
-    
 
-    
+
 }

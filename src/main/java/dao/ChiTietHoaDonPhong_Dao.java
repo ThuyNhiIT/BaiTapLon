@@ -14,13 +14,13 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
- *
  * @author HO MINH HAU
  */
 public class ChiTietHoaDonPhong_Dao {
-    public ChiTietHoaDonPhong_Dao(){
+    public ChiTietHoaDonPhong_Dao() {
 
     }
+
     public ArrayList<ChiTietHoaDonPhong> getalltbChiTietHoaDonPhong() {
         ArrayList<ChiTietHoaDonPhong> dsCTHDP = new ArrayList<>();
         try {
@@ -46,7 +46,7 @@ public class ChiTietHoaDonPhong_Dao {
         return dsCTHDP;
     }
 
-public ChiTietHoaDonPhong getChiTietHoaDonPhongTheoMaHD(String id, String maPhong) {
+    public ChiTietHoaDonPhong getChiTietHoaDonPhongTheoMaHD(String id, String maPhong) {
         ChiTietHoaDonPhong cthdp = null;
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
@@ -72,6 +72,7 @@ public ChiTietHoaDonPhong getChiTietHoaDonPhongTheoMaHD(String id, String maPhon
         }
         return cthdp;
     }
+
     public boolean createChiTietHoaDonPhong(ChiTietHoaDonPhong cthdp) {
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
@@ -93,6 +94,7 @@ public ChiTietHoaDonPhong getChiTietHoaDonPhongTheoMaHD(String id, String maPhon
 
         return n > 0;
     }
+
     public ChiTietHoaDonPhong finHDByRoomID(String roomID) {
         ChiTietHoaDonPhong cthdp = null;
 
@@ -110,7 +112,7 @@ public ChiTietHoaDonPhong getChiTietHoaDonPhongTheoMaHD(String id, String maPhon
                 LocalDateTime gioRa = rs.getTimestamp("gioRa").toLocalDateTime();
                 String ghiChu = rs.getString("ghiChu");
 
-                cthdp = new ChiTietHoaDonPhong(new HoaDon(maHD), new PhongHat(maPhong), gia, gioVao, gioRa,ghiChu);
+                cthdp = new ChiTietHoaDonPhong(new HoaDon(maHD), new PhongHat(maPhong), gia, gioVao, gioRa, ghiChu);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -118,6 +120,7 @@ public ChiTietHoaDonPhong getChiTietHoaDonPhongTheoMaHD(String id, String maPhon
 
         return cthdp;
     }
+
     public ChiTietHoaDonPhong finHDByRoomIDDaTT(String roomID) {
         ChiTietHoaDonPhong cthdp = null;
 
@@ -147,7 +150,6 @@ public ChiTietHoaDonPhong getChiTietHoaDonPhongTheoMaHD(String id, String maPhon
     }
 
 
-
     public boolean updateGioRaVsGia(String maHD, LocalDateTime gioRa, Float gia, String maPhong) {
         int n = 0;
 
@@ -171,19 +173,19 @@ public ChiTietHoaDonPhong getChiTietHoaDonPhongTheoMaHD(String id, String maPhon
 
 
     //update room
-    public Boolean doiPhong(String maHD, String maPhongHienTai,String maPhongMoi, String ghiChu){
+    public Boolean doiPhong(String maHD, String maPhongHienTai, String maPhongMoi, String ghiChu) {
 
         Connection con = ConnectDB.getInstance().getConnection();
         PreparedStatement stmt = null;
         int n = 0;
-        try{
+        try {
             stmt = con.prepareStatement("UPDATE ChiTietHoaDonPhong SET maPhong = ?, ghiChu = ? WHERE maHD = ? AND maPhong = ?");
             stmt.setString(1, maPhongMoi);
             stmt.setString(2, ghiChu);
             stmt.setString(3, maHD);
             stmt.setString(4, maPhongHienTai);
             n = stmt.executeUpdate();
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return n > 0;
@@ -226,11 +228,8 @@ public ChiTietHoaDonPhong getChiTietHoaDonPhongTheoMaHD(String id, String maPhon
 
         return dsCTHDP;
     }
-    
+
     // updateGioRaVsGiaforNhieu
-
-
-
 
 
 }

@@ -1,6 +1,6 @@
 package com.raven.chart;
 
-import java.awt.Color;
+import java.awt.*;
 
 public class ModelLegend {
 

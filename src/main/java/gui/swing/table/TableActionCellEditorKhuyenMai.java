@@ -6,7 +6,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JTable;
 
 /**
- *
  * @author 84343
  */
 public class TableActionCellEditorKhuyenMai extends DefaultCellEditor {

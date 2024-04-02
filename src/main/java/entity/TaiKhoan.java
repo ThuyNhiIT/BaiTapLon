@@ -15,7 +15,7 @@ public class TaiKhoan {
     public TaiKhoan(NhanVien username) {
         this.username = username;
     }
-    
+
     public TaiKhoan(NhanVien username, String passWord) {
         super();
         this.username = username;
@@ -75,7 +75,7 @@ public class TaiKhoan {
     }
 
     public void setUsername(String maNV) {
-       
+
     }
 
 }

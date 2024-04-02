@@ -2,10 +2,13 @@ package gui.swing;
 
 import gui.event.EventMenu;
 import gui.model.ModelMenu;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import net.miginfocom.swing.MigLayout;
 import gui.event.EventMenuSelected;
+
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -13,7 +16,8 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
 /**
- *Lớp MenuItem đại diện cho một mục menu trong ứng dụng.
+ * Lớp MenuItem đại diện cho một mục menu trong ứng dụng.
+ *
  * @author HO MINH HAU
  */
 public class MenuItem extends javax.swing.JPanel {
@@ -47,7 +51,8 @@ public class MenuItem extends javax.swing.JPanel {
     public void setMenu(ModelMenu menu) {
         this.menu = menu;
     }
-     public ModelMenu getMenu() {
+
+    public ModelMenu getMenu() {
         return menu;
     }
 
@@ -109,12 +114,12 @@ public class MenuItem extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -3,15 +3,11 @@ package dao;
 import connectDB.ConnectDB;
 import entity.LoaiPhong;
 import entity.PhongHat;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
+import java.sql.*;
 import java.util.ArrayList;
 
 /**
- *
  * @author HO MINH HAU
  */
 public class PhongHat_DAO {

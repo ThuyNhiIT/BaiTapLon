@@ -1,17 +1,16 @@
 package dao;
 
 import connectDB.ConnectDB;
-import entity.NhanVien;
-import entity.TaiKhoan;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
-import java.sql.*;
-import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Base64;
 
 /**
- *
  * @author HO MINH HAU
  */
 public class TaiKhoan_DAO {
@@ -121,7 +120,7 @@ public class TaiKhoan_DAO {
 
     }
 
-//    public void nhoMK(String maNV, StringBuilder passwordRef) {
+    //    public void nhoMK(String maNV, StringBuilder passwordRef) {
 //        Connection con = ConnectDB.getConnection();
 //        try {
 //            PreparedStatement statement = con.prepareStatement("SELECT Password FROM TaiKhoan WHERE maNV = ?");
