@@ -1,7 +1,6 @@
 package gui.swing;
 
 /**
- *
  * @author RAVEN
  */
 public interface TableActionEvent {

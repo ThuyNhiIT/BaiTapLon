@@ -51,29 +51,29 @@ public class ChiTietHoaDonDichVu_DAO {
         return n > 0;
     }
 
-    public ChiTietHoaDonDV getChiTietHoaDonDVTheoMaHD(String id,String maPhong) {
+    public ChiTietHoaDonDV getChiTietHoaDonDVTheoMaHD(String id, String maPhong) {
 
         ChiTietHoaDonDV cthddv = null;
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
         PreparedStatement statement = null;
 
-        try{
+        try {
             String sql = "Select * from ChiTietHoaDonDV where maHD = ? AND maPhong = ?";
             statement = con.prepareStatement(sql);
             statement.setString(1, id);
             statement.setString(2, maPhong);
             ResultSet rs = statement.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 String maHD = rs.getString(1);
                 String maMH = rs.getString(2);
                 String maPhong1 = rs.getString(3);
                 int soLuong = rs.getInt(4);
                 double gia = rs.getDouble(5);
-                cthddv = new ChiTietHoaDonDV(new HoaDon(maHD), new MatHang(maMH),new PhongHat(maPhong1), soLuong, gia);
+                cthddv = new ChiTietHoaDonDV(new HoaDon(maHD), new MatHang(maMH), new PhongHat(maPhong1), soLuong, gia);
 
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return cthddv;
@@ -94,7 +94,7 @@ public class ChiTietHoaDonDichVu_DAO {
                 String maPhong = rs.getString(3);
                 int soLuong = rs.getInt(4);
                 double gia = rs.getDouble(5);
-                ChiTietHoaDonDV cthddv = new ChiTietHoaDonDV(new HoaDon(maHD), new MatHang(maMH),new PhongHat(maPhong), soLuong, gia);
+                ChiTietHoaDonDV cthddv = new ChiTietHoaDonDV(new HoaDon(maHD), new MatHang(maMH), new PhongHat(maPhong), soLuong, gia);
                 dsCTHDDV.add(cthddv);
             }
         } catch (SQLException e) {
@@ -119,7 +119,7 @@ public class ChiTietHoaDonDichVu_DAO {
                 String maPhong = rs.getString(3);
                 int soLuong = rs.getInt(4);
                 double gia = rs.getDouble(5);
-                ChiTietHoaDonDV cthddv = new ChiTietHoaDonDV(new HoaDon(maHD), new MatHang(maMH1),new PhongHat(maPhong), soLuong, gia);
+                ChiTietHoaDonDV cthddv = new ChiTietHoaDonDV(new HoaDon(maHD), new MatHang(maMH1), new PhongHat(maPhong), soLuong, gia);
                 dsCTHDDV.add(cthddv);
             }
         } catch (SQLException e) {
@@ -129,13 +129,13 @@ public class ChiTietHoaDonDichVu_DAO {
     }
 
     // update sl và giá theo maHD
-    public boolean updateChiTietHoaDonDV(ChiTietHoaDonDV cthddv){
+    public boolean updateChiTietHoaDonDV(ChiTietHoaDonDV cthddv) {
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
         PreparedStatement stmt = null;
         int n = 0;
 
-        try{
+        try {
             stmt = con.prepareStatement("UPDATE ChiTietHoaDonDV SET soLuong = ?, gia = ? WHERE maHD = ? AND maMH = ?");
             stmt.setInt(1, cthddv.getSoLuong());
             stmt.setDouble(2, cthddv.getGia());
@@ -143,7 +143,7 @@ public class ChiTietHoaDonDichVu_DAO {
             stmt.setString(4, cthddv.getMatHang().getMaMH());
 
             n = stmt.executeUpdate();
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
 
         }
@@ -152,78 +152,80 @@ public class ChiTietHoaDonDichVu_DAO {
     }
 
     //deleteChiTietHoaDonDV
-    public boolean deleteChiTietHoaDonDV(String maHD, String maMH){
+    public boolean deleteChiTietHoaDonDV(String maHD, String maMH) {
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
         PreparedStatement stmt = null;
         int n = 0;
 
-        try{
+        try {
             stmt = con.prepareStatement("DELETE FROM ChiTietHoaDonDV WHERE maHD = ? AND maMH = ?");
             stmt.setString(1, maHD);
             stmt.setString(2, maMH);
             n = stmt.executeUpdate();
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return n > 0;
     }
 
 
-// find findChiTietHoaDonDV by maHD vs maMH
-    public ChiTietHoaDonDV findChiTietHoaDonDV(String maHD, String maMH){
+    // find findChiTietHoaDonDV by maHD vs maMH
+    public ChiTietHoaDonDV findChiTietHoaDonDV(String maHD, String maMH) {
         ChiTietHoaDonDV cthddv = null;
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
         PreparedStatement statement = null;
 
-        try{
+        try {
             String sql = "Select * from ChiTietHoaDonDV where maHD = ? AND maMH = ?";
             statement = con.prepareStatement(sql);
             statement.setString(1, maHD);
             statement.setString(2, maMH);
             ResultSet rs = statement.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 String maHD1 = rs.getString(1);
                 String maMH1 = rs.getString(2);
                 String maPhong = rs.getString(3);
                 int soLuong = rs.getInt(4);
                 double gia = rs.getDouble(5);
-                cthddv = new ChiTietHoaDonDV(new HoaDon(maHD1), new MatHang(maMH1),new PhongHat(maPhong), soLuong, gia);
+                cthddv = new ChiTietHoaDonDV(new HoaDon(maHD1), new MatHang(maMH1), new PhongHat(maPhong), soLuong, gia);
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return cthddv;
     }
-    public ChiTietHoaDonDV findChiTietHoaDonDVforThem(String maHD, String maMH,String maPhong){
+
+    public ChiTietHoaDonDV findChiTietHoaDonDVforThem(String maHD, String maMH, String maPhong) {
         ChiTietHoaDonDV cthddv = null;
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
         PreparedStatement statement = null;
 
-        try{
+        try {
             String sql = "Select * from ChiTietHoaDonDV where maHD = ? AND maMH = ? AND maPhong = ?";
             statement = con.prepareStatement(sql);
             statement.setString(1, maHD);
             statement.setString(2, maMH);
             statement.setString(3, maPhong);
             ResultSet rs = statement.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 String maHD1 = rs.getString(1);
                 String maMH1 = rs.getString(2);
                 String maPhong1 = rs.getString(3);
                 int soLuong = rs.getInt(4);
                 double gia = rs.getDouble(5);
-                cthddv = new ChiTietHoaDonDV(new HoaDon(maHD1), new MatHang(maMH1),new PhongHat(maPhong), soLuong, gia);
+                cthddv = new ChiTietHoaDonDV(new HoaDon(maHD1), new MatHang(maMH1), new PhongHat(maPhong), soLuong, gia);
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return cthddv;
     }
+
     // lấy ra ds cthddv theo maHD
-    public ArrayList<ChiTietHoaDonDV> getAllTheMaHDDVforRoomArray(String maHD,String maPhong) {
+    public ArrayList<ChiTietHoaDonDV> getAllTheMaHDDVforRoomArray(String maHD, String maPhong) {
         ArrayList<ChiTietHoaDonDV> dsCTHDDV = new ArrayList<>();
 
         try {
@@ -243,7 +245,7 @@ public class ChiTietHoaDonDichVu_DAO {
                 int soLuong = rs.getInt(4);
                 double gia = rs.getDouble(5);
 
-                ChiTietHoaDonDV cthddv = new ChiTietHoaDonDV(new HoaDon(maHD1), new MatHang(maMH),new PhongHat(maPhong), soLuong, gia);
+                ChiTietHoaDonDV cthddv = new ChiTietHoaDonDV(new HoaDon(maHD1), new MatHang(maMH), new PhongHat(maPhong), soLuong, gia);
                 dsCTHDDV.add(cthddv);
             }
         } catch (SQLException e) {
@@ -253,7 +255,6 @@ public class ChiTietHoaDonDichVu_DAO {
     }
 
     /**
-     *
      * @param nam
      * @return Top 5 sản phẩm dịch vụ bán chạy nhất năm
      */
@@ -291,7 +292,6 @@ public class ChiTietHoaDonDichVu_DAO {
     }
 
     /**
-     *
      * @param nam
      * @return Tổng tiền dịch vụ (top 5) bán chạy trong năm
      */
@@ -325,7 +325,6 @@ public class ChiTietHoaDonDichVu_DAO {
     }
 
     /**
-     *
      * @param thang
      * @param nam
      * @return Top 5 sản phẩm dịch vụ bán chạy nhất tháng
@@ -369,7 +368,6 @@ public class ChiTietHoaDonDichVu_DAO {
     public static final String COLUMN_TONG_TIEN_DV_THANG = "TongTatCaTienThang";
 
     /**
-     *
      * @param thang
      * @param nam
      * @return Tổng tiền dịch vụ (top 5) bán chạy trong tháng
@@ -433,6 +431,7 @@ public class ChiTietHoaDonDichVu_DAO {
         }
         return list;
     }
+
     public static final String COLUMN_TONG_TIEN_DV_NGAY = "TongTatCaTienNgay";
 
     public int getTongTienNgay(Date ngay) {
@@ -550,21 +549,22 @@ public class ChiTietHoaDonDichVu_DAO {
         }
         return list;
     }
-public boolean doiPhong(String maHD, String phongHT,String phongMoi){
+
+    public boolean doiPhong(String maHD, String phongHT, String phongMoi) {
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
         PreparedStatement stmt = null;
         int n = 0;
-        try{
+        try {
             stmt = con.prepareStatement("UPDATE ChiTietHoaDonDV SET maPhong = ? WHERE maHD = ? AND maPhong = ?");
             stmt.setString(1, phongMoi);
             stmt.setString(2, maHD);
             stmt.setString(3, phongHT);
             n = stmt.executeUpdate();
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return n > 0;
-}
+    }
 
 }

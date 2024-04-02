@@ -1,25 +1,27 @@
 package gui.swing;
 
 import gui.event.EventMenuSelected;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
+
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
 /**
- *
  * @author HO MINH HAU
  */
 public class PopupMenu extends javax.swing.JDialog {
-    
+
 
     private Animator animator;
     private boolean show = true;
+
     /**
      * Khởi tạo một PopupMenu mới.
      *
@@ -33,7 +35,7 @@ public class PopupMenu extends javax.swing.JDialog {
         initComponents();
         setOpacity(0f);
         setBackground(new Color(0, 0, 0, 0));
-        
+
         panel.setLayout(new MigLayout("fill, wrap", "8[fill, 120]0", "0[30, fill]0[30, fill]0"));
 
 
@@ -101,6 +103,7 @@ public class PopupMenu extends javax.swing.JDialog {
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
             }
+
             public void windowLostFocus(java.awt.event.WindowEvent evt) {
                 formWindowLostFocus(evt);
             }
@@ -109,23 +112,23 @@ public class PopupMenu extends javax.swing.JDialog {
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
-            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 152, Short.MAX_VALUE)
+                panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 152, Short.MAX_VALUE)
         );
         panelLayout.setVerticalGroup(
-            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+                panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -135,7 +138,6 @@ public class PopupMenu extends javax.swing.JDialog {
         closeMenu();
     }//GEN-LAST:event_formWindowLostFocus
 
-  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private gui.swing.PanelPopUp panel;

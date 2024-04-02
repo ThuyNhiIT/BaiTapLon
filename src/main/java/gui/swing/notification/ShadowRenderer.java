@@ -86,7 +86,7 @@ class ShadowRenderer {
         for (int srcY = 0, dstOffset = left * dstWidth; srcY < srcHeight; srcY++) {
 
             // first pixels are empty
-            for (historyIdx = 0; historyIdx < shadowSize;) {
+            for (historyIdx = 0; historyIdx < shadowSize; ) {
                 aHistory[historyIdx++] = 0;
             }
 
@@ -134,7 +134,7 @@ class ShadowRenderer {
             aSum = 0;
 
             // first pixels are empty
-            for (historyIdx = 0; historyIdx < left;) {
+            for (historyIdx = 0; historyIdx < left; ) {
                 aHistory[historyIdx++] = 0;
             }
 

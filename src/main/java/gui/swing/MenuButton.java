@@ -13,6 +13,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
+
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
@@ -59,8 +60,9 @@ public class MenuButton extends JButton {
         setIcon(icon);
         init();
         setBorder(new EmptyBorder(1, 20, 1, 1));
-         setFont(new Font("SansSerif", Font.PLAIN, 14));
+        setFont(new Font("SansSerif", Font.PLAIN, 14));
     }
+
     /**
      * Khởi tạo một MenuButton với văn bản (text).
      *
@@ -77,6 +79,7 @@ public class MenuButton extends JButton {
         super(text);
         init();
     }
+
     private void init() {
         setContentAreaFilled(false);
         setForeground(new Color(255, 255, 255));

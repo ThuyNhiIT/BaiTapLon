@@ -4,6 +4,7 @@ import gui.event.EventMenu;
 import gui.model.ModelMenu;
 import gui.swing.MenuAnimation;
 import gui.swing.MenuItem;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GradientPaint;
@@ -11,9 +12,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import javax.swing.ImageIcon;
+
 import net.miginfocom.swing.MigLayout;
 import gui.event.EventMenuSelected;
 import gui.event.EventShowPopUpMenu;
+
 import java.awt.event.ActionListener;
 
 /**
@@ -67,6 +70,7 @@ public class Menu extends javax.swing.JPanel {
     public void addEventShowPopUpMenu(EventShowPopUpMenu eventShowPopUpMenu) {
         this.eventShowPopUpMenu = eventShowPopUpMenu;
     }
+
     // Các biến và sự kiện quan trọng
     private EventMenuSelected event; // Sự kiện xảy ra khi một mục menu được chọn.
     private boolean enbleMenu = true; // Cờ cho phép hiển thị menu.
@@ -110,7 +114,7 @@ public class Menu extends javax.swing.JPanel {
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/service.png")), "Quản Lí Khách Hàng"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/dairy-products.png")), "Quản Lí Mặt Hàng", "     Mặt Hàng", "     Dịch Vụ"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/bill.png")), "Quản Lí Hóa Đơn"));
-         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/bar-chart.png")), "Thống Kê"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/bar-chart.png")), "Thống Kê"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/setting.png")), "Cài Đặt"));
     }
 
@@ -119,7 +123,6 @@ public class Menu extends javax.swing.JPanel {
      * pnlSetting .
      *
      * @param menu ModelMenu đại diện cho mục menu.
-     *
      */
     private void addMenu(ModelMenu menu) {
         if (menu.getMenuName().equals("Cài Đặt")) {
@@ -184,12 +187,12 @@ public class Menu extends javax.swing.JPanel {
         javax.swing.GroupLayout MenuLayout = new javax.swing.GroupLayout(Menu);
         Menu.setLayout(MenuLayout);
         MenuLayout.setHorizontalGroup(
-            MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+                MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 100, Short.MAX_VALUE)
         );
         MenuLayout.setVerticalGroup(
-            MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+                MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 100, Short.MAX_VALUE)
         );
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -202,12 +205,12 @@ public class Menu extends javax.swing.JPanel {
         javax.swing.GroupLayout pnlItemLayout = new javax.swing.GroupLayout(pnlItem);
         pnlItem.setLayout(pnlItemLayout);
         pnlItemLayout.setHorizontalGroup(
-            pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+                pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE)
         );
         pnlItemLayout.setVerticalGroup(
-            pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 519, Short.MAX_VALUE)
+                pnlItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 519, Short.MAX_VALUE)
         );
 
         pnlSetting.setBackground(new java.awt.Color(255, 255, 255));
@@ -217,12 +220,12 @@ public class Menu extends javax.swing.JPanel {
         javax.swing.GroupLayout pnlSettingLayout = new javax.swing.GroupLayout(pnlSetting);
         pnlSetting.setLayout(pnlSettingLayout);
         pnlSettingLayout.setHorizontalGroup(
-            pnlSettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+                pnlSettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE)
         );
         pnlSettingLayout.setVerticalGroup(
-            pnlSettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+                pnlSettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 100, Short.MAX_VALUE)
         );
 
         lblTitle.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
@@ -232,22 +235,22 @@ public class Menu extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlItem, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
-            .addComponent(pnlSetting, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(pnlItem, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                        .addComponent(pnlSetting, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(61, 61, 61)
+                                .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlItem, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnlSetting, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(pnlItem, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(pnlSetting, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

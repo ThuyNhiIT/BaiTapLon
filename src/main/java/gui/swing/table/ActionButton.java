@@ -11,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
 
 /**
- *
  * @author RAVEN
  */
 public class ActionButton extends JButton {

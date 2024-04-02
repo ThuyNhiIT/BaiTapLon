@@ -8,7 +8,6 @@ import java.awt.RenderingHints;
 import javax.swing.JPanel;
 
 /**
- *
  * @author HO MINH HAU
  */
 public class PanelPopUp extends JPanel {
@@ -23,7 +22,7 @@ public class PanelPopUp extends JPanel {
         Graphics2D g2 = (Graphics2D) grphcs;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-       GradientPaint gp = new GradientPaint(
+        GradientPaint gp = new GradientPaint(
                 0, 0, Color.GRAY, // Màu bắt đầu
                 getWidth(), 0, Color.decode("#00AFB9") // Màu kết thúc
         );

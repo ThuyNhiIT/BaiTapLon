@@ -18,7 +18,7 @@ public class DonDatPhong {
     }
 
     public DonDatPhong(String maDonDatPhong, LocalDateTime ngayDat, LocalDateTime ngayNhan, PhongHat phongHat,
-            KhachHang khachHang) {
+                       KhachHang khachHang) {
         super();
         this.maDonDatPhong = maDonDatPhong;
         this.ngayDat = ngayDat;

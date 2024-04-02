@@ -12,6 +12,7 @@ public class ModelPhongDatTruoc {
                 + ", maDonDatPhong='" + maDonDatPhong + '\''
                 + '}';
     }
+
     private String maPhong;
     private String maKH;
     private String ngayDat;

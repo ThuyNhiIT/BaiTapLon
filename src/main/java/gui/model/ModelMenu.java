@@ -3,7 +3,6 @@ package gui.model;
 import javax.swing.Icon;
 
 /**
- *
  * @author HO MINH HAU
  */
 public class ModelMenu {
@@ -37,10 +36,11 @@ public class ModelMenu {
         this.menuName = menuName;
         this.subMenu = subMenu;
     }
-    
-    public ModelMenu(){
-        
+
+    public ModelMenu() {
+
     }
+
     private Icon icon;
     private String menuName;
     private String subMenu[];

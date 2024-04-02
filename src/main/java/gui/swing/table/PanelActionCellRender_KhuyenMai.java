@@ -6,7 +6,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
 /**
- *
  * @author 84343
  */
 public class PanelActionCellRender_KhuyenMai extends DefaultTableCellRenderer {

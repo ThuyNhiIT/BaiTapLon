@@ -1,20 +1,14 @@
 package dao;
 
 import connectDB.ConnectDB;
-import static connectDB.ConnectDB.con;
 import entity.LoaiNhanVien;
 import entity.NhanVien;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import javax.swing.*;
+import java.sql.*;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 /**
- *
  * @author HO MINH HAU
  */
 public class NhanVien_DAO {
@@ -120,7 +114,7 @@ public class NhanVien_DAO {
         }
         return ds;
     }
-    
+
 //     public ArrayList<NhanVien> getEmployeesByLoaiNhanVien(LoaiNhanVien loaiNhanVien) {
 //        ArrayList<NhanVien> employees = new ArrayList<>();
 //
@@ -163,7 +157,7 @@ public class NhanVien_DAO {
         try {
 //            stmt = con.prepareStatement("INSERT INTO NhanVien VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
             stmt = con.prepareStatement("INSERT INTO nhanvien (maNV, tenNV, gioiTinh, CCCD, SDT, diaChi, caLam, loaiNV) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 //            System.out.println("Xong lần 1");
             stmt.setString(1, nv.getMaNV());
             stmt.setString(2, nv.getTenNV());
@@ -175,9 +169,8 @@ public class NhanVien_DAO {
             stmt.setString(8, nv.getLoaiNV().getMaLoai());
 //            System.out.println("Xong lần 2");
             n = stmt.executeUpdate();
-            
-            if(tk_dao.taoTK(nv.getMaNV())== false)
-            {
+
+            if (tk_dao.taoTK(nv.getMaNV()) == false) {
                 JOptionPane.showInputDialog(null, "Tạo Tài khoant thất bại!");
             }
         } catch (SQLException e) {
@@ -191,7 +184,7 @@ public class NhanVien_DAO {
         }
         return n > 0;
     }
-    
+
     public boolean editStaff(NhanVien nv) {
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
@@ -208,7 +201,7 @@ public class NhanVien_DAO {
             stmt.setString(6, nv.getCaLam());
             stmt.setString(7, nv.getLoaiNV().getMaLoai());
             stmt.setString(8, nv.getMaNV());
-             n = stmt.executeUpdate();
+            n = stmt.executeUpdate();
 //            System.out.println("Xongggg");
         } catch (SQLException e) {
             e.printStackTrace();

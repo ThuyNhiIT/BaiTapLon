@@ -8,10 +8,9 @@ import java.awt.RenderingHints;
 import javax.swing.JPanel;
 
 /**
- *
  * @author 84934
  */
-public class CustomPanel extends JPanel{
+public class CustomPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;

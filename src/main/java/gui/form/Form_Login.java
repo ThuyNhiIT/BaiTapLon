@@ -6,6 +6,7 @@ import dao.TaiKhoan_DAO;
 import entity.NhanVien;
 import gui.main.Main;
 import gui_dialog.DL_QuenMatKhau;
+
 import java.awt.Component;
 
 import java.awt.event.ActionEvent;
@@ -26,7 +27,7 @@ import javax.swing.*;
 /**
  * @author 84934 NguyenThiQuynhGiang
  */
-public class Form_Login extends javax.swing.JFrame{
+public class Form_Login extends javax.swing.JFrame {
 
     private NhanVien_DAO nv_dao;
     private TaiKhoan_DAO tk_dao;
@@ -49,16 +50,16 @@ public class Form_Login extends javax.swing.JFrame{
         this.setIconImage(new ImageIcon(getClass().getResource("/icon/microphone.png")).getImage());
         txtTenDangNhap.setText("NV003");
         txtPassword.setText("1");
-        
-        
-        txtPassword.addKeyListener(new KeyAdapter(){
-            public void keyPressed(KeyEvent e){
-                if(e.getKeyCode() ==  KeyEvent.VK_ENTER){
+
+
+        txtPassword.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     btnDangNhapActionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Enter"));
                 }
             }
         });
-        
+
 
 //        btnThoat.addActionListener(this);
 //        btnQuenMatKhau.addActionListener(this);
@@ -258,7 +259,7 @@ public class Form_Login extends javax.swing.JFrame{
 
     private void btnQuenMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuenMatKhauActionPerformed
         // TODO add your handling code here:
-        DL_QuenMatKhau qMK = new DL_QuenMatKhau((java.awt.Frame)SwingUtilities.getWindowAncestor(this), true);
+        DL_QuenMatKhau qMK = new DL_QuenMatKhau((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
         qMK.setLocationRelativeTo(qMK);
         qMK.setVisible(true);
     }//GEN-LAST:event_btnQuenMatKhauActionPerformed
@@ -356,7 +357,7 @@ public class Form_Login extends javax.swing.JFrame{
         });
     }
 
-//    public void nhoMK(String maNV, StringBuilder passwordRef) {
+    //    public void nhoMK(String maNV, StringBuilder passwordRef) {
 //        Connection con = ConnectDB.getConnection();
 //        try {
 //            PreparedStatement statement = con.prepareStatement("SELECT Password FROM TaiKhoan WHERE maNV = ?");
@@ -388,7 +389,5 @@ public class Form_Login extends javax.swing.JFrame{
     private gui.swing.CustomJTextField txtTenDangNhap;
     // End of variables declaration//GEN-END:variables
 
-  
-   
 
 }

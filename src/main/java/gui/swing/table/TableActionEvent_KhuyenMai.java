@@ -5,7 +5,6 @@
 package gui.swing.table;
 
 /**
- *
  * @author 84343
  */
 public interface TableActionEvent_KhuyenMai {

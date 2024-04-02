@@ -8,10 +8,9 @@ import java.awt.Graphics;
 import javax.swing.JTextField;
 
 /**
- *
  * @author 84934 NguyenThiQuynhGiang
  */
-public class CustomJTextField extends JTextField{
+public class CustomJTextField extends JTextField {
     @Override
     protected void paintBorder(Graphics g) {
         // Draw a green border line with a thickness of 2 pixels

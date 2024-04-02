@@ -146,7 +146,7 @@ public class DonDatPhong_DAO {
     }
 
     // delete
-    public boolean deleteDonDatPhong(String maDDP ,String maPhong) {
+    public boolean deleteDonDatPhong(String maDDP, String maPhong) {
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
         PreparedStatement stmt = null;

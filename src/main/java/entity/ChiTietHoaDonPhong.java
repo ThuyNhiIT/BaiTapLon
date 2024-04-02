@@ -22,7 +22,7 @@ public class ChiTietHoaDonPhong {
     }
 
     public ChiTietHoaDonPhong(HoaDon hoaDon, PhongHat phongHat, Double gia, LocalDateTime gioVao, LocalDateTime gioRa,
-            String ghiChu) {
+                              String ghiChu) {
         super();
         this.hoaDon = hoaDon;
         this.phongHat = phongHat;
@@ -31,9 +31,11 @@ public class ChiTietHoaDonPhong {
         this.gioRa = gioRa;
         this.ghiChu = ghiChu;
     }
+
     public ChiTietHoaDonPhong(HoaDon hoaDon, PhongHat phongHat, Double gia, LocalDateTime gioVao, String ghiChu) {
         this(hoaDon, phongHat, gia, gioVao, null, ghiChu);
     }
+
     public HoaDon getHoaDon() {
         return hoaDon;
     }

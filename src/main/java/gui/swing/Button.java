@@ -13,6 +13,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
+
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
@@ -79,7 +80,7 @@ public class Button extends JButton {
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, alpha));
             g2.fillOval((int) (pressedPoint.x - animatSize / 2), (int) (pressedPoint.y - animatSize / 2), (int) animatSize, (int) animatSize);
         }
-        
+
         g2.dispose();
         grphcs.drawImage(img, 0, 0, null);
         super.paintComponent(grphcs);

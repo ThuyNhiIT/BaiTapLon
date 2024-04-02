@@ -1,6 +1,7 @@
 package gui.swing;
 
 import java.awt.Component;
+
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
@@ -24,6 +25,7 @@ public class MenuAnimation {
         this.menuItem = (MenuItem) component;
         initAnimaotor(component, duration);
     }
+
     /**
      * Khởi tạo một MenuAnimation với MigLayout và một thành phần (component).
      * Mặc định thời gian hiệu ứng là 200 milliseconds.
@@ -51,7 +53,7 @@ public class MenuAnimation {
                     h = 40 + ((height - 40) * (1f - fraction));
                     menuItem.setAlpha(1f - fraction);
                 }
-             layout.setComponentConstraints(menuItem, "h " + h + "!");
+                layout.setComponentConstraints(menuItem, "h " + h + "!");
 
                 component.revalidate();
                 component.repaint();
@@ -80,6 +82,7 @@ public class MenuAnimation {
         animator.start();
 
     }
+
     private final MigLayout layout;
     private final MenuItem menuItem;
     private Animator animator;

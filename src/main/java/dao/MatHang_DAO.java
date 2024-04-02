@@ -2,16 +2,12 @@ package dao;
 
 import connectDB.ConnectDB;
 import entity.MatHang;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 
 /**
- *
  * @author 84343
  */
 public class MatHang_DAO {
@@ -85,7 +81,7 @@ public class MatHang_DAO {
         return dsmh;
     }
 
-// Thêm mặt hàng
+    // Thêm mặt hàng
     public boolean addMatHang(MatHang mh) {
         ConnectDB db = ConnectDB.getInstance();
         Connection con = db.getConnection();
@@ -127,7 +123,7 @@ public class MatHang_DAO {
         return n > 0;
     }
 
-//    Tìm mặt hàng 
+    //    Tìm mặt hàng
     public MatHang findMatHang(String maTim) {
         MatHang mh = null;
         Connection con = ConnectDB.getInstance().getConnection();
@@ -189,7 +185,6 @@ public class MatHang_DAO {
     }
 
     /**
-     *
      * @param nam
      * @return Danh sách mặt hàng theo năm
      */
@@ -223,10 +218,10 @@ public class MatHang_DAO {
         }
         return list;
     }
+
     public static final String COLUMN_TONG_TIEN_MH_NAM = "TongTatCaTien";
 
     /**
-     *
      * @param nam
      * @return Tổng tiền mặt hàng theo năm
      */
@@ -257,7 +252,6 @@ public class MatHang_DAO {
     }
 
     /**
-     *
      * @param thang
      * @param nam
      * @return Danh sách mặt hàng theo tháng
@@ -296,7 +290,6 @@ public class MatHang_DAO {
     public static final String COLUMN_TONG_TIEN_MH_THANG = "TongTatCaTienThang";
 
     /**
-     *
      * @param thang
      * @param nam
      * @return Tổng tiền mặt hàng theo tháng
@@ -327,7 +320,7 @@ public class MatHang_DAO {
         }
         return 0;
     }
-    
+
     public ArrayList<String[]> getMHNgay(Date ngay) {
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
@@ -357,9 +350,10 @@ public class MatHang_DAO {
         }
         return list;
     }
-    
-       public static final String COLUMN_TONG_TIEN_MH_NGAY = "TongTatCaTienNgay";
-       public int getTongTienNgay(Date ngay) {
+
+    public static final String COLUMN_TONG_TIEN_MH_NGAY = "TongTatCaTienNgay";
+
+    public int getTongTienNgay(Date ngay) {
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
         try {

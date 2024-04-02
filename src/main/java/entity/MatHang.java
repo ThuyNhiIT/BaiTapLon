@@ -7,7 +7,6 @@ package entity;
 import java.util.Objects;
 
 /**
- *
  * @author 84343
  */
 public class MatHang {

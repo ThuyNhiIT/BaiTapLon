@@ -31,7 +31,7 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
     private ChiTietHoaDonDichVu_DAO cthddv_dao;
     private int selectedRowIndex = -1;
     private PanelAction panelAction;
-       private ChiTietHoaDonPhong_Dao cthdp_dao;
+    private ChiTietHoaDonPhong_Dao cthdp_dao;
     private int currentSL;
     private double gia;
     private String maHD;
@@ -40,7 +40,7 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
     public DL_ChonDichVu(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-         jScrollPane1.getViewport().setOpaque(false);
+        jScrollPane1.getViewport().setOpaque(false);
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
         jScrollPane2.getViewport().setOpaque(false);
         jScrollPane2.setVerticalScrollBar(new ScrollBarCustom());
@@ -59,40 +59,40 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
                 }
             }
         });
-        
-         TableActionEvent event = new TableActionEvent() {
-             @Override
-             public void tangSoLuong(int row) {
-                 currentSL = (int) dtmDVThem.getValueAt(row, 2);
-                 // lấy giá từ dao
-                 mh_dao = new MatHang_DAO();
-                 MatHang mh = mh_dao.findMatHang((String) dtmDVThem.getValueAt(row, 0));
-                 gia = mh.getGia();
-                 dtmDVThem.setValueAt(currentSL + 1, row, 2);
 
-                 // Tính lại tổng tiền dựa trên số lượng mới
-                 double newTotalPrice = (currentSL + 1) * gia;
-                 dtmDVThem.setValueAt(newTotalPrice, row, 3);
-             }
+        TableActionEvent event = new TableActionEvent() {
+            @Override
+            public void tangSoLuong(int row) {
+                currentSL = (int) dtmDVThem.getValueAt(row, 2);
+                // lấy giá từ dao
+                mh_dao = new MatHang_DAO();
+                MatHang mh = mh_dao.findMatHang((String) dtmDVThem.getValueAt(row, 0));
+                gia = mh.getGia();
+                dtmDVThem.setValueAt(currentSL + 1, row, 2);
 
-             @Override
-             public void giamSoLuong(int row) {
-                 currentSL = (int) dtmDVThem.getValueAt(row, 2);
-                 mh_dao = new MatHang_DAO();
-                 MatHang mh = mh_dao.findMatHang((String) dtmDVThem.getValueAt(row, 0));
-                 gia = mh.getGia();
+                // Tính lại tổng tiền dựa trên số lượng mới
+                double newTotalPrice = (currentSL + 1) * gia;
+                dtmDVThem.setValueAt(newTotalPrice, row, 3);
+            }
 
-                 if (currentSL > 1) {
-                     dtmDVThem.setValueAt(currentSL - 1, row, 2);
+            @Override
+            public void giamSoLuong(int row) {
+                currentSL = (int) dtmDVThem.getValueAt(row, 2);
+                mh_dao = new MatHang_DAO();
+                MatHang mh = mh_dao.findMatHang((String) dtmDVThem.getValueAt(row, 0));
+                gia = mh.getGia();
 
-                     // Tính lại tổng tiền dựa trên số lượng mới
-                     double newTotalPrice = (currentSL - 1) * gia;
-                     dtmDVThem.setValueAt(newTotalPrice, row, 3);
-                 } else { // currentSL == 1
-                     dtmDVThem.removeRow(row);
-                 }
-             }
-         };
+                if (currentSL > 1) {
+                    dtmDVThem.setValueAt(currentSL - 1, row, 2);
+
+                    // Tính lại tổng tiền dựa trên số lượng mới
+                    double newTotalPrice = (currentSL - 1) * gia;
+                    dtmDVThem.setValueAt(newTotalPrice, row, 3);
+                } else { // currentSL == 1
+                    dtmDVThem.removeRow(row);
+                }
+            }
+        };
 
         tblDVThem.getColumnModel().getColumn(4).setCellRenderer(new TableActionCellRender());
         tblDVThem.getColumnModel().getColumn(4).setCellEditor(new TableActionCellEditor(event));
@@ -105,28 +105,28 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
         return mh_dao.findMatHang(maMH);
     }
 
-  private void addToDVThemTable(MatHang selectedMatHang) {
-    String selectedCode = selectedMatHang.getMaMH();
-    int rowIndex = findRowIndexByCode(selectedCode);
+    private void addToDVThemTable(MatHang selectedMatHang) {
+        String selectedCode = selectedMatHang.getMaMH();
+        int rowIndex = findRowIndexByCode(selectedCode);
 
-    if (rowIndex != -1) {
-        // Row already exists, update quantity and total price
-         currentSL = (int) dtmDVThem.getValueAt(rowIndex, 2);
-         gia = (double) dtmDVThem.getValueAt(rowIndex, 3);
+        if (rowIndex != -1) {
+            // Row already exists, update quantity and total price
+            currentSL = (int) dtmDVThem.getValueAt(rowIndex, 2);
+            gia = (double) dtmDVThem.getValueAt(rowIndex, 3);
 
 
-        dtmDVThem.setValueAt(currentSL + 1, rowIndex, 2);
+            dtmDVThem.setValueAt(currentSL + 1, rowIndex, 2);
 
-        // Calculate the new total price based on the updated quantity
-        double newTotalPrice = (currentSL +1 ) * gia;
+            // Calculate the new total price based on the updated quantity
+            double newTotalPrice = (currentSL + 1) * gia;
 
-        // Set the new total price in the table
-        dtmDVThem.setValueAt(newTotalPrice, rowIndex, 3);
-    } else {
-        // Row does not exist, add a new row
-        dtmDVThem.addRow(new Object[]{selectedMatHang.getMaMH(), selectedMatHang.getTenMH(), 1, selectedMatHang.getGia()});
+            // Set the new total price in the table
+            dtmDVThem.setValueAt(newTotalPrice, rowIndex, 3);
+        } else {
+            // Row does not exist, add a new row
+            dtmDVThem.addRow(new Object[]{selectedMatHang.getMaMH(), selectedMatHang.getTenMH(), 1, selectedMatHang.getGia()});
+        }
     }
-}
 
     private int findRowIndexByCode(String code) {
         for (int i = 0; i < dtmDVThem.getRowCount(); i++) {
@@ -278,22 +278,22 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
         pnDSDV.setBackground(new java.awt.Color(255, 255, 255));
 
         tblDSDV.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Mã mặt hàng", "Tên mặt hàng"
-            }
+                new Object[][]{
+                        {null, null},
+                        {null, null},
+                        {null, null},
+                        {null, null}
+                },
+                new String[]{
+                        "Mã mặt hàng", "Tên mặt hàng"
+                }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
+            boolean[] canEdit = new boolean[]{
+                    false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         tblDSDV.setRowHeight(30);
@@ -311,24 +311,24 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
         javax.swing.GroupLayout pnDSDVLayout = new javax.swing.GroupLayout(pnDSDV);
         pnDSDV.setLayout(pnDSDVLayout);
         pnDSDVLayout.setHorizontalGroup(
-            pnDSDVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDSDVLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblDSDV, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56))
-            .addGroup(pnDSDVLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+                pnDSDVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDSDVLayout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblDSDV, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(56, 56, 56))
+                        .addGroup(pnDSDVLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 6, Short.MAX_VALUE))
         );
         pnDSDVLayout.setVerticalGroup(
-            pnDSDVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnDSDVLayout.createSequentialGroup()
-                .addGap(9, 9, 9)
-                .addComponent(lblDSDV)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+                pnDSDVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnDSDVLayout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(lblDSDV)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         pnDSDVThem.setBackground(new java.awt.Color(255, 255, 255));
@@ -337,19 +337,19 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
         lblDVThem.setText("Dịch vụ đã thêm");
 
         tblDVThem.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+                new Object[][]{
 
-            },
-            new String [] {
-                "Mã", "Tên", "SL", "Thành tiền", "Hành động"
-            }
+                },
+                new String[]{
+                        "Mã", "Tên", "SL", "Thành tiền", "Hành động"
+                }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, true, false, true
+            boolean[] canEdit = new boolean[]{
+                    false, false, true, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         tblDVThem.setRowHeight(30);
@@ -375,29 +375,29 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
         javax.swing.GroupLayout pnDSDVThemLayout = new javax.swing.GroupLayout(pnDSDVThem);
         pnDSDVThem.setLayout(pnDSDVThemLayout);
         pnDSDVThemLayout.setHorizontalGroup(
-            pnDSDVThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnDSDVThemLayout.createSequentialGroup()
-                .addGap(139, 139, 139)
-                .addComponent(lblDVThem, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(126, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDSDVThemLayout.createSequentialGroup()
-                .addGroup(pnDSDVThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDSDVThemLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnXong, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                pnDSDVThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnDSDVThemLayout.createSequentialGroup()
+                                .addGap(139, 139, 139)
+                                .addComponent(lblDVThem, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(126, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDSDVThemLayout.createSequentialGroup()
+                                .addGroup(pnDSDVThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnDSDVThemLayout.createSequentialGroup()
+                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(btnXong, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap())
         );
         pnDSDVThemLayout.setVerticalGroup(
-            pnDSDVThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnDSDVThemLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblDVThem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnXong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                pnDSDVThemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnDSDVThemLayout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblDVThem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnXong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
         );
 
         btnExit2.setBackground(new java.awt.Color(255, 0, 51));
@@ -416,40 +416,40 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblDV1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(270, 270, 270)
-                .addComponent(btnExit2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(pnDSDV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(pnDSDVThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblDV1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(270, 270, 270)
+                                .addComponent(btnExit2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(pnDSDV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4)
+                                .addComponent(pnDSDVThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDV1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnExit2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnDSDVThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnDSDV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0))
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblDV1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnExit2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(pnDSDVThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(pnDSDV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, 0))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -470,9 +470,9 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
             // bắt sưj kiện khi mở từ DL_NhanPhongDatTruoc
             if (dataHD.getMaHDPublic() != null) {
                 maHD = dataHD.getMaHDPublic();
-            }else{
+            } else {
                 DL_NhanPhongDatTruoc dataHD1 = new DL_NhanPhongDatTruoc((java.awt.Frame) SwingUtilities.getWindowAncestor(this), true);
-                 maHD = dataHD1.getMaHDPublic();
+                maHD = dataHD1.getMaHDPublic();
             }
 
             // Call getMaHDPublic method
@@ -480,8 +480,8 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
             for (MatHangModel data : dvThemData) {
                 ChiTietHoaDonDV cthddv = new ChiTietHoaDonDV();
 
-                ChiTietHoaDonDV cthddvadd = new ChiTietHoaDonDV(new HoaDon(maHD), new MatHang(data.getMaMH()),new PhongHat(frm.getRoomSelected()), data.getSL(), data.getGia());
-              // check chưa tồn tại thì create, đã tồn tại thì update sl, nếu trong database có mà trong table không có thì xóa trong database do sl dưới 0 thì đã xóa khỏi table\
+                ChiTietHoaDonDV cthddvadd = new ChiTietHoaDonDV(new HoaDon(maHD), new MatHang(data.getMaMH()), new PhongHat(frm.getRoomSelected()), data.getSL(), data.getGia());
+                // check chưa tồn tại thì create, đã tồn tại thì update sl, nếu trong database có mà trong table không có thì xóa trong database do sl dưới 0 thì đã xóa khỏi table\
                 if (cthddv_dao.findChiTietHoaDonDV(maHD, data.getMaMH()) != null) {
                     if (data.getSL() > 0) {
                         cthddv_dao.updateChiTietHoaDonDV(cthddvadd);
@@ -489,7 +489,7 @@ public class DL_ChonDichVu extends javax.swing.JDialog {
                         cthddv_dao.deleteChiTietHoaDonDV(maHD, data.getMaMH());
                     }
                 } else {
-                        cthddv_dao.createChiTietHoaDonDV(cthddvadd);
+                    cthddv_dao.createChiTietHoaDonDV(cthddvadd);
 
                 }
 

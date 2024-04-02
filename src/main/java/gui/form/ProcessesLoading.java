@@ -4,7 +4,6 @@ package gui.form;
 import javax.swing.*;
 
 /**
- *
  * @author HO MINH HAU
  */
 public class ProcessesLoading extends javax.swing.JFrame {
@@ -14,7 +13,7 @@ public class ProcessesLoading extends javax.swing.JFrame {
      */
     public ProcessesLoading() {
         initComponents();
-         setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
         this.setIconImage(new ImageIcon(getClass().getResource("/icon/microphone.png")).getImage());
     }
 
@@ -47,36 +46,36 @@ public class ProcessesLoading extends javax.swing.JFrame {
         javax.swing.GroupLayout pnlCoverLayout = new javax.swing.GroupLayout(pnlCover);
         pnlCover.setLayout(pnlCoverLayout);
         pnlCoverLayout.setHorizontalGroup(
-            pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlCoverLayout.createSequentialGroup()
-                .addGroup(pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlCoverLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblConnectDB, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlCoverLayout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(lblGIF, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(57, Short.MAX_VALUE))
+                pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlCoverLayout.createSequentialGroup()
+                                .addGroup(pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(pnlCoverLayout.createSequentialGroup()
+                                                .addContainerGap()
+                                                .addComponent(lblConnectDB, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(pnlCoverLayout.createSequentialGroup()
+                                                .addGap(46, 46, 46)
+                                                .addComponent(lblGIF, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap(57, Short.MAX_VALUE))
         );
         pnlCoverLayout.setVerticalGroup(
-            pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlCoverLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblGIF, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(lblConnectDB, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-                .addContainerGap())
+                pnlCoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlCoverLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lblGIF, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(lblConnectDB, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlCover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(pnlCover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlCover, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(pnlCover, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -89,7 +88,7 @@ public class ProcessesLoading extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
